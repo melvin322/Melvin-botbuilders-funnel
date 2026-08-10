@@ -3,25 +3,30 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>BotBuilders — 25 Bot Flows for $27</title>
-<meta name="description" content="The 25 client-grade bot flows we charge $5,000 to build — import into Automator AI or ManyChat and go live this afternoon. $27, one payment.">
+<title>BotBuilders — More Leads. More Calls. More Clients.</title>
+<meta name="description" content="We build high-converting chatbot funnels and automation systems that capture more leads, book more calls, and close more clients — on autopilot. Book a free call.">
 
 <!-- ==========================================================================
-     BotBuilders — $27 Flow Vault sales page
+     BotBuilders — "Book a Call" agency / funnel-build landing page
+     Rebuilt to the BotBuilders brand board (Automate. Engage. Convert.)
      ------------------------------------------------------------------------
      TWO WAYS TO USE THIS
-     A) Standalone: open this file in a browser. It links bb-sales-page.css.
+     A) Standalone: open this file in a browser. It links bb-sales-page.css
+        and pulls Bebas Neue + Inter from Google Fonts.
      B) GHL: paste everything between <div class="bb-page"> … </div> AND the
         <script> below it into a full-width Custom Code / HTML element.
-        Paste the contents of bb-sales-page.css into Settings › Custom CSS.
+        Paste the contents of bb-sales-page.css into Settings › Custom CSS
+        (it @imports the two fonts itself, so nothing else is needed).
      ------------------------------------------------------------------------
      EDIT THESE FIRST (see the CONFIG block in the <script> at the bottom):
-       CHECKOUT_URL / BUMP_URL — your Stripe / GHL checkout links
-       OFFER_ENDS              — real deadline; blank = honest per-visitor 24h
-       VIDEO_URL               — .mp4 file OR an embed URL (both supported now)
-       SHOTS 1..3              — swap the drawn illustrations for real screens
-       TESTIMONIALS            — put REAL names + results in the markup below
+       BOOKING_URL  — your calendar / "book a call" link (Calendly, GHL, etc.)
+       VIDEO_URL    — .mp4 file OR an embed URL (both supported)
+       TESTIMONIALS — put REAL names + results in the markup below
+       PRESS_LOGOS  — point at YOUR hosted logo files
      ========================================================================== -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="bb-sales-page.css">
 </head>
 <body>
@@ -32,10 +37,10 @@
   <div class="bb-topbar">
     <div class="bb-wrap bb-topbar-in">
       <span class="bb-topbar-secure">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="vertical-align:-2px;margin-right:6px"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-        Secure checkout
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="vertical-align:-2px;margin-right:6px"><path d="M12 2l8 3.5v6c0 5-3.4 9.4-8 10.5-4.6-1.1-8-5.5-8-10.5v-6z"/></svg>
+        Inc. 5000 — 4 years running
       </span>
-      <span><i class="bb-dot"></i>Founding price <strong>$27</strong> — limited time</span>
+      <span><i class="bb-dot"></i>Now booking new client builds — <strong>free strategy call</strong></span>
     </div>
   </div>
 
@@ -43,24 +48,21 @@
   <nav class="bb-nav">
     <div class="bb-wrap bb-nav-in">
       <a href="#bb-top" class="bb-logo">
-        <svg class="bb-logo-mark" viewBox="0 0 32 32" fill="none"><defs><linearGradient id="bbg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1250E1"/><stop offset="1" stop-color="#0FD6C4"/></linearGradient></defs>
-          <rect x="6" y="11" width="20" height="15" rx="5" fill="url(#bbg)"/>
-          <circle cx="12.5" cy="18" r="2.1" fill="#2E3133"/>
-          <circle cx="19.5" cy="18" r="2.1" fill="#2E3133"/>
-          <path d="M16 5v5" stroke="url(#bbg)" stroke-width="2.4" stroke-linecap="round"/>
-          <circle cx="16" cy="4" r="2.2" fill="url(#bbg)"/>
+        <svg class="bb-logo-mark" viewBox="0 0 32 32" fill="none"><defs><linearGradient id="bbg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1E3A8A"/><stop offset="1" stop-color="#38BDF8"/></linearGradient></defs>
+          <path d="M16 3l11 6v14l-11 6-11-6V9z" fill="url(#bbg)"/>
+          <path d="M17 9l-6 8h4l-1 6 6-8h-4z" fill="#fff"/>
         </svg>
         BotBuilders
       </a>
       <div class="bb-navlinks">
-        <a href="#bb-inside">What's inside</a>
+        <a href="#bb-services">Services</a>
         <a href="#bb-how">How it works</a>
-        <a href="#bb-press">Featured</a>
+        <a href="#bb-results">Results</a>
         <a href="#bb-faq">FAQ</a>
       </div>
-      <a href="#bb-offer" class="bb-btn bb-btn--primary bb-btn--sm" data-cta>
-        Get access — $27
-        <svg class="bb-arrow" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      <a href="#bb-book" class="bb-btn bb-btn--secondary bb-btn--sm" data-cta>
+        <svg class="bb-cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg>
+        Book a Call
       </a>
     </div>
   </nav>
@@ -68,74 +70,117 @@
   <!-- ================================================================= hero -->
   <header class="bb-hero">
     <div class="bb-hero-bg" aria-hidden="true">
-      <div class="bb-hero-glow"></div>
-      <div class="bb-hero-glow2"></div>
       <svg class="bb-hero-arcs" viewBox="0 0 900 900" fill="none">
-        <circle cx="640" cy="330" r="250" stroke="#1B4F80" stroke-width="1"/>
-        <circle cx="640" cy="330" r="360" stroke="#1B4F80" stroke-width="1" stroke-opacity=".7"/>
-        <circle cx="640" cy="330" r="470" stroke="#1B4F80" stroke-width="1" stroke-opacity=".45"/>
-        <circle cx="640" cy="330" r="580" stroke="#1B4F80" stroke-width="1" stroke-opacity=".25"/>
+        <circle cx="640" cy="330" r="250" stroke="#2563EB" stroke-width="1"/>
+        <circle cx="640" cy="330" r="360" stroke="#2563EB" stroke-width="1" stroke-opacity=".7"/>
+        <circle cx="640" cy="330" r="470" stroke="#2563EB" stroke-width="1" stroke-opacity=".45"/>
+        <circle cx="640" cy="330" r="580" stroke="#2563EB" stroke-width="1" stroke-opacity=".25"/>
       </svg>
+      <div class="bb-dotgrid"></div>
     </div>
 
     <div class="bb-wrap bb-hero-in">
       <div>
-        <h1 class="bb-load" style="--d:80ms">
-          The 25 bot flows we charge <span class="bb-hl">$5,000</span> to build
+        <span class="bb-hero-eyebrow bb-load" style="--d:40ms">Automate. Engage. Convert.</span>
+        <h1 class="bb-load" style="--d:120ms">
+          More Leads.<br>More Calls.<br><span class="bb-hl">More Clients.</span>
         </h1>
-        <p class="bb-hero-sub bb-load" style="--d:220ms">
-          Import them into Automator AI or ManyChat and have your first one live
-          this afternoon. No blank canvas, no build time, no guessing at the logic.
+        <p class="bb-hero-sub bb-load" style="--d:260ms">
+          We build high-converting chatbot funnels and automation systems that help
+          your business capture more leads, book more calls, and close more clients —
+          on autopilot.
         </p>
 
-        <div class="bb-hero-cta bb-load" style="--d:340ms">
-          <a href="#bb-offer" class="bb-btn bb-btn--primary" data-cta>
-            Get instant access — $27
-            <svg class="bb-arrow" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        <div class="bb-hero-cta bb-load" style="--d:380ms">
+          <a href="#bb-book" class="bb-btn bb-btn--primary" data-cta>
+            <svg class="bb-cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg>
+            Book a Call
           </a>
+          <a href="#bb-how" class="bb-btn bb-btn--ghost">See how it works</a>
+        </div>
+
+        <div class="bb-hero-trust bb-load" style="--d:500ms">
           <div class="bb-avatars">
             <div class="bb-avatar-stack">
-              <span class="bb-av" style="--c1:#DDE9FB;--c2:#C9DEF8;--sk:#E8B98F;--hr:#3A2A20;--sh:#1250E1"></span>
-              <span class="bb-av" style="--c1:#D6F5F0;--c2:#BEEDE6;--sk:#8D5A3B;--hr:#1B1310;--sh:#0FD6C4"></span>
-              <span class="bb-av" style="--c1:#E3EAF0;--c2:#CFDBE6;--sk:#F0C9A6;--hr:#6B4A2F;--sh:#55585B"></span>
-              <span class="bb-av" style="--c1:#D9EAFB;--c2:#C2DDF7;--sk:#C98A5E;--hr:#241A14;--sh:#3FA3E8"></span>
-              <span class="bb-av" style="--c1:#E7DEF6;--c2:#D6C7EE;--sk:#E8B98F;--hr:#2A2320;--sh:#7C5CD6"></span>
+              <span class="bb-av" style="--c1:#DDE9FB;--c2:#C9DEF8;--sk:#E8B98F;--hr:#3A2A20;--sh:#2563EB"></span>
+              <span class="bb-av" style="--c1:#D6ECF5;--c2:#BEE0ED;--sk:#8D5A3B;--hr:#1B1310;--sh:#38BDF8"></span>
+              <span class="bb-av" style="--c1:#E3EAF0;--c2:#CFDBE6;--sk:#F0C9A6;--hr:#6B4A2F;--sh:#1E3A8A"></span>
+              <span class="bb-av" style="--c1:#D9EAFB;--c2:#C2DDF7;--sk:#C98A5E;--hr:#241A14;--sh:#38BDF8"></span>
+              <span class="bb-av" style="--c1:#DCE6F6;--c2:#C7D6EE;--sk:#E8B98F;--hr:#2A2320;--sh:#2563EB"></span>
             </div>
-            <span>Trusted by 2,000+ businesses</span>
+            <div class="bb-avatars-txt">
+              <div class="bb-avatars-stars">★★★★★</div>
+              <span>Trusted by 2,000+ businesses</span>
+            </div>
           </div>
         </div>
 
-        <ul class="bb-ticks bb-load" style="--d:460ms">
+        <ul class="bb-ticks bb-load" style="--d:600ms">
           <li class="bb-tick">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M8 12.5l2.6 2.6L16 9.5"/></svg>
-            Instant download
+            Custom-built for your business
           </li>
           <li class="bb-tick">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M8 12.5l2.6 2.6L16 9.5"/></svg>
-            Works on ManyChat's free tier
+            Live in weeks, not months
           </li>
           <li class="bb-tick">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M8 12.5l2.6 2.6L16 9.5"/></svg>
-            30-day refund
+            Done-for-you, start to finish
           </li>
         </ul>
       </div>
 
-      <!-- video panel — Matt's 2-min explainer -->
-      <div class="bb-hero-panel bb-load" style="--d:560ms">
-        <div class="bb-video" id="bb-video" role="button" tabindex="0"
-             aria-label="Play: Matt explains it, 2 minutes">
-          <img class="bb-video-poster" id="bb-poster"
-               src="https://assets.cdn.filesafe.space/sz4sVbBhLW7cX7keIHT6/media/6a76640a78cdd940a02fa484.jpg"
-               alt="Matt Leitz explaining the 25 bot flows">
-          <span class="bb-video-scrim"></span>
-          <span class="bb-play">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg>
+      <!-- visual: dashboard mock + Matt's explainer poster / video -->
+      <div class="bb-hero-panel bb-load" style="--d:680ms">
+        <div class="bb-mock" id="bb-video" role="button" tabindex="0" aria-label="Play: how BotBuilders builds your system, 2 minutes">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 550" preserveAspectRatio="xMidYMid slice" id="bb-mock-art"><defs>
+<linearGradient id="mg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1E3A8A"/><stop offset=".55" stop-color="#2563EB"/><stop offset="1" stop-color="#38BDF8"/></linearGradient>
+</defs>
+<rect width="800" height="550" fill="#0A1524"/>
+<rect x="0" y="0" width="800" height="46" fill="#0E1B2E"/>
+<circle cx="26" cy="23" r="5" fill="#28405F"/><circle cx="44" cy="23" r="5" fill="#28405F"/><circle cx="62" cy="23" r="5" fill="#28405F"/>
+<rect x="330" y="16" width="140" height="14" rx="7" fill="#1A2C45"/>
+<rect x="690" y="12" width="90" height="22" rx="7" fill="url(#mg)"/><rect x="706" y="19" width="58" height="8" rx="4" fill="#fff" fill-opacity=".9"/>
+<!-- sidebar -->
+<rect x="0" y="46" width="150" height="504" fill="#0C182A"/>
+<rect x="24" y="82" width="102" height="9" rx="4.5" fill="#1E3A8A"/>
+<rect x="24" y="112" width="90" height="8" rx="4" fill="#22364F"/>
+<rect x="24" y="138" width="102" height="8" rx="4" fill="#22364F"/>
+<rect x="24" y="164" width="80" height="8" rx="4" fill="#22364F"/>
+<rect x="24" y="190" width="96" height="8" rx="4" fill="#22364F"/>
+<!-- kpi row -->
+<rect x="176" y="74" width="180" height="92" rx="12" fill="#0E1E33" stroke="#1B3050"/>
+<rect x="196" y="94" width="70" height="8" rx="4" fill="#28405F"/><rect x="196" y="112" width="96" height="20" rx="5" fill="#fff" fill-opacity=".92"/><rect x="196" y="142" width="60" height="7" rx="3.5" fill="#16A34A" fill-opacity=".8"/>
+<rect x="372" y="74" width="180" height="92" rx="12" fill="#0E1E33" stroke="#1B3050"/>
+<rect x="392" y="94" width="70" height="8" rx="4" fill="#28405F"/><rect x="392" y="112" width="80" height="20" rx="5" fill="#38BDF8"/><rect x="392" y="142" width="52" height="7" rx="3.5" fill="#16A34A" fill-opacity=".8"/>
+<rect x="568" y="74" width="208" height="92" rx="12" fill="#0E1E33" stroke="#1B3050"/>
+<rect x="588" y="94" width="70" height="8" rx="4" fill="#28405F"/><rect x="588" y="112" width="90" height="20" rx="5" fill="#fff" fill-opacity=".92"/><rect x="588" y="142" width="64" height="7" rx="3.5" fill="#16A34A" fill-opacity=".8"/>
+<!-- chart -->
+<rect x="176" y="184" width="376" height="212" rx="12" fill="#0E1E33" stroke="#1B3050"/>
+<rect x="196" y="204" width="120" height="9" rx="4.5" fill="#28405F"/>
+<path d="M196 356 L246 330 L296 342 L346 300 L396 316 L446 268 L496 288 L532 246" fill="none" stroke="url(#mg)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M196 356 L246 330 L296 342 L346 300 L396 316 L446 268 L496 288 L532 246 L532 372 L196 372 Z" fill="url(#mg)" fill-opacity=".14"/>
+<circle cx="446" cy="268" r="4.5" fill="#38BDF8"/>
+<!-- funnel card -->
+<rect x="568" y="184" width="208" height="212" rx="12" fill="#0E1E33" stroke="#1B3050"/>
+<rect x="588" y="204" width="100" height="9" rx="4.5" fill="#28405F"/>
+<rect x="588" y="232" width="168" height="24" rx="6" fill="#1E3A8A"/>
+<rect x="602" y="272" width="140" height="24" rx="6" fill="#2563EB"/>
+<rect x="616" y="312" width="112" height="24" rx="6" fill="#38BDF8"/>
+<rect x="630" y="352" width="84" height="24" rx="6" fill="#38BDF8" fill-opacity=".6"/>
+<!-- chat/table row -->
+<rect x="176" y="414" width="600" height="120" rx="12" fill="#0E1E33" stroke="#1B3050"/>
+<circle cx="212" cy="454" r="14" fill="url(#mg)"/><rect x="238" y="440" width="180" height="8" rx="4" fill="#28405F"/><rect x="238" y="458" width="120" height="7" rx="3.5" fill="#1B3050"/>
+<rect x="640" y="440" width="116" height="26" rx="8" fill="#1E3A8A"/><rect x="658" y="450" width="80" height="7" rx="3.5" fill="#fff" fill-opacity=".85"/>
+<circle cx="212" cy="500" r="14" fill="#22364F"/><rect x="238" y="490" width="220" height="8" rx="4" fill="#28405F"/><rect x="238" y="508" width="150" height="7" rx="3.5" fill="#1B3050"/>
+</svg>
+          <span class="bb-video-scrim" style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,14,20,.05),rgba(10,14,20,.55))"></span>
+          <span class="bb-play" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:72px;height:72px;border-radius:50%;background:rgba(255,255,255,.96);display:flex;align-items:center;justify-content:center;color:#2563EB;box-shadow:0 10px 30px -6px rgba(0,0,0,.5)">
+            <svg viewBox="0 0 24 24" fill="currentColor" style="width:30px;height:30px;margin-left:4px"><path d="M8 5.5v13l11-6.5z"/></svg>
           </span>
-          <span class="bb-video-time">2 min</span>
-          <div class="bb-video-cap">
-            <span class="bb-video-label">Watch: Matt Explains It</span>
-          </div>
+          <span style="position:absolute;top:14px;right:14px;background:rgba(0,0,0,.6);color:#fff;font-size:12px;font-weight:600;padding:4px 9px;border-radius:999px">2 min</span>
+          <div style="position:absolute;left:16px;bottom:14px;color:#fff;font-weight:700;font-size:15px;text-shadow:0 1px 8px rgba(0,0,0,.6)">Watch: how we build your system</div>
         </div>
 
         <div class="bb-float" id="bb-float">
@@ -176,94 +221,104 @@
     </div>
   </div>
 
-  <!-- ============================================ Inc. 5000 (botbuilders.com) -->
-  <section class="bb-sec bb-sec--tight bb-inc">
-    <div class="bb-wrap bb-inc-in">
-      <div class="bb-inc-badges bb-rv bb-rv--left" id="bb-inc-badges">
-        <span class="bb-inc-badge"><b>Inc.</b><i>5000</i><em>FASTEST-GROWING</em></span>
-        <span class="bb-inc-badge"><b>Inc.</b><i>5000</i><em>FASTEST-GROWING</em></span>
-        <span class="bb-inc-badge"><b>Inc.</b><i>5000</i><em>FASTEST-GROWING</em></span>
-        <span class="bb-inc-badge"><b>Inc.</b><i>5000</i><em>FASTEST-GROWING</em></span>
-      </div>
-      <p class="bb-inc-txt bb-rv bb-rv--right">
-        Thanks for making us one of the fastest growing companies in America&hellip;
-        <strong>4 years in a row!</strong>
-      </p>
-    </div>
-  </section>
-
-  <!-- ============================================================== problem -->
-  <section class="bb-sec bb-sec--light">
+  <!-- ============================================================== services -->
+  <section class="bb-sec bb-sec--gray" id="bb-services">
     <div class="bb-wrap">
       <div class="bb-sec-head bb-rv">
-        <div class="bb-eyebrow">The honest bit</div>
-        <h2>You already know you should have a bot running</h2>
-        <p>You've had the tab open for months. The gap isn't skill — it's that nobody hands you the finished flow.</p>
+        <div class="bb-eyebrow">What we build</div>
+        <h2>Systems That Sell While You Sleep</h2>
+        <p>Every piece is custom-built for your business, connected end to end, and running 24/7 — so no lead ever slips through.</p>
       </div>
 
-      <div class="bb-probs" data-stagger>
-        <div class="bb-prob bb-rv">
-          <div class="bb-prob-ico bb-prob-ico--red">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 13l5 2v4a2 2 0 0 1-2.2 2A17 17 0 0 1 2 6.2 2 2 0 0 1 4 4z"/><path d="M22 2L16 8"/><path d="M16 2l6 6"/></svg>
+      <div class="bb-services" data-stagger>
+        <div class="bb-svc bb-rv">
+          <div class="bb-svc-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h18l-7 8v6l-4 2v-8z"/></svg>
           </div>
-          <h3>The blank canvas</h3>
-          <p>You open ManyChat, stare at an empty flow, and close the tab again. Starting from nothing is the slow part.</p>
+          <h3>Chatbot Funnels</h3>
+          <p>Conversational funnels that greet every visitor, qualify them, and capture the lead before they bounce.</p>
         </div>
-        <div class="bb-prob bb-rv">
-          <div class="bb-prob-ico bb-prob-ico--blue">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5.4l3.4 2"/></svg>
+
+        <div class="bb-svc bb-rv">
+          <div class="bb-svc-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.2 7.6L3 21l1.9-5.8A8.5 8.5 0 1 1 21 11.5z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg>
           </div>
-          <h3>Leads going cold</h3>
-          <p>The lead who filled in your form at 11pm is still unanswered at 9am. That gap is where deals quietly die.</p>
+          <h3>Speed-to-Lead Automation</h3>
+          <p>The instant someone opts in, SMS and email fire automatically — you reach them before a competitor can.</p>
         </div>
-        <div class="bb-prob bb-rv">
-          <div class="bb-prob-ico bb-prob-ico--indigo">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="M3 7l9 6 9-6"/></svg>
+
+        <div class="bb-svc bb-rv">
+          <div class="bb-svc-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/><path d="M8.5 14.5l2 2 4-4"/></svg>
           </div>
-          <h3>Someone replied first</h3>
-          <p>Speed decides most of these. Whoever answers first usually gets the booking, whatever the offer looks like.</p>
+          <h3>Appointment Booking</h3>
+          <p>Qualified leads land straight on your calendar. Reminders and no-show follow-ups keep it full.</p>
         </div>
-        <div class="bb-prob bb-rv">
-          <div class="bb-prob-ico bb-prob-ico--violet">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20v-11"/></svg>
+
+        <div class="bb-svc bb-rv">
+          <div class="bb-svc-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5"/><path d="M16 5.2a3.2 3.2 0 0 1 0 6M18 20c0-2.6-1-4.5-2.8-5.4"/></svg>
           </div>
-          <h3>Build time you don't have</h3>
-          <p>A flow like this is a weekend of work. It's the reason the tab has stayed open since March.</p>
+          <h3>Lead Nurture Systems</h3>
+          <p>Automated sequences that keep following up with a "not yet" lead until they're ready to buy.</p>
+        </div>
+
+        <div class="bb-svc bb-rv">
+          <div class="bb-svc-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20v-11"/></svg>
+          </div>
+          <h3>Analytics &amp; Optimization</h3>
+          <p>See exactly where leads come from and what converts, then we tune the system to squeeze out more.</p>
+        </div>
+
+        <div class="bb-svc bb-rv">
+          <div class="bb-svc-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 3.5v6c0 5-3.4 9.4-8 10.5-4.6-1.1-8-5.5-8-10.5v-6z"/><path d="M9 12l2.2 2.2L15.5 10"/></svg>
+          </div>
+          <h3>Done-For-You Setup</h3>
+          <p>We build, connect, and test the whole thing. You approve it and go live — no tech headaches on your side.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============================================================= solution -->
-  <section class="bb-sec bb-sec--light" style="padding-top:0">
+  <!-- ============================================== design direction / approach -->
+  <section class="bb-sec bb-sec--navy">
     <div class="bb-wrap">
-      <div class="bb-solution bb-rv bb-rv--scale">
-        <div class="bb-solution-l">
-          <div class="bb-eyebrow">What changes</div>
-          <h2>Skip the blank canvas entirely</h2>
-          <p>
-            These are the same flows we deploy for paying clients — the logic,
-            the timing and the branching are already set. You change the business
-            name and the offer, then publish.
-          </p>
+      <div class="bb-sec-head bb-rv">
+        <div class="bb-eyebrow">The way we build</div>
+        <h2>Built On Four Simple Principles</h2>
+        <p>No clutter, no hype — just systems designed around the results your business actually needs.</p>
+      </div>
+
+      <div class="bb-pillars" data-stagger>
+        <div class="bb-pillar bb-rv">
+          <div class="bb-pillar-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4" fill="currentColor"/></svg>
+          </div>
+          <h3>Focus on Outcomes</h3>
+          <p>We build for the transformation and the results — more leads, calls, and clients.</p>
         </div>
-        <div class="bb-solution-r" data-stagger>
-          <div class="bb-sol bb-rv bb-rv--right">
-            <div class="bb-sol-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M13 2L4.5 13H11l-1 9 8.5-11H12z"/></svg></div>
-            <div><h3>Live this afternoon, not next quarter</h3><p>Import a finished flow and publish the same day. The build time that stopped you is already spent.</p></div>
+        <div class="bb-pillar bb-rv">
+          <div class="bb-pillar-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg>
           </div>
-          <div class="bb-sol bb-rv bb-rv--right">
-            <div class="bb-sol-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5.4l3.4 2"/></svg></div>
-            <div><h3>Answer leads before they cool</h3><p>Speed-to-lead sequences fire the moment someone opts in, whatever hour it is.</p></div>
+          <h3>Simple &amp; Clear</h3>
+          <p>We remove the clutter and highlight what actually matters to your customer.</p>
+        </div>
+        <div class="bb-pillar bb-rv">
+          <div class="bb-pillar-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 3.5v6c0 5-3.4 9.4-8 10.5-4.6-1.1-8-5.5-8-10.5v-6z"/><path d="M9 12l2.2 2.2L15.5 10"/></svg>
           </div>
-          <div class="bb-sol bb-rv bb-rv--right">
-            <div class="bb-sol-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v20M17 5.5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
-            <div><h3>Charge for what you can now deliver</h3><p>These are client-grade flows. Agencies resell them — that's what they were built for.</p></div>
+          <h3>Build Trust</h3>
+          <p>We back it up with proof, testimonials, and real results — not empty promises.</p>
+        </div>
+        <div class="bb-pillar bb-rv">
+          <div class="bb-pillar-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 15c-1 3-1 5-1 5s2 0 5-1M9 15l-3-3a11 11 0 0 1 8-9c3 0 5 2 5 5a11 11 0 0 1-9 8z"/><circle cx="14.5" cy="9.5" r="1.6"/></svg>
           </div>
-          <div class="bb-sol bb-rv bb-rv--right">
-            <div class="bb-sol-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2.5" y="4" width="19" height="14" rx="2.5"/><path d="M8 21h8M12 18v3"/></svg></div>
-            <div><h3>Works on both platforms</h3><p>Every flow ships twice — a ManyChat import file and an Automator AI snapshot.</p></div>
-          </div>
+          <h3>Drive Action</h3>
+          <p>Every system makes booking a call the easiest possible next step.</p>
         </div>
       </div>
     </div>
@@ -274,17 +329,19 @@
     <div class="bb-wrap">
       <div class="bb-sec-head bb-rv">
         <div class="bb-eyebrow">How it works</div>
-        <h2>Three steps, about twenty minutes</h2>
+        <h2>From Call To Live System</h2>
+        <p>A simple, hands-off process. You bring the business — we handle the build.</p>
       </div>
 
       <div class="bb-steps" data-stagger>
         <div class="bb-step bb-rv">
           <div class="bb-step-badge">1</div>
           <div class="bb-step-ico">
-            <svg viewBox="0 0 48 48" fill="none"><rect x="7" y="9" width="34" height="26" rx="5" fill="#DCE9FF"/><path d="M24 15v11M19 21.5l5 5 5-5" stroke="#3B82F6" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 39h20" stroke="#3B82F6" stroke-width="2.6" stroke-linecap="round"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 9h8M8 12.5h5"/></svg>
           </div>
-          <h3>Download the files</h3>
-          <p>Links land in your inbox the second you pay. Nothing to wait for.</p>
+          <div class="bb-step-tag">We Listen</div>
+          <h3>Book your free call</h3>
+          <p>We learn your business, your offer, and where leads are leaking today.</p>
           <div class="bb-step-link">
             <span class="bb-dash"></span>
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 4l8 8-8 8z"/></svg>
@@ -294,10 +351,11 @@
         <div class="bb-step bb-rv">
           <div class="bb-step-badge">2</div>
           <div class="bb-step-ico">
-            <svg viewBox="0 0 48 48" fill="none"><rect x="8" y="11" width="32" height="22" rx="5" fill="#E0E4FF"/><path d="M16 19h16M16 25h10" stroke="#4F63D2" stroke-width="2.6" stroke-linecap="round"/><path d="M18 33l-3 6 9-6" fill="#E0E4FF"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4l-6 6a1.4 1.4 0 0 0 2 2l6-6a4 4 0 0 0 5.4-5.4l-2.3 2.3-2-2z"/></svg>
           </div>
-          <h3>Import to your platform</h3>
-          <p>One file for ManyChat, one snapshot for Automator AI. Both one click.</p>
+          <div class="bb-step-tag">We Build</div>
+          <h3>We build your system</h3>
+          <p>Funnel, automations, and follow-up — designed, connected, and tested for you.</p>
           <div class="bb-step-link">
             <span class="bb-dash"></span>
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 4l8 8-8 8z"/></svg>
@@ -307,86 +365,67 @@
         <div class="bb-step bb-rv">
           <div class="bb-step-badge">3</div>
           <div class="bb-step-ico">
-            <svg viewBox="0 0 48 48" fill="none">
-              <path d="M24 4c6 5 9 11.5 9 19 0 4-1 7.5-2.5 10.5h-13C16 30.5 15 27 15 23c0-7.5 3-14 9-19z" fill="#DCE9FF"/>
-              <path d="M15.5 24.5 9 30.5c-.8.8-.6 2 .5 2.3l6 1.7" fill="#C3D9FF"/>
-              <path d="M32.5 24.5 39 30.5c.8.8.6 2-.5 2.3l-6 1.7" fill="#C3D9FF"/>
-              <circle cx="24" cy="19" r="4" fill="#3B82F6"/>
-              <path d="M20 36c0 2.5 1.8 6 4 8 2.2-2 4-5.5 4-8" fill="#0FD6C4"/>
-              <path d="M22.5 37.5c0 1.4 .8 3.2 1.5 4.2.7-1 1.5-2.8 1.5-4.2" fill="#FFC46B"/>
-            </svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M21 7v5h-5"/></svg>
           </div>
-          <h3>Swap the copy, publish</h3>
-          <p>Change the business name and offer. The logic and timing are already set.</p>
+          <div class="bb-step-tag">We Deliver</div>
+          <h3>You get more clients</h3>
+          <p>Go live and watch leads, booked calls, and sales roll in — on autopilot.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ========================================================= what's inside -->
-  <section class="bb-sec bb-sec--light" id="bb-inside">
+  <!-- ============================================================== results -->
+  <section class="bb-sec bb-sec--gray" id="bb-results">
     <div class="bb-wrap">
       <div class="bb-sec-head bb-rv">
-        <div class="bb-eyebrow">What you're actually getting</div>
-        <h2>This is what's inside, before you pay</h2>
-        <p>A look at the flows, prompts and sequences you&rsquo;ll be importing.</p>
+        <div class="bb-eyebrow">Real results</div>
+        <h2>The Numbers Clients See</h2>
+        <p>Averages reported by BotBuilders clients after going live with their custom system.</p>
       </div>
 
-      <div class="bb-inside" data-stagger>
-        <article class="bb-card bb-rv">
-          <div class="bb-card-shot">
-            <div class="bb-card-art" data-shot="1" role="img" aria-label="A bot flow open on the ManyChat canvas, showing branching message steps"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice"><defs>
-<linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
-  <stop offset="0" stop-color="#1250E1"/><stop offset=".55" stop-color="#3FA3E8"/><stop offset="1" stop-color="#0FD6C4"/>
-</linearGradient>
-<pattern id="dots1" width="26" height="26" patternUnits="userSpaceOnUse">
-  <circle cx="1.5" cy="1.5" r="1.5" fill="#3E4245"/>
-</pattern>
-</defs><rect width="800" height="600" fill="#2E3133"/><rect width="800" height="600" fill="url(#dots1)"/><rect x="0" y="0" width="800" height="44" fill="#26292B"/><circle cx="26" cy="22" r="5" fill="#4A4E52"/><circle cx="44" cy="22" r="5" fill="#4A4E52"/><rect x="62" y="17" width="96" height="9" rx="4.5" fill="#8A8F94"/><rect x="686" y="12" width="90" height="21" rx="6" fill="url(#g1)"/><rect x="702" y="19" width="58" height="7" rx="3.5" fill="#fff" fill-opacity=".9"/><rect x="56" y="96" width="190" height="118" rx="10" fill="#3A3D40" stroke="#55585B" stroke-width="1"/><rect x="56" y="96" width="190" height="26" rx="10" fill="#434649"/><rect x="56" y="112" width="190" height="10" fill="#434649"/><circle cx="71" cy="109" r="4.5" fill="#8A8F94"/><rect x="82" y="106" width="74" height="6" rx="3" fill="#B9BEC2"/><rect x="71" y="136" width="128" height="5" rx="2.5" fill="#55585B"/><rect x="71" y="148" width="104" height="5" rx="2.5" fill="#55585B"/><rect x="71" y="160" width="84" height="5" rx="2.5" fill="#55585B"/><rect x="322" y="74" width="190" height="104" rx="10" fill="#3A3D40" stroke="#55585B" stroke-width="1"/><rect x="322" y="74" width="190" height="26" rx="10" fill="#434649"/><rect x="322" y="90" width="190" height="10" fill="#434649"/><circle cx="337" cy="87" r="4.5" fill="#8A8F94"/><rect x="348" y="84" width="62" height="6" rx="3" fill="#B9BEC2"/><rect x="337" y="114" width="126" height="5" rx="2.5" fill="#55585B"/><rect x="337" y="126" width="92" height="5" rx="2.5" fill="#55585B"/><rect x="322" y="236" width="190" height="104" rx="10" fill="#3A3D40" stroke="#55585B" stroke-width="1"/><rect x="322" y="236" width="190" height="26" rx="10" fill="#434649"/><rect x="322" y="252" width="190" height="10" fill="#434649"/><circle cx="337" cy="249" r="4.5" fill="#8A8F94"/><rect x="348" y="246" width="68" height="6" rx="3" fill="#B9BEC2"/><rect x="337" y="276" width="118" height="5" rx="2.5" fill="#55585B"/><rect x="337" y="288" width="100" height="5" rx="2.5" fill="#55585B"/><rect x="578" y="156" width="178" height="124" rx="10" fill="#3A3D40" stroke="url(#g1)" stroke-width="2"/><rect x="578" y="156" width="178" height="26" rx="10" fill="#434649"/><rect x="578" y="172" width="178" height="10" fill="#434649"/><circle cx="593" cy="169" r="4.5" fill="url(#g1)"/><rect x="604" y="166" width="58" height="6" rx="3" fill="#B9BEC2"/><rect x="593" y="196" width="112" height="5" rx="2.5" fill="#55585B"/><rect x="593" y="208" width="132" height="5" rx="2.5" fill="#55585B"/><rect x="593" y="220" width="90" height="5" rx="2.5" fill="#55585B"/><rect x="56" y="300" width="190" height="96" rx="10" fill="#3A3D40" stroke="#55585B" stroke-width="1"/><rect x="56" y="300" width="190" height="26" rx="10" fill="#434649"/><rect x="56" y="316" width="190" height="10" fill="#434649"/><circle cx="71" cy="313" r="4.5" fill="#8A8F94"/><rect x="82" y="310" width="80" height="6" rx="3" fill="#B9BEC2"/><rect x="71" y="340" width="130" height="5" rx="2.5" fill="#55585B"/><rect x="71" y="352" width="88" height="5" rx="2.5" fill="#55585B"/><path d="M246 152 C284.0 152 284.0 122 322 122" fill="none" stroke="url(#g1)" stroke-width="2.4" stroke-opacity=".85"/><circle cx="322" cy="122" r="3.6" fill="#0FD6C4"/><path d="M246 168 C284.0 168 284.0 286 322 286" fill="none" stroke="url(#g1)" stroke-width="2.4" stroke-opacity=".85"/><circle cx="322" cy="286" r="3.6" fill="#0FD6C4"/><path d="M512 122 C545.0 122 545.0 196 578 196" fill="none" stroke="url(#g1)" stroke-width="2.4" stroke-opacity=".85"/><circle cx="578" cy="196" r="3.6" fill="#0FD6C4"/><path d="M512 286 C545.0 286 545.0 232 578 232" fill="none" stroke="url(#g1)" stroke-width="2.4" stroke-opacity=".85"/><circle cx="578" cy="232" r="3.6" fill="#0FD6C4"/><path d="M246 340 C284.0 340 284.0 306 322 306" fill="none" stroke="url(#g1)" stroke-width="2.4" stroke-opacity=".85"/><circle cx="322" cy="306" r="3.6" fill="#0FD6C4"/><rect x="72" y="424" width="60" height="19" rx="9.5" fill="none" stroke="#55585B" stroke-width="1.2"/><rect x="82" y="430" width="36" height="6" rx="3" fill="#8A8F94"/><rect x="72" y="450" width="74" height="19" rx="9.5" fill="none" stroke="#55585B" stroke-width="1.2"/><rect x="82" y="456" width="50" height="6" rx="3" fill="#8A8F94"/><rect x="72" y="476" width="52" height="19" rx="9.5" fill="none" stroke="#55585B" stroke-width="1.2"/><rect x="82" y="482" width="28" height="6" rx="3" fill="#8A8F94"/><rect x="300" y="470" width="392" height="76" rx="10" fill="#3A3D40" stroke="#55585B"/><circle cx="330" cy="508" r="13" fill="url(#g1)"/><rect x="356" y="492" width="244" height="5" rx="2.5" fill="#55585B"/><rect x="356" y="505" width="190" height="5" rx="2.5" fill="#55585B"/><rect x="356" y="518" width="150" height="5" rx="2.5" fill="#55585B"/></svg></div>
-            <span class="bb-card-tag">01 / Flows</span>
-          </div>
-          <div class="bb-card-body">
-            <h3>25 flows, already built</h3>
-            <p>Lead capture, booking, FAQ deflection, review requests. Import the file, swap the copy, publish.</p>
-          </div>
-        </article>
-
-        <article class="bb-card bb-rv">
-          <div class="bb-card-shot">
-            <div class="bb-card-art" data-shot="2" role="img" aria-label="The prompt library spreadsheet with categories and example prompts"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice"><defs>
-<linearGradient id="g2" x1="0" y1="0" x2="1" y2="1">
-  <stop offset="0" stop-color="#1250E1"/><stop offset=".55" stop-color="#3FA3E8"/><stop offset="1" stop-color="#0FD6C4"/>
-</linearGradient>
-<pattern id="dots2" width="26" height="26" patternUnits="userSpaceOnUse">
-  <circle cx="1.5" cy="1.5" r="1.5" fill="#3E4245"/>
-</pattern>
-</defs><rect width="800" height="600" fill="#2E3133"/><rect x="0" y="0" width="800" height="52" fill="#26292B"/><rect x="28" y="20" width="132" height="11" rx="5.5" fill="#B9BEC2"/><rect x="640" y="16" width="132" height="20" rx="6" fill="#434649"/><rect x="656" y="23" width="72" height="6" rx="3" fill="#8A8F94"/><rect x="0" y="52" width="800" height="38" fill="#434649"/><rect x="28" y="66" width="84" height="8" rx="4" fill="#B9BEC2"/><rect x="196" y="66" width="84" height="8" rx="4" fill="#B9BEC2"/><rect x="516" y="66" width="84" height="8" rx="4" fill="#B9BEC2"/><rect x="652" y="66" width="84" height="8" rx="4" fill="#B9BEC2"/><rect x="28" y="106" width="96" height="20" rx="10" fill="url(#g2)" fill-opacity=".22"/><rect x="38" y="113" width="76" height="6" rx="3" fill="url(#g2)"/><rect x="196" y="105" width="286" height="6" rx="3" fill="#B9BEC2"/><rect x="196" y="119" width="214" height="6" rx="3" fill="#55585B"/><rect x="516" y="112" width="64" height="6" rx="3" fill="#55585B"/><circle cx="664" cy="116" r="6" fill="#0FD6C4" fill-opacity=".28"/><path d="M661 116l2.2 2.2 4.4-4.6" stroke="#0FD6C4" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="680" y="113" width="52" height="6" rx="3" fill="#8A8F94"/><rect x="0" y="142" width="800" height="1" fill="#3E4245"/><rect x="0" y="142" width="800" height="52" fill="#333639"/><rect x="28" y="158" width="78" height="20" rx="10" fill="#0FD6C4" fill-opacity=".22"/><rect x="38" y="165" width="58" height="6" rx="3" fill="#0FD6C4"/><rect x="196" y="157" width="273" height="6" rx="3" fill="#B9BEC2"/><rect x="196" y="171" width="197" height="6" rx="3" fill="#55585B"/><rect x="516" y="164" width="75" height="6" rx="3" fill="#55585B"/><circle cx="664" cy="168" r="6" fill="#0FD6C4" fill-opacity=".28"/><path d="M661 168l2.2 2.2 4.4-4.6" stroke="#0FD6C4" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="680" y="165" width="59" height="6" rx="3" fill="#8A8F94"/><rect x="0" y="194" width="800" height="1" fill="#3E4245"/><rect x="28" y="210" width="108" height="20" rx="10" fill="#3FA3E8" fill-opacity=".22"/><rect x="38" y="217" width="88" height="6" rx="3" fill="#3FA3E8"/><rect x="196" y="209" width="260" height="6" rx="3" fill="#B9BEC2"/><rect x="196" y="223" width="180" height="6" rx="3" fill="#55585B"/><rect x="516" y="216" width="86" height="6" rx="3" fill="#55585B"/><circle cx="664" cy="220" r="6" fill="#0FD6C4" fill-opacity=".28"/><path d="M661 220l2.2 2.2 4.4-4.6" stroke="#0FD6C4" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="680" y="217" width="66" height="6" rx="3" fill="#8A8F94"/><rect x="0" y="246" width="800" height="1" fill="#3E4245"/><rect x="0" y="246" width="800" height="52" fill="#333639"/><rect x="28" y="262" width="86" height="20" rx="10" fill="#1250E1" fill-opacity=".22"/><rect x="38" y="269" width="66" height="6" rx="3" fill="#1250E1"/><rect x="196" y="261" width="247" height="6" rx="3" fill="#B9BEC2"/><rect x="196" y="275" width="163" height="6" rx="3" fill="#55585B"/><rect x="516" y="268" width="97" height="6" rx="3" fill="#55585B"/><circle cx="664" cy="272" r="6" fill="#0FD6C4" fill-opacity=".28"/><path d="M661 272l2.2 2.2 4.4-4.6" stroke="#0FD6C4" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="680" y="269" width="73" height="6" rx="3" fill="#8A8F94"/><rect x="0" y="298" width="800" height="1" fill="#3E4245"/><rect x="28" y="314" width="92" height="20" rx="10" fill="#0FD6C4" fill-opacity=".22"/><rect x="38" y="321" width="72" height="6" rx="3" fill="#0FD6C4"/><rect x="196" y="313" width="234" height="6" rx="3" fill="#B9BEC2"/><rect x="196" y="327" width="146" height="6" rx="3" fill="#55585B"/><rect x="516" y="320" width="68" height="6" rx="3" fill="#55585B"/><circle cx="664" cy="324" r="6" fill="#0FD6C4" fill-opacity=".28"/><path d="M661 324l2.2 2.2 4.4-4.6" stroke="#0FD6C4" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="680" y="321" width="54" height="6" rx="3" fill="#8A8F94"/><rect x="0" y="350" width="800" height="1" fill="#3E4245"/><rect x="0" y="350" width="800" height="52" fill="#333639"/><rect x="28" y="366" width="70" height="20" rx="10" fill="#3FA3E8" fill-opacity=".22"/><rect x="38" y="373" width="50" height="6" rx="3" fill="#3FA3E8"/><rect x="196" y="365" width="221" height="6" rx="3" fill="#B9BEC2"/><rect x="196" y="379" width="199" height="6" rx="3" fill="#55585B"/><rect x="516" y="372" width="79" height="6" rx="3" fill="#55585B"/><circle cx="664" cy="376" r="6" fill="#0FD6C4" fill-opacity=".28"/><path d="M661 376l2.2 2.2 4.4-4.6" stroke="#0FD6C4" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="680" y="373" width="61" height="6" rx="3" fill="#8A8F94"/><rect x="0" y="402" width="800" height="1" fill="#3E4245"/><rect x="28" y="418" width="100" height="20" rx="10" fill="url(#g2)" fill-opacity=".22"/><rect x="38" y="425" width="80" height="6" rx="3" fill="url(#g2)"/><rect x="196" y="417" width="208" height="6" rx="3" fill="#B9BEC2"/><rect x="196" y="431" width="182" height="6" rx="3" fill="#55585B"/><rect x="516" y="424" width="90" height="6" rx="3" fill="#55585B"/><circle cx="664" cy="428" r="6" fill="#0FD6C4" fill-opacity=".28"/><path d="M661 428l2.2 2.2 4.4-4.6" stroke="#0FD6C4" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="680" y="425" width="68" height="6" rx="3" fill="#8A8F94"/><rect x="0" y="454" width="800" height="1" fill="#3E4245"/><rect x="0" y="454" width="800" height="52" fill="#333639"/><rect x="28" y="470" width="82" height="20" rx="10" fill="#1250E1" fill-opacity=".22"/><rect x="38" y="477" width="62" height="6" rx="3" fill="#1250E1"/><rect x="196" y="469" width="285" height="6" rx="3" fill="#B9BEC2"/><rect x="196" y="483" width="165" height="6" rx="3" fill="#55585B"/><rect x="516" y="476" width="101" height="6" rx="3" fill="#55585B"/><circle cx="664" cy="480" r="6" fill="#0FD6C4" fill-opacity=".28"/><path d="M661 480l2.2 2.2 4.4-4.6" stroke="#0FD6C4" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="680" y="477" width="75" height="6" rx="3" fill="#8A8F94"/><rect x="0" y="506" width="800" height="1" fill="#3E4245"/><rect x="28" y="522" width="90" height="20" rx="10" fill="#0FD6C4" fill-opacity=".22"/><rect x="38" y="529" width="70" height="6" rx="3" fill="#0FD6C4"/><rect x="196" y="521" width="272" height="6" rx="3" fill="#B9BEC2"/><rect x="196" y="535" width="148" height="6" rx="3" fill="#55585B"/><rect x="516" y="528" width="72" height="6" rx="3" fill="#55585B"/><circle cx="664" cy="532" r="6" fill="#0FD6C4" fill-opacity=".28"/><path d="M661 532l2.2 2.2 4.4-4.6" stroke="#0FD6C4" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="680" y="529" width="56" height="6" rx="3" fill="#8A8F94"/><rect x="0" y="558" width="800" height="1" fill="#3E4245"/></svg></div>
-            <span class="bb-card-tag">02 / Prompts</span>
-          </div>
-          <div class="bb-card-body">
-            <h3>300+ prompts we actually use</h3>
-            <p>Sorted by job, not by theme. Each one tested on live client bots before it went in.</p>
-          </div>
-        </article>
-
-        <article class="bb-card bb-rv">
-          <div class="bb-card-shot">
-            <div class="bb-card-art" data-shot="3" role="img" aria-label="Speed-to-lead follow-up sequence showing timed SMS and email steps"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice"><defs>
-<linearGradient id="g3" x1="0" y1="0" x2="1" y2="1">
-  <stop offset="0" stop-color="#1250E1"/><stop offset=".55" stop-color="#3FA3E8"/><stop offset="1" stop-color="#0FD6C4"/>
-</linearGradient>
-<pattern id="dots3" width="26" height="26" patternUnits="userSpaceOnUse">
-  <circle cx="1.5" cy="1.5" r="1.5" fill="#3E4245"/>
-</pattern>
-</defs><rect width="800" height="600" fill="#2E3133"/><rect x="0" y="0" width="800" height="52" fill="#26292B"/><rect x="28" y="20" width="164" height="11" rx="5.5" fill="#B9BEC2"/><rect x="118" y="96" width="3" height="404" rx="1.5" fill="url(#g3)" fill-opacity=".55"/><circle cx="119" cy="126" r="13" fill="#2E3133" stroke="#0FD6C4" stroke-width="2.6"/><circle cx="119" cy="126" r="4.6" fill="#0FD6C4"/><rect x="28" y="119" width="62" height="16" rx="8" fill="#434649"/><rect x="38" y="124" width="42" height="6" rx="3" fill="#B9BEC2"/><rect x="160" y="104" width="380" height="56" rx="12" fill="#3A3D40" stroke="#55585B"/><rect x="160" y="104" width="4" height="56" rx="2" fill="#0FD6C4"/><rect x="182" y="118" width="20" height="20" rx="6" fill="none" stroke="#0FD6C4" stroke-width="1.8"/><path d="M187 125h10M187 131h6" stroke="#0FD6C4" stroke-width="1.8" stroke-linecap="round"/><rect x="218" y="119" width="86" height="7" rx="3.5" fill="#B9BEC2"/><rect x="218" y="134" width="260" height="5" rx="2.5" fill="#55585B"/><circle cx="119" cy="222" r="13" fill="#2E3133" stroke="#3FA3E8" stroke-width="2.6"/><circle cx="119" cy="222" r="4.6" fill="#3FA3E8"/><rect x="28" y="215" width="62" height="16" rx="8" fill="#434649"/><rect x="38" y="220" width="42" height="6" rx="3" fill="#B9BEC2"/><rect x="160" y="200" width="470" height="68" rx="12" fill="#3A3D40" stroke="#55585B"/><rect x="160" y="200" width="4" height="68" rx="2" fill="#3FA3E8"/><rect x="182" y="216" width="22" height="16" rx="3" fill="none" stroke="#3FA3E8" stroke-width="1.8"/><path d="M182 217l11 8 11-8" fill="none" stroke="#3FA3E8" stroke-width="1.8"/><rect x="218" y="215" width="104" height="7" rx="3.5" fill="#B9BEC2"/><rect x="218" y="230" width="330" height="5" rx="2.5" fill="#55585B"/><rect x="218" y="242" width="250" height="5" rx="2.5" fill="#55585B"/><circle cx="119" cy="318" r="13" fill="#2E3133" stroke="#1250E1" stroke-width="2.6"/><circle cx="119" cy="318" r="4.6" fill="#1250E1"/><rect x="28" y="311" width="62" height="16" rx="8" fill="#434649"/><rect x="38" y="316" width="42" height="6" rx="3" fill="#B9BEC2"/><rect x="160" y="296" width="380" height="56" rx="12" fill="#3A3D40" stroke="#55585B"/><rect x="160" y="296" width="4" height="56" rx="2" fill="#1250E1"/><rect x="182" y="310" width="20" height="20" rx="6" fill="none" stroke="#1250E1" stroke-width="1.8"/><path d="M187 317h10M187 323h6" stroke="#1250E1" stroke-width="1.8" stroke-linecap="round"/><rect x="218" y="311" width="86" height="7" rx="3.5" fill="#B9BEC2"/><rect x="218" y="326" width="260" height="5" rx="2.5" fill="#55585B"/><circle cx="119" cy="414" r="13" fill="#2E3133" stroke="#3FA3E8" stroke-width="2.6"/><circle cx="119" cy="414" r="4.6" fill="#3FA3E8"/><rect x="28" y="407" width="62" height="16" rx="8" fill="#434649"/><rect x="38" y="412" width="42" height="6" rx="3" fill="#B9BEC2"/><rect x="160" y="392" width="470" height="68" rx="12" fill="#3A3D40" stroke="#55585B"/><rect x="160" y="392" width="4" height="68" rx="2" fill="#3FA3E8"/><rect x="182" y="408" width="22" height="16" rx="3" fill="none" stroke="#3FA3E8" stroke-width="1.8"/><path d="M182 409l11 8 11-8" fill="none" stroke="#3FA3E8" stroke-width="1.8"/><rect x="218" y="407" width="104" height="7" rx="3.5" fill="#B9BEC2"/><rect x="218" y="422" width="330" height="5" rx="2.5" fill="#55585B"/><rect x="218" y="434" width="250" height="5" rx="2.5" fill="#55585B"/><circle cx="119" cy="492" r="13" fill="#2E3133" stroke="#0FD6C4" stroke-width="2.6"/><circle cx="119" cy="492" r="4.6" fill="#0FD6C4"/><rect x="28" y="485" width="62" height="16" rx="8" fill="#434649"/><rect x="38" y="490" width="42" height="6" rx="3" fill="#B9BEC2"/><rect x="160" y="470" width="380" height="56" rx="12" fill="#3A3D40" stroke="#55585B"/><rect x="160" y="470" width="4" height="56" rx="2" fill="#0FD6C4"/><rect x="182" y="484" width="20" height="20" rx="6" fill="none" stroke="#0FD6C4" stroke-width="1.8"/><path d="M187 491h10M187 497h6" stroke="#0FD6C4" stroke-width="1.8" stroke-linecap="round"/><rect x="218" y="485" width="86" height="7" rx="3.5" fill="#B9BEC2"/><rect x="218" y="500" width="260" height="5" rx="2.5" fill="#55585B"/></svg></div>
-            <span class="bb-card-tag">03 / Follow-up</span>
-          </div>
-          <div class="bb-card-body">
-            <h3>Speed-to-lead sequences</h3>
-            <p>The SMS and email timing we use to reach a new lead before they cool off.</p>
-          </div>
-        </article>
+      <div class="bb-metrics bb-rv">
+        <div class="bb-metric"><div class="bb-metric-num is-green">+<span data-count="320">0</span>%</div><div class="bb-metric-lbl">More appointments</div></div>
+        <div class="bb-metric"><div class="bb-metric-num is-green">−<span data-count="60">0</span>%</div><div class="bb-metric-lbl">Response time</div></div>
+        <div class="bb-metric"><div class="bb-metric-num is-blue"><span data-count="3">0</span>×</div><div class="bb-metric-lbl">More leads</div></div>
+        <div class="bb-metric"><div class="bb-metric-num is-green">+<span data-count="45">0</span>%</div><div class="bb-metric-lbl">Revenue increase</div></div>
+        <div class="bb-metric"><div class="bb-metric-num is-blue"><span data-count="20">0</span>+ hrs</div><div class="bb-metric-lbl">Saved weekly</div></div>
+        <div class="bb-metric"><div class="bb-metric-num is-blue">2.5×</div><div class="bb-metric-lbl">More conversions</div></div>
       </div>
+      <p class="bb-metrics-note bb-rv">Individual results vary and depend on your offer, market, and the work you put in.</p>
+
+      <!-- testimonials -->
+      <!-- ▸ REPLACE these with REAL named clients + a specific result.
+           Set data-photo="URL" on .bb-quote to drop in a real headshot;
+           without it, the coloured monogram initials show instead.          -->
+      <div class="bb-quotes" data-stagger style="margin-top:52px">
+        <figure class="bb-quote bb-rv" style="--av:#2563EB" data-initials="RL">
+          <div class="bb-quote-stars">★★★★★</div>
+          <div class="bb-quote-txt">"They built us a bot funnel that books calls while we sleep. It paid for itself in the first two weeks."</div>
+          <figcaption class="bb-quote-by">
+            <span class="bb-quote-av" aria-hidden="true">RL</span>
+            <div><div class="bb-quote-name">Real Client Name</div><div class="bb-quote-role">Verified client · Trustpilot</div></div>
+          </figcaption>
+        </figure>
+        <figure class="bb-quote bb-rv" style="--av:#1E3A8A" data-initials="SM">
+          <div class="bb-quote-stars">★★★★★</div>
+          <div class="bb-quote-txt">"Setup was completely hands-off for us. The team handled everything and our calendar has been full since."</div>
+          <figcaption class="bb-quote-by">
+            <span class="bb-quote-av" aria-hidden="true">SM</span>
+            <div><div class="bb-quote-name">Real Client Name</div><div class="bb-quote-role">Verified client · Trustpilot</div></div>
+          </figcaption>
+        </figure>
+        <figure class="bb-quote bb-rv" style="--av:#38BDF8" data-initials="JT">
+          <div class="bb-quote-stars">★★★★★</div>
+          <div class="bb-quote-txt">"Growth with AI, without it feeling too techy. Our lead response time went from hours to seconds."</div>
+          <figcaption class="bb-quote-by">
+            <span class="bb-quote-av" aria-hidden="true">JT</span>
+            <div><div class="bb-quote-name">Real Client Name</div><div class="bb-quote-role">Verified client · Trustpilot</div></div>
+          </figcaption>
+        </figure>
+      </div>
+
+      <p class="bb-joinline bb-rv">Inc. 5000 — 4 years running · Building bots since 2018 · Phoenix, AZ</p>
     </div>
   </section>
 
@@ -411,202 +450,181 @@
     </div>
   </section>
 
-  <!-- ========================================================== testimonials -->
+  <!-- ================================================ CTA section examples -->
   <section class="bb-sec bb-sec--white">
     <div class="bb-wrap">
       <div class="bb-sec-head bb-rv">
-        <div class="bb-eyebrow">Who's behind it</div>
-        <h2>BotBuilders has been doing this since 2018</h2>
-        <p>These are the same flows we deploy for paying clients.</p>
+        <div class="bb-eyebrow">Take the next step</div>
+        <h2>One Call Is All It Takes</h2>
+        <p>No pressure and no obligation — just a clear plan for getting your business more leads and sales.</p>
       </div>
 
-      <!-- ▸ REPLACE these with REAL named customers + a specific result.
-           Set data-photo="URL" on .bb-quote to drop in a real headshot;
-           without it, the coloured monogram initials show instead.          -->
-      <div class="bb-quotes" data-stagger>
-        <figure class="bb-quote bb-rv" style="--av:#1250E1" data-initials="RL">
-          <div class="bb-quote-stars">★★★★★</div>
-          <div class="bb-quote-txt">"Never has a company cared so much about its customers. The flows paid for themselves in the first week."</div>
-          <figcaption class="bb-quote-by">
-            <span class="bb-quote-av" aria-hidden="true">RL</span>
-            <div><div class="bb-quote-name">Real Customer Name</div><div class="bb-quote-role">Verified buyer · Trustpilot</div></div>
-          </figcaption>
-        </figure>
-        <figure class="bb-quote bb-rv" style="--av:#0FD6C4" data-initials="SM">
-          <div class="bb-quote-stars">★★★★★</div>
-          <div class="bb-quote-txt">"They give you everything you need to be successful. I had my first bot live the same afternoon."</div>
-          <figcaption class="bb-quote-by">
-            <span class="bb-quote-av" aria-hidden="true">SM</span>
-            <div><div class="bb-quote-name">Real Customer Name</div><div class="bb-quote-role">Verified buyer · Trustpilot</div></div>
-          </figcaption>
-        </figure>
-        <figure class="bb-quote bb-rv" style="--av:#3FA3E8" data-initials="JT">
-          <div class="bb-quote-stars">★★★★★</div>
-          <div class="bb-quote-txt">"Growth using AI, without it feeling too techy. My agency now resells these to every new client."</div>
-          <figcaption class="bb-quote-by">
-            <span class="bb-quote-av" aria-hidden="true">JT</span>
-            <div><div class="bb-quote-name">Real Customer Name</div><div class="bb-quote-role">Verified buyer · Trustpilot</div></div>
-          </figcaption>
-        </figure>
-      </div>
-
-      <div class="bb-metrics bb-rv">
-        <div class="bb-metric"><div class="bb-metric-num is-green">+<span data-count="320">0</span>%</div><div class="bb-metric-lbl">More appointments</div></div>
-        <div class="bb-metric"><div class="bb-metric-num is-green">−<span data-count="60">0</span>%</div><div class="bb-metric-lbl">Response time</div></div>
-        <div class="bb-metric"><div class="bb-metric-num"><span data-count="3">0</span>X</div><div class="bb-metric-lbl">More leads</div></div>
-        <div class="bb-metric"><div class="bb-metric-num">+<span data-count="45">0</span>%</div><div class="bb-metric-lbl">Revenue increase</div></div>
-        <div class="bb-metric"><div class="bb-metric-num"><span data-count="20">0</span>+ hrs</div><div class="bb-metric-lbl">Saved weekly</div></div>
-        <div class="bb-metric"><div class="bb-metric-num">2.5X</div><div class="bb-metric-lbl">More conversions</div></div>
-      </div>
-      <p class="bb-metrics-note bb-rv">Averages reported by BotBuilders clients. Individual results vary and depend on the work you put in.</p>
-
-      <p class="bb-joinline bb-rv">Inc. 5000 — 4 years running · Building bots since 2018 · Phoenix, AZ</p>
-    </div>
-  </section>
-
-  <!-- ================================================================ offer -->
-  <section class="bb-sec bb-sec--light" id="bb-offer">
-    <div class="bb-wrap">
-      <div class="bb-sec-head bb-rv">
-        <div class="bb-eyebrow">Simple pricing, real results</div>
-        <h2>Everything included</h2>
-        <p class="bb-offer-anchor">We charge clients <strong>$5,000</strong> to build these custom. Packaged up, it's a <strong>$1,900</strong> value. Normally <strong>$97</strong>. Today, <strong>$27</strong>.</p>
-      </div>
-
-      <div class="bb-offer bb-rv bb-rv--scale">
-        <div class="bb-offer-l">
-          <h3>What you get today</h3>
-          <ul class="bb-stack">
-            <li>
-              <span class="bb-stack-name"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M8 12.5l2.6 2.6L16 9.5"/></svg>25 done-for-you bot flows</span>
-              <span class="bb-stack-val">$1,200</span>
-            </li>
-            <li>
-              <span class="bb-stack-name"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M8 12.5l2.6 2.6L16 9.5"/></svg>300+ tested AI prompts</span>
-              <span class="bb-stack-val">$400</span>
-            </li>
-            <li>
-              <span class="bb-stack-name"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M8 12.5l2.6 2.6L16 9.5"/></svg>Speed-to-lead sequences</span>
-              <span class="bb-stack-val">$300</span>
-            </li>
-            <li>
-              <span class="bb-stack-name"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M8 12.5l2.6 2.6L16 9.5"/></svg>Automator AI + ManyChat import files</span>
-              <span class="bb-stack-val">Included</span>
-            </li>
-            <li>
-              <span class="bb-stack-name"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M8 12.5l2.6 2.6L16 9.5"/></svg>Unlimited client accounts licence</span>
-              <span class="bb-stack-val">Included</span>
-            </li>
-          </ul>
-          <div class="bb-stack-total"><span>Total value</span><span>$1,900</span></div>
+      <div class="bb-cta3" data-stagger>
+        <div class="bb-cta-card bb-cta-card--dark bb-rv">
+          <span class="bb-cta-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M21 7v5h-5"/></svg>
+          </span>
+          <h3>Ready to Grow<br>Your Business?</h3>
+          <p>Let's build your custom funnel and automation system.</p>
+          <a href="#bb-book" class="bb-btn bb-btn--secondary" data-cta>
+            <svg class="bb-cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg>
+            Book a Call
+          </a>
+          <div class="bb-cta-fine">Pick a time. Just works for you.</div>
         </div>
 
-        <div class="bb-offer-r">
-          <div class="bb-price">
-            <span class="bb-price-was">$97</span>
-            <span class="bb-price-now">$27</span>
-          </div>
-          <div class="bb-price-note">One payment. No trial, no rebill.</div>
-
-          <div class="bb-bump">
-            <input type="checkbox" id="bb-bump-input">
-            <label for="bb-bump-input">
-              Add the <strong>Bot Buildout Walkthrough</strong> — Matt builds one live, start to finish. <strong>+$19</strong>
-            </label>
-          </div>
-
-          <a href="#" class="bb-btn bb-btn--primary bb-btn--wide" id="bb-checkout" data-cta>
-            <span id="bb-checkout-label">Get instant access — $27</span>
-            <svg class="bb-arrow" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        <div class="bb-cta-card bb-cta-card--light bb-rv">
+          <span class="bb-cta-kicker">Next step</span>
+          <h3>Book a Call<br>With Our Team</h3>
+          <p>Get answers, see the process, and get a plan for your business.</p>
+          <a href="#bb-book" class="bb-btn bb-btn--secondary" data-cta>
+            <svg class="bb-cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg>
+            Book a Call
           </a>
-          <div class="bb-microcopy">Instant download · 30-day refund, no questions</div>
-          <div class="bb-countdown">Founding price ends in <b id="bb-timer">--:--:--</b></div>
+          <div class="bb-cta-fine">No pressure, just a friendly call.</div>
+        </div>
+
+        <div class="bb-cta-card bb-cta-card--blue bb-rv">
+          <span class="bb-cta-badge">
+            <svg class="bb-cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg>
+          </span>
+          <h3>Let's Talk</h3>
+          <p>Book a call and let's build a system that gets you more leads and sales.</p>
+          <a href="#bb-book" class="bb-btn bb-btn--ghost" data-cta>
+            <svg class="bb-cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg>
+            Book a Call
+          </a>
+          <div class="bb-cta-fine">Choose a time that works for you.</div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ================================================================== faq -->
-  <section class="bb-sec bb-sec--white" id="bb-faq">
+  <section class="bb-sec bb-sec--gray" id="bb-faq">
     <div class="bb-wrap">
       <div class="bb-sec-head bb-rv">
-        <div class="bb-eyebrow">Before you buy</div>
-        <h2>The questions we actually get asked</h2>
+        <div class="bb-eyebrow">Before you book</div>
+        <h2>The Questions We Get Asked</h2>
       </div>
 
       <div class="bb-faq" data-stagger>
         <div class="bb-q bb-rv">
           <button class="bb-q-btn" aria-expanded="false">
-            Do I need Automator AI to use these?
+            How long does it take to go live?
             <span class="bb-q-ico"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
           </button>
-          <div class="bb-q-panel"><p>No. Every flow ships twice — a ManyChat import file and an Automator AI snapshot. If you're on ManyChat's free tier, the flows still work.</p></div>
+          <div class="bb-q-panel"><p>Most systems are built and live within a few weeks of your strategy call. Simpler funnels can be faster — we'll give you a clear timeline on the call.</p></div>
         </div>
 
         <div class="bb-q bb-rv">
           <button class="bb-q-btn" aria-expanded="false">
-            I've never built a bot. Is this over my head?
+            Do I need to be technical?
             <span class="bb-q-ico"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
           </button>
-          <div class="bb-q-panel"><p>The flows are already built, so you're editing rather than creating. If you can change text in a Google Doc you can change it here. The $19 walkthrough exists for people who'd rather watch it done once first.</p></div>
+          <div class="bb-q-panel"><p>Not at all. This is done-for-you. We handle the build, the connections, and the testing — you approve it and we go live. No blank canvas, no configuring tools yourself.</p></div>
         </div>
 
         <div class="bb-q bb-rv">
           <button class="bb-q-btn" aria-expanded="false">
-            Can I use these for client work?
+            What platforms do you build on?
             <span class="bb-q-ico"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
           </button>
-          <div class="bb-q-panel"><p>Yes. Use them in unlimited client accounts. You can't resell the files themselves as a competing product.</p></div>
+          <div class="bb-q-panel"><p>We build on the tools that fit your business — including ManyChat, Automator AI, and popular CRMs. If you already have a stack, we work with it wherever we can.</p></div>
         </div>
 
         <div class="bb-q bb-rv">
           <button class="bb-q-btn" aria-expanded="false">
-            What if the flows don't fit my industry?
+            How much does it cost?
             <span class="bb-q-ico"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
           </button>
-          <div class="bb-q-panel"><p>The 25 cover jobs rather than industries — capturing a lead, booking a call, answering an FAQ, chasing a review. The logic transfers; the copy is yours to change.</p></div>
+          <div class="bb-q-panel"><p>It depends on the size of the system. On your free call we'll scope exactly what you need and give you a clear, no-surprises quote before anything begins.</p></div>
         </div>
 
         <div class="bb-q bb-rv">
           <button class="bb-q-btn" aria-expanded="false">
-            Is this a subscription?
+            Will this work for my industry?
             <span class="bb-q-ico"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
           </button>
-          <div class="bb-q-panel"><p>No. $27 once, plus $19 once if you add the walkthrough. No trial, no rebill.</p></div>
+          <div class="bb-q-panel"><p>We've built for coaches, agencies, local services, e-commerce, and more. The core jobs — capture a lead, book a call, follow up — apply almost everywhere. We'll confirm fit on the call.</p></div>
         </div>
 
         <div class="bb-q bb-rv">
           <button class="bb-q-btn" aria-expanded="false">
-            What if I want a refund?
+            What happens on the call?
             <span class="bb-q-ico"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
           </button>
-          <div class="bb-q-panel"><p>Email support within 30 days and we'll refund you. You keep the files.</p></div>
+          <div class="bb-q-panel"><p>We learn about your business, show you how the process works, and map out a plan to get you more leads and booked calls. No pressure — just a friendly, useful conversation.</p></div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ============================================================ final cta -->
-  <section class="bb-sec bb-final">
+  <section class="bb-sec bb-final" id="bb-book">
+    <div class="bb-ring" aria-hidden="true"></div>
+    <div class="bb-ring r2" aria-hidden="true"></div>
     <div class="bb-wrap bb-final-in">
-      <h2 class="bb-rv"><span class="bb-hl">$27</span> for the flows, or a weekend building them yourself</h2>
-      <p class="bb-rv">Your call. The files are ready either way.</p>
+      <h2 class="bb-rv">Ready To Grow <span class="bb-hl">Your Business?</span></h2>
+      <p class="bb-rv">Let's build a system that captures more leads, books more calls, and closes more clients — on autopilot.</p>
 
-      <div class="bb-rv" style="margin-top:36px">
-        <a href="#bb-offer" class="bb-btn bb-btn--primary" data-cta>
-          Get instant access — $27
-          <svg class="bb-arrow" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      <div class="bb-final-cta bb-rv">
+        <a href="#" class="bb-btn bb-btn--secondary" id="bb-book-btn" data-cta>
+          <svg class="bb-cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg>
+          Book Your Free Call
         </a>
-        <div class="bb-microcopy" style="margin-top:14px">Instant download · 30-day refund, no questions</div>
       </div>
 
       <div class="bb-guarantee bb-rv">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2l8 3.5v6c0 5-3.4 9.4-8 10.5-4.6-1.1-8-5.5-8-10.5v-6z"/><path d="M9 12l2.2 2.2L15.5 10"/></svg>
         <span>
-          <strong>The refund is real.</strong> Import a flow, run it for a month, and if it hasn't
-          earned back the $27, email us and we'll refund you. You keep the files.
-          We'd rather have your trust than your twenty-seven dollars.
+          <strong>No pressure, no obligation.</strong> The call is free and genuinely useful — you'll
+          leave with a clear plan whether or not we build it for you. We'd rather earn your trust first.
         </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================= how we work -->
+  <section class="bb-values">
+    <div class="bb-wrap">
+      <div class="bb-values-grid" data-stagger>
+        <div class="bb-value bb-rv">
+          <div class="bb-value-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.6 2.6L16 9.5"/></svg>
+          </div>
+          <div>
+            <div class="bb-value-t">We Listen</div>
+            <p>We take the time to understand your business.</p>
+          </div>
+        </div>
+        <div class="bb-value bb-rv">
+          <div class="bb-value-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"/></svg>
+          </div>
+          <div>
+            <div class="bb-value-t">We Build</div>
+            <p>We build your custom system, end to end.</p>
+          </div>
+        </div>
+        <div class="bb-value bb-rv">
+          <div class="bb-value-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V9M10 19V4M16 19v-6M22 19v-9"/><path d="M2 22h20"/></svg>
+          </div>
+          <div>
+            <div class="bb-value-t">We Deliver Results</div>
+            <p>You get more leads, calls, and clients.</p>
+          </div>
+        </div>
+        <div class="bb-value bb-rv">
+          <div class="bb-value-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5"/><path d="M16 5.2a3.2 3.2 0 0 1 0 6M18 20c0-2.6-1-4.5-2.8-5.4"/></svg>
+          </div>
+          <div>
+            <div class="bb-value-t">We're Your Partner</div>
+            <p>We grow with you, long after launch.</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -615,14 +633,14 @@
   <footer class="bb-footer">
     <div class="bb-wrap">
       <div class="bb-footer-top">
-        <a href="#bb-top" class="bb-logo" style="font-size:18px">
-          <svg class="bb-logo-mark" viewBox="0 0 32 32" fill="none"><defs><linearGradient id="bbg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1250E1"/><stop offset="1" stop-color="#0FD6C4"/></linearGradient></defs><rect x="6" y="11" width="20" height="15" rx="5" fill="url(#bbg2)"/><circle cx="12.5" cy="18" r="2.1" fill="#2E3133"/><circle cx="19.5" cy="18" r="2.1" fill="#2E3133"/><path d="M16 5v5" stroke="url(#bbg2)" stroke-width="2.4" stroke-linecap="round"/><circle cx="16" cy="4" r="2.2" fill="url(#bbg2)"/></svg>
+        <a href="#bb-top" class="bb-logo" style="font-size:22px">
+          <svg class="bb-logo-mark" viewBox="0 0 32 32" fill="none"><defs><linearGradient id="bbg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1E3A8A"/><stop offset="1" stop-color="#38BDF8"/></linearGradient></defs><path d="M16 3l11 6v14l-11 6-11-6V9z" fill="url(#bbg2)"/><path d="M17 9l-6 8h4l-1 6 6-8h-4z" fill="#fff"/></svg>
           BotBuilders
         </a>
         <div class="bb-footer-badges">
-          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Stripe secured</span>
-          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 3.5v6c0 5-3.4 9.4-8 10.5-4.6-1.1-8-5.5-8-10.5v-6z"/></svg>30-day refund</span>
-          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.9 6.3 6.6.7-5 4.5 1.4 6.5L12 16.8 6.1 20l1.4-6.5-5-4.5 6.6-.7z"/></svg>Inc. 5000</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg>Free strategy call</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.9 6.3 6.6.7-5 4.5 1.4 6.5L12 16.8 6.1 20l1.4-6.5-5-4.5 6.6-.7z"/></svg>Inc. 5000 · 4 years</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5.4l3.4 2"/></svg>Building bots since 2018</span>
         </div>
       </div>
 
@@ -635,7 +653,7 @@
 
       <p class="bb-footer-fine">
         BotBuilders · 8936 N Central Ave, Phoenix, AZ 85020 · 602-922-9700<br>
-        Results vary and depend on the work you put in. Nothing here is a guarantee of income.
+        Results vary and depend on your offer, market, and the work you put in. Nothing here is a guarantee of income.
         This site is not part of, or endorsed by, Meta, Google or ManyChat.<br>
         © 2026 BotBuilders. All rights reserved.
       </p>
@@ -646,12 +664,12 @@
   <div class="bb-sticky" id="bb-sticky">
     <div class="bb-wrap bb-sticky-in">
       <div class="bb-sticky-txt">
-        <s>$97</s> <b>$27</b>
-        <span class="bb-sticky-sub">25 flows · 300+ prompts · instant download</span>
+        <b>Book a Call</b>
+        <span class="bb-sticky-sub">Free strategy call · more leads, calls &amp; clients</span>
       </div>
-      <a href="#bb-offer" class="bb-btn bb-btn--primary bb-btn--sm" data-cta>
-        Get access
-        <svg class="bb-arrow" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      <a href="#bb-book" class="bb-btn bb-btn--secondary bb-btn--sm" data-cta>
+        <svg class="bb-cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg>
+        Book Now
       </a>
     </div>
   </div>
@@ -664,23 +682,20 @@
 
   /* ====================================================== CONFIG — EDIT ME */
   var CONFIG = {
-    CHECKOUT_URL : 'https://lead.automatordemo.com/checkout',            // $27 only
-    BUMP_URL     : 'https://lead.automatordemo.com/checkout?bump=1',     // $27 + $19
-    OFFER_ENDS   : '',            // real deadline e.g. '2026-08-31T23:59:00-07:00'
-                                  // blank = honest per-visitor 24h window (persists across refreshes)
-    SHOTS        : { 1:'', 2:'', 3:'' },  // paste real screenshot URLs here
+    /* Your calendar / "book a call" link. Every BOOK A CALL button points here.
+       e.g. a Calendly, GHL calendar, SavvyCal or Cal.com scheduling URL.     */
+    BOOKING_URL  : 'https://lead.automatordemo.com/book',
 
-    /* Matt's 2-min explainer. BOTH are supported now:
-         • Direct file → ends in .mp4/.webm/.ogg → rendered as a <video> element
-         • Embed URL   → YouTube/Vimeo/Wistia embed link → rendered as an <iframe>
-       Leave blank and the poster stays a still image (no click).          */
-    VIDEO_URL    : 'https://assets.cdn.filesafe.space/sz4sVbBhLW7cX7keIHT6/media/6a7661997a46c6dc51b8755c.mp4',
-    VIDEO_POSTER : 'https://assets.cdn.filesafe.space/sz4sVbBhLW7cX7keIHT6/media/6a76640a78cdd940a02fa484.jpg',
+    /* Short explainer that plays in the hero. BOTH are supported:
+         • Direct file → ends in .mp4/.webm/.ogg → rendered as a <video>
+         • Embed URL   → YouTube/Vimeo/Wistia embed link → rendered as <iframe>
+       Leave blank and the dashboard mock stays a still image (no click).     */
+    VIDEO_URL    : '',
+    VIDEO_POSTER : '',   /* optional poster image shown before play */
 
-    /* Press + Inc. 5000 marks are third-party trademarks, so they ship as
-       plain text until you point these at YOUR OWN hosted image files —
-       the same assets already live on botbuilders.com. Order matters and
-       must match the markup. Leave an entry '' to keep the text fallback. */
+    /* Press marks are third-party trademarks, so they ship as plain text
+       until you point these at YOUR OWN hosted image files. Order matters
+       and must match the markup. Leave an entry '' to keep the text.        */
     PRESS_LOGOS  : [
       /* Inc. 5000        */ '',
       /* abc              */ '',
@@ -695,15 +710,14 @@
       /* PerpetualTraffic */ '',
       /* FOX              */ ''
     ],
-    INC_BADGE    : '',  /* one Inc. 5000 badge image; repeated 4x */
 
     /* Your logo. Replaces the drawn placeholder mark in BOTH the nav and the
-       footer. The nav sits on charcoal #2E3133, so this needs to be a light /
-       reverse version — a dark-text logo will disappear. Set LOGO_FOOTER only
-       if the footer needs a different file; otherwise it reuses LOGO_URL.     */
-    LOGO_URL     : 'https://assets.cdn.filesafe.space/sz4sVbBhLW7cX7keIHT6/media/6a76a8418880872019224576.png',
-    LOGO_FOOTER  : 'https://assets.cdn.filesafe.space/sz4sVbBhLW7cX7keIHT6/media/6a76a8418880872019224576.png',
-    LOGO_HEIGHT  : 34    /* px; width scales automatically — bump/drop to taste */
+       footer. Both sit on navy, so this needs to be a light / reverse version
+       — a dark logo will disappear. Set LOGO_FOOTER only if the footer needs
+       a different file; otherwise it reuses LOGO_URL.                        */
+    LOGO_URL     : '',
+    LOGO_FOOTER  : '',
+    LOGO_HEIGHT  : 36    /* px; width scales automatically */
   };
   /* ======================================================================= */
 
@@ -719,16 +733,13 @@
       if(window.dataLayer && window.dataLayer.push) window.dataLayer.push(Object.assign({event:event}, params));
       if(typeof window.gtag === 'function')          window.gtag('event', event, params);
       if(typeof window.fbq  === 'function'){
-        var fbMap = {ViewContent:'ViewContent', InitiateCheckout:'InitiateCheckout'};
+        var fbMap = {ViewContent:'ViewContent', book_a_call:'Lead', Schedule:'Schedule'};
         if(fbMap[event]) window.fbq('track', fbMap[event], params);
       }
     }catch(e){/* analytics must never break the page */}
   }
 
-  /* -- 0. kill GHL's wrapper chrome (the white strip above the page) -------
-     GHL nests the code element inside section > row > column wrappers, each
-     of which can carry its own white background and vertical padding. Walk
-     the ancestor chain and flatten it. Harmless when run standalone. */
+  /* -- 0. kill GHL's wrapper chrome (the white strip above the page) ------- */
   (function(){
     var el = root.parentElement;
     while(el && el !== document.body && el !== document.documentElement){
@@ -741,8 +752,8 @@
       el.style.maxWidth       = 'none';
       el = el.parentElement;
     }
-    document.documentElement.style.background = '#2E3133';
-    document.body.style.background = '#2E3133';
+    document.documentElement.style.background = '#0B1320';
+    document.body.style.background = '#0B1320';
     document.body.style.margin = '0';
   })();
 
@@ -753,22 +764,7 @@
   setVW();
   window.addEventListener('resize', setVW, {passive:true});
 
-  /* -- 2. real product screenshots, if supplied ---------------------------- */
-  Object.keys(CONFIG.SHOTS).forEach(function(k){
-    var url = CONFIG.SHOTS[k];
-    if(!url) return;
-    var box = root.querySelector('[data-shot="'+k+'"]');
-    if(!box) return;
-    var img = document.createElement('img');
-    img.src = url;
-    img.alt = box.getAttribute('aria-label') || '';
-    img.loading = 'lazy';
-    box.innerHTML = '';
-    box.removeAttribute('role');
-    box.appendChild(img);
-  });
-
-  /* -- 2a. real testimonial headshots, if supplied (data-photo on .bb-quote) */
+  /* -- 2. real testimonial headshots, if supplied (data-photo on .bb-quote) */
   root.querySelectorAll('.bb-quote[data-photo]').forEach(function(fig){
     var url = fig.getAttribute('data-photo');
     if(!url) return;
@@ -779,7 +775,7 @@
     av.classList.add('has-photo');
   });
 
-  /* -- 3. scroll reveal, with per-group stagger ---------------------------- */
+  /* -- 3. scroll reveal, with per-group stagger --------------------------- */
   root.querySelectorAll('[data-stagger]').forEach(function(group){
     var kids = group.querySelectorAll('.bb-rv');
     for(var i=0;i<kids.length;i++) kids[i].style.setProperty('--d', (i*90)+'ms');
@@ -802,7 +798,7 @@
     revealables.forEach(function(el){ io.observe(el); });
   }
 
-  /* -- 4. number count-up --------------------------------------------------
+  /* -- 4. number count-up -------------------------------------------------
      Resting state is the REAL number, so a failed observer degrades to a
      correct static figure rather than a zero. */
   root.querySelectorAll('[data-count]').forEach(function(el){
@@ -849,7 +845,7 @@
     });
   })();
 
-  /* -- 4b. press + Inc. 5000 marks, when real assets are supplied --------- */
+  /* -- 4b. press marks, when real assets are supplied --------------------- */
   (function(){
     var items = root.querySelectorAll('#bb-press-grid .bb-press-item');
     (CONFIG.PRESS_LOGOS || []).forEach(function(src, i){
@@ -860,39 +856,33 @@
       img.src = src; img.alt = name; img.loading = 'lazy';
       items[i].appendChild(img);
     });
-
-    if(CONFIG.INC_BADGE){
-      var wrap = document.getElementById('bb-inc-badges');
-      if(wrap){
-        wrap.innerHTML = '';
-        for(var i = 0; i < 4; i++){
-          var b = document.createElement('img');
-          b.src = CONFIG.INC_BADGE;
-          b.alt = 'Inc. 5000 fastest-growing companies';
-          b.loading = 'lazy';
-          wrap.appendChild(b);
-        }
-      }
-    }
   })();
 
-  /* -- 5. video facade: build the real player only on click ----------------
-     FIX: a direct video file (.mp4/.webm/.ogg) is played with a <video>
-     element (the old code shoved it into an <iframe>, which ignores
-     ?autoplay and shows the browser's raw media viewer). Embed URLs still
-     use an <iframe>. */
+  /* -- 5. video facade: build the real player only on click ---------------
+     A direct video file (.mp4/.webm/.ogg) plays with a <video> element;
+     embed URLs use an <iframe>. With no VIDEO_URL, the dashboard mock stays
+     a static, non-clickable image. */
   (function(){
     var box = document.getElementById('bb-video');
     if(!box) return;
-
-    var poster = document.getElementById('bb-poster');
-    if(poster && CONFIG.VIDEO_POSTER) poster.src = CONFIG.VIDEO_POSTER;
 
     if(!CONFIG.VIDEO_URL){
       box.style.cursor = 'default';
       box.removeAttribute('role');
       box.removeAttribute('tabindex');
+      box.setAttribute('aria-label','Product dashboard preview');
       return;
+    }
+
+    if(CONFIG.VIDEO_POSTER){
+      var art = document.getElementById('bb-mock-art');
+      if(art){
+        var poster = document.createElement('img');
+        poster.src = CONFIG.VIDEO_POSTER;
+        poster.alt = 'Watch how BotBuilders builds your system';
+        poster.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover';
+        art.replaceWith(poster);
+      }
     }
 
     var isFile = /\.(mp4|webm|ogg)(\?.*)?$/i.test(CONFIG.VIDEO_URL);
@@ -912,12 +902,16 @@
         var sep = CONFIG.VIDEO_URL.indexOf('?') > -1 ? '&' : '?';
         node = document.createElement('iframe');
         node.src = CONFIG.VIDEO_URL + sep + 'autoplay=1';
-        node.title = 'Matt explains the 25 bot flows';
+        node.title = 'How BotBuilders builds your system';
         node.allow = 'autoplay; fullscreen; picture-in-picture';
         node.setAttribute('allowfullscreen','');
       }
+      node.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:0;background:#000';
       box.appendChild(node);
       box.classList.add('is-playing');
+      Array.prototype.forEach.call(box.children, function(c){
+        if(c !== node) c.style.display = 'none';
+      });
       track('video_play', {location:'hero'});
     }
 
@@ -927,7 +921,7 @@
     });
   })();
 
-  /* -- 6. FAQ accordion ---------------------------------------------------- */
+  /* -- 6. FAQ accordion --------------------------------------------------- */
   root.querySelectorAll('.bb-q-btn').forEach(function(btn){
     btn.addEventListener('click', function(){
       var q = btn.closest('.bb-q');
@@ -948,96 +942,45 @@
     });
   });
 
-  /* -- 7. order bump swaps the checkout link and the button label ---------- */
+  /* -- 7. wire every CTA to the booking link ------------------------------
+     In-page jumps (href="#bb-...") scroll to the final booking section, which
+     holds the real booking button. The real booking button + any external
+     CTA opens BOOKING_URL and fires the lead event. */
   (function(){
-    var bump  = document.getElementById('bb-bump-input');
-    var link  = document.getElementById('bb-checkout');
-    var label = document.getElementById('bb-checkout-label');
-    function sync(){
-      var on = bump && bump.checked;
-      if(link)  link.href = on ? CONFIG.BUMP_URL : CONFIG.CHECKOUT_URL;
-      if(label) label.textContent = on ? 'Get instant access — $46' : 'Get instant access — $27';
-    }
-    if(bump) bump.addEventListener('change', function(){
-      sync();
-      track('order_bump_toggle', {selected: bump.checked});
-    });
-    sync();
+    var bookBtn = document.getElementById('bb-book-btn');
+    if(bookBtn && CONFIG.BOOKING_URL) bookBtn.href = CONFIG.BOOKING_URL;
 
-    /* every other CTA points at the plain checkout */
     root.querySelectorAll('[data-cta]').forEach(function(el){
-      if(el.id === 'bb-checkout') return;
-      if(el.getAttribute('href') === '#bb-offer') return;   // in-page jumps stay
-      el.href = CONFIG.CHECKOUT_URL;
-    });
+      var href = el.getAttribute('href') || '';
+      // in-page jumps stay as anchors; everything else points at the calendar
+      if(href.indexOf('#') !== 0 && CONFIG.BOOKING_URL) el.href = CONFIG.BOOKING_URL;
 
-    /* fire InitiateCheckout on any click that leaves for the checkout ------ */
-    root.querySelectorAll('[data-cta]').forEach(function(el){
       el.addEventListener('click', function(){
-        var href = el.getAttribute('href') || '';
-        if(href.indexOf('#') === 0) return;   // in-page jump, not a checkout
-        var withBump = bump && bump.checked;
-        track('InitiateCheckout', {
-          value: withBump ? 46 : 27,
-          currency: 'USD',
-          content_name: withBump ? 'Flow Vault + Walkthrough' : 'Flow Vault'
-        });
+        var h = el.getAttribute('href') || '';
+        if(h.indexOf('#') === 0) return;   // in-page jump, not a booking
+        track('book_a_call', {location: el.closest('section,nav,.bb-sticky') ? 'cta' : 'page'});
+        track('Schedule', {content_name:'Strategy call'});
       });
     });
   })();
 
-  /* -- 8. countdown -------------------------------------------------------
-     Honest by default: a real OFFER_ENDS date if you set one; otherwise a
-     per-visitor 24h window stored in localStorage so it does NOT reset to a
-     fresh "midnight" on every page refresh. */
-  (function(){
-    var out = document.getElementById('bb-timer');
-    if(!out) return;
-    var WINDOW_MS = 24 * 3.6e6;
-
-    function endTime(){
-      if(CONFIG.OFFER_ENDS){
-        var t = new Date(CONFIG.OFFER_ENDS).getTime();
-        if(!isNaN(t)) return t;
-      }
-      var key = 'bb_offer_ends';
-      var stored;
-      try{ stored = parseInt(window.localStorage.getItem(key), 10); }catch(e){}
-      if(stored && !isNaN(stored) && stored > Date.now()) return stored;
-      var end = Date.now() + WINDOW_MS;
-      try{ window.localStorage.setItem(key, String(end)); }catch(e){}
-      return end;
-    }
-
-    var end = endTime();
-    function pad(n){ return n < 10 ? '0'+n : ''+n; }
-    function tick(){
-      var left = end - Date.now();
-      if(left <= 0){ out.textContent = '00:00:00'; return; }
-      var h = Math.floor(left/3.6e6), m = Math.floor(left%3.6e6/6e4), s = Math.floor(left%6e4/1000);
-      out.textContent = pad(h)+':'+pad(m)+':'+pad(s);
-      setTimeout(tick, 1000);
-    }
-    tick();
-  })();
-
-  /* -- 9. sticky bar appears once the hero has scrolled past --------------- */
+  /* -- 8. sticky bar appears once the hero has scrolled past --------------- */
   (function(){
     var bar  = document.getElementById('bb-sticky');
     var hero = root.querySelector('.bb-hero');
-    var offer = document.getElementById('bb-offer');
+    var book = document.getElementById('bb-book');
     if(!bar || !hero) return;
     function onScroll(){
       var past = hero.getBoundingClientRect().bottom < 0;
-      var atOffer = offer && offer.getBoundingClientRect().top < window.innerHeight
-                          && offer.getBoundingClientRect().bottom > 0;
-      bar.classList.toggle('is-in', past && !atOffer);
+      var atBook = book && book.getBoundingClientRect().top < window.innerHeight
+                        && book.getBoundingClientRect().bottom > 0;
+      bar.classList.toggle('is-in', past && !atBook);
     }
     window.addEventListener('scroll', onScroll, {passive:true});
     onScroll();
   })();
 
-  /* -- 10. smooth in-page jumps ------------------------------------------- */
+  /* -- 9. smooth in-page jumps -------------------------------------------- */
   root.querySelectorAll('a[href^="#bb-"]').forEach(function(a){
     a.addEventListener('click', function(ev){
       var t = document.querySelector(a.getAttribute('href'));
@@ -1047,8 +990,8 @@
     });
   });
 
-  /* -- 11. page view -> analytics ----------------------------------------- */
-  track('ViewContent', {content_name:'Flow Vault sales page', value:27, currency:'USD'});
+  /* -- 10. page view -> analytics ----------------------------------------- */
+  track('ViewContent', {content_name:'Book a Call landing page'});
 
 })();
 </script>
