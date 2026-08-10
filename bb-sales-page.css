@@ -679,6 +679,24 @@
 }
 
 /* ==========================================================================
+   WHITE "BOOK A CALL" BUTTON — nav + sticky bar only
+   (hero, CTA band and final CTA stay on the blue gradient)
+   ========================================================================== */
+.bb-nav .bb-btn--primary,
+.bb-sticky .bb-btn--primary{
+  background:#fff;
+  color:var(--bb-blue);
+  box-shadow:0 8px 22px -10px rgba(0,0,0,.5);
+}
+.bb-nav .bb-btn--primary:hover,
+.bb-sticky .bb-btn--primary:hover{
+  background:#fff;
+  filter:none;
+  color:var(--bb-blue-900);
+  box-shadow:0 12px 28px -10px rgba(0,0,0,.55);
+}
+
+/* ==========================================================================
    POP-UP STICKY-BAR CTA BOUNCE
    ========================================================================== */
 @keyframes bb-cta-bounce{
