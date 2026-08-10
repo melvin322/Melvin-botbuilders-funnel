@@ -781,3 +781,21 @@
   /* keep content clear of the fixed sticky bar */
   .bb-footer{ padding-bottom:96px; }
 }
+
+/* ==========================================================================
+   CTA ATTENTION BOUNCE
+   Every call-to-action ([data-cta]) gently bounces up and down to pull the
+   eye. Tune it: .7s = speed (lower is faster), -8px = jump height.
+   ========================================================================== */
+@keyframes bb-cta-bounce{
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+.bb-page [data-cta]{
+  animation: bb-cta-bounce .7s ease-in-out infinite;
+  will-change: transform;
+}
+/* hold still for visitors who ask for reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .bb-page [data-cta]{ animation: none; }
+}
