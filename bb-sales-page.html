@@ -696,7 +696,9 @@
         node.title='How BotBuilders chatbot funnels work';
         node.allow='autoplay; fullscreen; picture-in-picture'; node.setAttribute('allowfullscreen','');
       }
-      box.appendChild(node); box.classList.add('is-playing'); track('video_play',{location:'hero'});
+      box.appendChild(node); box.classList.add('is-playing');
+      var panel = box.closest('.bb-hero-panel'); if(panel) panel.classList.add('is-playing'); // expand + hide stat card
+      track('video_play',{location:'hero'});
     }
     box.addEventListener('click', play);
     box.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); play(); } });
