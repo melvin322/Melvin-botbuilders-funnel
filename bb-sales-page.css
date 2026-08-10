@@ -24,8 +24,8 @@
   --bb-blue-900:#1E3A8A;
   --bb-blue:#2563EB;
   --bb-sky:#38BDF8;
-  --bb-grad:linear-gradient(120deg,#2563EB 0%,#38BDF8 100%);
-  --bb-grad-soft:linear-gradient(120deg,#1E3A8A 0%,#2563EB 55%,#38BDF8 100%);
+  --bb-grad:linear-gradient(120deg,#2563EB 0%,#38BDF8 52%,#14D0C2 100%);
+  --bb-grad-soft:linear-gradient(120deg,#1E3A8A 0%,#2563EB 50%,#14D0C2 100%);
 
   --bb-heading:#0B1320;
   --bb-body:#47566B;
