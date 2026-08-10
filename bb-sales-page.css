@@ -105,7 +105,7 @@
 .bb-arrow{ transition:transform .2s var(--bb-ease); }
 .bb-btn:hover .bb-arrow{ transform:translateX(3px); }
 
-.bb-btn--primary{                       /* the money button — blue→sky gradient */
+.bb-page .bb-btn--primary{              /* the money button — blue→sky gradient */
   color:#fff;
   background:var(--bb-grad);
   box-shadow:0 12px 30px -10px rgba(37,99,235,.6);
@@ -113,7 +113,7 @@
 .bb-btn--primary:hover{ transform:translateY(-2px); filter:brightness(1.05); box-shadow:0 18px 40px -12px rgba(37,99,235,.7); }
 .bb-btn--primary:active{ transform:translateY(0); }
 
-.bb-btn--dark{                          /* brand primary CTA style */
+.bb-page .bb-btn--dark{                 /* brand primary CTA style */
   color:#fff;
   background:var(--bb-ink);
   box-shadow:0 12px 30px -12px rgba(11,19,32,.6);
@@ -676,24 +676,6 @@
   .bb-guarantee{ flex-direction:column; gap:12px; }
   .bb-footer-top{ flex-direction:column; align-items:flex-start; }
   .bb-footer{ padding-bottom:96px; }
-}
-
-/* ==========================================================================
-   WHITE "BOOK A CALL" BUTTON — nav + sticky bar only
-   (hero, CTA band and final CTA stay on the blue gradient)
-   ========================================================================== */
-.bb-nav .bb-btn--primary,
-.bb-sticky .bb-btn--primary{
-  background:#fff;
-  color:var(--bb-blue);
-  box-shadow:0 8px 22px -10px rgba(0,0,0,.5);
-}
-.bb-nav .bb-btn--primary:hover,
-.bb-sticky .bb-btn--primary:hover{
-  background:#fff;
-  filter:none;
-  color:var(--bb-blue-900);
-  box-shadow:0 12px 28px -10px rgba(0,0,0,.55);
 }
 
 /* ==========================================================================
