@@ -309,6 +309,7 @@
 .bb-offercard-top{
   position:relative;
   text-align:center; padding:12px;
+  border-radius:calc(var(--bb-radius-lg) - 1px) calc(var(--bb-radius-lg) - 1px) 0 0;
   font-family:var(--bb-font); font-weight:800; font-size:12px; letter-spacing:.18em; text-transform:uppercase;
   color:#fff; background:var(--bb-grad);
 }
