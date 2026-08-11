@@ -767,11 +767,17 @@
     el.addEventListener('click', function(){ track('Lead', {content_name:'Book a call'}); });
   });
 
-  /* -- 8. sticky bar after hero ------------------------------------------- */
+  /* -- 8. sticky bar: show after the hero, hide once the lead reaches the
+     bottom of the page (when the final CTA / footer comes into view) ------- */
   (function(){
     var bar=document.getElementById('bb-sticky'), hero=root.querySelector('.bb-hero');
+    var bottomEl=root.querySelector('.bb-final') || root.querySelector('.bb-footer');
     if(!bar || !hero) return;
-    function onScroll(){ bar.classList.toggle('is-in', hero.getBoundingClientRect().bottom < 0); }
+    function onScroll(){
+      var pastHero = hero.getBoundingClientRect().bottom < 0;
+      var atBottom = bottomEl ? bottomEl.getBoundingClientRect().top < (window.innerHeight - 40) : false;
+      bar.classList.toggle('is-in', pastHero && !atBottom);
+    }
     window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
   })();
 
