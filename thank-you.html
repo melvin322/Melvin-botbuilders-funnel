@@ -7,7 +7,7 @@
 <meta name="robots" content="noindex">
 
 <!-- ==========================================================================
-     BotBuilders — "You're all set" thank-you / booking confirmation page
+     BotBuilders — "You're all set" thank-you / booking confirmation page (v2)
      Brand board: navy #0B1320 · blue #2563EB · sky #38BDF8 · Bebas Neue + Inter
      ------------------------------------------------------------------------
      GHL: paste everything between <div class="bb-ty"> … </div> AND the
@@ -15,21 +15,32 @@
      thank-you.css into that page's Custom CSS.
      ------------------------------------------------------------------------
      EDIT in the CONFIG block at the bottom:
-       ADD_TO_CAL_URL — link for the "Add to calendar" button (see notes)
-       LOGO_URL       — your hosted logo (light/reverse for the dark page)
-       HERO_IMAGE     — cut-out photo (transparent PNG). Blank = hidden.
+       ADD_TO_CAL_URL — link for the "Add to calendar" button (blank = hidden)
+       LOGO_URL       — your hosted logo (light/reverse for the dark panel)
+       HERO_IMAGE     — transparent cut-out photo. Blank = photo hidden.
      ========================================================================== -->
 <link rel="stylesheet" href="thank-you.css">
 </head>
 <body>
 
 <div class="bb-ty" id="bb-ty">
+  <div class="bb-ty-shell">
 
-  <!-- ================================================================= hero -->
-  <header class="bb-ty-hero">
-    <div class="bb-ty-dots" aria-hidden="true"></div>
+    <!-- concentric rings behind the photo -->
+    <div class="bb-ty-rings" aria-hidden="true">
+      <svg viewBox="0 0 660 660" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g stroke="#3B82F6" fill="none">
+          <circle cx="360" cy="300" r="120" stroke-opacity=".55" stroke-width="2"/>
+          <circle cx="360" cy="300" r="180" stroke-opacity=".38" stroke-width="1.6"/>
+          <circle cx="360" cy="300" r="244" stroke-opacity=".26" stroke-width="1.4"/>
+          <circle cx="360" cy="300" r="312" stroke-opacity=".16" stroke-width="1.2"/>
+          <circle cx="360" cy="300" r="384" stroke-opacity=".10" stroke-width="1"/>
+        </g>
+      </svg>
+    </div>
 
-    <div class="bb-ty-wrap">
+    <!-- ============================================================= hero -->
+    <header class="bb-ty-hero">
       <div class="bb-ty-logo bb-ty-in" style="--d:40ms">
         <svg class="bb-ty-logo-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <defs><linearGradient id="tybg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2563EB"/><stop offset="1" stop-color="#38BDF8"/></linearGradient></defs>
@@ -41,11 +52,15 @@
 
       <div class="bb-ty-hero-grid">
         <div class="bb-ty-hero-l">
-          <h1 class="bb-ty-title bb-ty-in" style="--d:120ms">You're <span class="hl">all set!</span></h1>
+          <h1 class="bb-ty-title bb-ty-in" style="--d:120ms">You're<br><span class="hl">all set!</span></h1>
           <p class="bb-ty-lead bb-ty-in" style="--d:220ms">Your <span class="hl">FREE</span> strategy call has been booked.</p>
-          <p class="bb-ty-sub bb-ty-in" style="--d:300ms">Check your email and phone for your confirmation and appointment details.</p>
 
-          <a href="#" class="bb-ty-btn bb-ty-in" id="bb-ty-cal" style="--d:380ms">
+          <div class="bb-ty-note bb-ty-in" style="--d:290ms">
+            <span class="bb-ty-note-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M4 7l8 6 8-6"/></svg></span>
+            <span>Check your email and phone for your confirmation and appointment details.</span>
+          </div>
+
+          <a href="#" class="bb-ty-btn bb-ty-in" id="bb-ty-cal" style="--d:360ms">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4.5" width="18" height="17" rx="2.5"/><path d="M3 9h18M8 2.5v4M16 2.5v4"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 17.5h.01M12 17.5h.01"/></svg>
             Add to calendar
           </a>
@@ -55,62 +70,52 @@
           <img id="bb-ty-photo-img" src="" alt="" loading="lazy">
         </div>
       </div>
-    </div>
-  </header>
+    </header>
 
-  <!-- ==================================================== what happens next -->
-  <div class="bb-ty-wrap">
-    <section class="bb-ty-next bb-ty-in" style="--d:120ms">
+    <!-- ================================================== what happens next -->
+    <section class="bb-ty-next bb-ty-in" style="--d:140ms">
       <div class="bb-ty-next-head"><span>Here's what happens next</span></div>
 
       <ol class="bb-ty-steps">
         <li class="bb-ty-step">
+          <div class="bb-ty-step-num">1</div>
           <div class="bb-ty-step-ico">
             <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="20" cy="18" r="9"/><path d="M20 15a3 3 0 0 1 0 6"/><path d="M8 40c1.5-6 6-9 12-9"/><circle cx="32" cy="32" r="7"/><path d="M37 37l5 5"/></svg>
           </div>
-          <div class="bb-ty-step-num">1</div>
-          <div class="bb-ty-step-body">
-            <h3>We'll review your business</h3>
-            <p>We take time to understand your current situation and goals.</p>
-          </div>
+          <h3>We'll review your business</h3>
+          <p>We take time to understand your current situation and goals.</p>
         </li>
 
         <li class="bb-ty-step">
+          <div class="bb-ty-step-num">2</div>
           <div class="bb-ty-step-ico">
             <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 12h32v20H22l-8 7v-7H8z"/><circle cx="18" cy="22" r="1.6" fill="currentColor" stroke="none"/><circle cx="24" cy="22" r="1.6" fill="currentColor" stroke="none"/><circle cx="30" cy="22" r="1.6" fill="currentColor" stroke="none"/></svg>
           </div>
-          <div class="bb-ty-step-num">2</div>
-          <div class="bb-ty-step-body">
-            <h3>We'll discuss your goals</h3>
-            <p>We'll talk about what you want to achieve and the challenges you're facing.</p>
-          </div>
+          <h3>We'll discuss your goals</h3>
+          <p>We'll talk about what you want to achieve and the challenges you're facing.</p>
         </li>
 
         <li class="bb-ty-step">
+          <div class="bb-ty-step-num">3</div>
           <div class="bb-ty-step-ico">
             <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 6h4l1 4 4 1.6 3.6-2 2.8 2.8-2 3.6 1.6 4 4 1v4l-4 1-1.6 4 2 3.6-2.8 2.8-3.6-2-4 1.6-1 4h-4l-1-4-4-1.6-3.6 2-2.8-2.8 2-3.6L6 27l-4-1v-4l4-1 1.6-4-2-3.6 2.8-2.8 3.6 2 4-1.6z"/><path d="M18 30v-5M24 30v-9M30 30v-6" stroke-width="2.6"/></svg>
           </div>
-          <div class="bb-ty-step-num">3</div>
-          <div class="bb-ty-step-body">
-            <h3>We'll identify automation opportunities</h3>
-            <p>We'll pinpoint where automation can save you time, increase revenue, and scale your business.</p>
-          </div>
+          <h3>We'll identify automation opportunities</h3>
+          <p>We'll pinpoint where automation can save you time, increase revenue, and scale your business.</p>
         </li>
 
         <li class="bb-ty-step">
+          <div class="bb-ty-step-num">4</div>
           <div class="bb-ty-step-ico">
             <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 14l10-4 12 4 10-4v24l-10 4-12-4-10 4z"/><path d="M18 10v24M30 14v14"/><circle cx="31" cy="30" r="4"/><path d="M31 34c-3 3-3 6-3 6"/></svg>
           </div>
-          <div class="bb-ty-step-num">4</div>
-          <div class="bb-ty-step-body">
-            <h3>We'll map out the best next steps</h3>
-            <p>You'll leave the call with a clear plan and recommended next steps.</p>
-          </div>
+          <h3>We'll map out the best next steps</h3>
+          <p>You'll leave the call with a clear plan and recommended next steps.</p>
         </li>
       </ol>
     </section>
 
-    <!-- ============================================================ help bar -->
+    <!-- ========================================================== help bar -->
     <section class="bb-ty-help bb-ty-in" style="--d:200ms">
       <div class="bb-ty-help-col">
         <div class="bb-ty-help-ico">
@@ -135,9 +140,9 @@
       </div>
     </section>
 
-    <p class="bb-ty-foot">© 2026 BotBuilders · 8936 N Central Ave, Phoenix, AZ 85020 · 602-922-9700</p>
-  </div>
+  </div><!-- /shell -->
 
+  <p class="bb-ty-foot">© 2026 BotBuilders · 8936 N Central Ave, Phoenix, AZ 85020 · 602-922-9700</p>
 </div>
 
 <script>
@@ -146,20 +151,16 @@
 
   /* ====================================================== CONFIG — EDIT ME */
   var CONFIG = {
-    /* "Add to calendar" button link. Options:
-         • Leave the GHL confirmation's own add-to-calendar link here, OR
-         • a Google Calendar template link, OR
-         • '' to hide the button entirely.
-       GHL note: on the booking confirmation you can pass an add-to-calendar
-       URL through; paste it here or wire it via a merge field.              */
+    /* "Add to calendar" button link. Blank = the button is hidden.
+       GHL's confirmation email already includes add-to-calendar links, so
+       leaving this blank is fine; set it only if you have a real link.      */
     ADD_TO_CAL_URL : '',
 
     /* Your logo (light / reverse). Blank keeps the built-in gradient mark. */
     LOGO_URL       : '',
-    LOGO_HEIGHT    : 52,
+    LOGO_HEIGHT    : 44,
 
-    /* Cut-out hero photo (transparent PNG works best). Blank hides it and
-       the headline block centers on its own.                                */
+    /* Cut-out hero photo (transparent PNG works best). Blank hides it.       */
     HERO_IMAGE     : ''
   };
   /* ======================================================================= */
@@ -185,8 +186,8 @@
       el.style.marginTop='0px'; el.style.marginBottom='0px'; el.style.maxWidth='none';
       el = el.parentElement;
     }
-    document.documentElement.style.background='#0B1320';
-    document.body.style.background='#0B1320';
+    document.documentElement.style.background='#05070D';
+    document.body.style.background='#05070D';
     document.body.style.margin='0';
   })();
 
@@ -197,7 +198,7 @@
       logo.innerHTML='';
       var img=document.createElement('img');
       img.src=CONFIG.LOGO_URL; img.alt='BotBuilders';
-      img.style.height=(CONFIG.LOGO_HEIGHT||52)+'px'; img.style.width='auto';
+      img.style.height=(CONFIG.LOGO_HEIGHT||44)+'px'; img.style.width='auto';
       logo.appendChild(img);
     }
   }
@@ -214,12 +215,8 @@
   (function(){
     var btn=document.getElementById('bb-ty-cal');
     if(!btn) return;
-    if(CONFIG.ADD_TO_CAL_URL){
-      btn.href=CONFIG.ADD_TO_CAL_URL;
-      btn.target='_blank'; btn.rel='noopener';
-    } else {
-      btn.style.display='none';   // no link set → hide it
-    }
+    if(CONFIG.ADD_TO_CAL_URL){ btn.href=CONFIG.ADD_TO_CAL_URL; btn.target='_blank'; btn.rel='noopener'; }
+    else { btn.style.display='none'; }
   })();
 
 })();
