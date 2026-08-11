@@ -16,7 +16,7 @@
    All selectors are namespaced under .bb-page so nothing leaks into GHL.
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap');
 
 .bb-page{
   /* ---- brand tokens (LTO board) ---- */
@@ -48,6 +48,7 @@
   --bb-shadow-sm:0 10px 30px -14px rgba(8,18,32,.24);
 
   --bb-display:'Bebas Neue','Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --bb-head:'Poppins','Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
   --bb-font:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
 
   --bb-ease:cubic-bezier(.22,.61,.36,1);
@@ -252,17 +253,19 @@
 }
 .bb-hero-eyebrow{
   display:inline-flex; align-items:center; gap:9px;
-  font-family:var(--bb-font); font-weight:800; font-size:12.5px;
-  letter-spacing:.16em; text-transform:uppercase; color:var(--bb-blue);
+  font-family:var(--bb-head); font-weight:700; font-size:12.5px;
+  letter-spacing:.14em; text-transform:uppercase; color:var(--bb-blue);
   background:rgba(37,99,255,.08); border:1px solid rgba(37,99,255,.28);
   padding:7px 14px; border-radius:999px; margin-bottom:22px;
 }
 .bb-hero-eyebrow svg{ width:15px; height:15px; }
 .bb-hero h1{
   color:var(--bb-heading);
-  font-size:clamp(46px,6.1vw,84px);
-  line-height:.92;
-  letter-spacing:.012em;
+  font-family:var(--bb-head);
+  font-weight:700;
+  font-size:clamp(36px,4.8vw,62px);
+  line-height:1.08;
+  letter-spacing:-.015em;
 }
 .bb-hl{
   background:linear-gradient(95deg,#2563FF 0%,#38BDF8 58%,#22D3EE 100%);
@@ -422,14 +425,14 @@
 .bb-sec--dark h2{ color:#fff; }
 
 .bb-sec-head{ text-align:center; max-width:760px; margin:0 auto 52px; }
-.bb-sec-head h2{ font-size:clamp(34px,4.4vw,56px); letter-spacing:.012em; }
+.bb-sec-head h2{ font-family:var(--bb-head); font-weight:700; font-size:clamp(30px,3.6vw,46px); line-height:1.14; letter-spacing:-.01em; }
 .bb-sec-head p{ margin-top:16px; color:var(--bb-muted); font-size:17px; font-family:var(--bb-font); }
 .bb-sec--dark .bb-sec-head p{ color:#9FB6CC; }
 .bb-eyebrow{
   display:inline-block;
-  font-family:var(--bb-font);
+  font-family:var(--bb-head);
   color:var(--bb-blue);
-  font-weight:800; font-size:12.5px; letter-spacing:.16em; text-transform:uppercase;
+  font-weight:700; font-size:12.5px; letter-spacing:.14em; text-transform:uppercase;
   margin-bottom:14px;
 }
 .bb-sec--dark .bb-eyebrow{ color:var(--bb-sky); }
@@ -713,13 +716,13 @@
 .bb-final-in{ max-width:820px; margin:0 auto; }
 .bb-final-eyebrow{
   display:inline-flex; align-items:center; gap:9px;
-  font-family:var(--bb-font); font-weight:800; font-size:12.5px;
-  letter-spacing:.16em; text-transform:uppercase; color:var(--bb-sky);
+  font-family:var(--bb-head); font-weight:700; font-size:12.5px;
+  letter-spacing:.14em; text-transform:uppercase; color:var(--bb-sky);
   background:rgba(56,189,248,.1); border:1px solid rgba(56,189,248,.3);
   padding:7px 14px; border-radius:999px; margin-bottom:22px;
 }
 .bb-final-eyebrow svg{ width:15px; height:15px; }
-.bb-final h2{ color:#fff; font-size:clamp(40px,5vw,72px); letter-spacing:.012em; }
+.bb-final h2{ color:#fff; font-family:var(--bb-head); font-weight:700; font-size:clamp(32px,4vw,58px); line-height:1.1; letter-spacing:-.012em; }
 .bb-final-in > p{ margin:16px auto 0; color:#B9C7DB; font-size:18px; max-width:38em; }
 .bb-final-clock{ max-width:440px; margin:34px auto 0; }
 .bb-final .bb-hero-cta{ justify-content:center; }
