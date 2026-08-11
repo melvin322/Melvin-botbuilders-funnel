@@ -416,6 +416,16 @@
             <li><span class="bb-ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12.5l4 4L19 7"/></svg></span>Monthly strategy call</li>
           </ul>
 
+          <label class="bb-bump" id="bb-bump">
+            <input type="checkbox" class="bb-bump-input">
+            <span class="bb-bump-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12.5l4 4L19 7"/></svg></span>
+            <span class="bb-bump-body">
+              <span class="bb-bump-top"><b>Yes! Add the VIP Launch Intensive</b><span class="bb-bump-price">+$197</span></span>
+              <p>A live 1:1 session where we build, connect and launch your first funnel with you — so you're live in 48 hours.</p>
+              <span class="bb-bump-tag">Highly recommended</span>
+            </span>
+          </label>
+
           <a href="#" class="bb-btn bb-btn--primary bb-btn--wide" data-cta>
             <svg class="bb-btn-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M13 2L4.5 13H11l-1 9 8.5-11H12z"/></svg>
             Claim my offer
@@ -641,6 +651,9 @@
        GHL order form, Stripe checkout, ThriveCart, etc.                      */
     CHECKOUT_URL  : 'https://link.automator.ai/widget/bookings/melvin-guiritan-personal-calendar-ji0cmkuqe',
 
+    /* Order-bump add-on — appended to CHECKOUT_URL when the checkbox is ticked. */
+    BUMP_PARAM    : 'addon=vip-launch',
+
     /* "Watch demo" button. BOTH supported:
          • Direct file → ends in .mp4/.webm/.ogg → opens in a lightbox <video>
          • Embed/any URL → opens in a new tab
@@ -658,10 +671,10 @@
     /* Your logo. All heights are in px.
        LOGO_HEIGHT        = header/nav logo size
        LOGO_FOOTER_HEIGHT = footer logo size (blank/0 = same as LOGO_HEIGHT) */
-    LOGO_URL           : 'https://assets.cdn.filesafe.space/sz4sVbBhLW7cX7keIHT6/media/6a76a8418880872019224576.png',
+    LOGO_URL           : 'https://assets.cdn.filesafe.space/sz4sVbBhLW7cX7keIHT6/media/6a76a1f003343f290f6158c9.png',
     LOGO_FOOTER        : 'https://assets.cdn.filesafe.space/sz4sVbBhLW7cX7keIHT6/media/6a76a8418880872019224576.png',
-    LOGO_HEIGHT        : 40,
-    LOGO_FOOTER_HEIGHT : 40,
+    LOGO_HEIGHT        : 50,
+    LOGO_FOOTER_HEIGHT : 100,
 
     /* Inc. 5000 honoree badge — white / reversed PNG for dark backgrounds.
        Shown in the trust bar and the footer. Blank = both are hidden.        */
@@ -851,11 +864,36 @@
     });
   })();
 
-  /* -- 6. point every CTA at the checkout link + track a Lead click ------- */
+  /* -- 6. CTAs: the pricing-card button is the real checkout; every other
+     "Claim my offer" scrolls down to the offer / pricing section ---------- */
+  var bumpOn = false;
+  var checkoutBtns = [];
   root.querySelectorAll('[data-cta]').forEach(function(el){
-    el.href = CONFIG.CHECKOUT_URL;
-    el.addEventListener('click', function(){ track('Lead', {content_name:'Claim my offer'}); });
+    if(el.closest('#bb-pricing')){
+      checkoutBtns.push(el);
+      el.addEventListener('click', function(){ track('Lead', {content_name:'Claim my offer', value: bumpOn?294:97}); });
+    } else {
+      el.setAttribute('href', '#bb-pricing');   // smooth-scroll handler (below) does the rest
+    }
   });
+  function wireCheckout(){
+    var url = CONFIG.CHECKOUT_URL;
+    if(bumpOn && CONFIG.BUMP_PARAM){ url += (url.indexOf('?')>-1?'&':'?') + CONFIG.BUMP_PARAM; }
+    checkoutBtns.forEach(function(el){ el.href = url; });
+  }
+  wireCheckout();
+
+  /* -- 6b. order-bump add-on checkbox ------------------------------------- */
+  (function(){
+    var bump = document.getElementById('bb-bump'); if(!bump) return;
+    var input = bump.querySelector('input');
+    input.addEventListener('change', function(){
+      bumpOn = input.checked;
+      bump.classList.toggle('is-on', bumpOn);
+      wireCheckout();
+      if(bumpOn) track('AddToCart', {content_name:'VIP Launch Intensive', value:197});
+    });
+  })();
 
   /* -- 7. sticky bar: show after the hero, hide once the final CTA / footer
      comes into view ------------------------------------------------------- */
