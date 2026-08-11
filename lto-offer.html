@@ -655,11 +655,13 @@
     DEADLINE_ISO  : '2026-08-31T23:59:59',   // used when COUNTDOWN = 'fixed'
     EVERGREEN_MIN : 2880,                     // used when COUNTDOWN = 'evergreen' (2880 = 48h)
 
-    /* Your logo. Nav sits on dark navy, so use a light / reverse version.
-       LOGO_HEIGHT is in px — change it to resize the logo (nav + footer).    */
-    LOGO_URL      : 'https://assets.cdn.filesafe.space/sz4sVbBhLW7cX7keIHT6/media/6a76a8418880872019224576.png',
-    LOGO_FOOTER   : 'https://assets.cdn.filesafe.space/sz4sVbBhLW7cX7keIHT6/media/6a76a8418880872019224576.png',
-    LOGO_HEIGHT   : 150,
+    /* Your logo. All heights are in px.
+       LOGO_HEIGHT        = header/nav logo size
+       LOGO_FOOTER_HEIGHT = footer logo size (blank/0 = same as LOGO_HEIGHT) */
+    LOGO_URL           : 'https://assets.cdn.filesafe.space/sz4sVbBhLW7cX7keIHT6/media/6a76a8418880872019224576.png',
+    LOGO_FOOTER        : 'https://assets.cdn.filesafe.space/sz4sVbBhLW7cX7keIHT6/media/6a76a8418880872019224576.png',
+    LOGO_HEIGHT        : 150,
+    LOGO_FOOTER_HEIGHT : 40,
 
     /* Inc. 5000 honoree badge — white / reversed PNG for dark backgrounds.
        Shown in the trust bar and the footer. Blank = both are hidden.        */
@@ -701,10 +703,11 @@
     root.querySelectorAll('.bb-logo').forEach(function(el){
       var isFooter = !!el.closest('.bb-footer');
       var src = isFooter ? (CONFIG.LOGO_FOOTER || CONFIG.LOGO_URL) : CONFIG.LOGO_URL;
+      var ht  = isFooter ? (CONFIG.LOGO_FOOTER_HEIGHT || CONFIG.LOGO_HEIGHT) : CONFIG.LOGO_HEIGHT;
       el.innerHTML=''; el.classList.add('bb-logo--img');
       var img=document.createElement('img');
       img.src=src; img.alt='BotBuilders';
-      img.style.height=(CONFIG.LOGO_HEIGHT||34)+'px'; img.style.width='auto'; img.style.display='block';
+      img.style.height=(ht||34)+'px'; img.style.width='auto'; img.style.display='block';
       el.appendChild(img);
     });
   })();
