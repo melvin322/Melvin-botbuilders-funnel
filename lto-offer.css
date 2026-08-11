@@ -194,7 +194,7 @@
 }
 .bb-nav-in{
   display:flex; align-items:center; justify-content:space-between;
-  min-height:56px; gap:20px;
+  min-height:92px; gap:20px;
 }
 .bb-logo{
   display:inline-flex; align-items:center; gap:10px;
