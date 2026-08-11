@@ -3,12 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>BotBuilders — Limited Time Offer: Automate. Convert. Grow.</title>
-<meta name="description" content="For a limited time, get full access to the BotBuilders platform, done-for-you bot setup, premium integrations and priority support. Claim your exclusive launch offer before it ends.">
+<title>BotBuilders — Launch Your First AI Chatbot in Under 60 Minutes</title>
+<meta name="description" content="The BotBuilders AI Chatbot Starter Kit. Everything you need to build, launch and grow with AI — no coding, no tech headaches. Limited-time price.">
 
 <!-- ==========================================================================
-     BotBuilders — LIMITED TIME OFFER funnel (landing page)
-     Brand board: ink #081220 · blue #2563FF · sky #38BDF8 · Bebas Neue + Inter
+     BotBuilders — AI Chatbot Starter Kit (Limited Time Offer / tripwire page)
      ------------------------------------------------------------------------
      TWO WAYS TO USE THIS
      A) Standalone: open this file in a browser. It links lto-offer.css.
@@ -17,15 +16,18 @@
         Paste the contents of lto-offer.css into Settings › Custom CSS.
      ------------------------------------------------------------------------
      EDIT THESE FIRST (see the CONFIG block in the <script> at the bottom):
-       CHECKOUT_URL  — your order-form / checkout link. Every "Claim my offer"
-                       button points here.
-       DEMO_URL      — .mp4 file OR an embed URL for the "Watch demo" button
-                       (blank = the button is hidden)
-       COUNTDOWN     — deadline mode. 'evergreen' resets per-visitor; 'fixed'
-                       counts down to a real date (set DEADLINE_ISO)
-       DEADLINE_ISO  — the real cut-off, e.g. '2026-08-31T23:59:59'
-       EVERGREEN_MIN — evergreen window length in minutes (e.g. 2880 = 48h)
-       LOGO_URL / LOGO_HEIGHT — your hosted logo (light/reverse for dark nav)
+       CHECKOUT_URL   — order-form / checkout link. Every "Get instant access"
+                        button points here.
+       SUPPORT_URL    — "Contact Support" link in the top bar.
+       DEMO_URL       — .mp4 file OR embed URL for the hero video (blank = the
+                        player shows but the play button does nothing)
+       COUNTDOWN      — 'evergreen' (per-visitor timer) or 'fixed' (real date)
+       DEADLINE_ISO   — the real cut-off, e.g. '2026-08-31T23:59:59'  (fixed)
+       EVERGREEN_MIN  — evergreen window in minutes (2880 = 48h)      (evergreen)
+       EXPIRES_TEXT   — the line beside the timer (blank = hidden)
+       BUMP_ENABLED   — show the order-bump checkbox (true/false)
+       PRODUCT_IMAGE  — real product-box PNG (blank = built-in SVG mockup)
+       LOGO_URL / LOGO_HEIGHT — hosted logo (light/reverse for the dark bars)
      ========================================================================== -->
 <link rel="stylesheet" href="lto-offer.css">
 </head>
@@ -36,598 +38,331 @@
   <!-- =============================================================== topbar -->
   <div class="bb-topbar">
     <div class="bb-wrap bb-topbar-in">
-      <span class="bb-topbar-tag">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5.4l3.4 2"/></svg>
-        LIMITED TIME OFFER
-      </span>
-      <span class="bb-topbar-mini">
-        Offer ends in
-        <span class="bb-mini-t" data-cd="mini"><b data-cd-d>00</b><span class="bb-mini-u">d</span></span>
-        <span class="bb-mini-t"><b data-cd-h>00</b><span class="bb-mini-u">h</span></span>
-        <span class="bb-mini-t"><b data-cd-m>00</b><span class="bb-mini-u">m</span></span>
-        <span class="bb-mini-t"><b data-cd-s>00</b><span class="bb-mini-u">s</span></span>
-      </span>
+      <a href="#bb-top" class="bb-tb-logo bb-logo">
+        <svg class="bb-logo-mark" viewBox="0 0 40 40" fill="none"><defs><linearGradient id="bbg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#38BDF8"/><stop offset="1" stop-color="#2563EB"/></linearGradient></defs>
+          <path d="M20 3l14 8v18l-14 8-14-8V11z" fill="url(#bbg)"/>
+          <path d="M21 12l-8 10h6l-1 7 8-10h-6z" fill="#fff"/>
+        </svg>
+        BotBuilders<sup>&reg;</sup>
+      </a>
+      <div class="bb-tb-mid">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 1.5M9 2h6"/></svg>
+        <b>LIMITED TIME OFFER:</b>&nbsp;This price expires soon!
+      </div>
+      <div class="bb-tb-right">Questions? <a href="#" data-support>Contact Support</a></div>
     </div>
   </div>
 
-  <!-- ================================================================== nav -->
-  <nav class="bb-nav">
-    <div class="bb-wrap bb-nav-in">
-      <a href="#bb-top" class="bb-logo">
-        <svg class="bb-logo-mark" viewBox="0 0 32 32" fill="none"><defs><linearGradient id="bbg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2563FF"/><stop offset="1" stop-color="#38BDF8"/></linearGradient></defs>
-          <rect x="4" y="4" width="24" height="24" rx="7" fill="url(#bbg)"/>
-          <path d="M17 8l-7 9h5l-1 7 7-9h-5z" fill="#fff"/>
-        </svg>
-        BotBuilders
-      </a>
-      <div class="bb-navlinks">
-        <a href="#bb-included">What's included</a>
-        <a href="#bb-how">How it works</a>
-        <a href="#bb-pricing">Pricing</a>
-        <a href="#bb-faq">FAQ</a>
-      </div>
-      <a href="#" class="bb-btn bb-btn--primary bb-btn--sm" data-cta>
-        <svg class="bb-btn-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M13 2L4.5 13H11l-1 9 8.5-11H12z"/></svg>
-        Claim my offer
-      </a>
-    </div>
-  </nav>
-
   <!-- ================================================================= hero -->
   <header class="bb-hero">
-    <div class="bb-hero-bg" aria-hidden="true">
-      <div class="bb-hero-grid"></div>
-      <div class="bb-hero-glow"></div>
-      <div class="bb-hero-glow2"></div>
-      <svg class="bb-hero-arcs" viewBox="0 0 900 900" fill="none">
-        <circle cx="640" cy="330" r="250" stroke="#1E3A8A" stroke-width="1"/>
-        <circle cx="640" cy="330" r="360" stroke="#1E3A8A" stroke-width="1" stroke-opacity=".7"/>
-        <circle cx="640" cy="330" r="470" stroke="#1E3A8A" stroke-width="1" stroke-opacity=".45"/>
-        <circle cx="640" cy="330" r="580" stroke="#1E3A8A" stroke-width="1" stroke-opacity=".25"/>
-      </svg>
-    </div>
-
     <div class="bb-wrap bb-hero-in">
       <div>
-        <span class="bb-hero-eyebrow bb-load" style="--d:40ms">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5.4l3.4 2"/></svg>
-          Exclusive launch offer
-        </span>
-        <h1 class="bb-load" style="--d:120ms">
-          Save Time.<br>Capture More Leads.<br><span class="bb-hl">Automate. Convert. Grow.</span>
-        </h1>
-        <p class="bb-hero-sub bb-load" style="--d:240ms">
-          AI-powered chatbots and automation systems built to help your business capture more
-          leads, book more calls and close more deals — on autopilot. For a limited time, claim
-          the full platform, done-for-you setup and premium bonuses at our launch price.
-        </p>
+        <span class="bb-pill">Limited Time Offer</span>
+        <h1>Launch Your First AI Chatbot in <span class="hl">Under 60 Minutes</span></h1>
+        <div class="bb-hero-kit">The BotBuilders AI Chatbot Starter Kit</div>
+        <p class="bb-hero-sub">Everything you need to build, launch, and grow with AI — no coding, no tech headaches.</p>
 
-        <div class="bb-hero-cta bb-load" style="--d:360ms">
-          <a href="#" class="bb-btn bb-btn--primary bb-btn--lg" data-cta>
-            <svg class="bb-btn-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M13 2L4.5 13H11l-1 9 8.5-11H12z"/></svg>
-            Claim my offer
-            <svg class="bb-arrow" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </a>
-          <a href="#" class="bb-btn bb-btn--ghost on-dark bb-btn--lg" id="bb-demo" data-demo>
-            <svg class="bb-btn-ico" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg>
-            Watch demo
-          </a>
-        </div>
-
-        <div class="bb-hero-pills bb-pills bb-load" style="--d:460ms">
-          <span class="bb-pill bb-pill--time">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5.4l3.4 2"/></svg>
-            Limited time
-          </span>
-          <span class="bb-pill bb-pill--soon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2l9 5v6c0 5-3.8 8.6-9 10-5.2-1.4-9-5-9-10V7z"/><path d="M12 8v4M12 16h.01"/></svg>
-            Ends soon
-          </span>
-          <span class="bb-pill bb-pill--bonus">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M3 12h18M12 8v13M12 8S9 3 6.5 4.5 8 8 12 8zM12 8s3-5 5.5-3.5S16 8 12 8z"/></svg>
-            Bonus included
-          </span>
-        </div>
-
-        <div class="bb-hero-trust bb-load" style="--d:560ms">
-          <span class="bb-hero-trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg><b>500+</b>&nbsp;active clients</span>
-          <span class="bb-hero-trust-item"><span class="bb-stars">★★★★★</span>&nbsp;<b>4.9/5</b></span>
-          <span class="bb-hero-trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12a9 9 0 1 1-6.2-8.6"/><path d="M12 7v5l3 2"/></svg><b>24/7</b>&nbsp;automation</span>
+        <div class="bb-hero-feats">
+          <div class="bb-feat">
+            <div class="bb-feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M13 2L4.5 13H11l-1 9 8.5-11H12z"/></svg></div>
+            <h4>Beginner Friendly</h4>
+            <p>No coding or tech skills required</p>
+          </div>
+          <div class="bb-feat">
+            <div class="bb-feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 14c-2 2-2 5-2 5s3 0 5-2M9 15l-1-1a11 11 0 0 1 8-11c2 0 3 1 3 3a11 11 0 0 1-11 8zM15 9h.01"/></svg></div>
+            <h4>Launch Fast</h4>
+            <p>Go live in under 60 minutes</p>
+          </div>
+          <div class="bb-feat">
+            <div class="bb-feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5M4 19h16M8 16l4-5 3 3 4-6"/></svg></div>
+            <h4>Grow &amp; Automate</h4>
+            <p>Capture leads, answer questions, close sales</p>
+          </div>
         </div>
       </div>
 
-      <!-- offer card + countdown -->
-      <div class="bb-offercard bb-load" style="--d:640ms">
-        <div class="bb-offercard-top">Limited Time Offer</div>
-        <div class="bb-offercard-body">
-          <div class="bb-offercard-title">Exclusive Launch Offer</div>
-          <ul class="bb-offerlist">
-            <li><span class="bb-ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12.5l4 4L19 7"/></svg></span>Full access to the BotBuilders platform</li>
-            <li><span class="bb-ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12.5l4 4L19 7"/></svg></span>Done-for-you bot setup</li>
-            <li><span class="bb-ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12.5l4 4L19 7"/></svg></span>Premium integrations</li>
-            <li><span class="bb-ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12.5l4 4L19 7"/></svg></span>Priority support</li>
-          </ul>
-
-          <div class="bb-offer-bonus">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M3 12h18M12 8v13M12 8S9 3 6.5 4.5 8 8 12 8zM12 8s3-5 5.5-3.5S16 8 12 8z"/></svg>
-            <span><b>Bonus:</b> custom training + done-for-you templates</span>
-          </div>
-
-          <div class="bb-countdown">
-            <div class="bb-countdown-lbl">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 1.5M9 2h6"/></svg>
-              Offer ends in
+      <!-- video -->
+      <div class="bb-hero-media">
+        <div class="bb-video" id="bb-video" role="button" tabindex="0" aria-label="Play the 2-minute video">
+          <div class="bb-video-inner">
+            <div class="bb-video-logo">
+              <svg class="bb-logo-mark" viewBox="0 0 40 40" fill="none"><defs><linearGradient id="bbv" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#38BDF8"/><stop offset="1" stop-color="#2563EB"/></linearGradient></defs><path d="M20 3l14 8v18l-14 8-14-8V11z" fill="url(#bbv)"/><path d="M21 12l-8 10h6l-1 7 8-10h-6z" fill="#fff"/></svg>
+              BotBuilders<sup>&reg;</sup>
             </div>
-            <div class="bb-clock" data-cd="hero">
-              <div class="bb-clock-cell"><div class="bb-clock-num" data-cd-d>00</div><div class="bb-clock-unit">Days</div></div>
-              <div class="bb-clock-cell"><div class="bb-clock-num" data-cd-h>00</div><div class="bb-clock-unit">Hrs</div></div>
-              <div class="bb-clock-cell"><div class="bb-clock-num" data-cd-m>00</div><div class="bb-clock-unit">Mins</div></div>
-              <div class="bb-clock-cell"><div class="bb-clock-num" data-cd-s>00</div><div class="bb-clock-unit">Secs</div></div>
-            </div>
-            <div class="bb-countdown-note"><span class="bb-dot"></span>Ends soon — don't miss out</div>
           </div>
-
-          <a href="#" class="bb-btn bb-btn--primary bb-btn--wide" style="margin-top:22px" data-cta>
-            <svg class="bb-btn-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M13 2L4.5 13H11l-1 9 8.5-11H12z"/></svg>
-            Claim my offer
-          </a>
+          <span class="bb-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span>
+          <div class="bb-video-bar" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16 9a3 3 0 0 1 0 6"/></svg>
+            <span class="bb-video-time">0:00 / 2:02</span>
+            <div class="bb-video-track"></div>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.5 5.5l2 2M16.5 16.5l2 2M18.5 5.5l-2 2M5.5 18.5l2-2"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="14" rx="2"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+          </div>
+        </div>
+        <div class="bb-video-note" aria-hidden="true">
+          2-Minute<br>Video
+          <svg viewBox="0 0 60 50" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M52 6C40 6 12 12 8 40"/><path d="M4 30l4 12 12-5"/></svg>
         </div>
       </div>
     </div>
   </header>
 
-  <!-- ============================================================ trust chips -->
-  <div class="bb-proofwrap" id="bb-proof">
-    <div class="bb-wrap">
-      <div class="bb-chips bb-rv bb-rv--scale">
-        <div class="bb-chip">
-          <div class="bb-chip-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-          <div><div class="bb-chip-num"><span data-count="500">0</span>+</div><div class="bb-chip-lbl">Active clients</div></div>
-        </div>
-        <div class="bb-chip">
-          <div class="bb-chip-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2l2.9 6.3 6.6.7-5 4.5 1.4 6.5L12 16.8 6.1 20l1.4-6.5-5-4.5 6.6-.7z"/></svg></div>
-          <div><div class="bb-stars">★★★★★</div><div class="bb-chip-lbl">4.9/5 average rating</div></div>
-        </div>
-        <div class="bb-chip">
-          <div class="bb-chip-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12a9 9 0 1 1-6.2-8.6"/><path d="M12 7v5l3 2"/></svg></div>
-          <div><div class="bb-chip-num">24/7</div><div class="bb-chip-lbl">Automation</div></div>
-        </div>
-        <div class="bb-chip bb-chip--award">
-          <img class="bb-inc" data-inc-logo src="" alt="Inc. 5000 honoree" loading="lazy">
-          <div class="bb-chip-lbl">Inc. 5000 honoree</div>
-        </div>
+  <!-- ============================================================ timer bar -->
+  <div class="bb-timerbar">
+    <div class="bb-wrap bb-timerbar-in">
+      <span class="bb-timer-lead">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 1.5M9 2h6M18.5 5.5l1.6 1.6"/></svg>
+        Special price ends in:
+      </span>
+      <div class="bb-clock" data-cd="bar">
+        <div class="bb-clock-cell"><div class="bb-clock-num" data-cd-d>01</div><div class="bb-clock-unit">Days</div></div>
+        <div class="bb-clock-sep">:</div>
+        <div class="bb-clock-cell"><div class="bb-clock-num" data-cd-h>23</div><div class="bb-clock-unit">Hours</div></div>
+        <div class="bb-clock-sep">:</div>
+        <div class="bb-clock-cell"><div class="bb-clock-num" data-cd-m>47</div><div class="bb-clock-unit">Minutes</div></div>
+        <div class="bb-clock-sep">:</div>
+        <div class="bb-clock-cell"><div class="bb-clock-num" data-cd-s>12</div><div class="bb-clock-unit">Seconds</div></div>
       </div>
-
-      <div class="bb-seenin-strip bb-rv">
-        <span class="bb-seenin-lbl">As seen in</span>
-        <div class="bb-logos">
-          <span>HubSpot</span><span>Forbes</span><span>Entrepreneur</span><span>USA&nbsp;Today</span>
-        </div>
+      <div class="bb-timer-note">
+        <b data-expires>Offer expires soon.</b><br>Once the timer hits zero, the price goes up.
       </div>
     </div>
   </div>
 
-  <!-- ============================================================ brand strip -->
-  <section class="bb-strip bb-sec bb-sec--tight">
-    <div class="bb-wrap bb-strip-in bb-rv">
-      <span>AUTOMATE.</span><i class="bb-strip-dot"></i>CONVERT.<i class="bb-strip-dot"></i><span>GROW.</span>
-    </div>
-  </section>
-
-  <!-- ============================================================== problem -->
-  <section class="bb-sec bb-sec--light">
+  <!-- =============================================================== offer -->
+  <section class="bb-sec bb-sec--pad">
     <div class="bb-wrap">
-      <div class="bb-sec-head bb-rv">
-        <div class="bb-eyebrow">Why act now</div>
-        <h2>Every day without automation costs you leads</h2>
-        <p>Most businesses lose deals not because of the offer — but because nobody answers fast enough. This launch offer fixes that, at a price that won't last.</p>
-      </div>
-
-      <div class="bb-probs" data-stagger>
-        <div class="bb-prob bb-rv">
-          <div class="bb-prob-ico bb-prob-ico--blue">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5.4l3.4 2"/></svg>
-          </div>
-          <h3>Leads going cold</h3>
-          <p>The form filled at 11pm is still unanswered at 9am. That gap is where deals quietly die.</p>
-        </div>
-        <div class="bb-prob bb-rv">
-          <div class="bb-prob-ico bb-prob-ico--sky">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="M3 7l9 6 9-6"/></svg>
-          </div>
-          <h3>Someone replied first</h3>
-          <p>Whoever answers first usually wins the booking — automation makes sure that's always you.</p>
-        </div>
-        <div class="bb-prob bb-rv">
-          <div class="bb-prob-ico bb-prob-ico--indigo">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20v-11"/></svg>
-          </div>
-          <h3>No system to scale</h3>
-          <p>Chasing leads by hand doesn't scale. Growth stalls the moment you get busy.</p>
-        </div>
-        <div class="bb-prob bb-rv">
-          <div class="bb-prob-ico bb-prob-ico--red">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2l9 5v6c0 5-3.8 8.6-9 10-5.2-1.4-9-5-9-10V7z"/><path d="M12 8v4M12 16h.01"/></svg>
-          </div>
-          <h3>Wasted ad spend</h3>
-          <p>Paying for clicks that never get followed up is money straight down the drain.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========================================================= what's included -->
-  <section class="bb-sec bb-sec--white" id="bb-included">
-    <div class="bb-wrap">
-      <div class="bb-sec-head bb-rv">
-        <div class="bb-eyebrow">What's included</div>
-        <h2>Everything you need to automate and scale</h2>
-        <p>Your limited-time offer isn't just software — it's a done-for-you system, premium integrations and the support to make it convert.</p>
-      </div>
-
-      <div class="bb-inside" data-stagger>
-        <article class="bb-card bb-rv">
-          <div class="bb-card-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="14" rx="3"/><path d="M8 21h8M12 18v3M8.5 10.5h.01M15.5 10.5h.01M9 14a4 4 0 0 0 6 0"/></svg></div>
-          <h3>Full platform access</h3>
-          <p>Build unlimited AI chatbots and conversation funnels across your website, Instagram, Messenger, WhatsApp and SMS.</p>
-          <span class="bb-card-tag">Included</span>
-        </article>
-
-        <article class="bb-card bb-rv">
-          <div class="bb-card-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L4 17v3h3l5.3-5.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.5-2.5z"/></svg></div>
-          <h3>Done-for-you setup</h3>
-          <p>Our team builds, connects and tests your bots and automations for you — live in days, not months.</p>
-          <span class="bb-card-tag">Included</span>
-        </article>
-
-        <article class="bb-card bb-rv">
-          <div class="bb-card-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/><circle cx="12" cy="12" r="3.5"/></svg></div>
-          <h3>Premium integrations</h3>
-          <p>Connect the CRM, calendar and tools you already use so every lead flows straight into your pipeline.</p>
-          <span class="bb-card-tag">Included</span>
-        </article>
-
-        <article class="bb-card bb-rv">
-          <div class="bb-card-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2l8 3.5v6c0 5-3.4 9.4-8 10.5-4.6-1.1-8-5.5-8-10.5v-6z"/><path d="M9 12l2.2 2.2L15.5 10"/></svg></div>
-          <h3>Priority support</h3>
-          <p>Skip the queue. Get fast, hands-on help from our team whenever you need it, so you're never stuck.</p>
-          <span class="bb-card-tag">Included</span>
-        </article>
-
-        <article class="bb-card bb-rv">
-          <div class="bb-card-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
-          <h3>Custom training</h3>
-          <p><b>Bonus</b> — live onboarding and training so you and your team know exactly how to run the system.</p>
-          <span class="bb-card-tag">Bonus</span>
-        </article>
-
-        <article class="bb-card bb-rv">
-          <div class="bb-card-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2.5"/><path d="M3 9h18M9 21V9"/></svg></div>
-          <h3>Done-for-you templates</h3>
-          <p><b>Bonus</b> — a library of proven chatbot funnels and automation templates you can deploy in one click.</p>
-          <span class="bb-card-tag">Bonus</span>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========================================================== how it works -->
-  <section class="bb-sec bb-sec--light" id="bb-how">
-    <div class="bb-wrap">
-      <div class="bb-sec-head bb-rv">
-        <div class="bb-eyebrow">How it works</div>
-        <h2>Live in three simple steps</h2>
-        <p>Claim the offer today and your always-on lead machine is capturing and converting within days.</p>
-      </div>
-
-      <div class="bb-steps" data-stagger>
-        <div class="bb-step bb-rv">
-          <div class="bb-step-badge">1</div>
-          <div class="bb-step-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M13 2L4.5 13H11l-1 9 8.5-11H12z"/></svg></div>
-          <h3>Claim your offer</h3>
-          <p>Lock in the launch price and secure your bonuses before the timer runs out.</p>
-        </div>
-        <div class="bb-step bb-rv">
-          <div class="bb-step-badge">2</div>
-          <div class="bb-step-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L4 17v3h3l5.3-5.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.5-2.5z"/></svg></div>
-          <h3>We build it for you</h3>
-          <p>Our team sets up your bots, automations and integrations — done-for-you.</p>
-        </div>
-        <div class="bb-step bb-rv">
-          <div class="bb-step-badge">3</div>
-          <div class="bb-step-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 19V9M10 19V4M16 19v-6M22 19v-9"/></svg></div>
-          <h3>Automate &amp; scale</h3>
-          <p>Your system goes live and starts capturing leads and booking calls around the clock.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- =========================================================== offer / pricing -->
-  <section class="bb-sec bb-sec--white" id="bb-pricing">
-    <div class="bb-wrap">
-      <div class="bb-sec-head bb-rv">
-        <div class="bb-eyebrow">The offer</div>
-        <h2>One plan. Everything included.</h2>
-        <p>Claim the complete BotBuilders system at the launch price — locked in for as long as you stay.</p>
-      </div>
-
       <div class="bb-offer">
-        <!-- value stack -->
-        <div class="bb-stack bb-rv bb-rv--left">
-          <div class="bb-stack-in">
-            <h3>Here's everything you get</h3>
-            <p class="bb-stack-sub">The full stack of what's included in your limited-time offer.</p>
-            <div class="bb-stack-list">
-              <div class="bb-stack-row">
-                <div class="bb-stack-item"><span class="bb-ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12.5l4 4L19 7"/></svg></span>Full BotBuilders platform access</div>
-                <div class="bb-stack-val">$1,164/yr</div>
+
+        <!-- what you get -->
+        <div class="bb-card bb-get bb-rv">
+          <h2>Here's What You Get Today</h2>
+          <div class="bb-get-grid">
+            <div class="bb-checks">
+              <div class="bb-check">
+                <span class="bb-ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12.5l4 4L19 7"/></svg></span>
+                <div><h4>AI Chatbot Builder (No-Code)</h4><p>Build powerful, intelligent chatbots in minutes.</p></div>
               </div>
-              <div class="bb-stack-row">
-                <div class="bb-stack-item"><span class="bb-ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12.5l4 4L19 7"/></svg></span>Done-for-you bot setup</div>
-                <div class="bb-stack-val">$1,500</div>
+              <div class="bb-check">
+                <span class="bb-ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12.5l4 4L19 7"/></svg></span>
+                <div><h4>Plug &amp; Play Templates</h4><p>Proven templates for lead gen, support, and sales.</p></div>
               </div>
-              <div class="bb-stack-row">
-                <div class="bb-stack-item"><span class="bb-ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12.5l4 4L19 7"/></svg></span>Premium integrations</div>
-                <div class="bb-stack-val">$600</div>
+              <div class="bb-check">
+                <span class="bb-ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12.5l4 4L19 7"/></svg></span>
+                <div><h4>Training &amp; Getting Started Guide</h4><p>Step-by-step training to launch with confidence.</p></div>
               </div>
-              <div class="bb-stack-row">
-                <div class="bb-stack-item"><span class="bb-ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12.5l4 4L19 7"/></svg></span>Priority support</div>
-                <div class="bb-stack-val">$480/yr</div>
+              <div class="bb-check">
+                <span class="bb-ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12.5l4 4L19 7"/></svg></span>
+                <div><h4>Integrations That Just Work</h4><p>Connect with popular tools in a few clicks.</p></div>
               </div>
-              <div class="bb-stack-row">
-                <div class="bb-stack-item"><span class="bb-ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12.5l4 4L19 7"/></svg></span>Bonus: custom training</div>
-                <div class="bb-stack-val">$500</div>
+              <div class="bb-check">
+                <span class="bb-ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12.5l4 4L19 7"/></svg></span>
+                <div><h4>Commercial License</h4><p>Use for yourself or your clients — keep 100%.</p></div>
               </div>
-              <div class="bb-stack-row">
-                <div class="bb-stack-item"><span class="bb-ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12.5l4 4L19 7"/></svg></span>Bonus: done-for-you templates</div>
-                <div class="bb-stack-val">$300</div>
+              <div class="bb-check">
+                <span class="bb-ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12.5l4 4L19 7"/></svg></span>
+                <div><h4>30-Day Money-Back Guarantee</h4><p>Try it risk-free. Love it or get a full refund.</p></div>
               </div>
             </div>
 
-            <div class="bb-stack-total">
-              <span class="bb-stack-total-lbl">Total value</span>
-              <span class="bb-stack-total-val"><s>$5,044</s>$1,164<span style="font-size:16px;font-weight:600;color:#8FB4E6">/yr</span></span>
-            </div>
-
-            <div class="bb-stack-bonus">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M3 12h18M12 8v13M12 8S9 3 6.5 4.5 8 8 12 8zM12 8s3-5 5.5-3.5S16 8 12 8z"/></svg>
-              <span>Claim during the launch window and <b>both bonuses are free</b>.</span>
+            <div class="bb-boxwrap">
+              <div id="bb-productbox">
+                <!-- built-in product-box mockup (swap via CONFIG.PRODUCT_IMAGE) -->
+                <svg viewBox="0 0 300 380" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="BotBuilders AI Chatbot Starter Kit box">
+                  <defs>
+                    <linearGradient id="pbFront" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#12213B"/><stop offset="1" stop-color="#0A1222"/></linearGradient>
+                    <linearGradient id="pbSide" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0A1222"/><stop offset="1" stop-color="#060B16"/></linearGradient>
+                    <linearGradient id="pbMark" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#38BDF8"/><stop offset="1" stop-color="#2563EB"/></linearGradient>
+                    <linearGradient id="pbGlow" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2563EB" stop-opacity=".5"/><stop offset="1" stop-color="#38BDF8" stop-opacity="0"/></linearGradient>
+                  </defs>
+                  <!-- side -->
+                  <path d="M212 40l44 20v260l-44 24z" fill="url(#pbSide)"/>
+                  <!-- front -->
+                  <path d="M44 40h168v304L44 368z" fill="url(#pbFront)"/>
+                  <!-- top -->
+                  <path d="M44 40l168 0 44 20-168 4z" fill="#1A2C4A"/>
+                  <rect x="44" y="40" width="168" height="328" fill="url(#pbGlow)" opacity=".5"/>
+                  <!-- logo -->
+                  <g transform="translate(72,78)">
+                    <path d="M18 0l14 8v16l-14 8-14-8V8z" fill="url(#pbMark)"/>
+                    <path d="M19 6l-7 9h5l-1 6 7-9h-5z" fill="#fff"/>
+                    <text x="42" y="22" font-family="Inter,Arial,sans-serif" font-size="18" font-weight="800" fill="#fff">BotBuilders</text>
+                  </g>
+                  <!-- title -->
+                  <text x="72" y="150" font-family="Inter,Arial,sans-serif" font-size="26" font-weight="800" fill="#fff">AI CHATBOT</text>
+                  <text x="72" y="180" font-family="Inter,Arial,sans-serif" font-size="26" font-weight="800" fill="#38BDF8">STARTER KIT</text>
+                  <!-- robot -->
+                  <g transform="translate(96,210)">
+                    <rect x="10" y="18" width="72" height="56" rx="14" fill="#0E1D36" stroke="#2563EB" stroke-width="2"/>
+                    <circle cx="34" cy="44" r="7" fill="#38BDF8"/><circle cx="58" cy="44" r="7" fill="#38BDF8"/>
+                    <path d="M34 60h24" stroke="#2A63C4" stroke-width="3" stroke-linecap="round"/>
+                    <path d="M46 6v12" stroke="#38BDF8" stroke-width="3" stroke-linecap="round"/><circle cx="46" cy="5" r="4" fill="#38BDF8"/>
+                    <rect x="0" y="34" width="8" height="20" rx="4" fill="#2563EB"/><rect x="84" y="34" width="8" height="20" rx="4" fill="#2563EB"/>
+                  </g>
+                  <text x="128" y="322" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="700" letter-spacing="1" fill="#8FB4E6">Launch. Automate. Scale.</text>
+                </svg>
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- pricing card -->
-        <div class="bb-price bb-rv bb-rv--right">
-          <div class="bb-price-pop">Most popular</div>
-          <div class="bb-price-name">Growth Plan</div>
-          <div class="bb-price-fig">
-            <span class="bb-price-cur">$</span>
-            <span class="bb-price-amt">97</span>
-            <span class="bb-price-per">/mo</span>
+        <!-- pricing -->
+        <div class="bb-card bb-price bb-rv">
+          <div class="bb-price-head">Your Investment Today</div>
+          <div class="bb-price-body">
+            <div class="bb-price-name">BotBuilders AI Chatbot Starter Kit</div>
+            <div class="bb-price-fig">
+              <span class="bb-price-now">$27.00</span>
+              <span class="bb-price-was">$67.00</span>
+            </div>
+            <div class="bb-price-terms">One-Time Payment</div>
+
+            <label class="bb-bump" id="bb-bump">
+              <input type="checkbox" class="bb-bump-input">
+              <span class="bb-bump-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12.5l4 4L19 7"/></svg></span>
+              <span class="bb-bump-body">
+                <span class="bb-bump-top"><b>YES! Add the Done-For-You Setup Pack</b><span class="bb-bump-price">only $19</span></span>
+                <p>Let our experts build and customize your first chatbot for you. Get it live faster.</p>
+                <span class="bb-bump-tag">Highly Recommended</span>
+              </span>
+            </label>
+
+            <a href="#" class="bb-btn bb-btn--primary bb-btn--wide bb-btn--lg" data-cta>
+              YES! Get Instant Access
+              <svg class="bb-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+
+            <div class="bb-price-assure">
+              <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>Secure Checkout</span>
+              <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 3.5v6c0 5-3.4 9.4-8 10.5-4.6-1.1-8-5.5-8-10.5v-6z"/><path d="M9 12l2.2 2.2L15.5 10"/></svg>30-Day Money-Back Guarantee</span>
+            </div>
+
+            <div class="bb-pay">
+              <span class="bb-pay-lbl">We accept:</span>
+              <div class="bb-pay-cards">
+                <span class="bb-cc bb-cc--visa">VISA</span>
+                <span class="bb-cc" aria-label="Mastercard"><svg viewBox="0 0 40 24" fill="none"><circle cx="16" cy="12" r="7" fill="#EB001B"/><circle cx="24" cy="12" r="7" fill="#F79E1B" fill-opacity=".9"/></svg></span>
+                <span class="bb-cc bb-cc--amex">AMEX</span>
+                <span class="bb-cc bb-cc--disc">DISC&Oslash;VER</span>
+              </div>
+            </div>
           </div>
-          <div class="bb-price-bill">Billed annually · <s>$147/mo</s> <b>Save 34%</b></div>
+        </div>
 
-          <ul class="bb-price-list">
-            <li><span class="bb-ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12.5l4 4L19 7"/></svg></span>Everything in Starter</li>
-            <li><span class="bb-ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12.5l4 4L19 7"/></svg></span>Unlimited bots</li>
-            <li><span class="bb-ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12.5l4 4L19 7"/></svg></span>Advanced integrations</li>
-            <li><span class="bb-ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12.5l4 4L19 7"/></svg></span>Priority support</li>
-            <li><span class="bb-ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12.5l4 4L19 7"/></svg></span>Monthly strategy call</li>
-          </ul>
+      </div>
+    </div>
+  </section>
 
-          <a href="#" class="bb-btn bb-btn--primary bb-btn--wide" data-cta>
-            <svg class="bb-btn-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M13 2L4.5 13H11l-1 9 8.5-11H12z"/></svg>
-            Claim my offer
-          </a>
-
-          <div class="bb-price-guar">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 3.5v6c0 5-3.4 9.4-8 10.5-4.6-1.1-8-5.5-8-10.5v-6z"/><path d="M9 12l2.2 2.2L15.5 10"/></svg>
-            30-day money-back guarantee
+  <!-- =============================================================== trust -->
+  <section class="bb-sec" style="padding-top:0">
+    <div class="bb-wrap">
+      <div class="bb-trust bb-rv">
+        <div class="bb-trust-title">Trusted by Entrepreneurs &amp; Businesses Worldwide</div>
+        <div class="bb-trust-grid">
+          <div class="bb-trust-cell">
+            <div class="bb-trust-stars">★★★★★</div>
+            <span>4.9/5 Average Rating</span>
           </div>
-
-          <div class="bb-price-scarcity">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 1.5M9 2h6"/></svg>
-            Launch price ends when the timer hits zero
+          <div class="bb-trust-cell">
+            <div class="bb-trust-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l8 3.5v6c0 5-3.4 9.4-8 10.5-4.6-1.1-8-5.5-8-10.5v-6z"/><path d="M9 12l2.2 2.2L15.5 10"/></svg></div>
+            <b>30-Day</b><span>Money-Back Guarantee</span>
+          </div>
+          <div class="bb-trust-cell">
+            <div class="bb-trust-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="9" cy="8" r="3.2"/><path d="M15 5a3.2 3.2 0 0 1 0 6M3 20a6 6 0 0 1 12 0M16 14.5A6 6 0 0 1 21 20"/></svg></div>
+            <b>10,000+</b><span>Happy Customers</span>
+          </div>
+          <div class="bb-trust-cell">
+            <div class="bb-trust-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div>
+            <b>Secure</b><span>SSL Encrypted Checkout</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============================================================== results -->
-  <section class="bb-sec bb-sec--light">
+  <!-- ================================================================= faq -->
+  <section class="bb-sec" style="padding-top:0">
     <div class="bb-wrap">
-      <div class="bb-sec-head bb-rv">
-        <div class="bb-eyebrow">Proof</div>
-        <h2>Businesses like yours are already scaling</h2>
-        <p>The same platform and automations you'll unlock with this offer.</p>
-      </div>
-
-      <!-- ▸ REPLACE with REAL named customers + a specific result.
-           Set data-photo="URL" on .bb-quote to drop in a real headshot. -->
-      <div class="bb-quotes" data-stagger>
-        <figure class="bb-quote bb-rv" style="--av:#2563FF" data-initials="JM">
-          <div class="bb-quote-stars">★★★★★</div>
-          <div class="bb-quote-txt">"BotBuilders transformed how we capture and convert leads. Our chatbots work 24/7 and our bookings are up 300%."</div>
-          <figcaption class="bb-quote-by">
-            <span class="bb-quote-av" aria-hidden="true">JM</span>
-            <div><div class="bb-quote-name">Jessica M.</div><div class="bb-quote-role">Marketing Director · Growth Labs</div></div>
-          </figcaption>
-        </figure>
-        <figure class="bb-quote bb-rv" style="--av:#38BDF8" data-initials="RL">
-          <div class="bb-quote-stars">★★★★★</div>
-          <div class="bb-quote-txt">"The done-for-you setup was worth it alone. Leads that used to go cold now get answered in seconds."</div>
-          <figcaption class="bb-quote-by">
-            <span class="bb-quote-av" aria-hidden="true">RL</span>
-            <div><div class="bb-quote-name">Real Customer Name</div><div class="bb-quote-role">Verified client · Trustpilot</div></div>
-          </figcaption>
-        </figure>
-        <figure class="bb-quote bb-rv" style="--av:#1E3A8A" data-initials="JT">
-          <div class="bb-quote-stars">★★★★★</div>
-          <div class="bb-quote-txt">"We claimed the launch offer and were live in days. Our calendar has never been this full."</div>
-          <figcaption class="bb-quote-by">
-            <span class="bb-quote-av" aria-hidden="true">JT</span>
-            <div><div class="bb-quote-name">Real Customer Name</div><div class="bb-quote-role">Verified client · Trustpilot</div></div>
-          </figcaption>
-        </figure>
-      </div>
-
-      <div class="bb-metrics bb-rv">
-        <div class="bb-metric"><div class="bb-metric-num is-green">+<span data-count="300">0</span>%</div><div class="bb-metric-lbl">More bookings</div></div>
-        <div class="bb-metric"><div class="bb-metric-num"><span data-count="3">0</span>X</div><div class="bb-metric-lbl">More leads captured</div></div>
-        <div class="bb-metric"><div class="bb-metric-num">24/7</div><div class="bb-metric-lbl">Always-on automation</div></div>
-        <div class="bb-metric"><div class="bb-metric-num"><span data-count="20">0</span>+ hrs</div><div class="bb-metric-lbl">Saved weekly</div></div>
-      </div>
-      <p class="bb-metrics-note bb-rv">Averages reported by BotBuilders clients. Individual results vary and depend on the work you put in.</p>
-    </div>
-  </section>
-
-  <!-- ================================================================== faq -->
-  <section class="bb-sec bb-sec--white" id="bb-faq">
-    <div class="bb-wrap">
-      <div class="bb-sec-head bb-rv">
-        <div class="bb-eyebrow">Before you claim</div>
-        <h2>Questions, answered</h2>
-      </div>
-
+      <h2 class="bb-faq-head bb-rv">Frequently Asked Questions</h2>
       <div class="bb-faq" data-stagger>
         <div class="bb-q bb-rv">
-          <button class="bb-q-btn" aria-expanded="false">
-            What is BotBuilders?
-            <span class="bb-q-ico"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
-          </button>
-          <div class="bb-q-panel"><p>BotBuilders is an AI-powered platform for building chatbots and automation systems that capture leads, book calls and grow your business — across your website, social channels and SMS. With this offer, we also set it all up for you.</p></div>
+          <button class="bb-q-btn" aria-expanded="false">Do I need any technical skills?<span class="bb-q-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></button>
+          <div class="bb-q-panel"><p>None at all. The AI Chatbot Builder is 100% no-code — everything is drag-and-drop, and the Getting Started Guide walks you through your first launch step by step.</p></div>
         </div>
-
         <div class="bb-q bb-rv">
-          <button class="bb-q-btn" aria-expanded="false">
-            How does the limited-time offer work?
-            <span class="bb-q-ico"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
-          </button>
-          <div class="bb-q-panel"><p>Claim before the countdown hits zero and you lock in the launch price on the Growth Plan plus both free bonuses — custom training and done-for-you templates. Once the timer ends, the offer and bonuses come off the table.</p></div>
+          <button class="bb-q-btn" aria-expanded="false">Is there a money-back guarantee?<span class="bb-q-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></button>
+          <div class="bb-q-panel"><p>Yes — a full 30-day money-back guarantee. Try the Starter Kit risk-free, and if it's not for you, email us for a complete refund. No hard feelings.</p></div>
         </div>
-
         <div class="bb-q bb-rv">
-          <button class="bb-q-btn" aria-expanded="false">
-            Is there a setup fee?
-            <span class="bb-q-ico"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
-          </button>
-          <div class="bb-q-panel"><p>No. Done-for-you setup is included in this offer at no extra charge — our team builds, connects and tests everything for you as part of the plan.</p></div>
+          <button class="bb-q-btn" aria-expanded="false">How soon can I access the product?<span class="bb-q-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></button>
+          <div class="bb-q-panel"><p>Instantly. The moment your payment is confirmed you'll get an email with your login and everything you need to start building right away.</p></div>
         </div>
-
         <div class="bb-q bb-rv">
-          <button class="bb-q-btn" aria-expanded="false">
-            Can I cancel anytime?
-            <span class="bb-q-ico"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
-          </button>
-          <div class="bb-q-panel"><p>Yes. You can cancel or downgrade your plan at any time — no long-term contracts. And you're covered by our 30-day money-back guarantee, so you can claim with zero risk.</p></div>
+          <button class="bb-q-btn" aria-expanded="false">Can I use this for my clients?<span class="bb-q-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></button>
+          <div class="bb-q-panel"><p>Absolutely. Your Commercial License lets you build and deploy chatbots for clients and keep 100% of what you charge.</p></div>
         </div>
-
         <div class="bb-q bb-rv">
-          <button class="bb-q-btn" aria-expanded="false">
-            Do I need to be technical?
-            <span class="bb-q-ico"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
-          </button>
-          <div class="bb-q-panel"><p>Not at all. It's done-for-you. We build and connect everything, then walk you through it in plain English on your onboarding and training call.</p></div>
+          <button class="bb-q-btn" aria-expanded="false">What kind of chatbots can I build?<span class="bb-q-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></button>
+          <div class="bb-q-panel"><p>Lead-gen bots, customer-support bots, booking and sales bots, FAQ assistants and more — across your website, Instagram, Messenger, WhatsApp and SMS, all from the included templates.</p></div>
+        </div>
+        <div class="bb-q bb-rv">
+          <button class="bb-q-btn" aria-expanded="false">What happens after I purchase?<span class="bb-q-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></button>
+          <div class="bb-q-panel"><p>You'll get instant access to the platform, templates and training. Follow the quick-start guide and you can have your first chatbot live in under 60 minutes.</p></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============================================================ final cta -->
-  <section class="bb-sec bb-final">
-    <div class="bb-wrap bb-final-in">
-      <span class="bb-final-eyebrow bb-rv">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5.4l3.4 2"/></svg>
-        Limited time offer
-      </span>
-      <h2 class="bb-rv">Ready to Automate<br>and Scale?</h2>
-      <p class="bb-rv">Claim your exclusive offer now and start converting more leads today — before the timer runs out.</p>
-
-      <div class="bb-final-clock bb-rv">
-        <div class="bb-countdown-lbl">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 1.5M9 2h6"/></svg>
-          Offer ends in
+  <!-- =========================================================== final cta -->
+  <section class="bb-sec" style="padding-top:0">
+    <div class="bb-wrap">
+      <div class="bb-final bb-rv">
+        <svg class="bb-seal" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="30-Day Money-Back Guarantee">
+          <defs><linearGradient id="sealG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F8D26A"/><stop offset="1" stop-color="#E0A32E"/></linearGradient></defs>
+          <path d="M60 4l10 7 12-2 5 11 11 6-2 12 7 10-7 10 2 12-11 6-5 11-12-2-10 7-10-7-12 2-5-11-11-6 2-12-7-10 7-10-2-12 11-6 5-11 12 2z" fill="url(#sealG)"/>
+          <circle cx="60" cy="58" r="34" fill="#0A1222"/>
+          <circle cx="60" cy="58" r="34" fill="none" stroke="#F8D26A" stroke-width="2" stroke-dasharray="3 4"/>
+          <text x="60" y="52" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="26" font-weight="800" fill="#F8D26A">30</text>
+          <text x="60" y="66" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="10" font-weight="800" letter-spacing="1.5" fill="#fff">DAY</text>
+          <text x="60" y="80" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="8" font-weight="700" letter-spacing="1" fill="#F8D26A">MONEY BACK</text>
+        </svg>
+        <div class="bb-final-txt">
+          <h2>Ready to Launch Your First AI Chatbot?</h2>
+          <p>Join thousands of smart business owners using BotBuilders to save time, capture more leads, and close more sales.</p>
         </div>
-        <div class="bb-clock" data-cd="final">
-          <div class="bb-clock-cell"><div class="bb-clock-num" data-cd-d>00</div><div class="bb-clock-unit">Days</div></div>
-          <div class="bb-clock-cell"><div class="bb-clock-num" data-cd-h>00</div><div class="bb-clock-unit">Hrs</div></div>
-          <div class="bb-clock-cell"><div class="bb-clock-num" data-cd-m>00</div><div class="bb-clock-unit">Mins</div></div>
-          <div class="bb-clock-cell"><div class="bb-clock-num" data-cd-s>00</div><div class="bb-clock-unit">Secs</div></div>
+        <div class="bb-final-cta">
+          <a href="#" class="bb-btn bb-btn--primary bb-btn--lg" data-cta>
+            YES! Get Instant Access
+            <svg class="bb-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <div class="bb-final-timer" data-cd="final">
+            Special price ends in
+            <span class="bb-final-mini"><b data-cd-d>01</b>:<b data-cd-h>23</b>:<b data-cd-m>47</b>:<b data-cd-s>12</b></span>
+          </div>
         </div>
-      </div>
-
-      <div class="bb-hero-cta bb-rv" style="margin-top:34px">
-        <a href="#" class="bb-btn bb-btn--primary bb-btn--lg" data-cta>
-          <svg class="bb-btn-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M13 2L4.5 13H11l-1 9 8.5-11H12z"/></svg>
-          Claim my offer
-          <svg class="bb-arrow" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
-      </div>
-
-      <div class="bb-guarantee bb-rv">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2l8 3.5v6c0 5-3.4 9.4-8 10.5-4.6-1.1-8-5.5-8-10.5v-6z"/><path d="M9 12l2.2 2.2L15.5 10"/></svg>
-        <span>
-          <strong>Risk-free, 30-day money-back guarantee.</strong> Claim the offer, let us build your
-          system, and if it's not right for you within 30 days we'll refund every cent. No long-term
-          contracts — cancel anytime.
-        </span>
       </div>
     </div>
   </section>
 
   <!-- =============================================================== footer -->
   <footer class="bb-footer">
-    <div class="bb-wrap">
-      <div class="bb-footer-top">
-        <a href="#bb-top" class="bb-logo" style="font-size:20px">
-          <svg class="bb-logo-mark" viewBox="0 0 32 32" fill="none"><defs><linearGradient id="bbg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2563FF"/><stop offset="1" stop-color="#38BDF8"/></linearGradient></defs><rect x="4" y="4" width="24" height="24" rx="7" fill="url(#bbg2)"/><path d="M17 8l-7 9h5l-1 7 7-9h-5z" fill="#fff"/></svg>
-          BotBuilders
+    <div class="bb-wrap bb-footer-in">
+      <div class="bb-footer-l">
+        <a href="#bb-top" class="bb-tb-logo bb-logo" style="font-size:18px">
+          <svg class="bb-logo-mark" viewBox="0 0 40 40" fill="none"><defs><linearGradient id="bbf" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#38BDF8"/><stop offset="1" stop-color="#2563EB"/></linearGradient></defs><path d="M20 3l14 8v18l-14 8-14-8V11z" fill="url(#bbf)"/><path d="M21 12l-8 10h6l-1 7 8-10h-6z" fill="#fff"/></svg>
+          BotBuilders<sup>&reg;</sup>
         </a>
-        <div class="bb-footer-badges">
-          <img class="bb-footer-inc" data-inc-logo src="" alt="Inc. 5000 honoree" loading="lazy">
-          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 3.5v6c0 5-3.4 9.4-8 10.5-4.6-1.1-8-5.5-8-10.5v-6z"/></svg>30-day guarantee</span>
-          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.9 6.3 6.6.7-5 4.5 1.4 6.5L12 16.8 6.1 20l1.4-6.5-5-4.5 6.6-.7z"/></svg>500+ clients</span>
-          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12l5 5L20 6"/></svg>Trustpilot 4.9/5</span>
-        </div>
+        <span class="bb-footer-copy">© 2026 BotBuilders. All rights reserved.</span>
       </div>
-
       <div class="bb-footer-links">
-        <a href="https://www.botbuilders.com/privacy">Privacy Policy</a>
-        <a href="https://www.botbuilders.com/terms">Terms of Service</a>
-        <a href="https://www.botbuilders.com/disclaimer">Legal Disclaimer</a>
-        <a href="#bb-faq">Support</a>
+        <a href="https://www.botbuilders.com/terms">Terms</a>
+        <a href="https://www.botbuilders.com/privacy">Privacy</a>
+        <a href="#" data-support>Support</a>
       </div>
-
-      <p class="bb-footer-fine">
-        BotBuilders · 8936 N Central Ave, Phoenix, AZ 85020 · 602-922-9700<br>
-        Results vary and depend on the work you put in. Nothing here is a guarantee of income.
-        This site is not part of, or endorsed by, Meta, Google or ManyChat.<br>
-        © 2026 BotBuilders. All rights reserved.
-      </p>
     </div>
   </footer>
-
-  <!-- =========================================================== sticky bar -->
-  <div class="bb-sticky" id="bb-sticky">
-    <div class="bb-wrap bb-sticky-in">
-      <div class="bb-sticky-txt">
-        <b>Limited time offer</b>
-        <span class="bb-sticky-clock" data-cd="sticky">
-          <span class="bb-sc-lbl">Ends in</span>
-          <span class="bb-sc-cell"><b data-cd-d>00</b>d</span>
-          <span class="bb-sc-cell"><b data-cd-h>00</b>h</span>
-          <span class="bb-sc-cell"><b data-cd-m>00</b>m</span>
-          <span class="bb-sc-cell"><b data-cd-s>00</b>s</span>
-        </span>
-      </div>
-      <a href="#" class="bb-btn bb-btn--primary bb-btn--sm" data-cta>
-        <svg class="bb-btn-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M13 2L4.5 13H11l-1 9 8.5-11H12z"/></svg>
-        Claim my offer
-      </a>
-    </div>
-  </div>
 
 </div>
 
@@ -637,34 +372,36 @@
 
   /* ====================================================== CONFIG — EDIT ME */
   var CONFIG = {
-    /* Your checkout / order-form link — every "Claim my offer" button points here.
-       GHL order form, Stripe checkout, ThriveCart, etc.                      */
+    /* Checkout / order-form link — every "Get Instant Access" button uses it. */
     CHECKOUT_URL  : 'https://link.automator.ai/widget/bookings/melvin-guiritan-personal-calendar-ji0cmkuqe',
 
-    /* "Watch demo" button. BOTH supported:
-         • Direct file → ends in .mp4/.webm/.ogg → opens in a lightbox <video>
-         • Embed/any URL → opens in a new tab
-       Leave blank and the "Watch demo" button is hidden.                     */
+    /* "Contact Support" link (top bar + footer). Blank = points to checkout FAQ. */
+    SUPPORT_URL   : 'mailto:support@botbuilders.com',
+
+    /* Hero video. Direct .mp4/.webm/.ogg → inline player; any other URL → new tab.
+       Blank = the play button does nothing.                                  */
     DEMO_URL      : '',
 
     /* ---- COUNTDOWN --------------------------------------------------------
-       'evergreen' : a per-visitor timer that starts on first visit and is
-                     remembered in their browser (great for GHL funnels).
+       'evergreen' : per-visitor timer, remembered in the browser.
        'fixed'     : counts down to a real date/time for everyone.            */
     COUNTDOWN     : 'evergreen',
     DEADLINE_ISO  : '2026-08-31T23:59:59',   // used when COUNTDOWN = 'fixed'
     EVERGREEN_MIN : 2880,                     // used when COUNTDOWN = 'evergreen' (2880 = 48h)
+    /* Caption shown in the timer bar. Leave '' to auto-build it from the
+       deadline (e.g. "Offer expires Fri, Aug 29 at 11:59 PM").               */
+    EXPIRES_TEXT  : '',
 
-    /* Your logo. Nav sits on dark navy, so use a light / reverse version.
-       LOGO_HEIGHT is in px — change it to resize the logo (nav + footer).    */
+    /* Order bump ----------------------------------------------------------- */
+    BUMP_ENABLED  : true,
+    BUMP_PARAM    : 'bump=1',   // appended to CHECKOUT_URL when the box is ticked
+
+    /* Real product-box image (PNG w/ transparency). Blank = built-in SVG.    */
+    PRODUCT_IMAGE : '',
+
+    /* Your logo (light / reverse for the dark bars). Blank = built-in mark.  */
     LOGO_URL      : '',
-    LOGO_FOOTER   : '',
-    LOGO_HEIGHT   : 36,
-
-    /* Inc. 5000 honoree badge — white / reversed PNG for dark backgrounds.
-       Shown in the trust bar and the footer. Blank = both are hidden.        */
-    INC_LOGO_URL  : 'https://assets.cdn.filesafe.space/sz4sVbBhLW7cX7keIHT6/media/6a7b84e311f1d510eb993917.png',
-    INC_LOGO_HEIGHT : 56
+    LOGO_HEIGHT   : 30
   };
   /* ======================================================================= */
 
@@ -677,11 +414,11 @@
     try{
       if(window.dataLayer && window.dataLayer.push) window.dataLayer.push(Object.assign({event:event}, params));
       if(typeof window.gtag === 'function')          window.gtag('event', event, params);
-      if(typeof window.fbq  === 'function' && event === 'Lead') window.fbq('track','Lead', params);
+      if(typeof window.fbq  === 'function' && (event==='Lead'||event==='InitiateCheckout')) window.fbq('track', event, params);
     }catch(e){}
   }
 
-  /* -- 0. kill GHL's wrapper chrome (white strip) ------------------------- */
+  /* -- 0. strip GHL wrapper chrome ---------------------------------------- */
   (function(){
     var el = root.parentElement;
     while(el && el !== document.body && el !== document.documentElement){
@@ -690,185 +427,161 @@
       el.style.marginTop='0px'; el.style.marginBottom='0px'; el.style.maxWidth='none';
       el = el.parentElement;
     }
-    document.documentElement.style.background='#081220';
-    document.body.style.background='#081220';
-    document.body.style.margin='0';
+    document.documentElement.style.background='#F4F6FB';
+    document.body.style.background='#F4F6FB'; document.body.style.margin='0';
   })();
 
   /* -- 0b. logo swap ------------------------------------------------------ */
   (function(){
     if(!CONFIG.LOGO_URL) return;
     root.querySelectorAll('.bb-logo').forEach(function(el){
-      var isFooter = !!el.closest('.bb-footer');
-      var src = isFooter ? (CONFIG.LOGO_FOOTER || CONFIG.LOGO_URL) : CONFIG.LOGO_URL;
       el.innerHTML=''; el.classList.add('bb-logo--img');
       var img=document.createElement('img');
-      img.src=src; img.alt='BotBuilders';
-      img.style.height=(CONFIG.LOGO_HEIGHT||34)+'px'; img.style.width='auto'; img.style.display='block';
+      img.src=CONFIG.LOGO_URL; img.alt='BotBuilders';
+      img.style.height=(CONFIG.LOGO_HEIGHT||30)+'px'; img.style.width='auto';
       el.appendChild(img);
     });
   })();
 
-  /* -- 0c. Inc. 5000 honoree badge (trust bar + footer) ------------------- */
+  /* -- 0c. real product image, if supplied -------------------------------- */
   (function(){
-    var nodes = root.querySelectorAll('[data-inc-logo]');
-    if(!nodes.length) return;
-    nodes.forEach(function(img){
-      if(CONFIG.INC_LOGO_URL){
-        img.src = CONFIG.INC_LOGO_URL;
-        if(CONFIG.INC_LOGO_HEIGHT && img.classList.contains('bb-inc')) img.style.height = CONFIG.INC_LOGO_HEIGHT + 'px';
-      } else {
-        var wrap = img.closest('.bb-chip--award');
-        (wrap || img).style.display = 'none';
-      }
-    });
+    if(!CONFIG.PRODUCT_IMAGE) return;
+    var box=document.getElementById('bb-productbox'); if(!box) return;
+    box.innerHTML='';
+    var img=document.createElement('img');
+    img.src=CONFIG.PRODUCT_IMAGE; img.alt='BotBuilders AI Chatbot Starter Kit'; img.loading='lazy';
+    box.appendChild(img);
   })();
 
-  /* -- 1. scroll reveal + stagger ----------------------------------------- */
+  /* -- 1. scroll reveal --------------------------------------------------- */
   root.querySelectorAll('[data-stagger]').forEach(function(group){
     var kids=group.querySelectorAll('.bb-rv');
-    for(var i=0;i<kids.length;i++) kids[i].style.setProperty('--d',(i*90)+'ms');
+    for(var i=0;i<kids.length;i++) kids[i].style.setProperty('--d',(i*70)+'ms');
   });
-  var revealables = root.querySelectorAll('.bb-rv');
+  var rv = root.querySelectorAll('.bb-rv');
   if(REDUCED || !('IntersectionObserver' in window)){
-    revealables.forEach(function(el){ el.classList.add('is-in'); });
-    runCounters(root);
+    rv.forEach(function(el){ el.classList.add('is-in'); });
   } else {
     var io=new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        if(!e.isIntersecting) return;
-        e.target.classList.add('is-in'); runCounters(e.target); io.unobserve(e.target);
-      });
-    },{threshold:0.18, rootMargin:'0px 0px -8% 0px'});
-    revealables.forEach(function(el){ io.observe(el); });
+      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('is-in'); io.unobserve(e.target); } });
+    },{threshold:0.14, rootMargin:'0px 0px -6% 0px'});
+    rv.forEach(function(el){ io.observe(el); });
   }
 
-  /* -- 2. number count-up ------------------------------------------------- */
-  root.querySelectorAll('[data-count]').forEach(function(el){
-    var t=parseInt(el.getAttribute('data-count'),10);
-    el.textContent = el.hasAttribute('data-plain') ? t : t.toLocaleString();
-  });
-  function runCounters(scope){
-    var nodes = scope.querySelectorAll ? scope.querySelectorAll('[data-count]') : [];
-    if(scope.hasAttribute && scope.hasAttribute('data-count')) nodes=[scope];
-    Array.prototype.forEach.call(nodes,function(el){
-      if(el.dataset.done) return; el.dataset.done='1';
-      var target=parseInt(el.getAttribute('data-count'),10), plain=el.hasAttribute('data-plain');
-      if(REDUCED){ el.textContent=plain?target:target.toLocaleString(); return; }
-      var start=null, dur=1400;
-      function tick(ts){
-        if(start===null) start=ts;
-        var p=Math.min((ts-start)/dur,1), eased=1-Math.pow(1-p,3), val=Math.round(target*eased);
-        el.textContent=plain?val:val.toLocaleString();
-        if(p<1) requestAnimationFrame(tick);
-      }
-      requestAnimationFrame(tick);
-    });
-  }
-
-  /* -- 3. COUNTDOWN (drives every [data-cd] clock on the page) ------------ */
+  /* -- 2. COUNTDOWN (drives every [data-cd] clock) ------------------------ */
   (function(){
     var clocks = root.querySelectorAll('[data-cd]');
     if(!clocks.length) return;
-
-    /* work out the deadline (ms since epoch) */
     var deadline;
     if(CONFIG.COUNTDOWN === 'fixed'){
       deadline = new Date(CONFIG.DEADLINE_ISO).getTime();
       if(isNaN(deadline)) deadline = Date.now() + 48*3600*1000;
     } else {
-      /* evergreen — remembered per visitor in localStorage */
-      var KEY = 'bb_lto_deadline';
-      var win = Math.max(1, parseInt(CONFIG.EVERGREEN_MIN,10) || 2880) * 60 * 1000;
-      var saved;
-      try{ saved = parseInt(window.localStorage.getItem(KEY),10); }catch(e){}
+      var KEY='bb_kit_deadline';
+      var win=Math.max(1, parseInt(CONFIG.EVERGREEN_MIN,10)||2880)*60*1000, saved;
+      try{ saved=parseInt(window.localStorage.getItem(KEY),10); }catch(e){}
       if(!saved || isNaN(saved) || saved < Date.now()){
-        deadline = Date.now() + win;
-        try{ window.localStorage.setItem(KEY, String(deadline)); }catch(e){}
-      } else {
-        deadline = saved;
-      }
+        deadline = Date.now()+win;
+        try{ window.localStorage.setItem(KEY,String(deadline)); }catch(e){}
+      } else deadline = saved;
     }
 
-    function pad(n){ return (n<10?'0':'') + n; }
-    function paint(cl, d, h, m, s){
+    /* expiry caption */
+    (function(){
+      var node = root.querySelector('[data-expires]'); if(!node) return;
+      if(CONFIG.EXPIRES_TEXT){ node.textContent = CONFIG.EXPIRES_TEXT; return; }
+      try{
+        var d=new Date(deadline);
+        var opts={weekday:'short', month:'short', day:'numeric', hour:'numeric', minute:'2-digit'};
+        node.textContent = 'Offer expires ' + d.toLocaleString(undefined, opts) + '.';
+      }catch(e){ node.textContent='Offer expires soon.'; }
+    })();
+
+    function pad(n){ return (n<10?'0':'')+n; }
+    function paint(cl,d,h,m,s){
       var el;
-      if((el=cl.querySelector('[data-cd-d]'))) el.textContent = pad(d);
-      if((el=cl.querySelector('[data-cd-h]'))) el.textContent = pad(h);
-      if((el=cl.querySelector('[data-cd-m]'))) el.textContent = pad(m);
-      if((el=cl.querySelector('[data-cd-s]'))) el.textContent = pad(s);
+      if((el=cl.querySelector('[data-cd-d]'))) el.textContent=pad(d);
+      if((el=cl.querySelector('[data-cd-h]'))) el.textContent=pad(h);
+      if((el=cl.querySelector('[data-cd-m]'))) el.textContent=pad(m);
+      if((el=cl.querySelector('[data-cd-s]'))) el.textContent=pad(s);
     }
     function tick(){
-      var diff = Math.max(0, deadline - Date.now());
-      var t = Math.floor(diff/1000);
-      var d = Math.floor(t/86400);
-      var h = Math.floor((t%86400)/3600);
-      var m = Math.floor((t%3600)/60);
-      var s = t%60;
-      clocks.forEach(function(cl){ paint(cl, d, h, m, s); });
-      if(diff <= 0 && timer){ clearInterval(timer); timer=null; }
+      var diff=Math.max(0, deadline-Date.now()), t=Math.floor(diff/1000);
+      var d=Math.floor(t/86400), h=Math.floor((t%86400)/3600), m=Math.floor((t%3600)/60), s=t%60;
+      clocks.forEach(function(cl){ paint(cl,d,h,m,s); });
+      if(diff<=0 && timer){ clearInterval(timer); timer=null; }
     }
-    var timer = setInterval(tick, 1000);
-    tick();
+    var timer=setInterval(tick,1000); tick();
   })();
 
-  /* -- 4. FAQ accordion --------------------------------------------------- */
+  /* -- 3. FAQ accordion --------------------------------------------------- */
   root.querySelectorAll('.bb-q-btn').forEach(function(btn){
     btn.addEventListener('click', function(){
       var q=btn.closest('.bb-q'), panel=q.querySelector('.bb-q-panel'), open=q.classList.contains('is-open');
-      root.querySelectorAll('.bb-q.is-open').forEach(function(other){
-        other.classList.remove('is-open');
-        other.querySelector('.bb-q-panel').style.maxHeight=null;
-        other.querySelector('.bb-q-btn').setAttribute('aria-expanded','false');
+      root.querySelectorAll('.bb-q.is-open').forEach(function(o){
+        o.classList.remove('is-open'); o.querySelector('.bb-q-panel').style.maxHeight=null;
+        o.querySelector('.bb-q-btn').setAttribute('aria-expanded','false');
       });
       if(!open){ q.classList.add('is-open'); panel.style.maxHeight=panel.scrollHeight+'px'; btn.setAttribute('aria-expanded','true'); }
     });
   });
 
-  /* -- 5. "Watch demo" button (video file → lightbox, else new tab) ------- */
+  /* -- 4. order bump ------------------------------------------------------ */
+  var bumpOn=false;
   (function(){
-    var btn = document.getElementById('bb-demo');
-    if(!btn) return;
-    if(!CONFIG.DEMO_URL){ btn.style.display='none'; return; }
-    var isFile = /\.(mp4|webm|ogg)(\?.*)?$/i.test(CONFIG.DEMO_URL);
-    if(!isFile){ btn.href = CONFIG.DEMO_URL; btn.target='_blank'; btn.rel='noopener'; return; }
-
-    btn.addEventListener('click', function(ev){
-      ev.preventDefault();
-      var lb = document.createElement('div');
-      lb.setAttribute('style','position:fixed;inset:0;z-index:90;display:flex;align-items:center;justify-content:center;padding:5vw;background:rgba(6,12,24,.9);backdrop-filter:blur(6px)');
-      var v = document.createElement('video');
-      v.src = CONFIG.DEMO_URL; v.controls=true; v.autoplay=true; v.playsInline=true; v.setAttribute('playsinline','');
-      v.setAttribute('style','max-width:1000px;width:100%;max-height:86vh;border-radius:16px;box-shadow:0 44px 100px -30px rgba(0,0,0,.8);background:#000');
-      lb.appendChild(v);
-      lb.addEventListener('click', function(e){ if(e.target===lb){ document.body.style.overflow=''; lb.remove(); } });
-      document.addEventListener('keydown', function esc(e){ if(e.key==='Escape'){ document.body.style.overflow=''; lb.remove(); document.removeEventListener('keydown', esc); } });
-      document.body.appendChild(lb); document.body.style.overflow='hidden';
-      track('video_play',{location:'hero'});
+    var bump=document.getElementById('bb-bump');
+    if(!bump) return;
+    if(!CONFIG.BUMP_ENABLED){ bump.style.display='none'; return; }
+    var input=bump.querySelector('input');
+    input.addEventListener('change', function(){
+      bumpOn=input.checked;
+      bump.classList.toggle('is-on', bumpOn);
+      wireCTAs();
+      if(bumpOn) track('AddToCart',{content_name:'Done-For-You Setup Pack', value:19});
     });
   })();
 
-  /* -- 6. point every CTA at the checkout link + track a Lead click ------- */
+  /* -- 5. wire CTAs to checkout (+ bump param) ---------------------------- */
+  function wireCTAs(){
+    var url=CONFIG.CHECKOUT_URL;
+    if(bumpOn && CONFIG.BUMP_PARAM){ url += (url.indexOf('?')>-1?'&':'?') + CONFIG.BUMP_PARAM; }
+    root.querySelectorAll('[data-cta]').forEach(function(el){ el.href=url; });
+  }
+  wireCTAs();
   root.querySelectorAll('[data-cta]').forEach(function(el){
-    el.href = CONFIG.CHECKOUT_URL;
-    el.addEventListener('click', function(){ track('Lead', {content_name:'Claim my offer'}); });
+    el.addEventListener('click', function(){ track('InitiateCheckout',{content_name:'AI Chatbot Starter Kit', value: bumpOn?46:27}); });
   });
 
-  /* -- 7. sticky bar: show after the hero, hide once the final CTA / footer
-     comes into view ------------------------------------------------------- */
+  /* -- 5b. support links -------------------------------------------------- */
+  root.querySelectorAll('[data-support]').forEach(function(el){
+    el.href = CONFIG.SUPPORT_URL || CONFIG.CHECKOUT_URL;
+  });
+
+  /* -- 6. hero video ------------------------------------------------------ */
   (function(){
-    var bar=document.getElementById('bb-sticky'), hero=root.querySelector('.bb-hero');
-    var bottomEl=root.querySelector('.bb-final') || root.querySelector('.bb-footer');
-    if(!bar || !hero) return;
-    function onScroll(){
-      var pastHero = hero.getBoundingClientRect().bottom < 0;
-      var atBottom = bottomEl ? bottomEl.getBoundingClientRect().top < (window.innerHeight - 40) : false;
-      bar.classList.toggle('is-in', pastHero && !atBottom);
+    var box=document.getElementById('bb-video'); if(!box) return;
+    if(!CONFIG.DEMO_URL){ box.style.cursor='default'; box.removeAttribute('role'); box.removeAttribute('tabindex'); return; }
+    var isFile=/\.(mp4|webm|ogg)(\?.*)?$/i.test(CONFIG.DEMO_URL);
+    function play(){
+      if(box.classList.contains('is-playing')) return;
+      var node;
+      if(isFile){
+        node=document.createElement('video'); node.src=CONFIG.DEMO_URL;
+        node.controls=true; node.autoplay=true; node.playsInline=true; node.setAttribute('playsinline','');
+      } else {
+        if(/youtube|vimeo|wistia|\/embed\//i.test(CONFIG.DEMO_URL)){
+          var sep=CONFIG.DEMO_URL.indexOf('?')>-1?'&':'?';
+          node=document.createElement('iframe'); node.src=CONFIG.DEMO_URL+sep+'autoplay=1';
+          node.allow='autoplay; fullscreen; picture-in-picture'; node.setAttribute('allowfullscreen','');
+        } else { window.open(CONFIG.DEMO_URL,'_blank','noopener'); return; }
+      }
+      box.appendChild(node); box.classList.add('is-playing'); track('video_play',{location:'hero'});
     }
-    window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+    box.addEventListener('click', play);
+    box.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); play(); } });
   })();
 
-  /* -- 8. smooth in-page jumps -------------------------------------------- */
+  /* -- 7. smooth in-page jumps -------------------------------------------- */
   root.querySelectorAll('a[href^="#bb-"]').forEach(function(a){
     a.addEventListener('click', function(ev){
       var t=document.querySelector(a.getAttribute('href')); if(!t) return;
@@ -876,8 +589,8 @@
     });
   });
 
-  /* -- 9. page view ------------------------------------------------------- */
-  track('ViewContent', {content_name:'Limited time offer'});
+  /* -- 8. page view ------------------------------------------------------- */
+  track('ViewContent', {content_name:'AI Chatbot Starter Kit'});
 
 })();
 </script>
