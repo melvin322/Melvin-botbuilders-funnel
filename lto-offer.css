@@ -186,9 +186,10 @@
    NAV
    ========================================================================== */
 .bb-nav{
-  background:linear-gradient(180deg,#EAF5FE 0%,#D3E7FC 100%);
+  background:var(--bb-white);
   backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
-  border-bottom:1px solid rgba(8,18,32,.06);
+  border-bottom:1px solid rgba(8,18,32,.07);
+  box-shadow:0 8px 24px -12px rgba(8,18,32,.20);
   position:sticky; top:0; z-index:40;
 }
 .bb-nav-in{
