@@ -268,7 +268,11 @@
   line-height:.92;
   letter-spacing:.012em;
 }
-.bb-hl{ color:var(--bb-blue); }
+.bb-hl{
+  background:linear-gradient(95deg,#2563FF 0%,#38BDF8 58%,#22D3EE 100%);
+  -webkit-background-clip:text; background-clip:text;
+  -webkit-text-fill-color:transparent; color:transparent;
+}
 .bb-hero-sub{
   margin-top:22px;
   color:var(--bb-body);
