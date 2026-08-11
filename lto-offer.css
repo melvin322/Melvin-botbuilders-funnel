@@ -186,9 +186,9 @@
    NAV
    ========================================================================== */
 .bb-nav{
-  background:linear-gradient(180deg,#E7F5FE 0%,#CBE6FB 100%);
+  background:linear-gradient(180deg,#EAF5FE 0%,#D3E7FC 100%);
   backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
-  border-bottom:1px solid rgba(8,18,32,.08);
+  border-bottom:1px solid rgba(8,18,32,.06);
   position:sticky; top:0; z-index:40;
 }
 .bb-nav-in{
@@ -221,7 +221,7 @@
    ========================================================================== */
 .bb-hero{
   position:relative;
-  background:radial-gradient(1200px 620px at 78% 4%,#EBF5FE 0%,#CFE6FB 55%);
+  background:linear-gradient(180deg,#D3E7FC 0%,#CFE6FB 52%,#D7ECE6 100%);
   color:var(--bb-body);
   overflow:hidden;
   padding:70px 0 88px;
@@ -374,8 +374,8 @@
    TRUST / SOCIAL-PROOF CHIPS
    ========================================================================== */
 .bb-proofwrap{
-  background:linear-gradient(120deg,#D8F0E8 0%,#EAF7F2 60%,#F2FAF6 100%);
-  border-top:1px solid rgba(8,18,32,.06);
+  background:linear-gradient(180deg,#D7ECE6 0%,#E6F5EE 55%,#ECF8F2 100%);
+  border-top:1px solid rgba(8,18,32,.05);
   border-bottom:1px solid rgba(8,18,32,.06);
   padding:28px 0;
 }
