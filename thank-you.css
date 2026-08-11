@@ -59,7 +59,8 @@
 /* ==========================================================================
    HERO
    ========================================================================== */
-.bb-ty-hero{ position:relative; padding:40px 0 20px; overflow:hidden; }
+.bb-ty-hero{ position:relative; padding:40px 0 28px; overflow:hidden; }
+.bb-ty-hero .bb-ty-wrap{ position:relative; }   /* anchor the absolute photo to the content width */
 .bb-ty-logo{ display:flex; align-items:center; justify-content:center; gap:12px; margin-bottom:26px; }
 .bb-ty-logo img{ height:52px; width:auto; }
 .bb-ty-logo-mark{ width:46px; height:46px; }
@@ -102,9 +103,15 @@
 .bb-ty-btn svg{ width:26px; height:26px; flex:none; }
 
 /* hero photo -------------------------------------------------------------- */
-.bb-ty-photo{ position:relative; z-index:2; align-self:end; }
+/* photo is taken out of flow so it never pushes the card down; it sits bottom-right,
+   sized to the hero height (which the text drives) so it never clips or leaves a void */
+.bb-ty-photo{
+  position:absolute; top:0; right:0; bottom:0; width:42%; max-width:460px;
+  display:flex; align-items:flex-end; justify-content:flex-end;
+  z-index:2; pointer-events:none;
+}
 .bb-ty-photo img{
-  width:100%; max-width:420px; margin-left:auto; display:block;
+  max-height:100%; width:auto; max-width:100%; display:block;
   filter:drop-shadow(0 30px 50px rgba(0,0,0,.5));
 }
 .bb-ty-photo.is-empty{ display:none; }
@@ -114,7 +121,7 @@
    ========================================================================== */
 .bb-ty-next{
   position:relative; z-index:3;
-  margin-top:34px;
+  margin-top:18px;
   background:#fff; color:var(--ty-ink);
   border-radius:24px; padding:40px 44px;
   box-shadow:0 34px 80px -30px rgba(0,0,0,.6);
@@ -197,8 +204,11 @@
    ========================================================================== */
 @media (max-width:860px){
   .bb-ty-hero-grid{ grid-template-columns:1fr; }
-  .bb-ty-photo{ order:-1; max-width:320px; margin:0 auto 10px; }
-  .bb-ty-photo img{ margin:0 auto; max-width:300px; }
+  .bb-ty-photo{
+    position:static; width:auto; order:-1; max-width:300px; margin:0 auto 8px;
+    display:block;
+  }
+  .bb-ty-photo img{ max-height:none; width:100%; max-width:300px; margin:0 auto; }
   .bb-ty-next{ padding:32px 24px; }
   .bb-ty-help{ grid-template-columns:1fr; gap:18px; text-align:left; }
   .bb-ty-help-div{ display:none; }
