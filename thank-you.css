@@ -120,11 +120,11 @@
 
 /* hero photo -------------------------------------------------------------- */
 .bb-ty-photo{
-  position:absolute; top:-38px; right:-40px; bottom:0; width:52%; max-width:520px;
+  position:absolute; top:-64px; right:-56px; bottom:0; width:60%; max-width:660px;
   display:flex; align-items:flex-end; justify-content:flex-end;
   z-index:2; pointer-events:none;
 }
-.bb-ty-photo img{ max-height:118%; width:auto; max-width:100%; filter:drop-shadow(0 30px 50px rgba(0,0,0,.55)); }
+.bb-ty-photo img{ max-height:138%; width:auto; max-width:100%; filter:drop-shadow(0 30px 50px rgba(0,0,0,.55)); }
 .bb-ty-photo.is-empty{ display:none; }
 
 /* ==========================================================================
