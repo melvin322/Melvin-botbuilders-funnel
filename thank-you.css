@@ -60,7 +60,7 @@
 
 /* concentric rings behind the photo (anchored to the page's top-right) ---- */
 .bb-ty-rings{
-  position:absolute; top:-160px; right:-40px; width:720px; height:720px;
+  position:absolute; top:-51px; right:-161px; width:720px; height:720px;
   pointer-events:none; z-index:1;
 }
 .bb-ty-rings::before{
