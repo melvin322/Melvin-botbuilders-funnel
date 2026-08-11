@@ -691,6 +691,48 @@
 }
 
 /* ==========================================================================
+   SERVICE IMAGE LIGHTBOX (click a card image to pop it up)
+   ========================================================================== */
+.bb-card-shot{ cursor:zoom-in; }
+.bb-card-shot::after{
+  content:''; position:absolute; inset:0; pointer-events:none;
+  background:rgba(11,19,32,0); transition:background .25s ease;
+}
+.bb-card:hover .bb-card-shot::after{ background:rgba(11,19,32,.15); }
+
+.bb-lightbox{
+  position:fixed; inset:0; z-index:90;
+  display:flex; align-items:center; justify-content:center;
+  padding:5vw;
+  background:rgba(6,12,24,.86);
+  backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);
+  opacity:0; visibility:hidden; transition:opacity .3s ease, visibility .3s;
+}
+.bb-lightbox.is-open{ opacity:1; visibility:visible; }
+.bb-lightbox-stage{
+  max-width:1000px; width:100%; max-height:86vh;
+  border-radius:16px; overflow:hidden; background:var(--bb-ink);
+  box-shadow:0 44px 100px -30px rgba(0,0,0,.8);
+  transform:scale(.94); transition:transform .3s var(--bb-ease);
+}
+.bb-lightbox.is-open .bb-lightbox-stage{ transform:scale(1); }
+.bb-lightbox-stage img,
+.bb-lightbox-stage svg{ width:100%; height:auto; max-height:86vh; display:block; object-fit:contain; }
+.bb-lightbox-close{
+  position:absolute; top:20px; right:24px;
+  width:46px; height:46px; border-radius:50%;
+  background:rgba(255,255,255,.12); color:#fff; border:1px solid rgba(255,255,255,.25);
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+  transition:background .2s ease, transform .2s ease;
+}
+.bb-lightbox-close:hover{ background:rgba(255,255,255,.22); transform:rotate(90deg); }
+.bb-lightbox-close svg{ width:22px; height:22px; }
+
+@media (prefers-reduced-motion: reduce){
+  .bb-lightbox,.bb-lightbox-stage,.bb-lightbox-close{ transition:none; }
+}
+
+/* ==========================================================================
    POP-UP STICKY-BAR CTA BOUNCE
    ========================================================================== */
 @keyframes bb-cta-bounce{

@@ -543,6 +543,14 @@
     </div>
   </div>
 
+  <!-- ============================================================ lightbox -->
+  <div class="bb-lightbox" id="bb-lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Service preview">
+    <button class="bb-lightbox-close" id="bb-lightbox-close" type="button" aria-label="Close preview">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <div class="bb-lightbox-stage" id="bb-lightbox-stage"></div>
+  </div>
+
 </div>
 
 <script>
@@ -716,6 +724,42 @@
       if(!open){ q.classList.add('is-open'); panel.style.maxHeight=panel.scrollHeight+'px'; btn.setAttribute('aria-expanded','true'); }
     });
   });
+
+  /* -- 6b. service image lightbox (click a card image to pop it up) ------- */
+  (function(){
+    var lb=document.getElementById('bb-lightbox');
+    var stage=document.getElementById('bb-lightbox-stage');
+    var closeBtn=document.getElementById('bb-lightbox-close');
+    if(!lb || !stage) return;
+    var lastFocus=null;
+    function open(art){
+      stage.innerHTML='';
+      var img=art.querySelector('img'), node;
+      if(img){ node=document.createElement('img'); node.src=img.src; node.alt=img.alt||''; }
+      else { var svg=art.querySelector('svg'); node=svg?svg.cloneNode(true):art.cloneNode(true); }
+      stage.appendChild(node);
+      lastFocus=document.activeElement;
+      lb.classList.add('is-open'); lb.setAttribute('aria-hidden','false');
+      document.body.style.overflow='hidden';
+      if(closeBtn) closeBtn.focus();
+    }
+    function close(){
+      lb.classList.remove('is-open'); lb.setAttribute('aria-hidden','true');
+      document.body.style.overflow='';
+      setTimeout(function(){ stage.innerHTML=''; }, 300);
+      if(lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+    root.querySelectorAll('.bb-card-shot').forEach(function(shot){
+      var art=shot.querySelector('.bb-card-art'); if(!art) return;
+      shot.style.cursor='zoom-in';
+      shot.setAttribute('role','button'); shot.setAttribute('tabindex','0');
+      shot.addEventListener('click', function(){ open(art); });
+      shot.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); open(art); } });
+    });
+    if(closeBtn) closeBtn.addEventListener('click', close);
+    lb.addEventListener('click', function(e){ if(e.target===lb) close(); });
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape' && lb.classList.contains('is-open')) close(); });
+  })();
 
   /* -- 7. point every CTA at the booking link + track a Lead click -------- */
   root.querySelectorAll('[data-cta]').forEach(function(el){
