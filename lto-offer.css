@@ -237,18 +237,13 @@
   background:radial-gradient(circle,rgba(56,189,248,.16),transparent 66%);
   filter:blur(18px);
 }
-.bb-hero-arcs{
-  position:absolute; top:-40px; right:-60px; width:820px; max-width:76vw;
-  opacity:.14;
-}
-.bb-hero-grid{
-  position:absolute; inset:0; opacity:.6;
-  background-image:
-    linear-gradient(rgba(37,99,255,.05) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(37,99,255,.05) 1px,transparent 1px);
-  background-size:52px 52px;
-  mask-image:radial-gradient(circle at 50% 30%,#000,transparent 72%);
-  -webkit-mask-image:radial-gradient(circle at 50% 30%,#000,transparent 72%);
+.bb-hero .bb-hero-arcs{ display:none; }   /* removed line/arc design */
+.bb-hero-grid{                        /* subtle dot texture hugging the sides */
+  position:absolute; inset:0;
+  background-image:radial-gradient(circle, rgba(37,99,255,.20) 1.3px, transparent 1.7px);
+  background-size:18px 18px;
+  mask-image:linear-gradient(90deg,#000 0%, transparent 17%, transparent 83%, #000 100%);
+  -webkit-mask-image:linear-gradient(90deg,#000 0%, transparent 17%, transparent 83%, #000 100%);
 }
 .bb-hero-in{
   position:relative; z-index:2;
