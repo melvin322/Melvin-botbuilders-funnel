@@ -221,7 +221,7 @@
    ========================================================================== */
 .bb-hero{
   position:relative;
-  background:radial-gradient(1200px 620px at 78% 4%,#F2FAF6 0%,#DCF1EA 52%);
+  background:radial-gradient(1200px 620px at 78% 4%,#EBF5FE 0%,#CFE6FB 55%);
   color:var(--bb-body);
   overflow:hidden;
   padding:70px 0 88px;
@@ -234,7 +234,7 @@
 }
 .bb-hero-glow2{
   position:absolute; bottom:-200px; left:-160px; width:560px; height:560px;
-  background:radial-gradient(circle,rgba(20,208,194,.12),transparent 66%);
+  background:radial-gradient(circle,rgba(56,189,248,.16),transparent 66%);
   filter:blur(18px);
 }
 .bb-hero-arcs{
