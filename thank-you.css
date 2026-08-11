@@ -1,0 +1,215 @@
+/* ==========================================================================
+   BotBuilders — "You're all set" thank-you page
+   Companion stylesheet for thank-you.html
+   GHL: paste this whole file into the thank-you page's Custom CSS.
+   Brand board: navy #0B1320 · blue #2563EB · sky #38BDF8 · Bebas Neue + Inter
+   Namespaced under .bb-ty so nothing leaks into GHL.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap');
+
+.bb-ty{
+  --ty-navy:#0B1320;
+  --ty-navy-2:#0A1A33;
+  --ty-blue:#2563EB;
+  --ty-blue-d:#1E3A8A;
+  --ty-sky:#38BDF8;
+  --ty-ink:#0B1320;
+  --ty-body:#47566B;
+  --ty-muted:#6B7A90;
+  --ty-line:#E2E6EC;
+  --ty-white:#FFFFFF;
+
+  --ty-display:'Bebas Neue','Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --ty-font:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  --ty-wrap:1080px;
+
+  font-family:var(--ty-font);
+  color:#C7D5E6;
+  background:
+    radial-gradient(1100px 620px at 78% 2%, #12305F 0%, transparent 55%),
+    linear-gradient(180deg, #0B1320 0%, #081426 100%);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+  padding:0 0 40px;
+}
+.bb-ty *,
+.bb-ty *::before,
+.bb-ty *::after{ box-sizing:border-box; }
+.bb-ty h1,.bb-ty h2,.bb-ty h3,.bb-ty h4{ margin:0; }
+.bb-ty p{ margin:0; }
+.bb-ty img{ max-width:100%; display:block; }
+.bb-ty a{ color:inherit; text-decoration:none; }
+.bb-ty svg{ display:block; }
+
+.bb-ty-wrap{ width:100%; max-width:var(--ty-wrap); margin:0 auto; padding:0 24px; }
+
+/* decorative dotted graphic (top-right, brand board style) ---------------- */
+.bb-ty-dots{
+  position:absolute; top:-30px; right:-40px; width:520px; height:560px; pointer-events:none;
+  background-image:radial-gradient(circle, rgba(56,189,248,.55) 1.6px, transparent 1.7px);
+  background-size:24px 24px;
+  -webkit-mask-image:radial-gradient(320px 340px at 78% 20%, #000 0%, transparent 72%);
+          mask-image:radial-gradient(320px 340px at 78% 20%, #000 0%, transparent 72%);
+  opacity:.5;
+}
+
+/* ==========================================================================
+   HERO
+   ========================================================================== */
+.bb-ty-hero{ position:relative; padding:40px 0 20px; overflow:hidden; }
+.bb-ty-logo{ display:flex; align-items:center; justify-content:center; gap:12px; margin-bottom:26px; }
+.bb-ty-logo img{ height:52px; width:auto; }
+.bb-ty-logo-mark{ width:46px; height:46px; }
+.bb-ty-logo-word{ font-family:var(--ty-display); font-size:42px; letter-spacing:1.5px; color:#fff; line-height:1; }
+.bb-ty-logo-word sup{ font-size:.36em; vertical-align:super; margin-left:2px; opacity:.9; }
+
+.bb-ty-hero-grid{
+  position:relative; z-index:2;
+  display:grid; grid-template-columns:1.15fr .85fr; gap:24px; align-items:center;
+}
+.bb-ty-title{
+  font-family:var(--ty-display);
+  color:#fff;
+  font-size:clamp(64px,10vw,140px);
+  line-height:.86; letter-spacing:.01em;
+}
+.bb-ty-title .hl{ color:var(--ty-blue); }
+.bb-ty-lead{
+  margin-top:18px;
+  font-weight:800; font-size:clamp(22px,3vw,32px); color:#fff; line-height:1.2;
+}
+.bb-ty-lead .hl{ color:var(--ty-sky); }
+.bb-ty-sub{
+  margin-top:14px; color:#9FB6CC; font-size:17px; max-width:30em;
+}
+
+/* add to calendar button -------------------------------------------------- */
+.bb-ty-btn{
+  display:inline-flex; align-items:center; gap:14px;
+  margin-top:28px;
+  font-family:var(--ty-font); font-weight:800; font-size:22px; letter-spacing:.02em;
+  color:#fff; text-transform:uppercase;
+  padding:20px 40px; border-radius:14px;
+  background:linear-gradient(180deg,#2E6BF5,#1E52D8);
+  border:1px solid rgba(120,180,255,.7);
+  box-shadow:0 0 0 4px rgba(37,99,235,.18), 0 20px 46px -12px rgba(37,99,235,.8);
+  transition:transform .2s ease, box-shadow .2s ease, filter .2s ease;
+}
+.bb-ty-btn:hover{ transform:translateY(-2px); filter:brightness(1.06); box-shadow:0 0 0 4px rgba(37,99,235,.24), 0 26px 54px -12px rgba(37,99,235,.9); }
+.bb-ty-btn svg{ width:26px; height:26px; flex:none; }
+
+/* hero photo -------------------------------------------------------------- */
+.bb-ty-photo{ position:relative; z-index:2; align-self:end; }
+.bb-ty-photo img{
+  width:100%; max-width:420px; margin-left:auto; display:block;
+  filter:drop-shadow(0 30px 50px rgba(0,0,0,.5));
+}
+.bb-ty-photo.is-empty{ display:none; }
+
+/* ==========================================================================
+   WHAT HAPPENS NEXT (white card)
+   ========================================================================== */
+.bb-ty-next{
+  position:relative; z-index:3;
+  margin-top:34px;
+  background:#fff; color:var(--ty-ink);
+  border-radius:24px; padding:40px 44px;
+  box-shadow:0 34px 80px -30px rgba(0,0,0,.6);
+}
+.bb-ty-next-head{
+  display:flex; align-items:center; justify-content:center; gap:18px;
+  margin-bottom:28px;
+}
+.bb-ty-next-head span{
+  font-family:var(--ty-display); color:var(--ty-blue);
+  font-size:clamp(24px,3.4vw,34px); letter-spacing:.04em; white-space:nowrap;
+}
+.bb-ty-next-head::before,
+.bb-ty-next-head::after{
+  content:''; height:2px; flex:1; max-width:110px;
+  background:linear-gradient(90deg,transparent,rgba(37,99,235,.5));
+}
+.bb-ty-next-head::after{ background:linear-gradient(90deg,rgba(37,99,235,.5),transparent); }
+
+.bb-ty-steps{ list-style:none; margin:0; padding:0; }
+.bb-ty-step{
+  display:grid; grid-template-columns:64px 40px 1fr; align-items:center; gap:20px;
+  padding:22px 0;
+  border-bottom:1px solid var(--ty-line);
+}
+.bb-ty-step:last-child{ border-bottom:0; padding-bottom:4px; }
+.bb-ty-step:first-child{ padding-top:4px; }
+.bb-ty-step-ico{
+  width:64px; height:64px; color:var(--ty-blue);
+  display:flex; align-items:center; justify-content:center;
+}
+.bb-ty-step-ico svg{ width:52px; height:52px; }
+.bb-ty-step-num{
+  width:38px; height:38px; border-radius:50%;
+  background:var(--ty-blue); color:#fff;
+  display:flex; align-items:center; justify-content:center;
+  font-weight:800; font-size:17px;
+}
+.bb-ty-step-body h3{ font-family:var(--ty-font); font-weight:800; font-size:20px; color:var(--ty-ink); margin-bottom:4px; }
+.bb-ty-step-body p{ font-size:15.5px; color:var(--ty-muted); }
+
+/* ==========================================================================
+   HELP BAR (white)
+   ========================================================================== */
+.bb-ty-help{
+  position:relative; z-index:3;
+  margin-top:22px;
+  background:#fff; color:var(--ty-ink);
+  border-radius:18px; padding:22px 34px;
+  box-shadow:0 24px 60px -30px rgba(0,0,0,.5);
+  display:grid; grid-template-columns:1fr 1px 1fr; align-items:center; gap:26px;
+}
+.bb-ty-help-div{ width:1px; height:56px; background:var(--ty-line); }
+.bb-ty-help-col{ display:flex; align-items:center; gap:16px; }
+.bb-ty-help-ico{
+  width:52px; height:52px; flex:none; border-radius:50%;
+  border:2px solid var(--ty-blue); color:var(--ty-blue);
+  display:flex; align-items:center; justify-content:center;
+}
+.bb-ty-help-ico svg{ width:26px; height:26px; }
+.bb-ty-help-col h4{ font-family:var(--ty-font); font-weight:800; font-size:14px; letter-spacing:.06em; text-transform:uppercase; color:var(--ty-blue); margin-bottom:3px; }
+.bb-ty-help-col p{ font-size:14.5px; color:var(--ty-body); }
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+.bb-ty-foot{ text-align:center; margin-top:30px; font-size:12.5px; color:#5F7690; line-height:1.7; }
+
+/* ==========================================================================
+   REVEAL
+   ========================================================================== */
+.bb-ty-in{ opacity:0; transform:translateY(18px); animation:bb-ty-up .7s cubic-bezier(.2,.7,.25,1) forwards; animation-delay:var(--d,0ms); }
+@keyframes bb-ty-up{ to{ opacity:1; transform:none; } }
+@media (prefers-reduced-motion: reduce){
+  .bb-ty-in{ opacity:1 !important; transform:none !important; animation:none !important; }
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+@media (max-width:860px){
+  .bb-ty-hero-grid{ grid-template-columns:1fr; }
+  .bb-ty-photo{ order:-1; max-width:320px; margin:0 auto 10px; }
+  .bb-ty-photo img{ margin:0 auto; max-width:300px; }
+  .bb-ty-next{ padding:32px 24px; }
+  .bb-ty-help{ grid-template-columns:1fr; gap:18px; text-align:left; }
+  .bb-ty-help-div{ display:none; }
+}
+@media (max-width:560px){
+  .bb-ty-hero{ padding-top:28px; }
+  .bb-ty-btn{ width:100%; justify-content:center; font-size:19px; padding:18px 24px; }
+  .bb-ty-step{ grid-template-columns:48px 32px 1fr; gap:14px; }
+  .bb-ty-step-ico{ width:48px; height:48px; }
+  .bb-ty-step-ico svg{ width:40px; height:40px; }
+  .bb-ty-step-num{ width:32px; height:32px; font-size:15px; }
+  .bb-ty-step-body h3{ font-size:18px; }
+  .bb-ty-next-head::before,.bb-ty-next-head::after{ max-width:40px; }
+}
