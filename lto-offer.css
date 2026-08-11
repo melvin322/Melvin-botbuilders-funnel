@@ -159,7 +159,7 @@
    TOP BAR (urgency banner + mini countdown)
    ========================================================================== */
 .bb-topbar{
-  background:linear-gradient(90deg,#2563FF,#38BDF8);
+  background:linear-gradient(90deg,#0F2A5E 0%,#0B1C3F 100%);
   color:#fff;
   font-size:12.5px;
   letter-spacing:.02em;
@@ -176,7 +176,7 @@
 .bb-topbar-mini{ display:inline-flex; align-items:center; gap:7px; font-weight:700; }
 .bb-topbar-mini .bb-mini-t{
   display:inline-flex; align-items:center; gap:3px;
-  background:rgba(8,18,32,.28); border-radius:6px; padding:3px 7px;
+  background:rgba(255,255,255,.12); border-radius:6px; padding:3px 7px;
   font-variant-numeric:tabular-nums; letter-spacing:.02em;
 }
 .bb-topbar-mini b{ font-weight:800; }
