@@ -435,12 +435,12 @@
 /* ==========================================================================
    BRAND STRIP (SAVE TIME. CAPTURE MORE LEADS.)
    ========================================================================== */
-.bb-strip{ background:var(--bb-ink); }
+.bb-strip{ background:linear-gradient(120deg,#D8F0E8 0%,#EAF7F2 60%,#F2FAF6 100%); }
 .bb-strip-in{
   display:flex; align-items:center; justify-content:center; gap:22px; flex-wrap:wrap;
-  font-family:var(--bb-display); letter-spacing:.14em; color:#fff; font-size:clamp(20px,3vw,34px);
+  font-family:var(--bb-display); letter-spacing:.14em; color:var(--bb-heading); font-size:clamp(20px,3vw,34px);
 }
-.bb-strip-in span{ color:var(--bb-sky); }
+.bb-strip-in span{ color:var(--bb-blue); }
 .bb-strip-dot{ width:7px; height:7px; border-radius:50%; background:var(--bb-blue); }
 
 /* ==========================================================================
