@@ -186,9 +186,9 @@
    NAV
    ========================================================================== */
 .bb-nav{
-  background:rgba(8,18,32,.85);
+  background:linear-gradient(180deg,#E7F5FE 0%,#CBE6FB 100%);
   backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
-  border-bottom:1px solid rgba(255,255,255,.07);
+  border-bottom:1px solid rgba(8,18,32,.08);
   position:sticky; top:0; z-index:40;
 }
 .bb-nav-in{
@@ -199,12 +199,13 @@
   display:inline-flex; align-items:center; gap:10px;
   color:#fff; font-family:var(--bb-display); font-weight:400; font-size:24px; letter-spacing:.04em;
 }
+.bb-nav .bb-logo{ color:var(--bb-heading); }   /* dark wordmark for the light nav */
 .bb-logo-mark{ width:32px; height:32px; }
 .bb-logo--img{ gap:0; }
 .bb-logo--img img{ display:block; width:auto; }
 .bb-navlinks{ display:flex; gap:30px; margin-left:auto; margin-right:26px; }
 .bb-navlinks a{
-  color:#B7C4D2; font-size:15px; font-weight:500;
+  color:var(--bb-body); font-size:15px; font-weight:600;
   position:relative; transition:color .15s ease;
 }
 .bb-navlinks a::after{
@@ -212,7 +213,7 @@
   background:var(--bb-grad); transform:scaleX(0); transform-origin:right;
   transition:transform .3s var(--bb-ease);
 }
-.bb-navlinks a:hover{ color:#fff; }
+.bb-navlinks a:hover{ color:var(--bb-heading); }
 .bb-navlinks a:hover::after{ transform:scaleX(1); transform-origin:left; }
 
 /* ==========================================================================
