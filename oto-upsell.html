@@ -186,35 +186,66 @@
   /* ====================================================== CONFIG — EDIT ME */
   var CONFIG = {
     /* Where "Yes! Add to my order" sends the buyer. In a 1-click-upsell
-       funnel this is your platform's accept/upsell URL. Blank = stay put.   */
+       funnel this is your platform's accept / upsell URL. Blank = stay put. */
     ACCEPT_URL   : '',
 
     /* Where "No thanks" sends them — usually straight to the thank-you page.
        Blank = stay put.                                                      */
     DECLINE_URL  : '',
 
+    /* The upsell price (used for conversion tracking only).                  */
+    OFFER_VALUE  : 19,
+
     /* Real product shot (transparent PNG works best). Blank keeps the
        built-in on-brand SVG mockup.                                          */
     PRODUCT_IMAGE: '',
 
-    /* Your logo (dark / positive — this page has a light header). Blank
-       keeps the built-in gradient mark + wordmark.                           */
-    LOGO_URL     : 'https://assets.cdn.filesafe.space/sz4sVbBhLW7cX7keIHT6/media/6a76a8418880872019224576.png',
-    LOGO_HEIGHT  : 40
+    /* Your logo. This page has a LIGHT header, so use the dark / positive
+       logo (same file the LTO page uses in its light nav). Blank keeps the
+       built-in gradient mark + wordmark.                                     */
+    LOGO_URL     : 'https://assets.cdn.filesafe.space/sz4sVbBhLW7cX7keIHT6/media/6a76a1f003343f290f6158c9.png',
+    LOGO_HEIGHT  : 46
   };
   /* ======================================================================= */
 
   var root = document.getElementById('bb-oto');
   if(!root) return;
 
+  /* -- conversion tracking helper (same shape as the LTO page) ------------ */
+  function track(event, params){
+    params = params || {};
+    try{
+      if(window.dataLayer && window.dataLayer.push) window.dataLayer.push(Object.assign({event:event}, params));
+      if(typeof window.gtag === 'function') window.gtag('event', event, params);
+      if(typeof window.fbq === 'function'){
+        if(event === 'Purchase')  window.fbq('track','Purchase', params);
+        if(event === 'AddToCart') window.fbq('track','AddToCart', params);
+      }
+    }catch(e){}
+  }
+
+  /* -- kill GHL wrapper chrome (white strip) ------------------------------ */
+  (function(){
+    var el = root.parentElement;
+    while(el && el !== document.body && el !== document.documentElement){
+      el.style.background='transparent'; el.style.backgroundColor='transparent';
+      el.style.paddingTop='0px'; el.style.paddingBottom='0px';
+      el.style.marginTop='0px'; el.style.marginBottom='0px'; el.style.maxWidth='none';
+      el = el.parentElement;
+    }
+    document.documentElement.style.background='#EAF1F8';
+    document.body.style.background='#EAF1F8';
+    document.body.style.margin='0';
+  })();
+
   /* -- logo --------------------------------------------------------------- */
   if(CONFIG.LOGO_URL){
     var logo = root.querySelector('.bb-oto-logo');
     if(logo){
-      logo.innerHTML='';
+      logo.innerHTML=''; logo.classList.add('bb-oto-logo--img');
       var img=document.createElement('img');
       img.src=CONFIG.LOGO_URL; img.alt='BotBuilders';
-      img.style.height=(CONFIG.LOGO_HEIGHT||40)+'px'; img.style.width='auto';
+      img.style.height=(CONFIG.LOGO_HEIGHT||46)+'px'; img.style.width='auto'; img.style.display='block';
       logo.appendChild(img);
     }
   }
@@ -228,13 +259,26 @@
     if(mock){ mock.style.display='none'; }
   })();
 
-  /* -- accept / decline links --------------------------------------------- */
+  /* -- accept / decline links (+ conversion tracking) --------------------- */
   (function(){
     var accept=document.getElementById('bb-oto-accept');
     var decline=document.getElementById('bb-oto-decline');
-    if(accept && CONFIG.ACCEPT_URL)  accept.setAttribute('href', CONFIG.ACCEPT_URL);
-    if(decline && CONFIG.DECLINE_URL) decline.setAttribute('href', CONFIG.DECLINE_URL);
+    if(accept){
+      if(CONFIG.ACCEPT_URL) accept.setAttribute('href', CONFIG.ACCEPT_URL);
+      accept.addEventListener('click', function(){
+        track('Purchase', {content_name:'DFY Editing Service (OTO)', value:CONFIG.OFFER_VALUE, currency:'USD'});
+      });
+    }
+    if(decline){
+      if(CONFIG.DECLINE_URL) decline.setAttribute('href', CONFIG.DECLINE_URL);
+      decline.addEventListener('click', function(){
+        track('upsell_declined', {content_name:'DFY Editing Service (OTO)'});
+      });
+    }
   })();
+
+  /* -- page view ---------------------------------------------------------- */
+  track('ViewContent', {content_name:'OTO — DFY Editing Service'});
 
 })();
 </script>
