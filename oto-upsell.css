@@ -66,7 +66,26 @@
   min-height:100vh;
   overflow-x:hidden;
   padding-bottom:40px;
+  position:relative;
 }
+
+/* perspective dot-grid texture (light ellipses receding behind the hero) */
+.bb-oto-bg{
+  position:absolute; left:0; right:0; top:0; height:1040px;
+  z-index:0; pointer-events:none; overflow:hidden;
+}
+.bb-oto-bg::before{
+  content:''; position:absolute; left:-65%; right:-65%; top:-40px; bottom:-30px;
+  background-image:radial-gradient(circle, rgba(255,255,255,.92) 0 30%, transparent 36%);
+  background-size:30px 30px;
+  transform:perspective(560px) rotateX(63deg);
+  transform-origin:50% 100%;
+  -webkit-mask-image:linear-gradient(to bottom, transparent 20%, rgba(0,0,0,.75) 62%, rgba(0,0,0,.5) 90%, transparent 100%);
+  mask-image:linear-gradient(to bottom, transparent 20%, rgba(0,0,0,.75) 62%, rgba(0,0,0,.5) 90%, transparent 100%);
+  opacity:.7;
+}
+/* keep all page content above the texture */
+.bb-oto-secure, .bb-oto-shell, .bb-oto-foot{ position:relative; z-index:1; }
 
 .bb-oto *,
 .bb-oto *::before,
