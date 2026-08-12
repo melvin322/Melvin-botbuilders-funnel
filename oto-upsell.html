@@ -292,5 +292,66 @@
 })();
 </script>
 
+<!-- ============================================================
+     FLOW VAULT FUNNEL  ·  FILE 2 of 5
+     PASTE INTO: Page 2 (OTO Page) → Custom Code element
+     POSITION:   Bottom of page. Renders nothing visible.
+     JOB:        Remember whether they accepted the higher ticket offer.
+
+     SKIP THIS FILE IF your Yes and No buttons each accept their own
+     redirect URL. In that case set them to the same thank you page with
+     different params and paste nothing here:
+
+         Yes button  →  /thank-you?oto=1
+         No button   →  /thank-you?oto=0
+
+     That path is more trustworthy, because the flag comes from the button
+     that actually fired rather than from a guess about what got clicked.
+     Use this file only when GHL locks both buttons to "next funnel step."
+     ============================================================ -->
+
+<script>
+(function () {
+  "use strict";
+
+  /* ---------- CONFIG · edit these three values ---------- */
+  var CONFIG = {
+    // Exact visible text on each button. Partial match, so "Add To My Order"
+    // still matches a button reading "Yes! Add To My Order".
+    acceptLabel: "Add To My Order",
+    declineLabel: "No Thanks",
+
+    // Storage key. Must match the thank you page detector (File 3).
+    storageKey: "wg_oto"
+  };
+  /* ------------------- end CONFIG ---------------------- */
+
+  function remember(accepted) {
+    try {
+      sessionStorage.setItem(CONFIG.storageKey, accepted ? "1" : "0");
+    } catch (e) { /* fail quiet */ }
+  }
+
+  // Default to declined the moment they arrive. If they leave without
+  // clicking either button, declined is the honest answer.
+  remember(false);
+
+  // Capture phase so this runs BEFORE GHL's own handler navigates away.
+  // sessionStorage writes are synchronous, so the value lands before unload.
+  document.addEventListener("click", function (e) {
+    var el = e.target.closest('a, button, [role="button"], .celement');
+    if (!el) return;
+
+    var label = (el.textContent || "").trim();
+
+    if (label.indexOf(CONFIG.acceptLabel) > -1) {
+      remember(true);
+    } else if (label.indexOf(CONFIG.declineLabel) > -1) {
+      remember(false);
+    }
+  }, true);
+})();
+</script>
+
 </body>
 </html>
