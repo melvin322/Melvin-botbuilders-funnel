@@ -106,7 +106,8 @@
    HERO
    ========================================================================== */
 .bb-oto-hero{ text-align:center; padding:44px 0 8px; max-width:900px; margin-inline:auto; }
-.bb-oto-logo{ display:inline-flex; align-items:center; justify-content:center; gap:10px; margin-bottom:22px; }
+.bb-oto-topline{ display:flex; align-items:center; justify-content:center; gap:16px; flex-wrap:wrap; margin-bottom:6px; }
+.bb-oto-logo{ display:inline-flex; align-items:center; gap:10px; }
 .bb-oto-logo img{ height:40px; width:auto; }
 .bb-oto-logo-mark{ width:34px; height:34px; }
 .bb-oto-logo-word{ font-family:var(--o-display); font-size:30px; letter-spacing:1px; color:var(--o-ink); line-height:1; }

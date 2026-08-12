@@ -44,15 +44,16 @@
 
     <!-- =============================================================== hero -->
     <header class="bb-oto-hero">
-      <div class="bb-oto-logo bb-oto-in" style="--d:20ms">
-        <svg class="bb-oto-logo-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true"><defs><linearGradient id="otobg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2563EB"/><stop offset="1" stop-color="#38BDF8"/></linearGradient></defs>
-          <rect x="4" y="4" width="24" height="24" rx="7" fill="url(#otobg)"/>
-          <path d="M17 8l-7 9h5l-1 7 7-9h-5z" fill="#fff"/>
-        </svg>
-        <span class="bb-oto-logo-word">BotBuilders</span>
+      <div class="bb-oto-topline bb-oto-in" style="--d:20ms">
+        <div class="bb-oto-logo">
+          <svg class="bb-oto-logo-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true"><defs><linearGradient id="otobg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2563EB"/><stop offset="1" stop-color="#38BDF8"/></linearGradient></defs>
+            <rect x="4" y="4" width="24" height="24" rx="7" fill="url(#otobg)"/>
+            <path d="M17 8l-7 9h5l-1 7 7-9h-5z" fill="#fff"/>
+          </svg>
+          <span class="bb-oto-logo-word">BotBuilders</span>
+        </div>
+        <span class="bb-oto-badge">One-Time Offer</span>
       </div>
-
-      <span class="bb-oto-badge bb-oto-in" style="--d:80ms">One-Time Offer</span>
 
       <h1 class="bb-oto-title bb-oto-in" style="--d:140ms">
         Yes! Add the Done-For-You<br>
@@ -231,6 +232,9 @@
       el.style.background='transparent'; el.style.backgroundColor='transparent';
       el.style.paddingTop='0px'; el.style.paddingBottom='0px';
       el.style.marginTop='0px'; el.style.marginBottom='0px'; el.style.maxWidth='none';
+      /* kill GHL's section/row hairlines that render as faint white lines */
+      el.style.border='0'; el.style.borderTop='0'; el.style.borderBottom='0';
+      el.style.boxShadow='none';
       el = el.parentElement;
     }
     document.documentElement.style.background='#EAF1F8';
