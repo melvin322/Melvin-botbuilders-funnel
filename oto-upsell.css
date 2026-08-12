@@ -244,7 +244,7 @@
    ========================================================================== */
 .bb-oto-offer{
   position:relative;
-  margin:48px auto 0; max-width:700px;
+  margin:16px auto 0; max-width:700px;
   background:
     radial-gradient(360px 220px at 84% 0%, rgba(37,99,255,.10) 0%, transparent 66%),
     linear-gradient(180deg,#FFFFFF 0%,#F4F8FF 100%);
@@ -309,7 +309,7 @@
    ========================================================================== */
 .bb-oto-guarantee{
   display:flex; align-items:center; gap:26px;
-  margin:22px auto 0; max-width:900px;
+  margin:16px auto 0; max-width:700px;
   background:
     radial-gradient(420px 200px at 82% -10%, rgba(37,99,255,.35) 0%, transparent 70%),
     linear-gradient(180deg,#0E1F3A 0%,#0A1730 100%);
@@ -336,7 +336,7 @@
    ========================================================================== */
 .bb-oto-urgency{
   display:flex; align-items:center; gap:22px;
-  margin:16px auto 0; max-width:900px;
+  margin:40px auto 0; max-width:700px;
   background:var(--o-white);
   border:1px solid var(--o-border);
   border-radius:var(--o-radius); padding:24px 28px;
@@ -368,19 +368,9 @@
 .bb-oto-decline:hover > svg{ transform:translateX(4px); color:var(--o-blue); }
 
 /* ==========================================================================
-   GUARANTEE + DECLINE nested inside the offer card
+   DECLINE nested inside the offer card
    ========================================================================== */
-.bb-oto-offer .bb-oto-guarantee{
-  margin:24px 0 2px; max-width:none; padding:20px 22px; gap:18px; text-align:left;
-}
-.bb-oto-offer .bb-oto-shield{ width:90px; height:100px; }
-.bb-oto-offer .bb-oto-shield-txt{ font-size:10px; }
-.bb-oto-offer .bb-oto-shield-txt b{ font-size:18px; }
-.bb-oto-offer .bb-oto-shield-txt span{ font-size:10px; }
-.bb-oto-offer .bb-oto-guarantee-body h3{ font-size:20px; }
-.bb-oto-offer .bb-oto-guarantee-body p{ font-size:13.5px; }
 .bb-oto-offer .bb-oto-decline{ margin:16px 0 0; max-width:none; text-align:left; }
-@media (max-width:760px){ .bb-oto-offer .bb-oto-guarantee{ text-align:center; } }
 @media (max-width:520px){ .bb-oto-offer .bb-oto-decline{ text-align:center; } }
 
 /* ==========================================================================
