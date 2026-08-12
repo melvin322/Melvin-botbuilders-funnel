@@ -107,10 +107,6 @@
 
       <div class="bb-ty-hero-grid">
         <div class="bb-ty-hero-l">
-          <div class="bb-ty-check bb-ty-in" style="--d:80ms" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg>
-          </div>
-
           <h1 class="bb-ty-title bb-ty-in" style="--d:120ms">Order<br><span class="hl">confirmed!</span></h1>
 
           <!-- CONDITIONAL LEAD · one of these two shows -->
@@ -128,58 +124,64 @@
           </a>
         </div>
 
-        <!-- ================================================= order summary -->
-        <aside class="bb-ty-order bb-ty-in" style="--d:200ms" aria-label="Order summary">
-          <div class="bb-ty-order-head">
-            <span class="bb-ty-order-title">Order summary</span>
-            <span class="bb-ty-order-paid">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4 4L19 7"/></svg>
-              Paid
-            </span>
-          </div>
-
-          <ul class="bb-ty-order-list">
-            <!-- ALWAYS SHOWN · main offer -->
-            <li class="bb-ty-order-item">
-              <div class="bb-ty-order-item-main">
-                <span class="bb-ty-order-name">Growth Plan</span>
-                <span class="bb-ty-order-desc">Full BotBuilders platform access · billed annually</span>
-              </div>
-              <span class="bb-ty-order-price">$1,164/yr</span>
-            </li>
-
-            <!-- ONLY IF BUMP TICKED · wg-row-bump -->
-            <li class="bb-ty-order-item wg-row-bump">
-              <div class="bb-ty-order-item-main">
-                <span class="bb-ty-order-name">VIP Launch Intensive</span>
-                <span class="bb-ty-order-desc">Live 1:1 build &amp; launch session — live in 48 hours</span>
-              </div>
-              <span class="bb-ty-order-price">$197</span>
-            </li>
-
-            <!-- ONLY IF OTO ACCEPTED · wg-row-oto -->
-            <li class="bb-ty-order-item is-addon wg-row-oto">
-              <div class="bb-ty-order-item-main">
-                <span class="bb-ty-order-name">Done-For-You Bot Setup<span class="bb-ty-order-badge">Just added</span></span>
-                <span class="bb-ty-order-desc">We build &amp; configure your bot for you · one-time</span>
-              </div>
-              <span class="bb-ty-order-price">$1,500</span>
-            </li>
-          </ul>
-
-          <div class="bb-ty-order-total">
-            <span>Total charged today</span>
-            <!-- Computed by JS from what is actually shown. Do not hardcode. -->
-            <span class="bb-ty-order-total-num" id="bb-ty-total">—</span>
-          </div>
-
-          <div class="bb-ty-order-save">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 3.5v6c0 5-3.4 9.4-8 10.5-4.6-1.1-8-5.5-8-10.5v-6z"/><path d="M9 12l2.2 2.2L15.5 10"/></svg>
-            Secure checkout · 30-day money-back guarantee
-          </div>
-        </aside>
-      </div>
+        <!-- Matt cut-out photo, welcoming the customer -->
+        <div class="bb-ty-photo bb-ty-in is-empty" id="bb-ty-photo" style="--d:200ms" aria-hidden="true">
+          <span class="bb-ty-photo-glow"></span>
+          <img id="bb-ty-photo-img" src="" alt="" loading="lazy">
+        </div>
+      </div><!-- /hero-grid -->
     </header>
+
+    <!-- ============================================= order summary (below hero) -->
+    <aside class="bb-ty-order bb-ty-in" style="--d:260ms" aria-label="Order summary">
+      <div class="bb-ty-order-head">
+        <span class="bb-ty-order-title">Order summary</span>
+        <span class="bb-ty-order-paid">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4 4L19 7"/></svg>
+          Paid
+        </span>
+      </div>
+
+      <ul class="bb-ty-order-list">
+        <!-- ALWAYS SHOWN · main offer -->
+        <li class="bb-ty-order-item">
+          <div class="bb-ty-order-item-main">
+            <span class="bb-ty-order-name">Growth Plan</span>
+            <span class="bb-ty-order-desc">Full BotBuilders platform access · billed annually</span>
+          </div>
+          <span class="bb-ty-order-price">$1,164/yr</span>
+        </li>
+
+        <!-- ONLY IF BUMP TICKED · wg-row-bump -->
+        <li class="bb-ty-order-item wg-row-bump">
+          <div class="bb-ty-order-item-main">
+            <span class="bb-ty-order-name">VIP Launch Intensive</span>
+            <span class="bb-ty-order-desc">Live 1:1 build &amp; launch session — live in 48 hours</span>
+          </div>
+          <span class="bb-ty-order-price">$197</span>
+        </li>
+
+        <!-- ONLY IF OTO ACCEPTED · wg-row-oto -->
+        <li class="bb-ty-order-item is-addon wg-row-oto">
+          <div class="bb-ty-order-item-main">
+            <span class="bb-ty-order-name">Done-For-You Bot Setup<span class="bb-ty-order-badge">Just added</span></span>
+            <span class="bb-ty-order-desc">We build &amp; configure your bot for you · one-time</span>
+          </div>
+          <span class="bb-ty-order-price">$1,500</span>
+        </li>
+      </ul>
+
+      <div class="bb-ty-order-total">
+        <span>Total charged today</span>
+        <!-- Computed by JS from what is actually shown. Do not hardcode. -->
+        <span class="bb-ty-order-total-num" id="bb-ty-total">—</span>
+      </div>
+
+      <div class="bb-ty-order-save">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 3.5v6c0 5-3.4 9.4-8 10.5-4.6-1.1-8-5.5-8-10.5v-6z"/><path d="M9 12l2.2 2.2L15.5 10"/></svg>
+        Secure checkout · 30-day money-back guarantee
+      </div>
+    </aside>
 
     <!-- ============================================================
          CONDITIONAL MESSAGE CARDS
@@ -343,6 +345,9 @@
     LOGO_URL     : '',
     LOGO_HEIGHT  : 40,
 
+    /* Hero cut-out photo (transparent PNG works best). Blank hides it.      */
+    HERO_IMAGE   : 'https://assets.cdn.filesafe.space/sz4sVbBhLW7cX7keIHT6/media/6a7a83889a9c7792ea6078ce.png',
+
     CURRENCY     : 'USD'
   };
   /* ======================================================================= */
@@ -413,6 +418,17 @@
       bg.classList.add('has-img');
     };
     probe.src = CONFIG.BG_IMAGE;
+  })();
+
+  /* -- hero cut-out photo (Matt) ------------------------------------------ */
+  (function () {
+    var wrap = document.getElementById('bb-ty-photo');
+    var img  = document.getElementById('bb-ty-photo-img');
+    if (!wrap || !img) return;
+    if (CONFIG.HERO_IMAGE) {
+      img.src = CONFIG.HERO_IMAGE; img.alt = 'Matt from BotBuilders';
+      wrap.classList.remove('is-empty');
+    }
   })();
 
   /* -- logo --------------------------------------------------------------- */
