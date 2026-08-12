@@ -244,7 +244,7 @@
    ========================================================================== */
 .bb-oto-offer{
   position:relative;
-  margin:16px auto 0; max-width:700px;
+  margin:40px auto 0; max-width:700px;
   background:
     radial-gradient(360px 220px at 84% 0%, rgba(37,99,255,.10) 0%, transparent 66%),
     linear-gradient(180deg,#FFFFFF 0%,#F4F8FF 100%);
@@ -309,7 +309,7 @@
    ========================================================================== */
 .bb-oto-guarantee{
   display:flex; align-items:center; gap:26px;
-  margin:40px auto 0; max-width:700px;
+  margin:16px auto 0; max-width:700px;
   background:
     radial-gradient(420px 200px at 82% -10%, rgba(37,99,255,.35) 0%, transparent 70%),
     linear-gradient(180deg,#0E1F3A 0%,#0A1730 100%);
