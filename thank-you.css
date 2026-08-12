@@ -155,7 +155,7 @@
 /* access-your-order button (matches the OTO "Get Instant Access" CTA) ------ */
 .bb-ty-btn{
   display:flex; align-items:center; justify-content:center; gap:13px;
-  width:100%; max-width:440px; margin-top:26px;
+  width:100%; margin-top:26px;
   font-family:var(--ty-font); font-weight:800; font-size:clamp(17px,2.3vw,21px);
   letter-spacing:.03em; text-transform:uppercase; color:#fff;
   padding:19px 26px; border-radius:12px;
