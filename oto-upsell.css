@@ -168,7 +168,11 @@
 
 /* ---- visual / product mockup ------------------------------------------- */
 .bb-oto-visual{ position:relative; display:flex; justify-content:center; }
-.bb-oto-shot{ width:100%; max-width:100%; filter:drop-shadow(0 30px 46px rgba(8,18,32,.22)); }
+.bb-oto-shot{
+  width:100%; max-width:100%;
+  border-radius:16px;
+  box-shadow:0 34px 70px -20px rgba(8,18,32,.55), 0 12px 26px -12px rgba(8,18,32,.38);
+}
 
 .bb-oto-mockup{ position:relative; width:100%; max-width:520px; padding-top:8px; }
 .bb-oto-screen{
