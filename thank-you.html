@@ -187,6 +187,73 @@
       </div>
     </header>
 
+    <!-- ============================================================
+         FLOW VAULT FUNNEL  ·  FILE 4 of 5
+         PASTE INTO: Page 3 (Thank You Page) → Custom Code element  [SECOND OF TWO]
+         POSITION:   Below your header, and below the GHL Order Confirmation
+                     element if you are using one.
+         JOB:        The visible message blocks. Two show at a time, never more.
+
+         Two registers, and the difference carries meaning:
+           .wg-card--held  solid fill, teal rail    → you own this, here it is
+           .wg-card--open  ticket edge, amber rail  → still claimable, act now
+
+         Edit the copy freely. Do not rename the outer class on each block or
+         the CSS in File 5 stops matching.
+         ============================================================ -->
+    <div class="wg-states">
+
+      <!-- Shown when the bump WAS checked -->
+      <div class="wg-card wg-card--held wg-if-bump">
+        <p class="wg-card__eyebrow">Included in this order</p>
+        <h3 class="wg-card__title">Flow Vault Pro is yours</h3>
+        <p class="wg-card__body">
+          A second email carries your Pro library link. It lands within five
+          minutes of this page. Search your inbox for Flow Vault Pro if it hides.
+        </p>
+      </div>
+
+      <!-- Shown when the bump was NOT checked -->
+      <div class="wg-card wg-card--open wg-if-nobump">
+        <p class="wg-card__eyebrow">Still open to you</p>
+        <h3 class="wg-card__title">Flow Vault Pro at checkout pricing</h3>
+        <p class="wg-card__body">
+          The Pro library holds the advanced flows, and the price you saw at
+          checkout stays live for one hour from now.
+        </p>
+        <a class="wg-card__cta" href="#REPLACE_WITH_PRO_ORDER_URL">
+          Add Flow Vault Pro
+        </a>
+      </div>
+
+      <!-- Shown when they ACCEPTED the higher ticket offer -->
+      <div class="wg-card wg-card--held wg-if-oto">
+        <p class="wg-card__eyebrow">Your next step</p>
+        <h3 class="wg-card__title">Book your onboarding call</h3>
+        <p class="wg-card__body">
+          Your welcome email carries the booking link. Pick any slot this week and
+          bring the one flow you want built first.
+        </p>
+        <a class="wg-card__cta" href="#REPLACE_WITH_BOOKING_URL">
+          Choose a time
+        </a>
+      </div>
+
+      <!-- Shown when they DECLINED the higher ticket offer -->
+      <div class="wg-card wg-card--open wg-if-nooto">
+        <p class="wg-card__eyebrow">One last thing</p>
+        <h3 class="wg-card__title">The done with you tier stays open until midnight</h3>
+        <p class="wg-card__body">
+          You keep everything you just bought either way. This adds our team
+          building your first three flows alongside you.
+        </p>
+        <a class="wg-card__cta" href="#REPLACE_WITH_HIGH_TICKET_URL">
+          See what is included
+        </a>
+      </div>
+
+    </div>
+
     <!-- ================================================== what happens next -->
     <section class="bb-ty-next bb-ty-in" style="--d:140ms">
       <div class="bb-ty-next-head"><span>Here's what happens next</span></div>
