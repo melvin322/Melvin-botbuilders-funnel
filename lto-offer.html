@@ -692,7 +692,10 @@
     try{
       if(window.dataLayer && window.dataLayer.push) window.dataLayer.push(Object.assign({event:event}, params));
       if(typeof window.gtag === 'function')          window.gtag('event', event, params);
-      if(typeof window.fbq  === 'function' && event === 'Lead') window.fbq('track','Lead', params);
+      if(typeof window.fbq === 'function'){
+        var fbStandard = {ViewContent:1, Lead:1, AddToCart:1, InitiateCheckout:1, Purchase:1};
+        if(fbStandard[event]) window.fbq('track', event, params);
+      }
     }catch(e){}
   }
 
