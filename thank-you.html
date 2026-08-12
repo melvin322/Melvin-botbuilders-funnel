@@ -27,6 +27,65 @@
 </head>
 <body>
 
+<!-- ============================================================
+     FLOW VAULT FUNNEL  ·  FILE 3 of 5
+     PASTE INTO: Page 3 (Thank You Page) → Custom Code element  [FIRST OF TWO]
+     POSITION:   Very top of the page, in its own thin section.
+     JOB:        Read both flags, write state classes onto <html>.
+
+     Keep this separate from File 4 so you can move the visible message
+     blocks around the page later without dragging the script with them.
+     ============================================================ -->
+<script>
+(function () {
+  "use strict";
+
+  /* ---------- CONFIG · must match Files 1 and 2 ---------- */
+  var CONFIG = {
+    bumpKey: "wg_bump",
+    otoKey: "wg_oto",
+    otoParam: "oto"      // ?oto=1 / ?oto=0 on the redirect URL
+  };
+  /* -------------------- end CONFIG ---------------------- */
+
+  var root = document.documentElement;
+
+  function read(key) {
+    try { return sessionStorage.getItem(key); }
+    catch (e) { return null; }
+  }
+
+  var bumpRaw = read(CONFIG.bumpKey);
+  var otoRaw = read(CONFIG.otoKey);
+
+  var params = new URLSearchParams(window.location.search);
+  var hasParam = params.has(CONFIG.otoParam);
+
+  // The URL param wins when present. It came from the button that fired,
+  // which is a stronger signal than a click we inferred from label text.
+  var oto = hasParam
+    ? params.get(CONFIG.otoParam) === "1"
+    : otoRaw === "1";
+
+  var bump = bumpRaw === "1";
+
+  // Two independent classes, not four combined ones. The four blocks in
+  // File 4 then compose on their own and every scenario is covered without
+  // you authoring a variant per outcome.
+  root.classList.add(bump ? "wg-bump-yes" : "wg-bump-no");
+  root.classList.add(oto ? "wg-oto-yes" : "wg-oto-no");
+
+  // Cold landing: no storage and no param, so someone reached this URL
+  // without walking the funnel. Bookmark, shared link, expired session,
+  // or a browser blocking storage. They get the safe default above, and
+  // this class lets you suppress the offer blocks if you would rather show
+  // them nothing than show them a pitch for something they may own.
+  if (bumpRaw === null && otoRaw === null && !hasParam) {
+    root.classList.add("wg-cold");
+  }
+})();
+</script>
+
 <div class="bb-ty" id="bb-ty">
 
   <!-- perspective dot-grid texture behind the hero -->
