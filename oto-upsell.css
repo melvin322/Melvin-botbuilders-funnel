@@ -368,6 +368,22 @@
 .bb-oto-decline:hover > svg{ transform:translateX(4px); color:var(--o-blue); }
 
 /* ==========================================================================
+   GUARANTEE + DECLINE nested inside the offer card
+   ========================================================================== */
+.bb-oto-offer .bb-oto-guarantee{
+  margin:24px 0 2px; max-width:none; padding:20px 22px; gap:18px; text-align:left;
+}
+.bb-oto-offer .bb-oto-shield{ width:90px; height:100px; }
+.bb-oto-offer .bb-oto-shield-txt{ font-size:10px; }
+.bb-oto-offer .bb-oto-shield-txt b{ font-size:18px; }
+.bb-oto-offer .bb-oto-shield-txt span{ font-size:10px; }
+.bb-oto-offer .bb-oto-guarantee-body h3{ font-size:20px; }
+.bb-oto-offer .bb-oto-guarantee-body p{ font-size:13.5px; }
+.bb-oto-offer .bb-oto-decline{ margin:16px 0 0; max-width:none; text-align:left; }
+@media (max-width:760px){ .bb-oto-offer .bb-oto-guarantee{ text-align:center; } }
+@media (max-width:520px){ .bb-oto-offer .bb-oto-decline{ text-align:center; } }
+
+/* ==========================================================================
    FOOTER
    ========================================================================== */
 .bb-oto .bb-oto-foot{ text-align:center; margin:30px auto 0; max-width:900px; padding:0 24px; font-size:12.5px; color:#7E8DA1; line-height:1.7; }
