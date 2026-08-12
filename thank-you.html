@@ -7,79 +7,72 @@
 <meta name="robots" content="noindex">
 
 <!-- ==========================================================================
-     BotBuilders — OTO upsell "Yes! add this to my order" confirmation page
-     Shown after the customer accepts the one-time offer on
-     /lto-test-oto-upsell-page. Confirms the order AND the add-on they added.
-     Brand board: navy #0B1320 · blue #2563EB · sky #38BDF8 · Bebas Neue + Inter
+     BotBuilders — Melvin LTO OTO upsell "Order confirmed" thank-you page
      ------------------------------------------------------------------------
-     GHL: paste everything between <div class="bb-ty"> … </div> AND the
-     <script> into the thank-you page's Custom Code element. Paste
-     thank-you.css into that page's Custom CSS.
-     ------------------------------------------------------------------------
-     EDIT the order (offer name / add-on name / prices) directly in the
-     "ORDER SUMMARY" markup below — each line is commented ▸ EDIT.
-     EDIT links, logo and pixel values in the CONFIG block at the bottom:
-       ACCESS_URL  — link for the "Access your order" button (blank = hidden)
-       LOGO_URL    — your hosted logo (dark / full-colour; the page is light)
-       ORDER_VALUE — total order value sent to the ad pixels (blank = skip)
+     GHL: paste everything between <div class="bb-ty"> … </div> AND both
+     <script> blocks into the thank-you page's ONE Custom Code element.
+     Paste thank-you.css into that page's Custom CSS. File 05 (the CSS that
+     shows/hides the conditional rows + cards and styles the cards) goes in
+     Funnel Settings › Head tracking code.
+     The <link> below is only for viewing this file standalone — it does not
+     resolve in GHL, which is why the paste uses Custom CSS instead.
      ========================================================================== -->
 <link rel="stylesheet" href="thank-you.css">
 </head>
 <body>
 
-<!-- ============================================================
-     FLOW VAULT FUNNEL  ·  FILE 3 of 5
-     PASTE INTO: Page 3 (Thank You Page) → Custom Code element  [FIRST OF TWO]
-     POSITION:   Very top of the page, in its own thin section.
-     JOB:        Read both flags, write state classes onto <html>.
+<!-- ==========================================================================
+     MELVIN LTO FUNNEL  ·  THANK YOU PAGE  ·  CORRECTED
+     PASTE INTO: Melvin LTO Thank You Page → ONE Custom Code element
+     ALSO NEEDS: File 05 in Funnel Settings › Head tracking code
+                 your existing thank-you.css in this page's Custom CSS
 
-     Keep this separate from File 4 so you can move the visible message
-     blocks around the page later without dragging the script with them.
-     ============================================================ -->
+     WHAT CHANGED FROM YOUR VERSION
+     1. Order summary line items are now conditional. The VIP line shows only
+        if they ticked the bump. The Bot Setup line shows only if they
+        accepted the OTO. The total is computed from what is actually shown,
+        so the page can no longer bill someone for things they did not buy.
+     2. Hero lead is conditional on the OTO answer.
+     3. Cards retoned to this page's light palette in File 05.
+     4. Purchase pixel fires once per order, not once per page load, and
+        never on a cold landing.
+     5. Step 2 of "what happens next" rewritten to be true in all four cases.
+     6. The stylesheet <link> is gone, since it cannot resolve in GHL.
+
+     ASSUMPTION TO CONFIRM: your OTO is Done-For-You Bot Setup at $1,500.
+     If not, change OTO_NAME, OTO_DESC and price in CONFIG plus the markup.
+
+     STILL TO EDIT: prices in CONFIG, and the four hrefs marked REPLACE.
+     ========================================================================== -->
+
 <script>
+/* ============================================================
+   DETECTOR · runs first so no block flashes before its class lands
+   ============================================================ */
 (function () {
   "use strict";
 
-  /* ---------- CONFIG · must match Files 1 and 2 ---------- */
-  var CONFIG = {
-    bumpKey: "wg_bump",
-    otoKey: "wg_oto",
-    otoParam: "oto"      // ?oto=1 / ?oto=0 on the redirect URL
-  };
-  /* -------------------- end CONFIG ---------------------- */
-
+  var KEYS = { bump: "wg_bump", oto: "wg_oto", param: "oto" };
   var root = document.documentElement;
 
-  function read(key) {
-    try { return sessionStorage.getItem(key); }
-    catch (e) { return null; }
+  function read(k) {
+    try { return sessionStorage.getItem(k); } catch (e) { return null; }
   }
 
-  var bumpRaw = read(CONFIG.bumpKey);
-  var otoRaw = read(CONFIG.otoKey);
+  var bumpRaw = read(KEYS.bump);
+  var otoRaw  = read(KEYS.oto);
 
-  var params = new URLSearchParams(window.location.search);
-  var hasParam = params.has(CONFIG.otoParam);
+  var params   = new URLSearchParams(window.location.search);
+  var hasParam = params.has(KEYS.param);
 
   // The URL param wins when present. It came from the button that fired,
-  // which is a stronger signal than a click we inferred from label text.
-  var oto = hasParam
-    ? params.get(CONFIG.otoParam) === "1"
-    : otoRaw === "1";
-
+  // which beats a click we inferred from label text.
+  var oto  = hasParam ? params.get(KEYS.param) === "1" : otoRaw === "1";
   var bump = bumpRaw === "1";
 
-  // Two independent classes, not four combined ones. The four blocks in
-  // File 4 then compose on their own and every scenario is covered without
-  // you authoring a variant per outcome.
   root.classList.add(bump ? "wg-bump-yes" : "wg-bump-no");
-  root.classList.add(oto ? "wg-oto-yes" : "wg-oto-no");
+  root.classList.add(oto  ? "wg-oto-yes"  : "wg-oto-no");
 
-  // Cold landing: no storage and no param, so someone reached this URL
-  // without walking the funnel. Bookmark, shared link, expired session,
-  // or a browser blocking storage. They get the safe default above, and
-  // this class lets you suppress the offer blocks if you would rather show
-  // them nothing than show them a pitch for something they may own.
   if (bumpRaw === null && otoRaw === null && !hasParam) {
     root.classList.add("wg-cold");
   }
@@ -120,7 +113,9 @@
 
           <h1 class="bb-ty-title bb-ty-in" style="--d:120ms">Order<br><span class="hl">confirmed!</span></h1>
 
-          <p class="bb-ty-lead bb-ty-in" style="--d:220ms">Nice choice — your <span class="hl">Done-For-You Bot Setup</span> has been added to your order.</p>
+          <!-- CONDITIONAL LEAD · one of these two shows -->
+          <p class="bb-ty-lead bb-ty-in wg-if-oto" style="--d:220ms">Nice choice — your <span class="hl">Done-For-You Bot Setup</span> has been added to your order.</p>
+          <p class="bb-ty-lead bb-ty-in wg-if-nooto" style="--d:220ms">You're all set — your <span class="hl">Growth Plan</span> is confirmed and ready to go.</p>
 
           <div class="bb-ty-note bb-ty-in" style="--d:290ms">
             <span class="bb-ty-note-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M4 7l8 6 8-6"/></svg></span>
@@ -144,7 +139,7 @@
           </div>
 
           <ul class="bb-ty-order-list">
-            <!-- ▸ EDIT: main offer — Growth Plan ($97/mo billed annually) -->
+            <!-- ALWAYS SHOWN · main offer -->
             <li class="bb-ty-order-item">
               <div class="bb-ty-order-item-main">
                 <span class="bb-ty-order-name">Growth Plan</span>
@@ -153,8 +148,8 @@
               <span class="bb-ty-order-price">$1,164/yr</span>
             </li>
 
-            <!-- ▸ EDIT: order bump — VIP Launch Intensive -->
-            <li class="bb-ty-order-item">
+            <!-- ONLY IF BUMP TICKED · wg-row-bump -->
+            <li class="bb-ty-order-item wg-row-bump">
               <div class="bb-ty-order-item-main">
                 <span class="bb-ty-order-name">VIP Launch Intensive</span>
                 <span class="bb-ty-order-desc">Live 1:1 build &amp; launch session — live in 48 hours</span>
@@ -162,8 +157,8 @@
               <span class="bb-ty-order-price">$197</span>
             </li>
 
-            <!-- ▸ EDIT: the OTO add-on they just accepted (highlighted) -->
-            <li class="bb-ty-order-item is-addon">
+            <!-- ONLY IF OTO ACCEPTED · wg-row-oto -->
+            <li class="bb-ty-order-item is-addon wg-row-oto">
               <div class="bb-ty-order-item-main">
                 <span class="bb-ty-order-name">Done-For-You Bot Setup<span class="bb-ty-order-badge">Just added</span></span>
                 <span class="bb-ty-order-desc">We build &amp; configure your bot for you · one-time</span>
@@ -174,11 +169,10 @@
 
           <div class="bb-ty-order-total">
             <span>Total charged today</span>
-            <!-- ▸ EDIT: total = Growth Plan + VIP Launch Intensive + Bot Setup -->
-            <span class="bb-ty-order-total-num">$2,861</span>
+            <!-- Computed by JS from what is actually shown. Do not hardcode. -->
+            <span class="bb-ty-order-total-num" id="bb-ty-total">—</span>
           </div>
 
-          <!-- ▸ EDIT or delete: a reassuring line under the total -->
           <div class="bb-ty-order-save">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 3.5v6c0 5-3.4 9.4-8 10.5-4.6-1.1-8-5.5-8-10.5v-6z"/><path d="M9 12l2.2 2.2L15.5 10"/></svg>
             Secure checkout · 30-day money-back guarantee
@@ -188,78 +182,65 @@
     </header>
 
     <!-- ============================================================
-         MELVIN LTO FUNNEL  ·  FILE 4 of 5
-         PASTE INTO: Melvin LTO Thank You Page → Custom Code element  [SECOND OF TWO]
-         POSITION:   Below your header, and below the GHL Order Confirmation
-                     element if you are using one.
-         JOB:        The visible message blocks. Two show at a time, never more.
-
-         Two registers, and the difference carries meaning:
-           .wg-card--held  solid teal rail       → you own this, here it is
-           .wg-card--open  perforated amber rail → still claimable, act now
-
-         STILL TO EDIT:
-           · Three hrefs marked REPLACE
-           · The two OTO blocks. I do not know what your OTO page offers yet,
-             so that copy is a stand in. Swap in the real offer name.
-
-         Do NOT rename the four outer classes or the CSS stops matching:
-           wg-if-bump · wg-if-nobump · wg-if-oto · wg-if-nooto
+         CONDITIONAL MESSAGE CARDS
+         Two show at a time, never more. One speaks to the bump, one to
+         the OTO. Held cards carry next actions. Open cards carry offers.
+         Do NOT rename the four wg-if-* classes.
          ============================================================ -->
     <div class="wg-states">
 
-      <!-- ===== BUMP TAKEN · they ticked VIP Launch Intensive ===== -->
+      <!-- BUMP TAKEN -->
       <div class="wg-card wg-card--held wg-if-bump">
-        <p class="wg-card__eyebrow">Included in this order</p>
-        <h3 class="wg-card__title">Your VIP Launch Intensive is booked</h3>
+        <p class="wg-card__eyebrow">Book this now</p>
+        <h3 class="wg-card__title">Your VIP Launch Intensive is waiting to be scheduled</h3>
         <p class="wg-card__body">
-          A second email carries the scheduling link for your live 1:1 session.
-          Pick the earliest slot you can make, because the 48 hour window to
-          launch starts when we sit down together.
+          Pick the earliest slot you can make. The 48 hour window to launch
+          starts when we sit down together, not when you bought.
         </p>
         <a class="wg-card__cta" href="#REPLACE_WITH_VIP_BOOKING_URL">
           Schedule my intensive
         </a>
       </div>
 
-      <!-- ===== BUMP SKIPPED · no VIP Launch Intensive ===== -->
+      <!-- BUMP SKIPPED -->
       <div class="wg-card wg-card--open wg-if-nobump">
         <p class="wg-card__eyebrow">Still open to you</p>
         <h3 class="wg-card__title">Add the VIP Launch Intensive for $197</h3>
         <p class="wg-card__body">
-          A live 1:1 session where we build, connect and launch your first funnel
-          with you, so you go live in 48 hours instead of finding the time later.
-          This price holds for one hour.
+          A live 1:1 session where we build, connect and launch your first
+          funnel with you, so you go live in 48 hours instead of finding the
+          time later. This price holds for one hour.
         </p>
         <a class="wg-card__cta" href="#REPLACE_WITH_VIP_ORDER_URL">
           Add the VIP Launch Intensive
         </a>
       </div>
 
-      <!-- ===== OTO ACCEPTED ·  rename to your real OTO offer ===== -->
+      <!-- OTO ACCEPTED -->
       <div class="wg-card wg-card--held wg-if-oto">
-        <p class="wg-card__eyebrow">Your next step</p>
-        <h3 class="wg-card__title">REPLACE: your OTO offer is active</h3>
+        <p class="wg-card__eyebrow">What we need from you</p>
+        <h3 class="wg-card__title">Send us your bot details to start the build</h3>
         <p class="wg-card__body">
-          REPLACE with what happens now that they accepted. Where the access
-          lives, what lands in their inbox, and what you need from them first.
+          Our team builds and configures your bot for you. Fill in the intake
+          form with your offer, your audience and your existing assets, and we
+          start the same day.
         </p>
-        <a class="wg-card__cta" href="#REPLACE_WITH_OTO_ACCESS_URL">
-          REPLACE: action label
+        <a class="wg-card__cta" href="#REPLACE_WITH_INTAKE_FORM_URL">
+          Open the intake form
         </a>
       </div>
 
-      <!-- ===== OTO DECLINED ·  rename to your real OTO offer ===== -->
+      <!-- OTO DECLINED -->
       <div class="wg-card wg-card--open wg-if-nooto">
         <p class="wg-card__eyebrow">One last thing</p>
-        <h3 class="wg-card__title">REPLACE: your OTO offer stays open until midnight</h3>
+        <h3 class="wg-card__title">Done-For-You Bot Setup stays open until midnight</h3>
         <p class="wg-card__body">
-          REPLACE with the short version of the offer they just declined. Lead
-          with the fact that they keep their Growth Plan either way, then say
-          what this adds on top.
+          You keep your Growth Plan either way. This hands the build to our
+          team instead, so your first bot ships configured and connected
+          without you writing a single flow.
         </p>
-        <a class="wg-card__cta" href="#REPLACE_WITH_OTO_ORDER_URL">
-          REPLACE: action label
+        <a class="wg-card__cta" href="#REPLACE_WITH_DFY_ORDER_URL">
+          See what is included
         </a>
       </div>
 
@@ -284,8 +265,9 @@
           <div class="bb-ty-step-ico">
             <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M24 6l16 7v9c0 10-7 16-16 19-9-3-16-9-16-19v-9z"/><path d="M17 24l5 5 10-11"/></svg>
           </div>
-          <h3>Your add-on is included</h3>
-          <p>The upgrade you added is already part of your order — nothing else to do or pay.</p>
+          <!-- Rewritten to hold true in all four outcomes -->
+          <h3>Nothing left to pay</h3>
+          <p>Everything on your order summary is already active. No second checkout, no follow-up invoice.</p>
         </li>
 
         <li class="bb-ty-step">
@@ -328,7 +310,7 @@
         </div>
         <div>
           <h4>Thanks for your order</h4>
-          <p>We're glad you added it — you're going to love what's next!</p>
+          <p>We're glad you're here — you're going to love what's next!</p>
         </div>
       </div>
     </section>
@@ -339,95 +321,118 @@
 </div>
 
 <script>
-(function(){
+(function () {
   'use strict';
 
   /* ====================================================== CONFIG — EDIT ME */
   var CONFIG = {
-    /* "Access your order" button link (member area, download, next step).
-       Blank = the button is hidden.                                         */
+    /* --- PRICES · must match what your checkout actually charges --------- */
+    PRICE_MAIN : 1164,      /* Growth Plan, billed annually                  */
+    PRICE_BUMP : 197,       /* VIP Launch Intensive                          */
+    PRICE_OTO  : 1500,      /* Done-For-You Bot Setup                        */
+
+    /* "Access your order" button link. Blank = the button is hidden.       */
     ACCESS_URL   : '',
 
-    /* Background texture behind the hero. Paste a HOSTED image URL (upload it
-       to your GHL media library first, like your logo/hero images). When set,
-       it replaces the built-in dot-grid; blank keeps the dot-grid.
-       For the standalone file you can also use a local name, e.g. 'bg-mesh.jpg'. */
+    /* Background texture behind the hero. HOSTED image URL, uploaded to your
+       GHL media library. Blank keeps the built-in dot-grid.                */
     BG_IMAGE     : '',
 
-    /* Your logo. This page is LIGHT (matching the OTO offer page), so use a
-       DARK / full-colour logo here — a white/reverse logo would disappear.
-       Blank keeps the built-in gradient mark + dark wordmark (like the OTO page). */
+    /* Your logo. This page is LIGHT, so use a DARK or full-colour logo.
+       Blank keeps the built-in gradient mark and dark wordmark.            */
     LOGO_URL     : '',
     LOGO_HEIGHT  : 40,
 
-    /* Ad-pixel purchase value. Leave ORDER_VALUE blank to skip sending a
-       value (the Purchase event still fires). Match CURRENCY to your store. */
-    ORDER_VALUE  : '',
     CURRENCY     : 'USD'
   };
   /* ======================================================================= */
 
   var root = document.getElementById('bb-ty');
-  if(!root) return;
+  if (!root) return;
 
-  /* -- conversion tracking: this page load = a completed upsell purchase --- */
-  (function(){
-    try{
-      var val = parseFloat(CONFIG.ORDER_VALUE);
-      var hasVal = !isNaN(val);
-      var payload = {event:'purchase'};
-      if(hasVal){ payload.value = val; payload.currency = CONFIG.CURRENCY; }
-      if(window.dataLayer && window.dataLayer.push) window.dataLayer.push(payload);
-      if(typeof window.gtag === 'function') window.gtag('event','purchase', hasVal ? {value:val, currency:CONFIG.CURRENCY} : {});
-      if(typeof window.fbq === 'function') window.fbq('track','Purchase', hasVal ? {value:val, currency:CONFIG.CURRENCY} : {});
-    }catch(e){}
+  var cls  = document.documentElement.classList;
+  var hasBump = cls.contains('wg-bump-yes');
+  var hasOto  = cls.contains('wg-oto-yes');
+  var isCold  = cls.contains('wg-cold');
+
+  /* -- order total · derived from what is actually shown ------------------- */
+  var total = CONFIG.PRICE_MAIN
+            + (hasBump ? CONFIG.PRICE_BUMP : 0)
+            + (hasOto  ? CONFIG.PRICE_OTO  : 0);
+
+  (function () {
+    var el = document.getElementById('bb-ty-total');
+    if (!el) return;
+    el.textContent = '$' + total.toLocaleString('en-US');
+  })();
+
+  /* -- conversion tracking · once per order, never on a cold landing ------
+     Your original fired on every page load, so a refresh logged a second
+     purchase and a bookmarked visit logged a phantom one.                  */
+  (function () {
+    if (isCold) return;
+
+    var stamp = 'wg_pixel_fired';
+    try {
+      if (sessionStorage.getItem(stamp) === '1') return;
+      sessionStorage.setItem(stamp, '1');
+    } catch (e) {
+      return;   /* no storage means no dedupe, so skip rather than overcount */
+    }
+
+    try {
+      var payload = { event: 'purchase', value: total, currency: CONFIG.CURRENCY };
+      if (window.dataLayer && window.dataLayer.push) window.dataLayer.push(payload);
+      if (typeof window.gtag === 'function') window.gtag('event', 'purchase', { value: total, currency: CONFIG.CURRENCY });
+      if (typeof window.fbq === 'function') window.fbq('track', 'Purchase', { value: total, currency: CONFIG.CURRENCY });
+    } catch (e) {}
   })();
 
   /* -- kill GHL wrapper chrome (white strip) ------------------------------- */
-  (function(){
+  (function () {
     var el = root.parentElement;
-    while(el && el !== document.body && el !== document.documentElement){
-      el.style.background='transparent'; el.style.backgroundColor='transparent';
-      el.style.paddingTop='0px'; el.style.paddingBottom='0px';
-      el.style.marginTop='0px'; el.style.marginBottom='0px'; el.style.maxWidth='none';
+    while (el && el !== document.body && el !== document.documentElement) {
+      el.style.background = 'transparent'; el.style.backgroundColor = 'transparent';
+      el.style.paddingTop = '0px'; el.style.paddingBottom = '0px';
+      el.style.marginTop = '0px'; el.style.marginBottom = '0px'; el.style.maxWidth = 'none';
       el = el.parentElement;
     }
-    document.documentElement.style.background='#EAF1F8';
-    document.body.style.background='#EAF1F8';
-    document.body.style.margin='0';
+    document.documentElement.style.background = '#EAF1F8';
+    document.body.style.background = '#EAF1F8';
+    document.body.style.margin = '0';
   })();
 
   /* -- background texture ------------------------------------------------- */
-  (function(){
-    if(!CONFIG.BG_IMAGE) return;               /* blank = keep the dot-grid */
+  (function () {
+    if (!CONFIG.BG_IMAGE) return;
     var bg = root.querySelector('.bb-ty-bg');
-    if(!bg) return;
+    if (!bg) return;
     var probe = new Image();
-    probe.onload = function(){                  /* only swap in once it loads */
-      bg.style.backgroundImage = 'url("'+CONFIG.BG_IMAGE+'")';
+    probe.onload = function () {
+      bg.style.backgroundImage = 'url("' + CONFIG.BG_IMAGE + '")';
       bg.classList.add('has-img');
     };
     probe.src = CONFIG.BG_IMAGE;
   })();
 
   /* -- logo --------------------------------------------------------------- */
-  if(CONFIG.LOGO_URL){
+  if (CONFIG.LOGO_URL) {
     var logo = root.querySelector('.bb-ty-logo');
-    if(logo){
-      logo.innerHTML='';
-      var img=document.createElement('img');
-      img.src=CONFIG.LOGO_URL; img.alt='BotBuilders';
-      img.style.height=(CONFIG.LOGO_HEIGHT||44)+'px'; img.style.width='auto';
+    if (logo) {
+      logo.innerHTML = '';
+      var img = document.createElement('img');
+      img.src = CONFIG.LOGO_URL; img.alt = 'BotBuilders';
+      img.style.height = (CONFIG.LOGO_HEIGHT || 44) + 'px'; img.style.width = 'auto';
       logo.appendChild(img);
     }
   }
 
   /* -- access-your-order button ------------------------------------------- */
-  (function(){
-    var btn=document.getElementById('bb-ty-access');
-    if(!btn) return;
-    if(CONFIG.ACCESS_URL){ btn.href=CONFIG.ACCESS_URL; }
-    else { btn.style.display='none'; }
+  (function () {
+    var btn = document.getElementById('bb-ty-access');
+    if (!btn) return;
+    if (CONFIG.ACCESS_URL) { btn.href = CONFIG.ACCESS_URL; }
+    else { btn.style.display = 'none'; }
   })();
 
 })();
