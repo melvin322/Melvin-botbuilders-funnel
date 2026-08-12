@@ -927,5 +927,88 @@
 })();
 </script>
 
+<!-- ============================================================
+     FLOW VAULT FUNNEL  ·  FILE 1 of 5
+     PASTE INTO: Page 1 (Sales Page) → Custom Code element
+     POSITION:   Bottom of page. Renders nothing visible.
+     JOB:        Watch the order bump checkbox, remember the answer.
+     ============================================================ -->
+
+<script>
+(function () {
+  "use strict";
+
+  /* ---------- CONFIG · edit these three values ---------- */
+  var CONFIG = {
+    // The exact text a buyer SEES inside the bump block on this page.
+    // Anchor on visible copy, never a GHL class name. Class names change
+    // between GHL releases. Your product name does not.
+    bumpLabel: "Flow Vault Pro",
+
+    // Storage key. Must match the thank you page detector (File 3).
+    storageKey: "wg_bump",
+
+    // How long to keep watching for the order form to render, in ms.
+    watchFor: 15000
+  };
+  /* ------------------- end CONFIG ---------------------- */
+
+  function remember(checked) {
+    try {
+      sessionStorage.setItem(CONFIG.storageKey, checked ? "1" : "0");
+    } catch (e) {
+      /* Private mode or storage disabled. Fail quiet. The thank you page
+         falls back to its cold state, which shows no false claims. */
+    }
+  }
+
+  function bind(box) {
+    remember(box.checked);
+    box.addEventListener("change", function () {
+      remember(box.checked);
+    });
+  }
+
+  // Find the checkbox whose surrounding block contains the bump label.
+  // Walks up a few levels because GHL nests the label away from the input.
+  function findBump() {
+    var boxes = document.querySelectorAll('input[type="checkbox"]');
+
+    for (var i = 0; i < boxes.length; i++) {
+      var scope = boxes[i].parentElement;
+      var hops = 0;
+
+      while (scope && hops < 5) {
+        if (scope.textContent.indexOf(CONFIG.bumpLabel) > -1) {
+          bind(boxes[i]);
+          return true;
+        }
+        scope = scope.parentElement;
+        hops++;
+      }
+    }
+    return false;
+  }
+
+  function start() {
+    if (findBump()) return;
+
+    // The order form renders after this script runs, so watch for it.
+    var observer = new MutationObserver(function () {
+      if (findBump()) observer.disconnect();
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
+    setTimeout(function () { observer.disconnect(); }, CONFIG.watchFor);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", start);
+  } else {
+    start();
+  }
+})();
+</script>
+
 </body>
 </html>
