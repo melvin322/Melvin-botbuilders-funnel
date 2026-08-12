@@ -379,6 +379,49 @@
 .bb-oto .bb-oto-foot{ text-align:center; margin:30px auto 0; max-width:900px; padding:0 24px; font-size:12.5px; color:#7E8DA1; line-height:1.7; }
 
 /* ==========================================================================
+   PRODUCT PHOTO — click to enlarge (lightbox)
+   ========================================================================== */
+.bb-oto-visual.is-zoomable img{ cursor:zoom-in; }
+.bb-oto-zoom-hint{
+  position:absolute; right:14px; bottom:14px;
+  display:inline-flex; align-items:center; gap:7px;
+  padding:8px 13px; border-radius:999px;
+  background:rgba(8,14,22,.72); color:#fff;
+  font-size:12.5px; font-weight:600;
+  -webkit-backdrop-filter:blur(4px); backdrop-filter:blur(4px);
+  box-shadow:0 8px 20px -8px rgba(0,0,0,.5);
+  opacity:0; transform:translateY(4px);
+  transition:opacity .2s var(--o-ease), transform .2s var(--o-ease);
+  pointer-events:none;
+}
+.bb-oto-visual.is-zoomable:hover .bb-oto-zoom-hint{ opacity:1; transform:none; }
+.bb-oto-zoom-hint svg{ width:15px; height:15px; }
+
+/* the overlay is appended to <body> (outside .bb-oto), so it is not scoped */
+.bb-oto-lightbox{
+  position:fixed; inset:0; z-index:99999;
+  display:flex; align-items:center; justify-content:center; padding:4vw;
+  background:rgba(6,12,24,.9);
+  -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px);
+  animation:bb-oto-lb-in .2s ease;
+}
+@keyframes bb-oto-lb-in{ from{ opacity:0; } to{ opacity:1; } }
+.bb-oto-lightbox img{
+  max-width:min(1100px,96vw); max-height:90vh; width:auto; height:auto;
+  border-radius:14px; box-shadow:0 44px 100px -30px rgba(0,0,0,.8);
+  cursor:zoom-out;
+}
+.bb-oto-lightbox-close{
+  position:absolute; top:18px; right:22px;
+  width:44px; height:44px; border-radius:50%;
+  border:1px solid rgba(255,255,255,.3); background:rgba(255,255,255,.08); color:#fff;
+  font-family:var(--o-font); font-size:26px; line-height:1; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  transition:background .2s ease;
+}
+.bb-oto-lightbox-close:hover{ background:rgba(255,255,255,.2); }
+
+/* ==========================================================================
    REVEAL
    ========================================================================== */
 .bb-oto-in{ opacity:0; transform:translateY(16px); animation:bb-oto-up .7s var(--o-ease) forwards; animation-delay:var(--d,0ms); }

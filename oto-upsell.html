@@ -259,14 +259,53 @@
     }
   }
 
-  /* -- product image (falls back to the built-in SVG mockup) -------------- */
+  /* -- product image + click-to-enlarge lightbox -------------------------- */
   (function(){
     if(!CONFIG.PRODUCT_IMAGE) return;
     var shot=document.getElementById('bb-oto-shot');
     var mock=document.getElementById('bb-oto-mockup');
-    if(shot){ shot.src=CONFIG.PRODUCT_IMAGE; shot.hidden=false; }
     if(mock){ mock.style.display='none'; }
+    if(!shot) return;
+    shot.src=CONFIG.PRODUCT_IMAGE; shot.hidden=false;
+
+    var visual=shot.closest('.bb-oto-visual');
+    if(visual){
+      visual.classList.add('is-zoomable');
+      var hint=document.createElement('span');
+      hint.className='bb-oto-zoom-hint';
+      hint.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to enlarge';
+      visual.appendChild(hint);
+    }
+    shot.setAttribute('role','button');
+    shot.setAttribute('tabindex','0');
+    shot.setAttribute('aria-label','Enlarge product image');
+    shot.addEventListener('click', function(){ openLightbox(shot.currentSrc||shot.src, shot.alt); });
+    shot.addEventListener('keydown', function(e){
+      if(e.key==='Enter' || e.key===' '){ e.preventDefault(); openLightbox(shot.currentSrc||shot.src, shot.alt); }
+    });
   })();
+
+  /* creates a full-screen overlay for the product photo. Close via the X,
+     a click on the backdrop / image, or the Escape key.                     */
+  function openLightbox(src, alt){
+    if(document.querySelector('.bb-oto-lightbox')) return;
+    var lb=document.createElement('div');
+    lb.className='bb-oto-lightbox';
+    var img=document.createElement('img');
+    img.src=src; img.alt=alt||'';
+    var close=document.createElement('button');
+    close.className='bb-oto-lightbox-close';
+    close.setAttribute('aria-label','Close');
+    close.innerHTML='&times;';
+    lb.appendChild(img); lb.appendChild(close);
+    function shut(){ document.body.style.overflow=''; lb.remove(); document.removeEventListener('keydown', onEsc); }
+    function onEsc(e){ if(e.key==='Escape') shut(); }
+    lb.addEventListener('click', function(e){ if(e.target===lb || e.target===img || e.target===close) shut(); });
+    document.addEventListener('keydown', onEsc);
+    document.body.appendChild(lb);
+    document.body.style.overflow='hidden';
+    close.focus();
+  }
 
   /* -- accept / decline links (+ conversion tracking) --------------------- */
   (function(){
