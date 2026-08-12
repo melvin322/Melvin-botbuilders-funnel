@@ -211,6 +211,12 @@
        Blank = the button is hidden.                                         */
     ACCESS_URL   : '',
 
+    /* Background texture behind the hero. Paste a HOSTED image URL (upload it
+       to your GHL media library first, like your logo/hero images). When set,
+       it replaces the built-in dot-grid; blank keeps the dot-grid.
+       For the standalone file you can also use a local name, e.g. 'bg-mesh.jpg'. */
+    BG_IMAGE     : '',
+
     /* Your logo. This page is LIGHT (matching the OTO offer page), so use a
        DARK / full-colour logo here — a white/reverse logo would disappear.
        Blank keeps the built-in gradient mark + dark wordmark (like the OTO page). */
@@ -252,6 +258,19 @@
     document.documentElement.style.background='#EAF1F8';
     document.body.style.background='#EAF1F8';
     document.body.style.margin='0';
+  })();
+
+  /* -- background texture ------------------------------------------------- */
+  (function(){
+    if(!CONFIG.BG_IMAGE) return;               /* blank = keep the dot-grid */
+    var bg = root.querySelector('.bb-ty-bg');
+    if(!bg) return;
+    var probe = new Image();
+    probe.onload = function(){                  /* only swap in once it loads */
+      bg.style.backgroundImage = 'url("'+CONFIG.BG_IMAGE+'")';
+      bg.classList.add('has-img');
+    };
+    probe.src = CONFIG.BG_IMAGE;
   })();
 
   /* -- logo --------------------------------------------------------------- */
