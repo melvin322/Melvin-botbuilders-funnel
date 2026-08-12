@@ -82,7 +82,7 @@
    SECURE TOP BAR
    ========================================================================== */
 .bb-oto-secure{
-  background:linear-gradient(90deg,#0F2A5E 0%,#0B1C3F 100%);
+  background:#0A0E16;
   color:#DCE7F5;
   text-align:center;
 }
@@ -224,13 +224,24 @@
    OFFER CARD
    ========================================================================== */
 .bb-oto-offer{
+  position:relative;
   margin:48px auto 0; max-width:700px;
-  background:var(--o-white);
-  border:1.5px solid #D5E3F7;
+  background:
+    radial-gradient(360px 220px at 84% 0%, rgba(37,99,255,.10) 0%, transparent 66%),
+    linear-gradient(180deg,#FFFFFF 0%,#F4F8FF 100%);
+  border:1px solid #CFE0F7;
   border-radius:var(--o-radius-lg);
-  padding:36px 32px 32px;
+  padding:44px 32px 34px;
   text-align:center;
-  box-shadow:var(--o-shadow);
+  box-shadow:0 34px 80px -34px rgba(8,18,32,.45), 0 0 0 6px rgba(37,99,255,.06);
+}
+.bb-oto-offer-pop{
+  position:absolute; top:-14px; left:50%; transform:translateX(-50%);
+  font-family:var(--o-head); font-weight:800; font-size:11.5px;
+  letter-spacing:.14em; text-transform:uppercase; color:#fff;
+  padding:8px 20px; border-radius:999px; white-space:nowrap;
+  background:var(--o-grad);
+  box-shadow:0 12px 26px -8px rgba(37,99,255,.7);
 }
 .bb-oto-offer-h{
   font-family:var(--o-head); font-weight:700;
@@ -259,10 +270,16 @@
   padding:21px 26px; border-radius:12px;
   background:var(--o-grad);
   box-shadow:0 14px 34px -10px rgba(37,99,255,.62), inset 0 1px 0 rgba(255,255,255,.28);
-  transition:transform .2s var(--o-ease), box-shadow .2s var(--o-ease), filter .2s ease;
+  transition:box-shadow .2s var(--o-ease), filter .2s ease;
+  animation:bb-oto-cta-bounce 1.3s ease-in-out infinite;
+  will-change:transform;
 }
-.bb-oto-cta:hover{ transform:translateY(-2px); filter:brightness(1.05); box-shadow:0 20px 44px -12px rgba(37,99,255,.74), inset 0 1px 0 rgba(255,255,255,.36); }
-.bb-oto-cta:active{ transform:translateY(0); }
+.bb-oto a.bb-oto-cta{ color:#fff; }   /* out-specify the .bb-oto a color reset */
+.bb-oto-cta:hover{ animation-play-state:paused; filter:brightness(1.06); box-shadow:0 22px 48px -12px rgba(37,99,255,.82), inset 0 1px 0 rgba(255,255,255,.4); }
+@keyframes bb-oto-cta-bounce{
+  0%, 100%{ transform:translateY(0); }
+  50%{ transform:translateY(-6px); }
+}
 .bb-oto-cta svg{ width:25px; height:25px; flex:none; }
 
 .bb-oto-trust{ display:flex; align-items:center; justify-content:center; gap:8px; margin-top:16px; font-size:13.5px; font-weight:600; color:var(--o-muted); }
@@ -343,6 +360,7 @@
 @keyframes bb-oto-up{ to{ opacity:1; transform:none; } }
 @media (prefers-reduced-motion: reduce){
   .bb-oto-in{ opacity:1 !important; transform:none !important; animation:none !important; }
+  .bb-oto-cta{ animation:none !important; }
 }
 
 /* ==========================================================================
