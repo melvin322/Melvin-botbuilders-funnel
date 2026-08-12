@@ -20,7 +20,7 @@
      "ORDER SUMMARY" markup below — each line is commented ▸ EDIT.
      EDIT links, logo and pixel values in the CONFIG block at the bottom:
        ACCESS_URL  — link for the "Access your order" button (blank = hidden)
-       LOGO_URL    — your hosted logo (light/reverse for the dark panel)
+       LOGO_URL    — your hosted logo (dark / full-colour; the page is light)
        ORDER_VALUE — total order value sent to the ad pixels (blank = skip)
      ========================================================================== -->
 <link rel="stylesheet" href="thank-you.css">
@@ -28,20 +28,19 @@
 <body>
 
 <div class="bb-ty" id="bb-ty">
-  <div class="bb-ty-shell">
 
-    <!-- concentric rings behind the order card -->
-    <div class="bb-ty-rings" aria-hidden="true">
-      <svg viewBox="0 0 660 660" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g stroke="#3B82F6" fill="none">
-          <circle cx="360" cy="300" r="120" stroke-opacity=".55" stroke-width="2"/>
-          <circle cx="360" cy="300" r="180" stroke-opacity=".38" stroke-width="1.6"/>
-          <circle cx="360" cy="300" r="244" stroke-opacity=".26" stroke-width="1.4"/>
-          <circle cx="360" cy="300" r="312" stroke-opacity=".16" stroke-width="1.2"/>
-          <circle cx="360" cy="300" r="384" stroke-opacity=".10" stroke-width="1"/>
-        </g>
-      </svg>
+  <!-- perspective dot-grid texture behind the hero -->
+  <div class="bb-ty-bg" aria-hidden="true"></div>
+
+  <!-- ========================================================== secure bar -->
+  <div class="bb-ty-secure">
+    <div class="bb-ty-secure-in">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10.5" width="15" height="10.5" rx="2.5"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/></svg>
+      Your payment was secure &amp; encrypted — a receipt is on its way
     </div>
+  </div>
+
+  <div class="bb-ty-shell">
 
     <!-- ============================================================= hero -->
     <header class="bb-ty-hero">
@@ -212,9 +211,11 @@
        Blank = the button is hidden.                                         */
     ACCESS_URL   : '',
 
-    /* Your logo (light / reverse). Blank keeps the built-in gradient mark. */
-    LOGO_URL     : 'https://assets.cdn.filesafe.space/sz4sVbBhLW7cX7keIHT6/media/6a76a8418880872019224576.png',
-    LOGO_HEIGHT  : 48,
+    /* Your logo. This page is LIGHT (matching the OTO offer page), so use a
+       DARK / full-colour logo here — a white/reverse logo would disappear.
+       Blank keeps the built-in gradient mark + dark wordmark (like the OTO page). */
+    LOGO_URL     : '',
+    LOGO_HEIGHT  : 40,
 
     /* Ad-pixel purchase value. Leave ORDER_VALUE blank to skip sending a
        value (the Purchase event still fires). Match CURRENCY to your store. */
@@ -248,8 +249,8 @@
       el.style.marginTop='0px'; el.style.marginBottom='0px'; el.style.maxWidth='none';
       el = el.parentElement;
     }
-    document.documentElement.style.background='#05070D';
-    document.body.style.background='#05070D';
+    document.documentElement.style.background='#EAF1F8';
+    document.body.style.background='#EAF1F8';
     document.body.style.margin='0';
   })();
 
