@@ -247,7 +247,8 @@
   content:''; position:absolute; left:-4px; right:-4px; top:52%; height:4px;
   background:#9AA7B8; border-radius:3px; transform:rotate(-8deg);
 }
-.bb-oto-price-new{ font-family:var(--o-display); font-size:clamp(60px,10vw,88px); color:var(--o-blue); line-height:.9; letter-spacing:.01em; }
+.bb-oto-price-new{ font-family:var(--o-display); font-size:clamp(56px,9vw,84px); color:var(--o-blue); line-height:.9; letter-spacing:.01em; }
+.bb-oto-price-note{ align-self:flex-end; margin-bottom:14px; color:var(--o-muted); font-size:16px; font-weight:600; }
 
 /* money button — brand blue→sky gradient (matches the LTO "Claim my offer" CTA) */
 .bb-oto-cta{
