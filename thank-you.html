@@ -3,21 +3,25 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>You're all set — BotBuilders</title>
+<title>Order confirmed — BotBuilders</title>
 <meta name="robots" content="noindex">
 
 <!-- ==========================================================================
-     BotBuilders — "You're all set" thank-you / booking confirmation page (v2)
+     BotBuilders — OTO upsell "Yes! add this to my order" confirmation page
+     Shown after the customer accepts the one-time offer on
+     /lto-test-oto-upsell-page. Confirms the order AND the add-on they added.
      Brand board: navy #0B1320 · blue #2563EB · sky #38BDF8 · Bebas Neue + Inter
      ------------------------------------------------------------------------
      GHL: paste everything between <div class="bb-ty"> … </div> AND the
      <script> into the thank-you page's Custom Code element. Paste
      thank-you.css into that page's Custom CSS.
      ------------------------------------------------------------------------
-     EDIT in the CONFIG block at the bottom:
-       ADD_TO_CAL_URL — link for the "Add to calendar" button (blank = hidden)
-       LOGO_URL       — your hosted logo (light/reverse for the dark panel)
-       HERO_IMAGE     — transparent cut-out photo. Blank = photo hidden.
+     EDIT the order (offer name / add-on name / prices) directly in the
+     "ORDER SUMMARY" markup below — each line is commented ▸ EDIT.
+     EDIT links, logo and pixel values in the CONFIG block at the bottom:
+       ACCESS_URL  — link for the "Access your order" button (blank = hidden)
+       LOGO_URL    — your hosted logo (light/reverse for the dark panel)
+       ORDER_VALUE — total order value sent to the ad pixels (blank = skip)
      ========================================================================== -->
 <link rel="stylesheet" href="thank-you.css">
 </head>
@@ -26,7 +30,7 @@
 <div class="bb-ty" id="bb-ty">
   <div class="bb-ty-shell">
 
-    <!-- concentric rings behind the photo -->
+    <!-- concentric rings behind the order card -->
     <div class="bb-ty-rings" aria-hidden="true">
       <svg viewBox="0 0 660 660" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g stroke="#3B82F6" fill="none">
@@ -52,23 +56,68 @@
 
       <div class="bb-ty-hero-grid">
         <div class="bb-ty-hero-l">
-          <h1 class="bb-ty-title bb-ty-in" style="--d:120ms">You're<br><span class="hl">all set!</span></h1>
-          <p class="bb-ty-lead bb-ty-in" style="--d:220ms">Your <span class="hl">FREE</span> strategy call has been booked.</p>
+          <div class="bb-ty-check bb-ty-in" style="--d:80ms" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg>
+          </div>
+
+          <h1 class="bb-ty-title bb-ty-in" style="--d:120ms">Order<br><span class="hl">confirmed!</span></h1>
+
+          <!-- ▸ EDIT the add-on name so it matches the OTO offer they accepted -->
+          <p class="bb-ty-lead bb-ty-in" style="--d:220ms">Nice choice — your <span class="hl">add-on</span> has been added to your order.</p>
 
           <div class="bb-ty-note bb-ty-in" style="--d:290ms">
             <span class="bb-ty-note-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M4 7l8 6 8-6"/></svg></span>
-            <span>Check your email and phone for your confirmation and appointment details.</span>
+            <span>Your receipt and access details are on their way to your email — no further payment needed.</span>
           </div>
 
-          <a href="#" class="bb-ty-btn bb-ty-in" id="bb-ty-cal" style="--d:360ms">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4.5" width="18" height="17" rx="2.5"/><path d="M3 9h18M8 2.5v4M16 2.5v4"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 17.5h.01M12 17.5h.01"/></svg>
-            Add to calendar
+          <a href="#" class="bb-ty-btn bb-ty-in" id="bb-ty-access" style="--d:360ms">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10.5" width="15" height="10.5" rx="2.5"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5M12 15v2.5"/></svg>
+            Access your order
           </a>
         </div>
 
-        <div class="bb-ty-photo bb-ty-in is-empty" id="bb-ty-photo" style="--d:200ms">
-          <img id="bb-ty-photo-img" src="" alt="" loading="lazy">
-        </div>
+        <!-- ================================================= order summary -->
+        <aside class="bb-ty-order bb-ty-in" style="--d:200ms" aria-label="Order summary">
+          <div class="bb-ty-order-head">
+            <span class="bb-ty-order-title">Order summary</span>
+            <span class="bb-ty-order-paid">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4 4L19 7"/></svg>
+              Paid
+            </span>
+          </div>
+
+          <ul class="bb-ty-order-list">
+            <!-- ▸ EDIT: the main product they originally bought -->
+            <li class="bb-ty-order-item">
+              <div class="bb-ty-order-item-main">
+                <span class="bb-ty-order-name">Your original order</span>
+                <span class="bb-ty-order-desc">The offer you started with</span>
+              </div>
+              <span class="bb-ty-order-price">$97</span>
+            </li>
+
+            <!-- ▸ EDIT: the OTO add-on they just accepted (highlighted) -->
+            <li class="bb-ty-order-item is-addon">
+              <div class="bb-ty-order-item-main">
+                <span class="bb-ty-order-name">Your add-on<span class="bb-ty-order-badge">Just added</span></span>
+                <span class="bb-ty-order-desc">The upgrade you added on the last step</span>
+              </div>
+              <span class="bb-ty-order-price">$47</span>
+            </li>
+          </ul>
+
+          <div class="bb-ty-order-total">
+            <span>Total charged</span>
+            <!-- ▸ EDIT: total = original order + add-on -->
+            <span class="bb-ty-order-total-num">$144</span>
+          </div>
+
+          <!-- ▸ EDIT or delete: a reassuring line under the total -->
+          <div class="bb-ty-order-save">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 3.5v6c0 5-3.4 9.4-8 10.5-4.6-1.1-8-5.5-8-10.5v-6z"/><path d="M9 12l2.2 2.2L15.5 10"/></svg>
+            Secure checkout · one-time payment
+          </div>
+        </aside>
       </div>
     </header>
 
@@ -80,37 +129,37 @@
         <li class="bb-ty-step">
           <div class="bb-ty-step-num">1</div>
           <div class="bb-ty-step-ico">
-            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="20" cy="18" r="9"/><path d="M20 15a3 3 0 0 1 0 6"/><path d="M8 40c1.5-6 6-9 12-9"/><circle cx="32" cy="32" r="7"/><path d="M37 37l5 5"/></svg>
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="11" width="36" height="26" rx="4"/><path d="M8 14l16 12 16-12"/></svg>
           </div>
-          <h3>We'll review your business</h3>
-          <p>We take time to understand your current situation and goals.</p>
+          <h3>Check your email</h3>
+          <p>Your receipt and access details are on their way to the inbox you used at checkout.</p>
         </li>
 
         <li class="bb-ty-step">
           <div class="bb-ty-step-num">2</div>
           <div class="bb-ty-step-ico">
-            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 12h32v20H22l-8 7v-7H8z"/><circle cx="18" cy="22" r="1.6" fill="currentColor" stroke="none"/><circle cx="24" cy="22" r="1.6" fill="currentColor" stroke="none"/><circle cx="30" cy="22" r="1.6" fill="currentColor" stroke="none"/></svg>
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M24 6l16 7v9c0 10-7 16-16 19-9-3-16-9-16-19v-9z"/><path d="M17 24l5 5 10-11"/></svg>
           </div>
-          <h3>We'll discuss your goals</h3>
-          <p>We'll talk about what you want to achieve and the challenges you're facing.</p>
+          <h3>Your add-on is included</h3>
+          <p>The upgrade you added is already part of your order — nothing else to do or pay.</p>
         </li>
 
         <li class="bb-ty-step">
           <div class="bb-ty-step-num">3</div>
           <div class="bb-ty-step-ico">
-            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 6h4l1 4 4 1.6 3.6-2 2.8 2.8-2 3.6 1.6 4 4 1v4l-4 1-1.6 4 2 3.6-2.8 2.8-3.6-2-4 1.6-1 4h-4l-1-4-4-1.6-3.6 2-2.8-2.8 2-3.6L6 27l-4-1v-4l4-1 1.6-4-2-3.6 2.8-2.8 3.6 2 4-1.6z"/><path d="M18 30v-5M24 30v-9M30 30v-6" stroke-width="2.6"/></svg>
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 6h4l1 4 4 1.6 3.6-2 2.8 2.8-2 3.6 1.6 4 4 1v4l-4 1-1.6 4 2 3.6-2.8 2.8-3.6-2-4 1.6-1 4h-4l-1-4-4-1.6-3.6 2-2.8-2.8 2-3.6L6 27l-4-1v-4l4-1 1.6-4-2-3.6 2.8-2.8 3.6 2 4-1.6z"/><circle cx="24" cy="24" r="5"/></svg>
           </div>
-          <h3>We'll identify automation opportunities</h3>
-          <p>We'll pinpoint where automation can save you time, increase revenue, and scale your business.</p>
+          <h3>We'll get you set up</h3>
+          <p>Our team starts preparing everything for you right away — you'll hear from us shortly.</p>
         </li>
 
         <li class="bb-ty-step">
           <div class="bb-ty-step-num">4</div>
           <div class="bb-ty-step-ico">
-            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 14l10-4 12 4 10-4v24l-10 4-12-4-10 4z"/><path d="M18 10v24M30 14v14"/><circle cx="31" cy="30" r="4"/><path d="M31 34c-3 3-3 6-3 6"/></svg>
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 40V22M24 40V12M34 40V28"/><path d="M8 40h32"/><path d="M30 8l6 2 2 6"/><path d="M36 10L22 24l-6-6-8 8"/></svg>
           </div>
-          <h3>We'll map out the best next steps</h3>
-          <p>You'll leave the call with a clear plan and recommended next steps.</p>
+          <h3>Access anytime</h3>
+          <p>Use the button above to jump into your order whenever you're ready to get started.</p>
         </li>
       </ol>
     </section>
@@ -122,8 +171,8 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v12H9l-4 4v-4H4z"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.4 2.3c-.6.3-.9.7-.9 1.4"/><path d="M12 15.5h.01"/></svg>
         </div>
         <div>
-          <h4>Questions before your call?</h4>
-          <p>Reply to your confirmation email or call us.</p>
+          <h4>Questions about your order?</h4>
+          <p>Reply to your receipt email or call us — we're happy to help.</p>
         </div>
       </div>
 
@@ -134,8 +183,8 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13v-1a8 8 0 0 1 16 0v1"/><rect x="3" y="13" width="4" height="6" rx="1.4"/><rect x="17" y="13" width="4" height="6" rx="1.4"/><path d="M20 19a4 4 0 0 1-4 3h-2"/></svg>
         </div>
         <div>
-          <h4>We're here to help</h4>
-          <p>We look forward to speaking with you!</p>
+          <h4>Thanks for your order</h4>
+          <p>We're glad you added it — you're going to love what's next!</p>
         </div>
       </div>
     </section>
@@ -151,29 +200,34 @@
 
   /* ====================================================== CONFIG — EDIT ME */
   var CONFIG = {
-    /* "Add to calendar" button link. Blank = the button is hidden.
-       GHL's confirmation email already includes add-to-calendar links, so
-       leaving this blank is fine; set it only if you have a real link.      */
-    ADD_TO_CAL_URL : '',
+    /* "Access your order" button link (member area, download, next step).
+       Blank = the button is hidden.                                         */
+    ACCESS_URL   : '',
 
     /* Your logo (light / reverse). Blank keeps the built-in gradient mark. */
-    LOGO_URL       : 'https://assets.cdn.filesafe.space/sz4sVbBhLW7cX7keIHT6/media/6a76a8418880872019224576.png',
-    LOGO_HEIGHT    : 48,
+    LOGO_URL     : 'https://assets.cdn.filesafe.space/sz4sVbBhLW7cX7keIHT6/media/6a76a8418880872019224576.png',
+    LOGO_HEIGHT  : 48,
 
-    /* Cut-out hero photo (transparent PNG works best). Blank hides it.       */
-    HERO_IMAGE     : 'https://assets.cdn.filesafe.space/sz4sVbBhLW7cX7keIHT6/media/6a7a83889a9c7792ea6078ce.png'
+    /* Ad-pixel purchase value. Leave ORDER_VALUE blank to skip sending a
+       value (the Purchase event still fires). Match CURRENCY to your store. */
+    ORDER_VALUE  : '',
+    CURRENCY     : 'USD'
   };
   /* ======================================================================= */
 
   var root = document.getElementById('bb-ty');
   if(!root) return;
 
-  /* -- conversion tracking: this page load = a booked call ----------------- */
+  /* -- conversion tracking: this page load = a completed upsell purchase --- */
   (function(){
     try{
-      if(window.dataLayer && window.dataLayer.push) window.dataLayer.push({event:'booking_confirmed'});
-      if(typeof window.gtag === 'function') window.gtag('event','conversion',{send_to:'booking_confirmed'});
-      if(typeof window.fbq === 'function'){ window.fbq('track','Schedule'); window.fbq('track','Lead'); }
+      var val = parseFloat(CONFIG.ORDER_VALUE);
+      var hasVal = !isNaN(val);
+      var payload = {event:'purchase'};
+      if(hasVal){ payload.value = val; payload.currency = CONFIG.CURRENCY; }
+      if(window.dataLayer && window.dataLayer.push) window.dataLayer.push(payload);
+      if(typeof window.gtag === 'function') window.gtag('event','purchase', hasVal ? {value:val, currency:CONFIG.CURRENCY} : {});
+      if(typeof window.fbq === 'function') window.fbq('track','Purchase', hasVal ? {value:val, currency:CONFIG.CURRENCY} : {});
     }catch(e){}
   })();
 
@@ -203,19 +257,11 @@
     }
   }
 
-  /* -- hero photo --------------------------------------------------------- */
+  /* -- access-your-order button ------------------------------------------- */
   (function(){
-    var wrap=document.getElementById('bb-ty-photo');
-    var img=document.getElementById('bb-ty-photo-img');
-    if(!wrap || !img) return;
-    if(CONFIG.HERO_IMAGE){ img.src=CONFIG.HERO_IMAGE; img.alt='BotBuilders'; wrap.classList.remove('is-empty'); }
-  })();
-
-  /* -- add to calendar button --------------------------------------------- */
-  (function(){
-    var btn=document.getElementById('bb-ty-cal');
+    var btn=document.getElementById('bb-ty-access');
     if(!btn) return;
-    if(CONFIG.ADD_TO_CAL_URL){ btn.href=CONFIG.ADD_TO_CAL_URL; btn.target='_blank'; btn.rel='noopener'; }
+    if(CONFIG.ACCESS_URL){ btn.href=CONFIG.ACCESS_URL; }
     else { btn.style.display='none'; }
   })();
 
