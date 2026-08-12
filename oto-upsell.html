@@ -193,11 +193,11 @@
   var CONFIG = {
     /* Where "Yes! Add to my order" sends the buyer. In a 1-click-upsell
        funnel this is your platform's accept / upsell URL. Blank = stay put. */
-    ACCEPT_URL   : '',
+    ACCEPT_URL   : 'https://lead.automatordemo.com/lto-thank-you-page-1-offer--bump--oto',
 
     /* Where "No thanks" sends them — usually straight to the thank-you page.
        Blank = stay put.                                                      */
-    DECLINE_URL  : '',
+    DECLINE_URL  : 'https://lead.automatordemo.com/lto-thank-you-page-1-offer--bump--oto',
 
     /* The upsell price (used for conversion tracking only).                  */
     OFFER_VALUE  : 1297,
@@ -316,6 +316,10 @@
 
   /* ---------- CONFIG · edit these three values ---------- */
   var CONFIG = {
+    // NOTE: the ACCEPT_URL / DECLINE_URL for the offer buttons live in the
+    // main CONFIG block near the top of this file. Both point at the
+    // thank-you page; File 2 (below) records which button was clicked.
+
     // Exact visible text on each button. Partial match, so "Add To My Order"
     // still matches a button reading "Yes! Add To My Order".
     acceptLabel: "Add To My Order",
