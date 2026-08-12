@@ -188,67 +188,78 @@
     </header>
 
     <!-- ============================================================
-         FLOW VAULT FUNNEL  ·  FILE 4 of 5
-         PASTE INTO: Page 3 (Thank You Page) → Custom Code element  [SECOND OF TWO]
+         MELVIN LTO FUNNEL  ·  FILE 4 of 5
+         PASTE INTO: Melvin LTO Thank You Page → Custom Code element  [SECOND OF TWO]
          POSITION:   Below your header, and below the GHL Order Confirmation
                      element if you are using one.
          JOB:        The visible message blocks. Two show at a time, never more.
 
          Two registers, and the difference carries meaning:
-           .wg-card--held  solid fill, teal rail    → you own this, here it is
-           .wg-card--open  ticket edge, amber rail  → still claimable, act now
+           .wg-card--held  solid teal rail       → you own this, here it is
+           .wg-card--open  perforated amber rail → still claimable, act now
 
-         Edit the copy freely. Do not rename the outer class on each block or
-         the CSS in File 5 stops matching.
+         STILL TO EDIT:
+           · Three hrefs marked REPLACE
+           · The two OTO blocks. I do not know what your OTO page offers yet,
+             so that copy is a stand in. Swap in the real offer name.
+
+         Do NOT rename the four outer classes or the CSS stops matching:
+           wg-if-bump · wg-if-nobump · wg-if-oto · wg-if-nooto
          ============================================================ -->
     <div class="wg-states">
 
-      <!-- Shown when the bump WAS checked -->
+      <!-- ===== BUMP TAKEN · they ticked VIP Launch Intensive ===== -->
       <div class="wg-card wg-card--held wg-if-bump">
         <p class="wg-card__eyebrow">Included in this order</p>
-        <h3 class="wg-card__title">Flow Vault Pro is yours</h3>
+        <h3 class="wg-card__title">Your VIP Launch Intensive is booked</h3>
         <p class="wg-card__body">
-          A second email carries your Pro library link. It lands within five
-          minutes of this page. Search your inbox for Flow Vault Pro if it hides.
+          A second email carries the scheduling link for your live 1:1 session.
+          Pick the earliest slot you can make, because the 48 hour window to
+          launch starts when we sit down together.
         </p>
+        <a class="wg-card__cta" href="#REPLACE_WITH_VIP_BOOKING_URL">
+          Schedule my intensive
+        </a>
       </div>
 
-      <!-- Shown when the bump was NOT checked -->
+      <!-- ===== BUMP SKIPPED · no VIP Launch Intensive ===== -->
       <div class="wg-card wg-card--open wg-if-nobump">
         <p class="wg-card__eyebrow">Still open to you</p>
-        <h3 class="wg-card__title">Flow Vault Pro at checkout pricing</h3>
+        <h3 class="wg-card__title">Add the VIP Launch Intensive for $197</h3>
         <p class="wg-card__body">
-          The Pro library holds the advanced flows, and the price you saw at
-          checkout stays live for one hour from now.
+          A live 1:1 session where we build, connect and launch your first funnel
+          with you, so you go live in 48 hours instead of finding the time later.
+          This price holds for one hour.
         </p>
-        <a class="wg-card__cta" href="#REPLACE_WITH_PRO_ORDER_URL">
-          Add Flow Vault Pro
+        <a class="wg-card__cta" href="#REPLACE_WITH_VIP_ORDER_URL">
+          Add the VIP Launch Intensive
         </a>
       </div>
 
-      <!-- Shown when they ACCEPTED the higher ticket offer -->
+      <!-- ===== OTO ACCEPTED ·  rename to your real OTO offer ===== -->
       <div class="wg-card wg-card--held wg-if-oto">
         <p class="wg-card__eyebrow">Your next step</p>
-        <h3 class="wg-card__title">Book your onboarding call</h3>
+        <h3 class="wg-card__title">REPLACE: your OTO offer is active</h3>
         <p class="wg-card__body">
-          Your welcome email carries the booking link. Pick any slot this week and
-          bring the one flow you want built first.
+          REPLACE with what happens now that they accepted. Where the access
+          lives, what lands in their inbox, and what you need from them first.
         </p>
-        <a class="wg-card__cta" href="#REPLACE_WITH_BOOKING_URL">
-          Choose a time
+        <a class="wg-card__cta" href="#REPLACE_WITH_OTO_ACCESS_URL">
+          REPLACE: action label
         </a>
       </div>
 
-      <!-- Shown when they DECLINED the higher ticket offer -->
+      <!-- ===== OTO DECLINED ·  rename to your real OTO offer ===== -->
       <div class="wg-card wg-card--open wg-if-nooto">
         <p class="wg-card__eyebrow">One last thing</p>
-        <h3 class="wg-card__title">The done with you tier stays open until midnight</h3>
+        <h3 class="wg-card__title">REPLACE: your OTO offer stays open until midnight</h3>
         <p class="wg-card__body">
-          You keep everything you just bought either way. This adds our team
-          building your first three flows alongside you.
+          REPLACE with the short version of the offer they just declined. Lead
+          with the fact that they keep their Growth Plan either way, then say
+          what this adds on top.
         </p>
-        <a class="wg-card__cta" href="#REPLACE_WITH_HIGH_TICKET_URL">
-          See what is included
+        <a class="wg-card__cta" href="#REPLACE_WITH_OTO_ORDER_URL">
+          REPLACE: action label
         </a>
       </div>
 
