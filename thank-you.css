@@ -120,8 +120,8 @@
 .bb-ty-logo-word{ font-family:var(--ty-display); font-size:32px; letter-spacing:1px; color:var(--ty-ink); line-height:1; }
 .bb-ty-logo-word sup{ font-size:.34em; vertical-align:super; margin-left:2px; opacity:.7; }
 
-.bb-ty-hero-grid{ position:relative; display:grid; grid-template-columns:1fr .8fr; align-items:center; gap:36px; }
-.bb-ty-hero-l{ position:relative; z-index:3; }
+.bb-ty-hero-grid{ position:relative; display:grid; grid-template-columns:1fr .8fr; align-items:start; gap:36px; }
+.bb-ty-hero-l{ position:relative; z-index:3; padding-top:10px; }
 
 /* hero cut-out photo (Matt) with a soft glow behind ----------------------- */
 .bb-ty-photo{
@@ -132,7 +132,7 @@
 .bb-ty-photo.is-empty{ display:none; }
 .bb-ty-photo img{
   position:relative; z-index:2;
-  max-height:460px; width:auto; max-width:100%;
+  max-height:540px; width:auto; max-width:100%;
   filter:drop-shadow(0 26px 44px rgba(11,30,60,.32));
 }
 .bb-ty-photo-glow{
@@ -144,7 +144,7 @@
 
 .bb-ty-title{
   font-family:var(--ty-head); font-weight:800; color:var(--ty-heading);
-  font-size:clamp(36px,5.4vw,62px); line-height:1.04; letter-spacing:-.018em;
+  font-size:clamp(46px,6.6vw,84px); line-height:1.02; letter-spacing:-.02em;
 }
 .bb-ty-title .hl{
   background:linear-gradient(95deg,#2563FF 0%,#38BDF8 58%,#22D3EE 100%);
@@ -152,15 +152,16 @@
   -webkit-text-fill-color:transparent; color:transparent;
 }
 .bb-ty-lead{
-  margin-top:16px; font-family:var(--ty-font);
-  font-weight:600; font-size:clamp(17px,2.2vw,21px); color:var(--ty-heading); line-height:1.35;
+  margin-top:20px; font-family:var(--ty-font);
+  font-weight:600; font-size:clamp(20px,2.7vw,28px); color:var(--ty-heading); line-height:1.32;
 }
 .bb-ty-lead .hl{ font-weight:700; color:var(--ty-blue); }
 
-.bb-ty-note{ display:flex; align-items:flex-start; gap:11px; margin-top:16px; max-width:32em; }
-.bb-ty-note-ico{ flex:none; color:var(--ty-blue); margin-top:2px; }
-.bb-ty-note-ico svg{ width:21px; height:21px; }
-.bb-ty-note span:last-child{ color:var(--ty-muted); font-size:15px; }
+/* receipt caption, centred below the order card */
+.bb-ty .bb-ty-note{ display:flex; align-items:center; justify-content:center; gap:11px; max-width:620px; margin:16px auto 0; text-align:center; }
+.bb-ty-note-ico{ flex:none; color:var(--ty-blue); display:flex; }
+.bb-ty-note-ico svg{ width:22px; height:22px; }
+.bb-ty-note span:last-child{ color:var(--ty-muted); font-size:15.5px; }
 
 /* access-your-order button (matches the OTO "Get Instant Access" CTA) ------ */
 .bb-ty-btn{
@@ -181,8 +182,8 @@
    ORDER SUMMARY CARD (dark navy panel — matches OTO dark panels)
    ========================================================================== */
 .bb-ty-order{
-  position:relative; z-index:3;
-  max-width:660px; margin:34px auto 0;
+  position:relative; z-index:4;
+  max-width:660px; margin:-243px auto 0;
   background:
     radial-gradient(360px 220px at 84% 0%, rgba(37,99,255,.20) 0%, transparent 66%),
     linear-gradient(180deg,#0E1F3A 0%,#0A1730 100%);
