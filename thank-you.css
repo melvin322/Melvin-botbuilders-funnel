@@ -93,6 +93,24 @@
 }
 .bb-ty-bg.has-img::before{ display:none; }
 
+/* celebratory confetti scattered across the hero background --------------- */
+.bb-ty-confetti{ position:absolute; left:0; right:0; top:0; height:760px; z-index:0; pointer-events:none; overflow:hidden; }
+.bb-ty-confetti i{
+  position:absolute; top:var(--y); left:var(--x);
+  width:var(--w,10px); height:var(--h,15px); border-radius:var(--r,2px);
+  background:var(--c); opacity:var(--o,.82);
+  transform:rotate(var(--rot,0deg));
+  will-change:transform;
+  animation:bb-ty-confetti-float var(--t,5.5s) ease-in-out var(--d,0s) infinite;
+}
+@keyframes bb-ty-confetti-float{
+  0%,100%{ transform:translateY(0) rotate(var(--rot,0deg)); }
+  50%{ transform:translateY(-12px) rotate(calc(var(--rot,0deg) + 16deg)); }
+}
+@media (prefers-reduced-motion: reduce){
+  .bb-ty-confetti i{ animation:none; }
+}
+
 .bb-ty-secure, .bb-ty-shell, .bb-ty-foot{ position:relative; z-index:1; }
 
 /* ==========================================================================
