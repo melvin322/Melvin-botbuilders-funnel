@@ -599,6 +599,7 @@
 .bb-price-bill{ text-align:center; margin-top:8px; color:var(--bb-muted); font-size:13.5px; }
 .bb-price-bill s{ color:#A9B4C4; }
 .bb-price-bill b{ color:var(--bb-ok); font-weight:800; }
+.bb-price-annual{ text-align:center; margin-top:18px; font-size:14.5px; font-weight:700; color:var(--bb-heading); }
 .bb-price-list{ margin:24px 0 4px; display:flex; flex-direction:column; gap:12px; }
 .bb-price-list li{ display:flex; align-items:center; gap:11px; color:var(--bb-heading); font-size:15px; font-weight:500; }
 .bb-price-list .bb-ck{
