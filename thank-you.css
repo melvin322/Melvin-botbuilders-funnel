@@ -128,6 +128,7 @@
   position:relative; z-index:2;
   display:flex; align-items:flex-end; justify-content:center;
   min-height:340px;
+  transform:translateX(-90px);   /* nudge Matt left so the card spans his waist */
 }
 .bb-ty-photo.is-empty{ display:none; }
 .bb-ty-photo img{
@@ -183,7 +184,7 @@
    ========================================================================== */
 .bb-ty-order{
   position:relative; z-index:4;
-  max-width:660px; margin:-243px auto 0;
+  max-width:660px; margin:-196px auto 0;
   background:
     radial-gradient(360px 220px at 84% 0%, rgba(37,99,255,.20) 0%, transparent 66%),
     linear-gradient(180deg,#0E1F3A 0%,#0A1730 100%);
@@ -365,7 +366,7 @@
   .bb-ty-hero-grid{ grid-template-columns:1fr; gap:20px; justify-items:center; text-align:center; }
   .bb-ty-hero-l{ display:flex; flex-direction:column; align-items:center; }
   .bb-ty-note{ text-align:left; }
-  .bb-ty-photo{ min-height:0; order:-1; }
+  .bb-ty-photo{ min-height:0; order:-1; transform:none; }
   .bb-ty-photo img{ max-height:320px; }
   .bb-ty-order{ max-width:560px; margin-top:8px; }
   .bb-ty-help{ grid-template-columns:1fr; gap:18px; }
