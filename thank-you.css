@@ -158,11 +158,12 @@
 }
 .bb-ty-lead .hl{ font-weight:700; color:var(--ty-blue); }
 
-/* receipt caption, centred below the order card */
-.bb-ty .bb-ty-note{ display:flex; align-items:center; justify-content:center; gap:11px; max-width:620px; margin:16px auto 0; text-align:center; }
-.bb-ty-note-ico{ flex:none; color:var(--ty-blue); display:flex; }
-.bb-ty-note-ico svg{ width:22px; height:22px; }
-.bb-ty-note span:last-child{ color:var(--ty-muted); font-size:15.5px; }
+/* receipt caption, centred below the order card — icon aligned with the
+   first line of text, text flowing beside it, whole block centred */
+.bb-ty .bb-ty-note{ display:flex; align-items:flex-start; gap:9px; width:fit-content; max-width:560px; margin:16px auto 0; text-align:left; }
+.bb-ty-note-ico{ flex:none; color:var(--ty-blue); display:flex; margin-top:2px; }
+.bb-ty-note-ico svg{ width:20px; height:20px; }
+.bb-ty-note span:last-child{ color:var(--ty-muted); font-size:15.5px; line-height:1.5; }
 
 /* access-your-order button (matches the OTO "Get Instant Access" CTA) ------ */
 .bb-ty-btn{
