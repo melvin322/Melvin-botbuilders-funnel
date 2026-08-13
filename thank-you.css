@@ -114,8 +114,8 @@
 /* party poppers firing confetti inward from each side -------------------- */
 .bb-ty-popper{ position:absolute; z-index:1; width:150px; pointer-events:none; }
 .bb-ty-popper svg{ width:100%; height:auto; overflow:visible; filter:drop-shadow(0 10px 16px rgba(11,30,60,.20)); }
-.bb-ty-popper--l{ left:-8px; top:372px; transform:rotate(36deg); }
-.bb-ty-popper--r{ right:-8px; top:150px; transform:rotate(-36deg); }
+.bb-ty-popper--l{ left:-10px; top:470px; transform:rotate(42deg); }
+.bb-ty-popper--r{ right:-10px; top:470px; transform:rotate(-42deg); }
 
 .bb-ty-secure, .bb-ty-shell, .bb-ty-foot{ position:relative; z-index:1; }
 
