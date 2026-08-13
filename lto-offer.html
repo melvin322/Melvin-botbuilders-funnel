@@ -426,11 +426,27 @@
             </span>
           </label>
 
-          <a href="#" class="bb-btn bb-btn--primary bb-btn--wide" data-cta>
-            <svg class="bb-btn-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M13 2L4.5 13H11l-1 9 8.5-11H12z"/></svg>
-            Get Instant Access
-            <svg class="bb-arrow" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </a>
+          <div class="bb-buy" id="bb-buy">
+            <a href="#" id="bb-getaccess" class="bb-btn bb-btn--primary bb-btn--wide">
+              <svg class="bb-btn-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M13 2L4.5 13H11l-1 9 8.5-11H12z"/></svg>
+              Get Instant Access
+              <svg class="bb-arrow" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+
+            <form class="bb-lead" id="bb-lead" novalidate>
+              <div class="bb-lead-head">Enter your details to continue</div>
+              <div class="bb-lead-row">
+                <input type="text" name="first_name" placeholder="First name" autocomplete="given-name" required>
+                <input type="text" name="last_name" placeholder="Last name" autocomplete="family-name" required>
+              </div>
+              <input type="email" name="email" placeholder="Email address" autocomplete="email" required>
+              <button type="submit" class="bb-btn bb-btn--primary bb-btn--wide">
+                Continue to checkout
+                <svg class="bb-arrow" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </button>
+              <p class="bb-lead-err" id="bb-lead-err" hidden>Please enter your name and a valid email.</p>
+            </form>
+          </div>
 
           <div class="bb-price-guar">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 3.5v6c0 5-3.4 9.4-8 10.5-4.6-1.1-8-5.5-8-10.5v-6z"/><path d="M9 12l2.2 2.2L15.5 10"/></svg>
@@ -868,24 +884,12 @@
     });
   })();
 
-  /* -- 6. CTAs: the pricing-card button is the real checkout; every other
-     "Claim my offer" scrolls down to the offer / pricing section ---------- */
+  /* -- 6. CTAs: every "Claim my offer" scrolls down to the offer / pricing
+     section (the smooth-scroll handler below does the rest) --------------- */
   var bumpOn = false;
-  var checkoutBtns = [];
   root.querySelectorAll('[data-cta]').forEach(function(el){
-    if(el.closest('#bb-pricing')){
-      checkoutBtns.push(el);
-      el.addEventListener('click', function(){ track('Lead', {content_name:'Claim my offer', value: bumpOn?294:97}); });
-    } else {
-      el.setAttribute('href', '#bb-pricing');   // smooth-scroll handler (below) does the rest
-    }
+    el.setAttribute('href', '#bb-pricing');
   });
-  function wireCheckout(){
-    var url = CONFIG.CHECKOUT_URL;
-    if(bumpOn && CONFIG.BUMP_PARAM){ url += (url.indexOf('?')>-1?'&':'?') + CONFIG.BUMP_PARAM; }
-    checkoutBtns.forEach(function(el){ el.href = url; });
-  }
-  wireCheckout();
 
   /* -- 6b. order-bump add-on checkbox ------------------------------------- */
   (function(){
@@ -894,8 +898,43 @@
     input.addEventListener('change', function(){
       bumpOn = input.checked;
       bump.classList.toggle('is-on', bumpOn);
-      wireCheckout();
       if(bumpOn) track('AddToCart', {content_name:'VIP Launch Intensive', value:197});
+    });
+  })();
+
+  /* -- 6c. Get Instant Access → collect name + email → checkout ----------- */
+  (function(){
+    var wrap = document.getElementById('bb-buy');
+    var btn  = document.getElementById('bb-getaccess');
+    var form = document.getElementById('bb-lead');
+    if(!wrap || !btn || !form) return;
+    var err = document.getElementById('bb-lead-err');
+
+    btn.addEventListener('click', function(e){
+      e.preventDefault();
+      wrap.classList.add('is-open');
+      var first = form.querySelector('input'); if(first) first.focus();
+    });
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var fn = (form.first_name.value || '').trim();
+      var ln = (form.last_name.value  || '').trim();
+      var em = (form.email.value      || '').trim();
+      var okEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em);
+      if(!fn || !ln || !okEmail){ if(err) err.hidden = false; return; }
+      if(err) err.hidden = true;
+
+      var url = CONFIG.CHECKOUT_URL;
+      var q = 'first_name=' + encodeURIComponent(fn)
+            + '&last_name=' + encodeURIComponent(ln)
+            + '&email='     + encodeURIComponent(em);
+      if(bumpOn && CONFIG.BUMP_PARAM) q += '&' + CONFIG.BUMP_PARAM;
+      url += (url.indexOf('?') > -1 ? '&' : '?') + q;
+
+      track('Lead', {content_name:'Get Instant Access', value: bumpOn?294:97});
+      track('InitiateCheckout', {value: bumpOn?294:97});
+      window.location.href = url;
     });
   })();
 
