@@ -649,25 +649,6 @@
   background:#DDF3E6; padding:4px 9px; border-radius:5px;
 }
 
-/* Get Instant Access → dropdown lead form */
-.bb-buy{ position:relative; }
-#bb-getaccess{ margin-top:20px; }
-.bb-lead{ display:none; margin-top:16px; }
-.bb-buy.is-open #bb-getaccess{ display:none; }
-.bb-buy.is-open .bb-lead{ display:block; animation:bb-drop .28s var(--bb-ease); }
-@keyframes bb-drop{ from{ opacity:0; transform:translateY(-6px); } to{ opacity:1; transform:none; } }
-.bb-lead-head{ text-align:center; font-size:13px; font-weight:700; color:var(--bb-muted); margin-bottom:12px; }
-.bb-lead-row{ display:flex; gap:10px; }
-.bb-lead input{
-  width:100%; flex:1; min-width:0; margin-bottom:10px;
-  padding:13px 14px; border:1.5px solid var(--bb-border); border-radius:10px;
-  font-family:var(--bb-font); font-size:15px; color:var(--bb-heading); background:#fff;
-  transition:border-color .15s ease, box-shadow .15s ease;
-}
-.bb-lead input::placeholder{ color:#9AA7BC; }
-.bb-lead input:focus{ outline:none; border-color:var(--bb-blue); box-shadow:0 0 0 3px rgba(37,99,255,.15); }
-.bb-lead .bb-btn{ margin-top:4px; }
-.bb-lead-err{ margin-top:10px; text-align:center; font-size:13px; font-weight:600; color:#DC4B4B; }
 
 /* ==========================================================================
    TESTIMONIALS + METRICS
