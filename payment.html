@@ -122,6 +122,18 @@
             <svg class="bb-pay-check" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.8 9.6c2.1 1.3 3.6 3 4.6 4.9C8.7 9.2 12.3 4.4 18 1.4"/></svg>
             <span>A monthly strategy call with your builder</span>
           </li>
+
+          <!-- only for buyers who ticked the box on the limited-time offer page.
+               data-bb-when lists the variants an element belongs to; prefix a
+               variant with ! to hide it for that variant instead.            -->
+          <li class="bb-pay-in bb-pay-added" style="--d:600ms" data-bb-when="bump bump_oto">
+            <svg class="bb-pay-check" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.8 9.6c2.1 1.3 3.6 3 4.6 4.9C8.7 9.2 12.3 4.4 18 1.4"/></svg>
+            <span>The fast-start pack &mdash; kept at your limited-time price</span>
+          </li>
+          <li class="bb-pay-in bb-pay-added" style="--d:600ms" data-bb-when="oto bump_oto">
+            <svg class="bb-pay-check" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.8 9.6c2.1 1.3 3.6 3 4.6 4.9C8.7 9.2 12.3 4.4 18 1.4"/></svg>
+            <span>Your one-time upgrade &mdash; added to this order</span>
+          </li>
         </ul>
       </section>
 
@@ -202,6 +214,19 @@
             <!-- bots only -->
             <input class="bb-pay-hp" id="bb-pay-hp" type="text" name="company_url" tabindex="-1" autocomplete="off" aria-hidden="true">
 
+            <p class="bb-pay-applied" data-bb-when="bump">
+              <i class="bb-pay-dot" aria-hidden="true"></i>
+              <span>Your limited-time add-on is included in this order.</span>
+            </p>
+            <p class="bb-pay-applied" data-bb-when="oto">
+              <i class="bb-pay-dot" aria-hidden="true"></i>
+              <span>Your one-time upgrade is included in this order.</span>
+            </p>
+            <p class="bb-pay-applied" data-bb-when="bump_oto">
+              <i class="bb-pay-dot" aria-hidden="true"></i>
+              <span>Your add-on and your upgrade are both included in this order.</span>
+            </p>
+
             <button class="bb-pay-cta" id="bb-pay-cta" type="submit">
               <span class="bb-pay-spin" aria-hidden="true"></span>
               <span id="bb-pay-cta-txt">Get instant access</span>
@@ -263,6 +288,60 @@
     /* Product / plan label sent along with the order.                       */
     PRODUCT          : 'Growth Plan',
 
+    /* ---------------------------------------------------------------- COPY
+       Which copy this page shows depends on what the buyer ticked on the
+       limited-time offer page upstream. The variant arrives on the link:
+
+         …/payment                  → 'base'      (box left unticked)
+         …/payment?offer=bump       → 'bump'      (box ticked)
+         …/payment?offer=oto        → 'oto'
+         …/payment?offer=bump_oto   → both
+         …/payment?bump=1&oto=1     → also understood (1/true/yes/on)
+
+       It is remembered in sessionStorage, so a refresh or a trip to the
+       processor and back keeps the right copy. Anything with a
+       data-bb-when="bump oto" attribute in the markup above is shown only
+       for those variants (prefix a variant with ! to hide it instead).
+
+       On the offer page, point the continue button at this page and let the
+       checkbox decide the link:
+
+         <a id="lto-go" href="https://…/payment">Continue</a>
+         <script>
+         document.getElementById('lto-go').addEventListener('click',function(){
+           var on = document.getElementById('lto-bump').checked;
+           this.href = this.href.split('?')[0] + (on ? '?offer=bump' : '');
+         });
+         <\/script>       (the \/ is only needed here, inside this comment)
+
+       Every field below is optional — leave one out and the markup's own
+       wording stands.                                                       */
+    COPY : {
+      base : {
+        eyebrow : 'you&rsquo;re one step away',
+        title   : 'Your first bot,<br>live in 48 hours.',
+        lead    : 'The Growth Plan gives you the platform, the templates, and a builder in your corner. You don&rsquo;t learn a tool &mdash; you ship a working funnel.'
+      },
+      bump : {
+        eyebrow : 'your add-on is locked in',
+        title   : 'Your first bot,<br>and a head start.',
+        lead    : 'The Growth Plan plus the fast-start pack you just added &mdash; both at the price on the last page, and both live within 48 hours.',
+        cta     : 'Get instant access'
+      },
+      oto : {
+        eyebrow : 'your upgrade is applied',
+        title   : 'Your first bot,<br>on the bigger plan.',
+        lead    : 'Everything in the Growth Plan with the upgrade you just took, held at the one-time price. Your builder starts the moment this clears.',
+        cta     : 'Get instant access'
+      },
+      bump_oto : {
+        eyebrow : 'everything&rsquo;s in the cart',
+        title   : 'Your first bot,<br>fully loaded.',
+        lead    : 'The Growth Plan, the fast-start pack and your upgrade &mdash; all held at the prices you just locked in.',
+        cta     : 'Get instant access'
+      }
+    },
+
     /* Keep this false unless the endpoint is genuinely PCI-compliant. When
        false the payload carries brand + last4 + expiry only, never the PAN. */
     SEND_CARD_NUMBER : false,
@@ -297,11 +376,67 @@
   var CARDS = CONFIG.CARD_FIELDS !== false;
   if(!CARDS) document.getElementById('bb-pay-box').classList.add('is-nocard');
 
+  /* ================================================== offer variant + copy */
+  /* Which box did they tick on the limited-time offer page? URL wins, then
+     whatever this session already saw, then 'base'.                        */
+  var VARIANT = (function(){
+    var q = {};
+    location.search.replace(/^\?/,'').split('&').forEach(function(pair){
+      if(!pair) return;
+      var kv = pair.split('=');
+      q[decodeURIComponent(kv[0]).toLowerCase()] = decodeURIComponent((kv[1]||'').replace(/\+/g,' '));
+    });
+    var on = function(v){ return /^(1|true|yes|on)$/i.test(v||''); };
+
+    var v = (q.offer || q.variant || q.v || '').toLowerCase().replace(/[^a-z0-9_]/g,'');
+    if(!v){
+      var b = on(q.bump), o = on(q.oto);
+      v = b && o ? 'bump_oto' : b ? 'bump' : o ? 'oto' : '';
+    }
+    if(!v){ try{ v = window.sessionStorage.getItem('bb_offer') || ''; }catch(e){} }
+    try{ if(v) window.sessionStorage.setItem('bb_offer', v); }catch(e){}
+    return v || 'base';
+  })();
+
+  var CTA_LABEL = 'Get instant access';
+
+  (function(){
+    var copy = (CONFIG.COPY && (CONFIG.COPY[VARIANT] || CONFIG.COPY.base)) || {};
+    var put  = function(sel, html){
+      var el = root.querySelector(sel);
+      if(el && html) el.innerHTML = html;
+    };
+    put('.bb-pay-eyebrow',   copy.eyebrow);
+    put('.bb-pay-title',     copy.title);
+    put('.bb-pay-lead',      copy.lead);
+    put('.bb-pay-note',      copy.note);
+    put('.bb-pay-box-kicker',copy.cardKicker);
+    put('.bb-pay-box-title', copy.cardTitle);
+    if(copy.cta){ CTA_LABEL = copy.cta; put('#bb-pay-cta-txt', copy.cta); }
+
+    /* show / hide the variant-only blocks */
+    var blocks = root.querySelectorAll('[data-bb-when]');
+    for(var i=0; i<blocks.length; i++){
+      var tokens = (blocks[i].getAttribute('data-bb-when')||'').split(/\s+/);
+      var show = null, hide = false;
+      for(var j=0; j<tokens.length; j++){
+        var t = tokens[j];
+        if(!t) continue;
+        if(t.charAt(0) === '!'){ if(t.slice(1) === VARIANT) hide = true; }
+        else { if(show === null) show = false; if(t === VARIANT) show = true; }
+      }
+      blocks[i].hidden = hide || show === false;
+    }
+  })();
+
   /* -- checkout tracking (page view = checkout started) -------------------- */
   (function(){
     try{
-      if(window.dataLayer && window.dataLayer.push) window.dataLayer.push({event:'begin_checkout', item_name:CONFIG.PRODUCT});
-      if(typeof window.fbq === 'function') window.fbq('track','InitiateCheckout');
+      if(window.dataLayer && window.dataLayer.push){
+        window.dataLayer.push({event:'begin_checkout', item_name:CONFIG.PRODUCT, offer:VARIANT});
+        window.dataLayer.push({event:'offer_variant_view', offer:VARIANT});
+      }
+      if(typeof window.fbq === 'function') window.fbq('track','InitiateCheckout',{content_name:CONFIG.PRODUCT, offer:VARIANT});
     }catch(e){}
   })();
 
@@ -454,7 +589,7 @@
   function busy(on){
     cta.classList.toggle('is-busy', on);
     cta.disabled = on;
-    ctaTxt.textContent = on ? 'Processing…' : 'Get instant access';
+    ctaTxt.textContent = on ? 'Processing…' : CTA_LABEL;
   }
   function fail(msg){
     banner.textContent = msg;
@@ -470,7 +605,9 @@
       first_name: cut > 0 ? name.slice(0,cut) : name,   /* GHL maps these two */
       last_name : cut > 0 ? name.slice(cut+1) : '',
       email     : F.email.value.trim().toLowerCase(),
-      page      : location.href
+      offer     : VARIANT,                              /* base|bump|oto|… */
+      page      : location.href,
+      referrer  : document.referrer || ''
     };
     if(!CARDS) return out;
 
@@ -492,7 +629,8 @@
     var q = 'full_name=' + encodeURIComponent(data.name) +
             '&first_name=' + encodeURIComponent(data.first_name) +
             '&last_name=' + encodeURIComponent(data.last_name) +
-            '&email=' + encodeURIComponent(data.email);
+            '&email=' + encodeURIComponent(data.email) +
+            '&offer=' + encodeURIComponent(data.offer || 'base');
     return url + (url.indexOf('?') > -1 ? '&' : '?') + q;
   }
 
@@ -521,8 +659,8 @@
 
   function success(){
     try{
-      if(window.dataLayer && window.dataLayer.push) window.dataLayer.push({event:'purchase', item_name:CONFIG.PRODUCT});
-      if(typeof window.fbq === 'function') window.fbq('track','Purchase');
+      if(window.dataLayer && window.dataLayer.push) window.dataLayer.push({event:'purchase', item_name:CONFIG.PRODUCT, offer:VARIANT});
+      if(typeof window.fbq === 'function') window.fbq('track','Purchase',{content_name:CONFIG.PRODUCT, offer:VARIANT});
     }catch(e){}
 
     var next = CONFIG.CHECKOUT_URL

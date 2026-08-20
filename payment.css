@@ -320,6 +320,25 @@
 }
 .bb-pay-formerr.is-on{ display:block; }
 
+/* variant-only blocks (data-bb-when) — [hidden] must beat the display rules */
+.bb-pay [hidden]{ display:none !important; }
+
+/* the extra "you added this" line in the checklist */
+.bb-pay-added span{ font-weight:500; }
+
+/* "your add-on is included" note above the CTA */
+.bb-pay-applied{
+  display:grid; grid-template-columns:15px 1fr; align-items:start;
+  gap:0 0;
+  margin-top:2px; padding:12px 14px;
+  font-size:13.5px; line-height:1.5; font-weight:500;
+  color:#1F6B4C;
+  background:rgba(46,158,107,.08);
+  border:1px solid rgba(46,158,107,.18);
+  border-radius:10px;
+}
+.bb-pay-applied .bb-pay-dot{ margin-top:6px; }
+
 /* CONFIG.CARD_FIELDS = false — the card is taken on the GHL order form /
    payment link instead, so these rows come out of the page entirely.        */
 .bb-pay-box.is-nocard #bb-pay-card-slot,
