@@ -677,6 +677,10 @@
        funnel pages). */
     LEAD_KEY      : 'wg_lead',
 
+    /* GHL Inbound Webhook — the lead is POSTed here on submit, which creates
+       the contact in GHL. Blank = skip the webhook. */
+    WEBHOOK_URL   : 'https://services.leadconnectorhq.com/hooks/sz4sVbBhLW7cX7keIHT6/webhook-trigger/b9a82170-fd53-4844-bd39-4d90f311c28c',
+
     /* "Watch demo" button. BOTH supported:
          • Direct file → ends in .mp4/.webm/.ogg → opens in a lightbox <video>
          • Embed/any URL → opens in a new tab
@@ -916,6 +920,23 @@
     if(!wrap || !btn || !form) return;
     var err = document.getElementById('bb-lead-err');
 
+    /* POST the lead to the GHL inbound webhook — this creates the contact.
+       sendBeacon (with a fetch fallback) so it reliably fires before the
+       page navigates to checkout. */
+    function sendToWebhook(payload){
+      if(!CONFIG.WEBHOOK_URL) return;
+      var body = JSON.stringify(payload);
+      try{
+        if(navigator.sendBeacon){
+          if(navigator.sendBeacon(CONFIG.WEBHOOK_URL, new Blob([body], {type:'application/json'}))) return;
+        }
+      }catch(e){}
+      try{
+        fetch(CONFIG.WEBHOOK_URL, {method:'POST', mode:'no-cors', keepalive:true,
+          headers:{'Content-Type':'text/plain;charset=UTF-8'}, body:body});
+      }catch(e){}
+    }
+
     btn.addEventListener('click', function(e){
       e.preventDefault();
       wrap.classList.add('is-open');
@@ -930,6 +951,9 @@
       var okEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em);
       if(!fn || !ln || !okEmail){ if(err) err.hidden = false; return; }
       if(err) err.hidden = true;
+
+      /* CREATE the contact in GHL via the inbound webhook */
+      sendToWebhook({ first_name:fn, last_name:ln, email:em, name:(fn + ' ' + ln).trim(), source:'LTO Sales Page' });
 
       /* SAVE the fields so later funnel pages can read them */
       try{
