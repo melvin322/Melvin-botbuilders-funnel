@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Complete your order — BotBuilders</title>
+<meta name="description" content="Get instant access to the BotBuilders Growth Plan — the platform, the templates, and a builder in your corner. Secure checkout, 30-day money-back guarantee.">
+<meta name="robots" content="noindex">
+
+<!-- ==========================================================================
+     BotBuilders — Payment / checkout landing page
+     Design board: ink #16244C · accent #3C5A9A · body #5B6580 · green #2E9E6B
+                   Poppins (UI) + Caveat (handwritten accents)
+     ------------------------------------------------------------------------
+     TWO WAYS TO USE THIS
+     A) Standalone: open this file in a browser. It links payment.css.
+     B) GHL: paste everything between <div class="bb-pay"> … </div> AND the
+        <script> below it into a full-width Custom Code / HTML element.
+        Paste the contents of payment.css into that page's Custom CSS.
+     ------------------------------------------------------------------------
+     EDIT THESE FIRST (see the CONFIG block in the <script> at the bottom):
+       SUBMIT_URL   — endpoint / webhook that receives the order (POST JSON).
+                      Leave blank to preview the page in demo mode.
+       SUCCESS_URL  — where the buyer lands once the order goes through.
+       LOGO_URL     — your hosted logo. This page is light, so use the DARK
+                      version of the mark (the reverse/light logo used on the
+                      dark pages will disappear here). Blank = built-in mark.
+     ------------------------------------------------------------------------
+     PCI NOTE — read before going live
+       Raw card numbers must never touch your own server or a generic
+       webhook. Keep this markup for the layout and hand the actual charge to
+       a PCI-compliant processor in one of two ways:
+         1. Mount Stripe Elements (or your processor's fields) into the
+            #bb-pay-card-slot / #bb-pay-exp-slot / #bb-pay-cvc-slot wrappers,
+            replacing the plain inputs inside them; or
+         2. Set SUBMIT_URL to your own endpoint that creates a Checkout
+            Session and return { redirect: "https://checkout…" } — this page
+            follows that redirect automatically.
+       By default the card number is NEVER sent: the payload carries only
+       brand, last4 and expiry (SEND_CARD_NUMBER stays false).
+     ========================================================================== -->
+<link rel="stylesheet" href="payment.css">
+</head>
+<body>
+
+<div class="bb-pay" id="bb-pay">
+
+  <!-- ============================================================== topbar -->
+  <header class="bb-pay-top">
+    <div class="bb-pay-wrap bb-pay-top-in">
+      <a class="bb-pay-logo bb-pay-in" style="--d:40ms" href="#" aria-label="BotBuilders">
+        <svg class="bb-pay-logo-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs><linearGradient id="paybg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2B3E6E"/><stop offset="1" stop-color="#16244C"/></linearGradient></defs>
+          <rect x="3" y="3" width="34" height="34" rx="10" fill="url(#paybg)"/>
+          <path d="M22 9l-9 12h6l-1.5 9 9-12h-6z" fill="#fff"/>
+        </svg>
+        <span class="bb-pay-logo-word">BotBuilders<sup>&reg;</sup></span>
+      </a>
+
+      <p class="bb-pay-secure bb-pay-in" style="--d:120ms">
+        <i class="bb-pay-dot" aria-hidden="true"></i>
+<span>Secure checkout</span><span class="bb-pay-secure-long">&middot; 256-bit encryption</span>
+      </p>
+    </div>
+  </header>
+
+  <div class="bb-pay-wrap">
+    <div class="bb-pay-grid">
+
+      <!-- ============================================================ copy -->
+      <section class="bb-pay-copy">
+        <p class="bb-pay-eyebrow bb-pay-in" style="--d:160ms">you&rsquo;re one step away</p>
+        <h1 class="bb-pay-title bb-pay-in" style="--d:220ms">Your first bot,<br>live in 48 hours.</h1>
+        <p class="bb-pay-lead bb-pay-in" style="--d:300ms">
+          The Growth Plan gives you the platform, the templates, and a builder
+          in your corner. You don&rsquo;t learn a tool &mdash; you ship a working funnel.
+        </p>
+      </section>
+
+      <!-- ================================================= what's included -->
+      <section class="bb-pay-incl">
+        <h2 class="bb-pay-kicker bb-pay-in" style="--d:360ms">What&rsquo;s included</h2>
+        <ul class="bb-pay-list">
+          <li class="bb-pay-in" style="--d:400ms">
+            <svg class="bb-pay-check" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.8 9.6c2.1 1.3 3.6 3 4.6 4.9C8.7 9.2 12.3 4.4 18 1.4"/></svg>
+            <span>Full platform access &mdash; every channel, no seat limits</span>
+          </li>
+          <li class="bb-pay-in" style="--d:440ms">
+            <svg class="bb-pay-check" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.8 9.6c2.1 1.3 3.6 3 4.6 4.9C8.7 9.2 12.3 4.4 18 1.4"/></svg>
+            <span>Unlimited bots and conversation volume</span>
+          </li>
+          <li class="bb-pay-in" style="--d:480ms">
+            <svg class="bb-pay-check" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.8 9.6c2.1 1.3 3.6 3 4.6 4.9C8.7 9.2 12.3 4.4 18 1.4"/></svg>
+            <span>Premium integrations &mdash; CRM, calendar, payments</span>
+          </li>
+          <li class="bb-pay-in" style="--d:520ms">
+            <svg class="bb-pay-check" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.8 9.6c2.1 1.3 3.6 3 4.6 4.9C8.7 9.2 12.3 4.4 18 1.4"/></svg>
+            <span>Priority support with a two-hour first reply</span>
+          </li>
+          <li class="bb-pay-in" style="--d:560ms">
+            <svg class="bb-pay-check" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.8 9.6c2.1 1.3 3.6 3 4.6 4.9C8.7 9.2 12.3 4.4 18 1.4"/></svg>
+            <span>A monthly strategy call with your builder</span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- ===================================================== testimonial -->
+      <figure class="bb-pay-quote bb-pay-in" style="--d:620ms">
+        <blockquote class="bb-pay-quote-txt">
+          &ldquo;We had a booking bot answering leads by Thursday. It paid for
+          the year inside a month.&rdquo;
+        </blockquote>
+        <figcaption class="bb-pay-quote-by">
+          <span class="bb-pay-quote-name">Dana Whitfield</span>
+          <i class="bb-pay-quote-sep" aria-hidden="true"></i>
+          <span class="bb-pay-quote-co">Northline Property Group</span>
+        </figcaption>
+      </figure>
+
+      <!-- ============================================== handwritten closer -->
+      <p class="bb-pay-note bb-pay-in" style="--d:680ms">
+        try it for 30 days &mdash; if it&rsquo;s not for you,<br>we refund it, no forms
+      </p>
+
+      <!-- ==================================================== payment card -->
+      <aside class="bb-pay-panel">
+        <div class="bb-pay-box bb-pay-in" style="--d:240ms" id="bb-pay-box">
+
+          <p class="bb-pay-box-kicker">Payment details</p>
+          <h2 class="bb-pay-box-title">Complete your order</h2>
+
+          <form class="bb-pay-form" id="bb-pay-form" novalidate>
+
+            <div class="bb-pay-row is-2">
+              <div class="bb-pay-field">
+                <label class="bb-pay-label" for="bb-pay-name">Full name</label>
+                <input class="bb-pay-input" id="bb-pay-name" name="name" type="text"
+                       placeholder="Dana Whitfield" autocomplete="name"
+                       aria-describedby="bb-pay-name-err">
+                <p class="bb-pay-err" id="bb-pay-name-err">Enter your full name.</p>
+              </div>
+              <div class="bb-pay-field">
+                <label class="bb-pay-label" for="bb-pay-email">Work email</label>
+                <input class="bb-pay-input" id="bb-pay-email" name="email" type="email"
+                       placeholder="dana@company.com" autocomplete="email"
+                       inputmode="email" aria-describedby="bb-pay-email-err">
+                <p class="bb-pay-err" id="bb-pay-email-err">Enter a valid email address.</p>
+              </div>
+            </div>
+
+            <div class="bb-pay-field" id="bb-pay-card-slot">
+              <label class="bb-pay-label" for="bb-pay-card">Card details</label>
+              <div class="bb-pay-cardnum">
+                <input class="bb-pay-input" id="bb-pay-card" name="card" type="text"
+                       placeholder="4242 4242 4242 4242" autocomplete="cc-number"
+                       inputmode="numeric" maxlength="23" aria-describedby="bb-pay-card-err">
+                <span class="bb-pay-brand" id="bb-pay-brand" aria-hidden="true"></span>
+              </div>
+              <p class="bb-pay-err" id="bb-pay-card-err">Check the card number.</p>
+            </div>
+
+            <div class="bb-pay-row is-3">
+              <div class="bb-pay-field" id="bb-pay-exp-slot">
+                <input class="bb-pay-input" id="bb-pay-exp" name="exp" type="text"
+                       placeholder="MM / YY" autocomplete="cc-exp" aria-label="Card expiry, MM / YY"
+                       inputmode="numeric" maxlength="7" aria-describedby="bb-pay-exp-err">
+              </div>
+              <div class="bb-pay-field" id="bb-pay-cvc-slot">
+                <input class="bb-pay-input" id="bb-pay-cvc" name="cvc" type="text"
+                       placeholder="CVC" autocomplete="cc-csc" aria-label="Card security code"
+                       inputmode="numeric" maxlength="4" aria-describedby="bb-pay-exp-err">
+              </div>
+              <div class="bb-pay-field">
+                <input class="bb-pay-input" id="bb-pay-zip" name="zip" type="text"
+                       placeholder="ZIP" autocomplete="postal-code" aria-label="Billing ZIP or postcode"
+                       maxlength="10" aria-describedby="bb-pay-exp-err">
+              </div>
+              <p class="bb-pay-err" id="bb-pay-exp-err" style="grid-column:1/-1">Check the expiry, CVC and ZIP.</p>
+            </div>
+
+            <!-- bots only -->
+            <input class="bb-pay-hp" id="bb-pay-hp" type="text" name="company_url" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+            <button class="bb-pay-cta" id="bb-pay-cta" type="submit">
+              <span class="bb-pay-spin" aria-hidden="true"></span>
+              <span id="bb-pay-cta-txt">Get instant access</span>
+            </button>
+
+            <p class="bb-pay-formerr" id="bb-pay-formerr" role="alert"></p>
+          </form>
+
+          <p class="bb-pay-guarantee">
+            <i class="bb-pay-dot" aria-hidden="true"></i>
+            <span>30-day money-back guarantee &middot; cancel anytime</span>
+          </p>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+
+  /* ====================================================== CONFIG — EDIT ME */
+  var CONFIG = {
+    /* Endpoint that receives the order as JSON (your API, GHL inbound
+       webhook, Zapier/Make hook…). Blank = demo mode: the card validates and
+       shows the success state locally so you can preview the page.
+       If the response is JSON containing { redirect: "…" } (e.g. a Stripe
+       Checkout Session URL) the buyer is sent there instead of SUCCESS_URL. */
+    SUBMIT_URL       : '',
+
+    /* Where the buyer lands after a successful order.                       */
+    SUCCESS_URL      : 'thank-you.html',
+
+    /* Product / plan label sent along with the order.                       */
+    PRODUCT          : 'Growth Plan',
+
+    /* Keep this false unless the endpoint is genuinely PCI-compliant. When
+       false the payload carries brand + last4 + expiry only, never the PAN. */
+    SEND_CARD_NUMBER : false,
+
+    /* Your hosted logo. This page is light, so use the DARK logo — the
+       reverse/light version used on the dark pages vanishes here.
+       Blank keeps the built-in navy mark.                                   */
+    LOGO_URL         : '',
+    LOGO_HEIGHT      : 34
+  };
+  /* ======================================================================= */
+
+  var root = document.getElementById('bb-pay');
+  if(!root) return;
+
+  var form   = document.getElementById('bb-pay-form');
+  var cta    = document.getElementById('bb-pay-cta');
+  var ctaTxt = document.getElementById('bb-pay-cta-txt');
+  var banner = document.getElementById('bb-pay-formerr');
+  var brand  = document.getElementById('bb-pay-brand');
+
+  var F = {
+    name : document.getElementById('bb-pay-name'),
+    email: document.getElementById('bb-pay-email'),
+    card : document.getElementById('bb-pay-card'),
+    exp  : document.getElementById('bb-pay-exp'),
+    cvc  : document.getElementById('bb-pay-cvc'),
+    zip  : document.getElementById('bb-pay-zip')
+  };
+
+  /* -- checkout tracking (page view = checkout started) -------------------- */
+  (function(){
+    try{
+      if(window.dataLayer && window.dataLayer.push) window.dataLayer.push({event:'begin_checkout', item_name:CONFIG.PRODUCT});
+      if(typeof window.fbq === 'function') window.fbq('track','InitiateCheckout');
+    }catch(e){}
+  })();
+
+  /* -- kill GHL wrapper chrome (white strips around the section) ----------- */
+  (function(){
+    var el = root.parentElement;
+    while(el && el !== document.body && el !== document.documentElement){
+      el.style.background='transparent'; el.style.backgroundColor='transparent';
+      el.style.paddingTop='0px'; el.style.paddingBottom='0px';
+      el.style.marginTop='0px'; el.style.marginBottom='0px'; el.style.maxWidth='none';
+      el = el.parentElement;
+    }
+    document.documentElement.style.background='#BED5F5';
+    document.body.style.background='#BED5F5';
+    document.body.style.margin='0';
+  })();
+
+  /* -- logo --------------------------------------------------------------- */
+  if(CONFIG.LOGO_URL){
+    var logo = root.querySelector('.bb-pay-logo');
+    if(logo){
+      logo.innerHTML='';
+      var img=document.createElement('img');
+      img.src=CONFIG.LOGO_URL; img.alt='BotBuilders';
+      img.style.height=(CONFIG.LOGO_HEIGHT||34)+'px'; img.style.width='auto';
+      logo.appendChild(img);
+    }
+  }
+
+  /* ======================================================== input helpers */
+  function digits(v){ return (v||'').replace(/\D+/g,''); }
+
+  /* card brand from the leading digits — also drives grouping + CVC length  */
+  function brandOf(num){
+    if(/^4/.test(num))                                  return {key:'visa',  label:'VISA',  len:[16,19], cvc:3};
+    if(/^(5[1-5]|2[2-7])/.test(num))                    return {key:'mc',    label:'MC',    len:[16],    cvc:3};
+    if(/^3[47]/.test(num))                              return {key:'amex',  label:'AMEX',  len:[15],    cvc:4};
+    if(/^3(0[0-5]|[68])/.test(num))                     return {key:'diners',label:'DINERS',len:[14,16,19], cvc:3};
+    if(/^6(011|5|4[4-9]|22)/.test(num))                 return {key:'disc',  label:'DISC',  len:[16,19], cvc:3};
+    if(/^35(2[89]|[3-8])/.test(num))                    return {key:'jcb',   label:'JCB',   len:[16,17,18,19], cvc:3};
+    return null;
+  }
+
+  function groupCard(num){
+    var b = brandOf(num);
+    if(b && b.key === 'amex')   return [num.slice(0,4), num.slice(4,10), num.slice(10,15)].filter(Boolean).join(' ');
+    if(b && b.key === 'diners') return [num.slice(0,4), num.slice(4,10), num.slice(10,14)].filter(Boolean).join(' ');
+    return (num.match(/.{1,4}/g) || []).join(' ');
+  }
+
+  function luhn(num){
+    if(num.length < 12) return false;
+    var sum=0, alt=false, i;
+    for(i=num.length-1; i>=0; i--){
+      var d = +num.charAt(i);
+      if(alt){ d*=2; if(d>9) d-=9; }
+      sum+=d; alt=!alt;
+    }
+    return sum % 10 === 0;
+  }
+
+  /* live formatting: card number ------------------------------------------ */
+  F.card.addEventListener('input', function(){
+    var num = digits(this.value).slice(0,19);
+    var b   = brandOf(num);
+    if(b) num = num.slice(0, Math.max.apply(null, b.len));
+    this.value = groupCard(num);
+    brand.textContent = b ? b.label : '';
+    brand.classList.toggle('is-on', !!b);
+    F.cvc.setAttribute('maxlength', b ? String(b.cvc) : '4');
+    clear(this);
+    if(b && b.len.indexOf(num.length) > -1 && luhn(num)) F.exp.focus();
+  });
+
+  /* live formatting: MM / YY --------------------------------------------- */
+  F.exp.addEventListener('input', function(){
+    var v = digits(this.value).slice(0,4);
+    if(v.length === 1 && +v > 1) v = '0' + v;                 /* 5 → 05      */
+    this.value = v.length > 2 ? v.slice(0,2) + ' / ' + v.slice(2) : v;
+    clear(this);
+    if(v.length === 4) F.cvc.focus();
+  });
+
+  F.cvc.addEventListener('input', function(){
+    this.value = digits(this.value).slice(0, +this.getAttribute('maxlength') || 4);
+    clear(this);
+    if(this.value.length === (+this.getAttribute('maxlength') || 3)) F.zip.focus();
+  });
+
+  F.zip.addEventListener('input', function(){
+    this.value = this.value.replace(/[^A-Za-z0-9 -]/g,'').slice(0,10);
+    clear(this);
+  });
+
+  [F.name, F.email].forEach(function(el){
+    el.addEventListener('input', function(){ clear(el); });
+  });
+
+  /* ============================================================ validation */
+  function err(el, on){
+    el.classList.toggle('is-err', !!on);
+    if(on) el.setAttribute('aria-invalid','true'); else el.removeAttribute('aria-invalid');
+    var msg = document.getElementById(el.getAttribute('aria-describedby') || '');
+    if(msg){
+      /* the exp / cvc / zip row shares one message line */
+      var row = ['bb-pay-exp','bb-pay-cvc','bb-pay-zip'];
+      var stillBad = row.some(function(id){
+        var f = document.getElementById(id);
+        return f && f.classList.contains('is-err');
+      });
+      msg.classList.toggle('is-on', msg.id === 'bb-pay-exp-err' ? stillBad : !!on);
+    }
+  }
+  function clear(el){ if(el.classList.contains('is-err')) err(el, false); }
+
+  function validExp(v){
+    var m = digits(v);
+    if(m.length !== 4) return false;
+    var mm = +m.slice(0,2), yy = +m.slice(2);
+    if(mm < 1 || mm > 12) return false;
+    var now  = new Date();
+    var year = 2000 + yy;
+    var last = new Date(year, mm, 1);                 /* first day after exp */
+    return last > new Date(now.getFullYear(), now.getMonth(), 1);
+  }
+
+  function validate(){
+    var num = digits(F.card.value);
+    var b   = brandOf(num);
+    var bad = [];
+
+    if(F.name.value.trim().length < 2 || F.name.value.trim().indexOf(' ') < 0) bad.push(F.name);
+    if(!/^[^\s@]+@[^\s@]+\.[A-Za-z]{2,}$/.test(F.email.value.trim()))          bad.push(F.email);
+    if(!b || b.len.indexOf(num.length) < 0 || !luhn(num))                      bad.push(F.card);
+    if(!validExp(F.exp.value))                                                 bad.push(F.exp);
+    if(digits(F.cvc.value).length !== (b ? b.cvc : 3))                          bad.push(F.cvc);
+    if(F.zip.value.trim().length < 3)                                          bad.push(F.zip);
+
+    Object.keys(F).forEach(function(k){ err(F[k], bad.indexOf(F[k]) > -1); });
+    if(bad.length){
+      bad[0].focus();
+      return false;
+    }
+    return true;
+  }
+
+  /* ================================================================ submit */
+  function busy(on){
+    cta.classList.toggle('is-busy', on);
+    cta.disabled = on;
+    ctaTxt.textContent = on ? 'Processing…' : 'Get instant access';
+  }
+  function fail(msg){
+    banner.textContent = msg;
+    banner.classList.add('is-on');
+  }
+
+  function payload(){
+    var num = digits(F.card.value);
+    var b   = brandOf(num);
+    var exp = digits(F.exp.value);
+    var out = {
+      product   : CONFIG.PRODUCT,
+      name      : F.name.value.trim(),
+      email     : F.email.value.trim().toLowerCase(),
+      card_brand: b ? b.key : '',
+      card_last4: num.slice(-4),
+      exp_month : exp.slice(0,2),
+      exp_year  : '20' + exp.slice(2),
+      zip       : F.zip.value.trim().toUpperCase(),
+      page      : location.href
+    };
+    if(CONFIG.SEND_CARD_NUMBER){ out.card_number = num; out.cvc = digits(F.cvc.value); }
+    return out;
+  }
+
+  function success(){
+    try{
+      if(window.dataLayer && window.dataLayer.push) window.dataLayer.push({event:'purchase', item_name:CONFIG.PRODUCT});
+      if(typeof window.fbq === 'function') window.fbq('track','Purchase');
+    }catch(e){}
+
+    if(CONFIG.SUCCESS_URL){ window.location.href = CONFIG.SUCCESS_URL; return; }
+
+    var box = document.getElementById('bb-pay-box');
+    box.innerHTML =
+      '<div class="bb-pay-done">' +
+        '<div class="bb-pay-done-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg></div>' +
+        '<h2 class="bb-pay-done-title">You&rsquo;re in.</h2>' +
+        '<p class="bb-pay-done-txt">Check your inbox &mdash; your login and your builder&rsquo;s intro email are on the way.</p>' +
+      '</div>';
+  }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    banner.classList.remove('is-on');
+
+    if(document.getElementById('bb-pay-hp').value) return;   /* bot */
+    if(!validate()) return;
+
+    if(!CONFIG.SUBMIT_URL){                                  /* demo mode */
+      busy(true);
+      window.setTimeout(function(){ busy(false); success(); }, 900);
+      return;
+    }
+
+    busy(true);
+    fetch(CONFIG.SUBMIT_URL, {
+      method  : 'POST',
+      headers : {'Content-Type':'application/json'},
+      body    : JSON.stringify(payload())
+    })
+    .then(function(res){
+      return res.text().then(function(txt){
+        var data = {};
+        try{ data = txt ? JSON.parse(txt) : {}; }catch(e){}
+        if(!res.ok) throw new Error(data.message || 'Payment could not be completed.');
+        return data;
+      });
+    })
+    .then(function(data){
+      if(data && data.redirect){ window.location.href = data.redirect; return; }
+      success();
+    })
+    .catch(function(e){
+      busy(false);
+      fail(e && e.message ? e.message : 'Something went wrong. Please try again.');
+    });
+  });
+
+})();
+</script>
+
+</body>
+</html>
