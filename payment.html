@@ -376,6 +376,22 @@
        false the payload carries brand + last4 + expiry only, never the PAN. */
     SEND_CARD_NUMBER : false,
 
+    /* Fallback when the link arrives with no ?offer= — infer the variant from
+       the page they came from. Keys are variants, values are strings to look
+       for anywhere in the referring URL. Only safe when the accept button is
+       the ONLY route from that page to this one: a "no thanks" link that also
+       lands here would be labelled as an acceptance. Leave the entries
+       commented out to rely on the link alone.                              */
+    OFFER_REFERRERS : {
+      /* vip : ['/vip', 'vip-upgrade'], */
+      /* oto : ['/oto', 'done-for-you'] */
+    },
+
+    /* Logs which variant was detected and why to the browser console. You can
+       also switch it on for one visit with ?bbdebug=1 — handy for checking a
+       live page without editing anything.                                   */
+    DEBUG            : false,
+
     /* Your hosted logo. This page is light, so use the DARK logo — the
        reverse/light version used on the dark pages vanishes here.
        Blank keeps the built-in navy mark.                                   */
@@ -409,28 +425,79 @@
   /* ================================================== offer variant + copy */
   /* Which box did they tick on the limited-time offer page? URL wins, then
      whatever this session already saw, then 'base'.                        */
-  var VARIANT = (function(){
+  var QUERY = (function(){
     var q = {};
     location.search.replace(/^\?/,'').split('&').forEach(function(pair){
       if(!pair) return;
       var kv = pair.split('=');
       q[decodeURIComponent(kv[0]).toLowerCase()] = decodeURIComponent((kv[1]||'').replace(/\+/g,' '));
     });
+    return q;
+  })();
+
+  var DEBUG = CONFIG.DEBUG === true || /^(1|true|yes|on)$/i.test(QUERY.bbdebug || '');
+  var VARIANT_FROM = 'nothing — showing base copy';
+
+  var VARIANT = (function(){
     var on = function(v){ return /^(1|true|yes|on)$/i.test(v||''); };
 
-    var v = (q.offer || q.variant || q.v || '').toLowerCase().replace(/[^a-z0-9_]/g,'');
+    var v = (QUERY.offer || QUERY.variant || QUERY.v || '').toLowerCase().replace(/[^a-z0-9_]/g,'');
     if(v === 'oto_vip') v = 'vip_oto';                 /* order does not matter */
+    if(v) VARIANT_FROM = 'the link (?offer=' + v + ')';
+
     if(!v){
-      var vip = on(q.vip), oto = on(q.oto);
+      var vip = on(QUERY.vip), oto = on(QUERY.oto);
       v = vip && oto ? 'vip_oto' : vip ? 'vip' : oto ? 'oto' : '';
+      if(v) VARIANT_FROM = 'the link (?vip / ?oto flags)';
     }
-    if(!v){ try{ v = window.sessionStorage.getItem('bb_offer') || ''; }catch(e){} }
+
+    /* the page they came from, when the link carried nothing */
+    if(!v && CONFIG.OFFER_REFERRERS){
+      var ref = (document.referrer || '').toLowerCase();
+      if(ref){
+        var keys = Object.keys(CONFIG.OFFER_REFERRERS);
+        for(var i=0; i<keys.length && !v; i++){
+          var needles = CONFIG.OFFER_REFERRERS[keys[i]] || [];
+          for(var j=0; j<needles.length; j++){
+            if(needles[j] && ref.indexOf(String(needles[j]).toLowerCase()) > -1){
+              v = keys[i];
+              VARIANT_FROM = 'the referring page (' + needles[j] + ')';
+              break;
+            }
+          }
+        }
+      }
+    }
+
+    if(!v){
+      try{
+        v = window.sessionStorage.getItem('bb_offer') || '';
+        if(v) VARIANT_FROM = 'this session (seen on an earlier page view)';
+      }catch(e){}
+    }
     try{ if(v) window.sessionStorage.setItem('bb_offer', v); }catch(e){}
     return v || 'base';
   })();
 
   var CTA_LABEL   = 'Get instant access';
   var OFFER_LABEL = '';
+
+  if(DEBUG && window.console){
+    var known = !!(CONFIG.COPY && CONFIG.COPY[VARIANT]);
+    console.log(
+      '[bb-pay] offer variant: ' + VARIANT + '\n' +
+      '  read from   : ' + VARIANT_FROM + '\n' +
+      '  copy defined: ' + (known ? 'yes' : 'NO — falling back to base copy') + '\n' +
+      '  url         : ' + location.href + '\n' +
+      '  referrer    : ' + (document.referrer || '(none — opened directly, or the referrer was stripped)')
+    );
+    if(VARIANT === 'base'){
+      console.log('[bb-pay] Nothing marked this visit as VIP or OTO. The offer page\'s ' +
+                  'continue button has to reach this page as …/payment?offer=vip (or oto, ' +
+                  'or vip_oto) — or set CONFIG.OFFER_REFERRERS to infer it from the ' +
+                  'referring page.');
+    }
+  }
 
   (function(){
     var copy = (CONFIG.COPY && (CONFIG.COPY[VARIANT] || CONFIG.COPY.base)) || {};
