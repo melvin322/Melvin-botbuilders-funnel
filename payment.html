@@ -123,17 +123,8 @@
             <span>A monthly strategy call with your builder</span>
           </li>
 
-          <!-- only for buyers who ticked the box on the limited-time offer page.
-               data-bb-when lists the variants an element belongs to; prefix a
-               variant with ! to hide it for that variant instead.            -->
-          <li class="bb-pay-in bb-pay-added" style="--d:600ms" data-bb-when="bump bump_oto">
-            <svg class="bb-pay-check" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.8 9.6c2.1 1.3 3.6 3 4.6 4.9C8.7 9.2 12.3 4.4 18 1.4"/></svg>
-            <span>The fast-start pack &mdash; kept at your limited-time price</span>
-          </li>
-          <li class="bb-pay-in bb-pay-added" style="--d:600ms" data-bb-when="oto bump_oto">
-            <svg class="bb-pay-check" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.8 9.6c2.1 1.3 3.6 3 4.6 4.9C8.7 9.2 12.3 4.4 18 1.4"/></svg>
-            <span>Your one-time upgrade &mdash; added to this order</span>
-          </li>
+          <!-- this list is the 'base' wording and the no-JS fallback; the VIP /
+               LTO variants replace it from CONFIG.COPY[…].items below.       -->
         </ul>
       </section>
 
@@ -214,17 +205,19 @@
             <!-- bots only -->
             <input class="bb-pay-hp" id="bb-pay-hp" type="text" name="company_url" tabindex="-1" autocomplete="off" aria-hidden="true">
 
-            <p class="bb-pay-applied" data-bb-when="bump">
-              <i class="bb-pay-dot" aria-hidden="true"></i>
-              <span>Your limited-time add-on is included in this order.</span>
-            </p>
+            <!-- data-bb-when lists the variants an element belongs to; prefix a
+                 variant with ! to hide it for that variant instead.          -->
             <p class="bb-pay-applied" data-bb-when="oto">
               <i class="bb-pay-dot" aria-hidden="true"></i>
-              <span>Your one-time upgrade is included in this order.</span>
+              <span>Your one-time offer is applied to this order.</span>
             </p>
-            <p class="bb-pay-applied" data-bb-when="bump_oto">
+            <p class="bb-pay-applied" data-bb-when="vip">
               <i class="bb-pay-dot" aria-hidden="true"></i>
-              <span>Your add-on and your upgrade are both included in this order.</span>
+              <span>VIP is applied &mdash; you go to the front of the build queue.</span>
+            </p>
+            <p class="bb-pay-applied" data-bb-when="vip_oto">
+              <i class="bb-pay-dot" aria-hidden="true"></i>
+              <span>VIP and your one-time offer are both applied to this order.</span>
             </p>
 
             <button class="bb-pay-cta" id="bb-pay-cta" type="submit">
@@ -289,56 +282,86 @@
     PRODUCT          : 'Growth Plan',
 
     /* ---------------------------------------------------------------- COPY
-       Which copy this page shows depends on what the buyer ticked on the
-       limited-time offer page upstream. The variant arrives on the link:
+       Which copy this page shows depends on what the buyer clicked upstream.
+       The variant arrives on the link:
 
-         …/payment                  → 'base'      (box left unticked)
-         …/payment?offer=bump       → 'bump'      (box ticked)
-         …/payment?offer=oto        → 'oto'
-         …/payment?offer=bump_oto   → both
-         …/payment?bump=1&oto=1     → also understood (1/true/yes/on)
+         …/payment                 → 'base'     (took neither)
+         …/payment?offer=vip       → 'vip'      (took VIP)
+         …/payment?offer=oto       → 'oto'      (took the one-time offer)
+         …/payment?offer=vip_oto   → both
+         …/payment?vip=1&oto=1     → also understood (1/true/yes/on)
 
        It is remembered in sessionStorage, so a refresh or a trip to the
        processor and back keeps the right copy. Anything with a
-       data-bb-when="bump oto" attribute in the markup above is shown only
+       data-bb-when="vip oto" attribute in the markup above is shown only
        for those variants (prefix a variant with ! to hide it instead).
 
-       On the offer page, point the continue button at this page and let the
-       checkbox decide the link:
+       On the VIP / offer page, point the continue button at this page and
+       let the checkbox decide the link:
 
-         <a id="lto-go" href="https://…/payment">Continue</a>
+         <a id="up-go" href="https://…/payment">Continue</a>
          <script>
-         document.getElementById('lto-go').addEventListener('click',function(){
-           var on = document.getElementById('lto-bump').checked;
-           this.href = this.href.split('?')[0] + (on ? '?offer=bump' : '');
+         document.getElementById('up-go').addEventListener('click',function(){
+           var vip = document.getElementById('up-vip').checked;
+           var oto = document.getElementById('up-oto').checked;
+           var v   = vip && oto ? 'vip_oto' : vip ? 'vip' : oto ? 'oto' : '';
+           this.href = this.href.split('?')[0] + (v ? '?offer=' + v : '');
          });
-         <\/script>       (the \/ is only needed here, inside this comment)
+         <\/script>      (the \/ is only needed here, inside this comment)
 
-       Every field below is optional — leave one out and the markup's own
-       wording stands.                                                       */
+       Per variant: eyebrow, title, lead, note, cardKicker, cardTitle, cta
+       and items (the whole What's-included list). Every field is optional —
+       leave one out and the markup's own wording stands. In items, a leading
+       + marks the line as newly added, which sets it in medium weight.      */
     COPY : {
       base : {
         eyebrow : 'you&rsquo;re one step away',
         title   : 'Your first bot,<br>live in 48 hours.',
         lead    : 'The Growth Plan gives you the platform, the templates, and a builder in your corner. You don&rsquo;t learn a tool &mdash; you ship a working funnel.'
+        /* no items → the checklist in the markup above stands as written */
       },
-      bump : {
-        eyebrow : 'your add-on is locked in',
-        title   : 'Your first bot,<br>and a head start.',
-        lead    : 'The Growth Plan plus the fast-start pack you just added &mdash; both at the price on the last page, and both live within 48 hours.',
-        cta     : 'Get instant access'
+
+      vip : {
+        eyebrow : 'you went VIP',
+        title   : 'Your first bot,<br>built VIP-fast.',
+        lead    : 'VIP puts you at the front of the build queue. Your funnel gets scoped, built and shipped while the standard queue is still waiting &mdash; same platform, same templates, far less waiting.',
+        items   : [
+          'Full platform access &mdash; every channel, no seat limits',
+          'Unlimited bots and conversation volume',
+          'Premium integrations &mdash; CRM, calendar, payments',
+          '+VIP &mdash; front of the build queue, live in 24 hours',
+          '+A direct line to your builder, not a support inbox',
+          'A monthly strategy call with your builder'
+        ]
       },
+
       oto : {
-        eyebrow : 'your upgrade is applied',
-        title   : 'Your first bot,<br>on the bigger plan.',
-        lead    : 'Everything in the Growth Plan with the upgrade you just took, held at the one-time price. Your builder starts the moment this clears.',
-        cta     : 'Get instant access'
+        eyebrow : 'your one-time offer is locked in',
+        title   : 'Your first bot,<br>at the price you just claimed.',
+        lead    : 'The Growth Plan with your one-time offer applied &mdash; the platform, the templates, and a builder in your corner, held at the price from the last page.',
+        items   : [
+          'Full platform access &mdash; every channel, no seat limits',
+          'Unlimited bots and conversation volume',
+          'Premium integrations &mdash; CRM, calendar, payments',
+          'Priority support with a two-hour first reply',
+          'A monthly strategy call with your builder',
+          '+Your one-time offer &mdash; this price, this order only'
+        ]
       },
-      bump_oto : {
-        eyebrow : 'everything&rsquo;s in the cart',
-        title   : 'Your first bot,<br>fully loaded.',
-        lead    : 'The Growth Plan, the fast-start pack and your upgrade &mdash; all held at the prices you just locked in.',
-        cta     : 'Get instant access'
+
+      vip_oto : {
+        eyebrow : 'VIP, at your one-time price',
+        title   : 'Your first bot,<br>VIP and locked in.',
+        lead    : 'Both of them: VIP moves you to the front of the build queue, and your one-time offer holds the price you just claimed. Nothing left to decide but the card.',
+        items   : [
+          'Full platform access &mdash; every channel, no seat limits',
+          'Unlimited bots and conversation volume',
+          'Premium integrations &mdash; CRM, calendar, payments',
+          '+VIP &mdash; front of the build queue, live in 24 hours',
+          '+A direct line to your builder, not a support inbox',
+          '+Your one-time offer &mdash; this price, this order only',
+          'A monthly strategy call with your builder'
+        ]
       }
     },
 
@@ -389,9 +412,10 @@
     var on = function(v){ return /^(1|true|yes|on)$/i.test(v||''); };
 
     var v = (q.offer || q.variant || q.v || '').toLowerCase().replace(/[^a-z0-9_]/g,'');
+    if(v === 'oto_vip') v = 'vip_oto';                 /* order does not matter */
     if(!v){
-      var b = on(q.bump), o = on(q.oto);
-      v = b && o ? 'bump_oto' : b ? 'bump' : o ? 'oto' : '';
+      var vip = on(q.vip), oto = on(q.oto);
+      v = vip && oto ? 'vip_oto' : vip ? 'vip' : oto ? 'oto' : '';
     }
     if(!v){ try{ v = window.sessionStorage.getItem('bb_offer') || ''; }catch(e){} }
     try{ if(v) window.sessionStorage.setItem('bb_offer', v); }catch(e){}
@@ -413,6 +437,23 @@
     put('.bb-pay-box-kicker',copy.cardKicker);
     put('.bb-pay-box-title', copy.cardTitle);
     if(copy.cta){ CTA_LABEL = copy.cta; put('#bb-pay-cta-txt', copy.cta); }
+
+    /* the What's-included list. A leading + on a line marks it as newly
+       added by this variant (medium weight).                               */
+    if(copy.items && copy.items.length){
+      var list = root.querySelector('.bb-pay-list');
+      if(list){
+        var check = '<svg class="bb-pay-check" viewBox="0 0 20 20" fill="none" stroke="currentColor"'
+                  + ' stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+                  + '<path d="M1.8 9.6c2.1 1.3 3.6 3 4.6 4.9C8.7 9.2 12.3 4.4 18 1.4"/></svg>';
+        list.innerHTML = copy.items.map(function(item, i){
+          var added = item.charAt(0) === '+';
+          return '<li class="bb-pay-in' + (added ? ' bb-pay-added' : '') + '"'
+               + ' style="--d:' + (400 + i * 40) + 'ms">'
+               + check + '<span>' + (added ? item.slice(1) : item) + '</span></li>';
+        }).join('');
+      }
+    }
 
     /* show / hide the variant-only blocks */
     var blocks = root.querySelectorAll('[data-bb-when]');
