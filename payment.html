@@ -26,16 +26,37 @@
                       version of the mark (the reverse/light logo used on the
                       dark pages will disappear here). Blank = built-in mark.
      ------------------------------------------------------------------------
-     PCI NOTE — read before going live
+     WIRING IT TO GHL (recommended setup)
+       1. Workflows ▸ new workflow ▸ trigger "Inbound Webhook". Copy the URL
+          it gives you into CONFIG.SUBMIT_URL and leave SUBMIT_MODE 'ghl'.
+       2. Submit the form once from the live page so GHL captures a sample
+          payload, then add a "Create/Update Contact" action and map:
+            first_name → First Name     last_name → Last Name
+            email      → Email          product   → a custom field / tag
+          (the fields sent are listed in payload() below.)
+       3. Payments ▸ Products ▸ create the plan, then build the order form or
+          payment link that charges it. Put that URL in CONFIG.CHECKOUT_URL
+          and set CONFIG.CARD_FIELDS to false. The buyer fills name + email
+          here, lands on GHL's own order form with both prefilled, and pays
+          there — so no card data ever passes through this page.
+       4. Point the order form's post-purchase redirect at thank-you.html.
+       Why 'ghl' mode: GHL's webhook returns no CORS headers, so a browser
+       can never read its response. The page posts form-encoded via
+       sendBeacon (no preflight) and moves on. That means a failed post is
+       invisible to the page — keep GHL's own order form as the record of
+       truth for money, and treat this webhook as lead capture.
+     ------------------------------------------------------------------------
+     PCI NOTE — if you keep the card fields on this page
        Raw card numbers must never touch your own server or a generic
-       webhook. Keep this markup for the layout and hand the actual charge to
-       a PCI-compliant processor in one of two ways:
-         1. Mount Stripe Elements (or your processor's fields) into the
+       webhook. Either:
+         1. Set CARD_FIELDS false and let CHECKOUT_URL (GHL order form,
+            Stripe payment link) take the card — the simplest safe option; or
+         2. Mount Stripe Elements (or your processor's fields) into the
             #bb-pay-card-slot / #bb-pay-exp-slot / #bb-pay-cvc-slot wrappers,
             replacing the plain inputs inside them; or
-         2. Set SUBMIT_URL to your own endpoint that creates a Checkout
-            Session and return { redirect: "https://checkout…" } — this page
-            follows that redirect automatically.
+         3. Set SUBMIT_URL to your own endpoint (SUBMIT_MODE 'api') that
+            creates a Checkout Session and returns
+            { redirect: "https://checkout…" } — this page follows it.
        By default the card number is NEVER sent: the payload carries only
        brand, last4 and expiry (SEND_CARD_NUMBER stays false).
      ========================================================================== -->
@@ -206,14 +227,37 @@
 
   /* ====================================================== CONFIG — EDIT ME */
   var CONFIG = {
-    /* Endpoint that receives the order as JSON (your API, GHL inbound
-       webhook, Zapier/Make hook…). Blank = demo mode: the card validates and
-       shows the success state locally so you can preview the page.
-       If the response is JSON containing { redirect: "…" } (e.g. a Stripe
-       Checkout Session URL) the buyer is sent there instead of SUCCESS_URL. */
+    /* Endpoint that receives the submission. Blank = demo mode: the form
+       validates and shows the success state locally so you can preview.
+         • GHL  → Workflow ▸ Inbound Webhook trigger URL
+         • yours → any API / Zapier / Make hook                             */
     SUBMIT_URL       : '',
 
-    /* Where the buyer lands after a successful order.                       */
+    /* How to talk to that endpoint:
+         'ghl' — form-encoded, fire-and-forget. GHL's webhook does not send
+                 CORS headers back to a browser, so the page cannot read the
+                 response; it posts (sendBeacon, no preflight) and moves on.
+                 Use this for GHL inbound webhooks, Zapier and Make.
+         'api' — JSON, response is read. Use for your own endpoint. A JSON
+                 body of { redirect: "…" } (e.g. a Stripe Checkout Session)
+                 is followed; { message: "…" } on a 4xx/5xx is shown as the
+                 error. Needs CORS on your endpoint.                        */
+    SUBMIT_MODE      : 'ghl',
+
+    /* GHL order form / payment link that takes the actual payment. When set,
+       the buyer is sent here after the contact is captured, with name and
+       email prefilled — this is what GHL's order form expects. Leave blank
+       if the charge is handled by SUBMIT_URL instead.                       */
+    CHECKOUT_URL     : '',
+
+    /* Card block on this page. Set to false when CHECKOUT_URL collects the
+       card (recommended for GHL): the card rows are hidden and skipped by
+       the validator, so nobody types their card twice and no card data
+       touches this page.                                                    */
+    CARD_FIELDS      : true,
+
+    /* Where the buyer lands when neither CHECKOUT_URL nor a { redirect }
+       response applies.                                                     */
     SUCCESS_URL      : 'thank-you.html',
 
     /* Product / plan label sent along with the order.                       */
@@ -248,6 +292,10 @@
     cvc  : document.getElementById('bb-pay-cvc'),
     zip  : document.getElementById('bb-pay-zip')
   };
+
+  /* card block on or off (see CONFIG.CARD_FIELDS) --------------------------- */
+  var CARDS = CONFIG.CARD_FIELDS !== false;
+  if(!CARDS) document.getElementById('bb-pay-box').classList.add('is-nocard');
 
   /* -- checkout tracking (page view = checkout started) -------------------- */
   (function(){
@@ -387,10 +435,12 @@
 
     if(F.name.value.trim().length < 2 || F.name.value.trim().indexOf(' ') < 0) bad.push(F.name);
     if(!/^[^\s@]+@[^\s@]+\.[A-Za-z]{2,}$/.test(F.email.value.trim()))          bad.push(F.email);
-    if(!b || b.len.indexOf(num.length) < 0 || !luhn(num))                      bad.push(F.card);
-    if(!validExp(F.exp.value))                                                 bad.push(F.exp);
-    if(digits(F.cvc.value).length !== (b ? b.cvc : 3))                          bad.push(F.cvc);
-    if(F.zip.value.trim().length < 3)                                          bad.push(F.zip);
+    if(CARDS){
+      if(!b || b.len.indexOf(num.length) < 0 || !luhn(num))                    bad.push(F.card);
+      if(!validExp(F.exp.value))                                               bad.push(F.exp);
+      if(digits(F.cvc.value).length !== (b ? b.cvc : 3))                        bad.push(F.cvc);
+      if(F.zip.value.trim().length < 3)                                        bad.push(F.zip);
+    }
 
     Object.keys(F).forEach(function(k){ err(F[k], bad.indexOf(F[k]) > -1); });
     if(bad.length){
@@ -412,22 +462,61 @@
   }
 
   function payload(){
+    var name = F.name.value.trim();
+    var cut  = name.indexOf(' ');
+    var out  = {
+      product   : CONFIG.PRODUCT,
+      name      : name,
+      first_name: cut > 0 ? name.slice(0,cut) : name,   /* GHL maps these two */
+      last_name : cut > 0 ? name.slice(cut+1) : '',
+      email     : F.email.value.trim().toLowerCase(),
+      page      : location.href
+    };
+    if(!CARDS) return out;
+
     var num = digits(F.card.value);
     var b   = brandOf(num);
     var exp = digits(F.exp.value);
-    var out = {
-      product   : CONFIG.PRODUCT,
-      name      : F.name.value.trim(),
-      email     : F.email.value.trim().toLowerCase(),
-      card_brand: b ? b.key : '',
-      card_last4: num.slice(-4),
-      exp_month : exp.slice(0,2),
-      exp_year  : '20' + exp.slice(2),
-      zip       : F.zip.value.trim().toUpperCase(),
-      page      : location.href
-    };
+    out.card_brand = b ? b.key : '';
+    out.card_last4 = num.slice(-4);
+    out.exp_month  = exp.slice(0,2);
+    out.exp_year   = '20' + exp.slice(2);
+    out.zip        = F.zip.value.trim().toUpperCase();
     if(CONFIG.SEND_CARD_NUMBER){ out.card_number = num; out.cvc = digits(F.cvc.value); }
     return out;
+  }
+
+  /* GHL order forms prefill from the query string ------------------------- */
+  function prefill(url, data){
+    if(!url) return url;
+    var q = 'full_name=' + encodeURIComponent(data.name) +
+            '&first_name=' + encodeURIComponent(data.first_name) +
+            '&last_name=' + encodeURIComponent(data.last_name) +
+            '&email=' + encodeURIComponent(data.email);
+    return url + (url.indexOf('?') > -1 ? '&' : '?') + q;
+  }
+
+  /* fire-and-forget POST: form-encoded, no preflight, no response read.
+     This is the only shape a GHL inbound webhook accepts from a browser.   */
+  function postAway(url, data){
+    var body = Object.keys(data).map(function(k){
+      return encodeURIComponent(k) + '=' + encodeURIComponent(data[k]);
+    }).join('&');
+
+    try{
+      if(navigator.sendBeacon){
+        var blob = new Blob([body], {type:'application/x-www-form-urlencoded'});
+        if(navigator.sendBeacon(url, blob)) return Promise.resolve();
+      }
+    }catch(e){}
+
+    return fetch(url, {
+      method     : 'POST',
+      mode       : 'no-cors',
+      keepalive  : true,
+      headers    : {'Content-Type':'application/x-www-form-urlencoded'},
+      body       : body
+    }).catch(function(){});                    /* opaque either way */
   }
 
   function success(){
@@ -436,7 +525,10 @@
       if(typeof window.fbq === 'function') window.fbq('track','Purchase');
     }catch(e){}
 
-    if(CONFIG.SUCCESS_URL){ window.location.href = CONFIG.SUCCESS_URL; return; }
+    var next = CONFIG.CHECKOUT_URL
+      ? prefill(CONFIG.CHECKOUT_URL, payload())
+      : CONFIG.SUCCESS_URL;
+    if(next){ window.location.href = next; return; }
 
     var box = document.getElementById('bb-pay-box');
     box.innerHTML =
@@ -461,6 +553,14 @@
     }
 
     busy(true);
+
+    if(CONFIG.SUBMIT_MODE !== 'api'){          /* GHL / Zapier / Make */
+      postAway(CONFIG.SUBMIT_URL, payload()).then(function(){
+        window.setTimeout(success, 250);       /* let the beacon flush */
+      });
+      return;
+    }
+
     fetch(CONFIG.SUBMIT_URL, {
       method  : 'POST',
       headers : {'Content-Type':'application/json'},

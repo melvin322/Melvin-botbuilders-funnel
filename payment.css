@@ -320,6 +320,11 @@
 }
 .bb-pay-formerr.is-on{ display:block; }
 
+/* CONFIG.CARD_FIELDS = false — the card is taken on the GHL order form /
+   payment link instead, so these rows come out of the page entirely.        */
+.bb-pay-box.is-nocard #bb-pay-card-slot,
+.bb-pay-box.is-nocard .bb-pay-row.is-3{ display:none; }
+
 /* honeypot (bots only) */
 .bb-pay-hp{
   position:absolute !important; left:-9999px; top:auto;
