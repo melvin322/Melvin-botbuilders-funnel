@@ -209,7 +209,7 @@
                  variant with ! to hide it for that variant instead.          -->
             <p class="bb-pay-applied" data-bb-when="oto">
               <i class="bb-pay-dot" aria-hidden="true"></i>
-              <span>Your one-time offer is applied to this order.</span>
+              <span>Your Done-For-You Bot Setup is added to this order.</span>
             </p>
             <p class="bb-pay-applied" data-bb-when="vip">
               <i class="bb-pay-dot" aria-hidden="true"></i>
@@ -217,7 +217,7 @@
             </p>
             <p class="bb-pay-applied" data-bb-when="vip_oto">
               <i class="bb-pay-dot" aria-hidden="true"></i>
-              <span>VIP and your one-time offer are both applied to this order.</span>
+              <span>VIP and your Done-For-You Bot Setup are both on this order.</span>
             </p>
 
             <button class="bb-pay-cta" id="bb-pay-cta" type="submit">
@@ -309,7 +309,8 @@
          });
          <\/script>      (the \/ is only needed here, inside this comment)
 
-       Per variant: eyebrow, title, lead, note, cardKicker, cardTitle, cta
+       Per variant: label (the offer's readable name, sent to GHL as
+       offer_name), eyebrow, title, lead, note, cardKicker, cardTitle, cta
        and items (the whole What's-included list). Every field is optional —
        leave one out and the markup's own wording stands. In items, a leading
        + marks the line as newly added, which sets it in medium weight.      */
@@ -322,6 +323,7 @@
       },
 
       vip : {
+        label   : 'VIP',
         eyebrow : 'you went VIP',
         title   : 'Your first bot,<br>built VIP-fast.',
         lead    : 'VIP puts you at the front of the build queue. Your funnel gets scoped, built and shipped while the standard queue is still waiting &mdash; same platform, same templates, far less waiting.',
@@ -336,30 +338,35 @@
       },
 
       oto : {
-        eyebrow : 'your one-time offer is locked in',
-        title   : 'Your first bot,<br>at the price you just claimed.',
-        lead    : 'The Growth Plan with your one-time offer applied &mdash; the platform, the templates, and a builder in your corner, held at the price from the last page.',
+        label   : 'Done-For-You Bot Setup',
+        eyebrow : 'your build is on us',
+        title   : 'Your first bot,<br>done for you in 48 hours.',
+        lead    : 'You added Done-For-You Bot Setup, so our team builds, connects and launches the whole system &mdash; no DIY, no guesswork. You approve it, it goes live.',
         items   : [
           'Full platform access &mdash; every channel, no seat limits',
           'Unlimited bots and conversation volume',
           'Premium integrations &mdash; CRM, calendar, payments',
-          'Priority support with a two-hour first reply',
-          'A monthly strategy call with your builder',
-          '+Your one-time offer &mdash; this price, this order only'
+          '+Built and configured for you &mdash; chatbots, funnels, automations, end to end',
+          '+Connected to your CRM, calendar and channels',
+          '+Every flow QA&rsquo;d and launch-ready before go-live',
+          '+Priority onboarding and hands-on support',
+          'A monthly strategy call with your builder'
         ]
       },
 
       vip_oto : {
-        eyebrow : 'VIP, at your one-time price',
-        title   : 'Your first bot,<br>VIP and locked in.',
-        lead    : 'Both of them: VIP moves you to the front of the build queue, and your one-time offer holds the price you just claimed. Nothing left to decide but the card.',
+        label   : 'VIP + Done-For-You Bot Setup',
+        eyebrow : 'VIP, and we build it for you',
+        title   : 'Your first bot,<br>built for you, VIP-fast.',
+        lead    : 'Both of them: Done-For-You Bot Setup puts our team on the build, and VIP puts you at the front of the queue. Nothing left to decide but the card.',
         items   : [
           'Full platform access &mdash; every channel, no seat limits',
           'Unlimited bots and conversation volume',
           'Premium integrations &mdash; CRM, calendar, payments',
-          '+VIP &mdash; front of the build queue, live in 24 hours',
-          '+A direct line to your builder, not a support inbox',
-          '+Your one-time offer &mdash; this price, this order only',
+          '+VIP &mdash; front of the build queue',
+          '+Built, connected and launched for you by our team',
+          '+Every flow QA&rsquo;d and launch-ready before go-live',
+          '+Priority onboarding and a direct line to your builder',
           'A monthly strategy call with your builder'
         ]
       }
@@ -422,7 +429,8 @@
     return v || 'base';
   })();
 
-  var CTA_LABEL = 'Get instant access';
+  var CTA_LABEL   = 'Get instant access';
+  var OFFER_LABEL = '';
 
   (function(){
     var copy = (CONFIG.COPY && (CONFIG.COPY[VARIANT] || CONFIG.COPY.base)) || {};
@@ -437,6 +445,7 @@
     put('.bb-pay-box-kicker',copy.cardKicker);
     put('.bb-pay-box-title', copy.cardTitle);
     if(copy.cta){ CTA_LABEL = copy.cta; put('#bb-pay-cta-txt', copy.cta); }
+    OFFER_LABEL = copy.label || '';
 
     /* the What's-included list. A leading + on a line marks it as newly
        added by this variant (medium weight).                               */
@@ -646,7 +655,8 @@
       first_name: cut > 0 ? name.slice(0,cut) : name,   /* GHL maps these two */
       last_name : cut > 0 ? name.slice(cut+1) : '',
       email     : F.email.value.trim().toLowerCase(),
-      offer     : VARIANT,                              /* base|bump|oto|… */
+      offer     : VARIANT,                          /* base|vip|oto|vip_oto */
+      offer_name: OFFER_LABEL,                      /* readable, for GHL     */
       page      : location.href,
       referrer  : document.referrer || ''
     };
