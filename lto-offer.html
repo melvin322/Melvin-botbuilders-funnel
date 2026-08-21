@@ -137,47 +137,48 @@
         </div>
       </div>
 
-      <!-- offer card + countdown -->
-      <div class="bb-offercard bb-load" style="--d:640ms">
-        <div class="bb-offercard-top">Limited Time Offer</div>
-        <div class="bb-offercard-body">
-          <div class="bb-offercard-title">Exclusive Launch Offer</div>
-          <div class="bb-offercard-price">
-            <span class="bb-ocp-cur">$</span><span class="bb-ocp-amt">97</span><span class="bb-ocp-per">/mo</span>
-            <div class="bb-ocp-sub"><s>$147/mo</s> · billed annually at $1,164/yr</div>
-          </div>
-          <ul class="bb-offerlist">
-            <li><span class="bb-ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12.5l4 4L19 7"/></svg></span>Full access to the BotBuilders platform</li>
-            <li><span class="bb-ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12.5l4 4L19 7"/></svg></span>Guided Setup Walkthrough</li>
-            <li><span class="bb-ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12.5l4 4L19 7"/></svg></span>Premium Integrations</li>
-            <li><span class="bb-ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12.5l4 4L19 7"/></svg></span>Priority support</li>
-          </ul>
-
-          <div class="bb-offer-bonus">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M3 12h18M12 8v13M12 8S9 3 6.5 4.5 8 8 12 8zM12 8s3-5 5.5-3.5S16 8 12 8z"/></svg>
-            <span><b>Bonus:</b> custom training + proven templates</span>
-          </div>
-
-          <div class="bb-countdown">
-            <div class="bb-countdown-lbl">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 1.5M9 2h6"/></svg>
-              Offer ends in
-            </div>
-            <div class="bb-clock" data-cd="hero">
-              <div class="bb-clock-cell"><div class="bb-clock-num" data-cd-d>00</div><div class="bb-clock-unit">Days</div></div>
-              <div class="bb-clock-cell"><div class="bb-clock-num" data-cd-h>00</div><div class="bb-clock-unit">Hrs</div></div>
-              <div class="bb-clock-cell"><div class="bb-clock-num" data-cd-m>00</div><div class="bb-clock-unit">Mins</div></div>
-              <div class="bb-clock-cell"><div class="bb-clock-num" data-cd-s>00</div><div class="bb-clock-unit">Secs</div></div>
-            </div>
-            <div class="bb-countdown-note"><span class="bb-dot"></span>Ends soon. Don't miss out</div>
-          </div>
-
-          <a href="#" class="bb-btn bb-btn--primary bb-btn--wide" style="margin-top:22px" data-cta>
-            <svg class="bb-btn-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M13 2L4.5 13H11l-1 9 8.5-11H12z"/></svg>
-            Claim my offer
-          </a>
+      <!-- Bob, the AI assistant -->
+      <figure class="bb-hero-bob bb-load" style="--d:640ms">
+        <div class="bb-bob-glow" aria-hidden="true"></div>
+        <img class="bb-bob-img" data-bob src="" alt="Bob, your BotBuilders AI assistant" hidden>
+        <div class="bb-bob-ph" data-bob-ph aria-hidden="true">
+          <svg viewBox="0 0 240 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="bobBody" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#3B82F6"/><stop offset="1" stop-color="#2563FF"/>
+              </linearGradient>
+              <linearGradient id="bobHead" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#60A5FA"/><stop offset="1" stop-color="#3B82F6"/>
+              </linearGradient>
+            </defs>
+            <!-- antenna -->
+            <line x1="120" y1="34" x2="120" y2="14" stroke="#38BDF8" stroke-width="5" stroke-linecap="round"/>
+            <circle cx="120" cy="10" r="7" fill="#38BDF8"/>
+            <!-- head -->
+            <rect x="52" y="34" width="136" height="104" rx="30" fill="url(#bobHead)"/>
+            <rect x="66" y="50" width="108" height="74" rx="20" fill="#0B1B36"/>
+            <!-- eyes + smile -->
+            <circle cx="98" cy="82" r="10" fill="#38BDF8"/>
+            <circle cx="142" cy="82" r="10" fill="#38BDF8"/>
+            <path d="M96 102q24 20 48 0" stroke="#38BDF8" stroke-width="6" stroke-linecap="round" fill="none"/>
+            <!-- body -->
+            <rect x="66" y="150" width="108" height="80" rx="26" fill="url(#bobBody)"/>
+            <circle cx="120" cy="190" r="20" fill="#0B1B36"/>
+            <path d="M123 180l-9 12h7l-2 10 9-13h-7z" fill="#38BDF8"/>
+            <!-- arms -->
+            <rect x="30" y="158" width="26" height="20" rx="10" fill="url(#bobBody)"/>
+            <rect x="184" y="150" width="20" height="30" rx="10" fill="url(#bobBody)" transform="rotate(-20 194 165)"/>
+            <circle cx="196" cy="146" r="11" fill="#60A5FA"/>
+            <!-- feet -->
+            <rect x="78" y="228" width="26" height="16" rx="8" fill="#1E3A8A"/>
+            <rect x="136" y="228" width="26" height="16" rx="8" fill="#1E3A8A"/>
+          </svg>
         </div>
-      </div>
+        <figcaption class="bb-bob-cap">
+          <span class="bb-bob-badge"><span class="bb-bob-dot"></span>Online 24/7</span>
+          <span class="bb-bob-name">Say hi to <b>Bob</b>, your AI assistant</span>
+        </figcaption>
+      </figure>
     </div>
   </header>
 
@@ -718,7 +719,14 @@
     /* Inc. 5000 honoree badge — white / reversed PNG for dark backgrounds.
        Shown in the trust bar and the footer. Blank = both are hidden.        */
     INC_LOGO_URL  : 'https://assets.cdn.filesafe.space/sz4sVbBhLW7cX7keIHT6/media/6a7b84e311f1d510eb993917.png',
-    INC_LOGO_HEIGHT : 56
+    INC_LOGO_HEIGHT : 56,
+
+    /* Bob — your AI-assistant mascot, shown in the hero (right side).
+       Upload your Bob image in GHL (Media Library) and paste its URL here.
+       Leave blank to show the built-in placeholder robot instead.
+       BOB_HEIGHT is optional (px); blank = responsive width up to 380px.     */
+    BOB_URL       : '',
+    BOB_HEIGHT    : ''
   };
   /* ======================================================================= */
 
@@ -780,6 +788,20 @@
         (wrap || img).style.display = 'none';
       }
     });
+  })();
+
+  /* -- 0d. Bob mascot (hero) ---------------------------------------------- */
+  (function(){
+    var img = root.querySelector('[data-bob]');
+    var ph  = root.querySelector('[data-bob-ph]');
+    if(!img) return;
+    if(CONFIG.BOB_URL){
+      img.src = CONFIG.BOB_URL;
+      img.hidden = false;
+      if(CONFIG.BOB_HEIGHT){ img.style.width = 'auto'; img.style.height = CONFIG.BOB_HEIGHT + 'px'; }
+      if(ph) ph.style.display = 'none';
+    }
+    /* no BOB_URL → the built-in placeholder robot stays visible */
   })();
 
   /* -- 1. scroll reveal + stagger ----------------------------------------- */

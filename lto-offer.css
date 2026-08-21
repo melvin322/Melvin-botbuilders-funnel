@@ -279,6 +279,53 @@
   max-width:33em;
 }
 .bb-hero-sub strong{ color:var(--bb-heading); font-weight:700; }
+
+/* -- Bob mascot (hero right) ------------------------------------------- */
+.bb-hero-bob{
+  position:relative; margin:0;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  text-align:center; min-height:100%;
+}
+.bb-bob-glow{
+  position:absolute; z-index:0; top:42%; left:50%;
+  width:78%; aspect-ratio:1; transform:translate(-50%,-50%);
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(56,189,248,.45), rgba(37,99,255,.18) 55%, transparent 72%);
+  filter:blur(6px);
+}
+.bb-bob-img, .bb-bob-ph{
+  position:relative; z-index:1;
+  width:min(100%,380px); height:auto;
+  filter:drop-shadow(0 26px 42px rgba(15,32,66,.28));
+  animation:bb-bob-float 4.5s ease-in-out infinite;
+}
+.bb-bob-ph svg{ width:100%; height:auto; display:block; }
+.bb-bob-img[hidden]{ display:none; }
+@keyframes bb-bob-float{ 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(-14px) } }
+.bb-bob-cap{
+  position:relative; z-index:1; margin-top:22px;
+  display:flex; flex-direction:column; align-items:center; gap:10px;
+}
+.bb-bob-badge{
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:12px; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
+  color:var(--bb-blue); background:rgba(37,99,255,.08);
+  border:1px solid rgba(37,99,255,.2); padding:6px 14px; border-radius:999px;
+}
+.bb-bob-dot{
+  width:9px; height:9px; border-radius:50%; background:#22C55E;
+  box-shadow:0 0 0 0 rgba(34,197,94,.55); animation:bb-bob-pulse 1.8s ease-out infinite;
+}
+@keyframes bb-bob-pulse{
+  0%{ box-shadow:0 0 0 0 rgba(34,197,94,.55) }
+  70%{ box-shadow:0 0 0 9px rgba(34,197,94,0) }
+  100%{ box-shadow:0 0 0 0 rgba(34,197,94,0) }
+}
+.bb-bob-name{ font-size:18px; font-weight:600; color:var(--bb-heading); }
+.bb-bob-name b{ font-weight:800; }
+@media (prefers-reduced-motion: reduce){
+  .bb-bob-img, .bb-bob-ph, .bb-bob-dot{ animation:none; }
+}
 .bb-hero-cta{
   margin-top:30px;
   display:flex; align-items:center; gap:14px; flex-wrap:wrap;
