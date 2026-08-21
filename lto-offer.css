@@ -319,8 +319,14 @@
 .bb-offercard-body{ position:relative; padding:26px 28px 28px; }
 .bb-offercard-title{
   font-family:var(--bb-display); font-size:30px; letter-spacing:.03em; color:#fff; line-height:1;
-  text-align:center; margin-bottom:20px;
+  text-align:center; margin-bottom:10px;
 }
+.bb-offercard-price{ text-align:center; margin:0 0 20px; color:#fff; line-height:.95; }
+.bb-ocp-cur{ font-family:var(--bb-display); font-size:26px; color:#fff; vertical-align:top; }
+.bb-ocp-amt{ font-family:var(--bb-display); font-size:56px; color:#fff; letter-spacing:.01em; }
+.bb-ocp-per{ font-size:17px; font-weight:600; color:#8FB4E6; }
+.bb-ocp-sub{ margin-top:6px; font-size:12.5px; font-weight:500; color:#8FB4E6; }
+.bb-ocp-sub s{ color:#6E8195; }
 .bb-offerlist{ display:flex; flex-direction:column; gap:13px; }
 .bb-offerlist li{
   display:flex; align-items:center; gap:12px;
