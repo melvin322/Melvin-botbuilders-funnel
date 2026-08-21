@@ -293,14 +293,15 @@
   background:radial-gradient(circle, rgba(56,189,248,.45), rgba(37,99,255,.18) 55%, transparent 72%);
   filter:blur(6px);
 }
-.bb-bob-img, .bb-bob-ph{
+.bb-bob-img, .bb-bob-video, .bb-bob-ph{
   position:relative; z-index:1;
   width:min(100%,380px); height:auto;
   filter:drop-shadow(0 26px 42px rgba(15,32,66,.28));
   animation:bb-bob-float 4.5s ease-in-out infinite;
 }
+.bb-bob-video{ background:transparent; }
 .bb-bob-ph svg{ width:100%; height:auto; display:block; }
-.bb-bob-img[hidden]{ display:none; }
+.bb-bob-img[hidden], .bb-bob-video[hidden]{ display:none; }
 @keyframes bb-bob-float{ 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(-14px) } }
 .bb-bob-cap{
   position:relative; z-index:1; margin-top:22px;

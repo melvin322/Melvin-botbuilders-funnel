@@ -140,6 +140,7 @@
       <!-- Bob, the AI assistant -->
       <figure class="bb-hero-bob bb-load" style="--d:640ms">
         <div class="bb-bob-glow" aria-hidden="true"></div>
+        <video class="bb-bob-video" data-bob-video muted loop autoplay playsinline preload="auto" hidden></video>
         <img class="bb-bob-img" data-bob src="" alt="Bob, your BotBuilders AI assistant" hidden>
         <div class="bb-bob-ph" data-bob-ph aria-hidden="true">
           <svg viewBox="0 0 240 260" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -722,7 +723,9 @@
     INC_LOGO_HEIGHT : 56,
 
     /* Bob — your AI-assistant mascot, shown in the hero (right side).
-       Upload your Bob image in GHL (Media Library) and paste its URL here.
+       Paste your hosted Bob URL here. BOTH image and video are supported:
+         • Video → ends in .mp4/.webm/.ogg → plays muted, looped, autoplay
+         • Image → any other URL → shown as a still image
        Leave blank to show the built-in placeholder robot instead.
        BOB_HEIGHT is optional (px); blank = responsive width up to 380px.     */
     BOB_URL       : '',
@@ -790,18 +793,30 @@
     });
   })();
 
-  /* -- 0d. Bob mascot (hero) ---------------------------------------------- */
+  /* -- 0d. Bob mascot (hero) — supports image OR video -------------------- */
   (function(){
     var img = root.querySelector('[data-bob]');
+    var vid = root.querySelector('[data-bob-video]');
     var ph  = root.querySelector('[data-bob-ph]');
-    if(!img) return;
-    if(CONFIG.BOB_URL){
-      img.src = CONFIG.BOB_URL;
+    if(!img && !vid) return;
+    var url = CONFIG.BOB_URL;
+    if(!url) return;                 /* blank → keep the placeholder robot */
+
+    function sizeEl(el){ if(CONFIG.BOB_HEIGHT){ el.style.width = 'auto'; el.style.height = CONFIG.BOB_HEIGHT + 'px'; } }
+    var isVideo = /\.(mp4|webm|ogg|ogv|mov|m4v)(\?|#|$)/i.test(url);
+
+    if(isVideo && vid){
+      vid.src = url;
+      vid.hidden = false;
+      sizeEl(vid);
+      var play = vid.play && vid.play();
+      if(play && play.catch) play.catch(function(){});   /* ignore autoplay block */
+    } else if(img){
+      img.src = url;
       img.hidden = false;
-      if(CONFIG.BOB_HEIGHT){ img.style.width = 'auto'; img.style.height = CONFIG.BOB_HEIGHT + 'px'; }
-      if(ph) ph.style.display = 'none';
+      sizeEl(img);
     }
-    /* no BOB_URL → the built-in placeholder robot stays visible */
+    if(ph) ph.style.display = 'none';
   })();
 
   /* -- 1. scroll reveal + stagger ----------------------------------------- */
