@@ -278,6 +278,7 @@
   font-size:clamp(16px,1.5vw,19px);
   max-width:33em;
 }
+.bb-hero-sub strong{ color:var(--bb-heading); font-weight:700; }
 .bb-hero-cta{
   margin-top:30px;
   display:flex; align-items:center; gap:14px; flex-wrap:wrap;
