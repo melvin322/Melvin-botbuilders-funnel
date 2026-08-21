@@ -686,6 +686,12 @@
        the contact in GHL. Blank = skip the webhook. */
     LEAD_WEBHOOK_URL : 'https://services.leadconnectorhq.com/hooks/sz4sVbBhLW7cX7keIHT6/webhook-trigger/8be2732a-bbbb-4698-9968-b31484e23600',
 
+    /* Offer identity sent with the webhook payload (matches the OTO page shape:
+       order_bump / quoted_total / offer / source). */
+    OFFER_ID      : 'growth-plan-97',
+    OFFER_PRICE   : 97,
+    BUMP_PRICE    : 197,
+
     /* "Watch demo" button. BOTH supported:
          • Direct file → ends in .mp4/.webm/.ogg → opens in a lightbox <video>
          • Embed/any URL → opens in a new tab
@@ -926,18 +932,30 @@
     var err = document.getElementById('bb-lead-err');
 
     /* POST the lead to the GHL inbound webhook (creates the contact).
-       sendBeacon with a fetch keepalive fallback so it fires before nav. */
+       Sent as application/x-www-form-urlencoded to match the OTO page's
+       payload shape. sendBeacon with a fetch keepalive fallback so it fires
+       before navigation. */
+    function encodeForm(obj){
+      var parts = [];
+      for(var k in obj){
+        if(Object.prototype.hasOwnProperty.call(obj, k)){
+          parts.push(encodeURIComponent(k) + '=' + encodeURIComponent(obj[k]));
+        }
+      }
+      return parts.join('&');
+    }
     function sendToWebhook(payload){
       if(!CONFIG.LEAD_WEBHOOK_URL) return;
-      var body = JSON.stringify(payload);
+      var body = encodeForm(payload);
+      var type = 'application/x-www-form-urlencoded';
       try{
         if(navigator.sendBeacon){
-          if(navigator.sendBeacon(CONFIG.LEAD_WEBHOOK_URL, new Blob([body], {type:'application/json'}))) return;
+          if(navigator.sendBeacon(CONFIG.LEAD_WEBHOOK_URL, new Blob([body], {type:type}))) return;
         }
       }catch(e){}
       try{
         fetch(CONFIG.LEAD_WEBHOOK_URL, {method:'POST', mode:'no-cors', keepalive:true,
-          headers:{'Content-Type':'text/plain;charset=UTF-8'}, body:body});
+          headers:{'Content-Type':type}, body:body});
       }catch(e){}
     }
 
@@ -958,13 +976,24 @@
       if(!fn || !ln || !okEmail || !okPhone){ if(err) err.hidden = false; return; }
       if(err) err.hidden = true;
 
-      /* CREATE the contact in GHL via the inbound webhook (camelCase keys to
-         match the trigger's mapping sample) */
-      sendToWebhook({ firstName:fn, lastName:ln, email:em, phone:ph });
+      /* CREATE the contact in GHL via the inbound webhook. Payload matches the
+         OTO page's shape so the same mapping reference covers both pages. */
+      var quotedTotal = CONFIG.OFFER_PRICE + (bumpOn ? CONFIG.BUMP_PRICE : 0);
+      var payload = {
+        first_name   : fn,
+        last_name    : ln,
+        email        : em,
+        phone        : ph,
+        order_bump   : bumpOn ? 'true' : 'false',
+        quoted_total : String(quotedTotal),
+        offer        : CONFIG.OFFER_ID,
+        source       : window.location.href
+      };
+      sendToWebhook(payload);
 
       /* SAVE the fields in the browser (session + local) so later funnel
          pages can read them */
-      var lead = JSON.stringify({ firstName:fn, lastName:ln, email:em, phone:ph });
+      var lead = JSON.stringify(payload);
       try{ sessionStorage.setItem(CONFIG.LEAD_KEY, lead); }catch(e){}
       try{ localStorage.setItem(CONFIG.LEAD_KEY, lead); }catch(e){}
 
