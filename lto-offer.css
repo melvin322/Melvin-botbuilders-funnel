@@ -293,9 +293,10 @@
   background:radial-gradient(circle, rgba(56,189,248,.45), rgba(37,99,255,.18) 55%, transparent 72%);
   filter:blur(6px);
 }
+.bb-hero-bob{ --bb-card-h:694px; }   /* exact rendered height of the offer card */
 .bb-bob-img, .bb-bob-video, .bb-bob-ph{
   position:relative; z-index:1;
-  height:560px; width:auto; max-width:100%;
+  height:var(--bb-card-h); width:auto; max-width:100%;
   filter:drop-shadow(0 26px 42px rgba(15,32,66,.28));
   animation:bb-bob-float 4.5s ease-in-out infinite;
 }
