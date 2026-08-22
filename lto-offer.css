@@ -729,8 +729,12 @@
 }
 
 /* Get Instant Access → dropdown lead form (name + email) */
-.bb-buy{ position:relative; }
-#bb-getaccess{ margin-top:20px; }
+/* -- lead-capture form (inside the pricing card) ---------------------- */
+.bb-price .bb-lead{ margin-top:20px; }
+.bb-lead-head{
+  text-align:center; font-size:14px; font-weight:700;
+  color:var(--bb-heading); margin-bottom:12px;
+}
 .bb-lead-row{ display:flex; gap:10px; }
 .bb-lead input{
   width:100%; flex:1; min-width:0; margin-bottom:10px;
@@ -742,26 +746,6 @@
 .bb-lead input:focus{ outline:none; border-color:var(--bb-blue); box-shadow:0 0 0 3px rgba(37,99,255,.15); }
 .bb-lead .bb-btn{ margin-top:4px; }
 .bb-lead-err{ margin-top:10px; text-align:center; font-size:13px; font-weight:600; color:#DC4B4B; }
-
-/* -- lead-capture card (below the offer) ------------------------------- */
-.bb-order{
-  width:100%; max-width:480px; margin:36px auto 0;
-  background:#F6FAFF; border:1.5px solid var(--bb-border);
-  border-radius:var(--bb-radius-lg, 18px);
-  padding:30px 28px 24px;
-  box-shadow:0 18px 44px rgba(8,18,40,.10);
-}
-.bb-order-head{ text-align:center; margin-bottom:18px; }
-.bb-order-title{
-  font-family:var(--bb-head); font-weight:800; letter-spacing:-.01em;
-  font-size:22px; color:var(--bb-heading); margin-bottom:6px;
-}
-.bb-order-sub{ font-size:14px; color:var(--bb-muted); }
-.bb-order-trust{
-  margin-top:14px; display:flex; align-items:center; justify-content:center; gap:7px;
-  font-size:12.5px; font-weight:600; color:var(--bb-muted);
-}
-.bb-order-trust svg{ width:15px; height:15px; color:var(--bb-blue); }
 
 
 /* ==========================================================================
