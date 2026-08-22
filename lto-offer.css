@@ -305,7 +305,7 @@
 .bb-bob-video{ background:transparent; }
 .bb-bob-ph{ display:flex; align-items:center; justify-content:center; }
 .bb-bob-ph svg{ max-width:100%; max-height:100%; width:auto; height:auto; display:block; }
-.bb-bob-img[hidden], .bb-bob-video[hidden]{ display:none; }
+.bb-bob-img[hidden], .bb-bob-video[hidden], .bb-bob-ph[hidden]{ display:none; }
 @keyframes bb-bob-float{ 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(-14px) } }
 .bb-bob-cap{
   position:relative; z-index:1; margin-top:22px;
