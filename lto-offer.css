@@ -743,49 +743,25 @@
 .bb-lead .bb-btn{ margin-top:4px; }
 .bb-lead-err{ margin-top:10px; text-align:center; font-size:13px; font-weight:600; color:#DC4B4B; }
 
-/* -- lead-capture popup (modal) --------------------------------------- */
-.bb-modal{
-  position:fixed; inset:0; z-index:9999;
-  display:flex; align-items:center; justify-content:center;
-  padding:20px;
-  opacity:0; transition:opacity .22s var(--bb-ease);
-}
-.bb-modal[hidden]{ display:none; }
-.bb-modal.is-open{ opacity:1; }
-.bb-modal-overlay{
-  position:absolute; inset:0;
-  background:rgba(8,18,40,.62); backdrop-filter:blur(3px); -webkit-backdrop-filter:blur(3px);
-}
-.bb-modal-card{
-  position:relative; z-index:1;
-  width:100%; max-width:420px;
-  background:#fff; border-radius:var(--bb-radius-lg, 18px);
+/* -- lead-capture card (below the offer) ------------------------------- */
+.bb-order{
+  width:100%; max-width:480px; margin:36px auto 0;
+  background:#F6FAFF; border:1.5px solid var(--bb-border);
+  border-radius:var(--bb-radius-lg, 18px);
   padding:30px 28px 24px;
-  box-shadow:0 30px 70px rgba(8,18,40,.34);
-  transform:translateY(14px) scale(.98); transition:transform .26s var(--bb-ease);
-  max-height:calc(100vh - 40px); overflow-y:auto;
+  box-shadow:0 18px 44px rgba(8,18,40,.10);
 }
-.bb-modal.is-open .bb-modal-card{ transform:none; }
-.bb-modal-x{
-  position:absolute; top:12px; right:12px;
-  width:34px; height:34px; border:0; border-radius:50%;
-  background:rgba(8,18,40,.06); color:var(--bb-heading);
-  display:inline-flex; align-items:center; justify-content:center; cursor:pointer;
-  transition:background .15s ease;
-}
-.bb-modal-x:hover{ background:rgba(8,18,40,.12); }
-.bb-modal-x svg{ width:17px; height:17px; }
-.bb-modal-head{ text-align:center; margin-bottom:18px; }
-.bb-modal-title{
+.bb-order-head{ text-align:center; margin-bottom:18px; }
+.bb-order-title{
   font-family:var(--bb-head); font-weight:800; letter-spacing:-.01em;
   font-size:22px; color:var(--bb-heading); margin-bottom:6px;
 }
-.bb-modal-sub{ font-size:14px; color:var(--bb-muted); }
-.bb-modal-trust{
+.bb-order-sub{ font-size:14px; color:var(--bb-muted); }
+.bb-order-trust{
   margin-top:14px; display:flex; align-items:center; justify-content:center; gap:7px;
   font-size:12.5px; font-weight:600; color:var(--bb-muted);
 }
-.bb-modal-trust svg{ width:15px; height:15px; color:var(--bb-blue); }
+.bb-order-trust svg{ width:15px; height:15px; color:var(--bb-blue); }
 
 
 /* ==========================================================================

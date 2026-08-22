@@ -463,6 +463,31 @@
           </div>
         </div>
       </div>
+
+      <!-- fields card: fill in to continue to checkout -->
+      <div class="bb-order bb-rv" id="bb-order">
+        <div class="bb-order-head">
+          <div class="bb-order-title">Enter your details to claim your offer</div>
+          <div class="bb-order-sub">Fill in the fields below to continue to secure checkout.</div>
+        </div>
+        <form class="bb-lead" id="bb-lead" novalidate>
+          <div class="bb-lead-row">
+            <input type="text" name="first_name" placeholder="First name" autocomplete="given-name" required>
+            <input type="text" name="last_name" placeholder="Last name" autocomplete="family-name" required>
+          </div>
+          <input type="email" name="email" placeholder="Email address" autocomplete="email" required>
+          <input type="tel" name="phone" placeholder="Phone number" autocomplete="tel" inputmode="tel" required>
+          <button type="submit" class="bb-btn bb-btn--primary bb-btn--wide">
+            Continue to checkout
+            <svg class="bb-arrow" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+          <p class="bb-lead-err" id="bb-lead-err" hidden>Please enter your name, a valid email, and phone number.</p>
+        </form>
+        <div class="bb-order-trust">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+          Secure checkout &middot; 30-day money-back guarantee
+        </div>
+      </div>
     </div>
   </section>
 
@@ -657,37 +682,6 @@
         <svg class="bb-btn-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M13 2L4.5 13H11l-1 9 8.5-11H12z"/></svg>
         Claim my offer
       </a>
-    </div>
-  </div>
-
-  <!-- lead-capture popup: opened by every CTA (fields ready → fewer clicks) -->
-  <div class="bb-modal" id="bb-modal" hidden role="dialog" aria-modal="true" aria-labelledby="bb-modal-title">
-    <div class="bb-modal-overlay" data-modal-close></div>
-    <div class="bb-modal-card" role="document">
-      <button class="bb-modal-x" type="button" data-modal-close aria-label="Close">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
-      </button>
-      <div class="bb-modal-head">
-        <div class="bb-modal-title" id="bb-modal-title">Claim your launch offer</div>
-        <div class="bb-modal-sub">Enter your details to continue &mdash; takes 10 seconds.</div>
-      </div>
-      <form class="bb-lead" id="bb-lead" novalidate>
-        <div class="bb-lead-row">
-          <input type="text" name="first_name" placeholder="First name" autocomplete="given-name" required>
-          <input type="text" name="last_name" placeholder="Last name" autocomplete="family-name" required>
-        </div>
-        <input type="email" name="email" placeholder="Email address" autocomplete="email" required>
-        <input type="tel" name="phone" placeholder="Phone number" autocomplete="tel" inputmode="tel" required>
-        <button type="submit" class="bb-btn bb-btn--primary bb-btn--wide">
-          Continue to checkout
-          <svg class="bb-arrow" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </button>
-        <p class="bb-lead-err" id="bb-lead-err" hidden>Please enter your name, a valid email, and phone number.</p>
-      </form>
-      <div class="bb-modal-trust">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
-        Secure checkout &middot; 30-day money-back guarantee
-      </div>
     </div>
   </div>
 
@@ -986,45 +980,26 @@
   /* -- 6c. Lead-capture popup: opened by every CTA, collects the fields,
      fires the webhook, saves them, and sends to checkout ----------------- */
   (function(){
-    var modal = document.getElementById('bb-modal');
-    var form  = document.getElementById('bb-lead');
-    if(!modal || !form) return;
-    var err   = document.getElementById('bb-lead-err');
-    var lastFocus = null;
+    var card = document.getElementById('bb-order');
+    var form = document.getElementById('bb-lead');
+    if(!card || !form) return;
+    var err  = document.getElementById('bb-lead-err');
 
-    function openModal(){
-      lastFocus = document.activeElement;
-      modal.hidden = false;
-      document.body.style.overflow = 'hidden';           /* lock background scroll */
-      requestAnimationFrame(function(){ modal.classList.add('is-open'); });
-      var first = form.querySelector('input'); if(first){ try{ first.focus(); }catch(e){} }
-    }
-    function closeModal(){
-      modal.classList.remove('is-open');
-      document.body.style.overflow = '';
-      setTimeout(function(){ if(!modal.classList.contains('is-open')) modal.hidden = true; }, 300);
-      if(lastFocus && lastFocus.focus){ try{ lastFocus.focus(); }catch(e){} }
-    }
-
-    /* "Claim my offer" CTAs scroll down to the offer / pricing section
-       (smooth-scroll handler below does the rest) */
+    /* "Claim my offer" CTAs scroll down to the offer / pricing section */
     root.querySelectorAll('[data-cta]').forEach(function(el){
       el.setAttribute('href', '#bb-pricing');
     });
-    /* "Get Instant Access" opens the popup with the fields ready */
+    /* "Get Instant Access" jumps to the fields card and focuses it */
     var getBtn = document.getElementById('bb-getaccess');
     if(getBtn){
-      getBtn.setAttribute('href', '#');
-      getBtn.addEventListener('click', function(e){ e.preventDefault(); openModal(); });
+      getBtn.setAttribute('href', '#bb-order');
+      getBtn.addEventListener('click', function(e){
+        e.preventDefault();
+        card.scrollIntoView({behavior:REDUCED?'auto':'smooth', block:'center'});
+        var first = form.querySelector('input');
+        if(first){ setTimeout(function(){ try{ first.focus(); }catch(e){} }, REDUCED?0:350); }
+      });
     }
-
-    /* close: overlay click, X button, or Esc */
-    modal.querySelectorAll('[data-modal-close]').forEach(function(el){
-      el.addEventListener('click', closeModal);
-    });
-    document.addEventListener('keydown', function(e){
-      if((e.key === 'Escape' || e.keyCode === 27) && !modal.hidden) closeModal();
-    });
 
     /* POST the lead to the GHL inbound webhook (creates the contact).
        Sent as application/x-www-form-urlencoded to match the OTO page's
