@@ -423,34 +423,6 @@
 
         <!-- pricing card -->
         <div class="bb-price bb-rv bb-rv--right">
-          <div class="bb-lead-bob">
-            <img class="bb-lead-bob-img" data-bob-card src="" alt="Bob the BotBuilder pointing at the launch offer" hidden>
-            <div class="bb-lead-bob-ph" data-bob-card-ph aria-hidden="true">
-              <svg viewBox="0 0 96 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <!-- antenna -->
-                <line x1="48" y1="16" x2="48" y2="9" stroke="#38BDF8" stroke-width="3" stroke-linecap="round"/>
-                <circle cx="48" cy="7" r="3" fill="#38BDF8"/>
-                <!-- head -->
-                <rect x="26" y="16" width="44" height="38" rx="13" fill="#3B82F6"/>
-                <rect x="32" y="23" width="32" height="24" rx="8" fill="#0B1B36"/>
-                <circle cx="42" cy="34" r="4" fill="#38BDF8"/>
-                <circle cx="54" cy="34" r="4" fill="#38BDF8"/>
-                <path d="M41 41q7 5 14 0" stroke="#38BDF8" stroke-width="3" stroke-linecap="round" fill="none"/>
-                <!-- body -->
-                <rect x="33" y="57" width="30" height="24" rx="9" fill="#2563FF"/>
-                <circle cx="48" cy="69" r="5.5" fill="#0B1B36"/>
-                <!-- left arm -->
-                <rect x="20" y="59" width="9" height="18" rx="4.5" fill="#2563FF" transform="rotate(22 24 68)"/>
-                <!-- right arm pointing DOWN at the badge -->
-                <rect x="64" y="60" width="9" height="26" rx="4.5" fill="#2563FF" transform="rotate(-16 68 73)"/>
-                <circle cx="60" cy="96" r="6.5" fill="#60A5FA"/>
-                <rect x="57" y="98" width="6" height="15" rx="3" fill="#60A5FA"/>
-                <!-- feet -->
-                <rect x="36" y="81" width="10" height="7" rx="3.5" fill="#1E3A8A"/>
-                <rect x="52" y="81" width="10" height="7" rx="3.5" fill="#1E3A8A"/>
-              </svg>
-            </div>
-          </div>
           <div class="bb-price-pop">Launch offer</div>
           <div class="bb-price-name">Growth Plan</div>
           <div class="bb-price-fig">
@@ -496,6 +468,29 @@
           <div class="bb-price-scarcity">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 1.5M9 2h6"/></svg>
             Launch price ends when the timer hits zero
+          </div>
+        </div>
+
+        <!-- Bob mascot: floats in the middle of the offer, outside the cards -->
+        <div class="bb-lead-bob" aria-hidden="true">
+          <video class="bb-lead-bob-video" data-bob-card-video muted loop autoplay playsinline preload="auto" hidden></video>
+          <img class="bb-lead-bob-img" data-bob-card src="" alt="Bob the BotBuilder" hidden>
+          <div class="bb-lead-bob-ph" data-bob-card-ph>
+            <svg viewBox="0 0 96 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <line x1="48" y1="16" x2="48" y2="9" stroke="#38BDF8" stroke-width="3" stroke-linecap="round"/>
+              <circle cx="48" cy="7" r="3" fill="#38BDF8"/>
+              <rect x="26" y="16" width="44" height="38" rx="13" fill="#3B82F6"/>
+              <rect x="32" y="23" width="32" height="24" rx="8" fill="#0B1B36"/>
+              <circle cx="42" cy="34" r="4" fill="#38BDF8"/>
+              <circle cx="54" cy="34" r="4" fill="#38BDF8"/>
+              <path d="M41 41q7 5 14 0" stroke="#38BDF8" stroke-width="3" stroke-linecap="round" fill="none"/>
+              <rect x="33" y="57" width="30" height="24" rx="9" fill="#2563FF"/>
+              <circle cx="48" cy="69" r="5.5" fill="#0B1B36"/>
+              <rect x="20" y="59" width="9" height="18" rx="4.5" fill="#2563FF" transform="rotate(22 24 68)"/>
+              <rect x="67" y="59" width="9" height="18" rx="4.5" fill="#2563FF" transform="rotate(-22 72 68)"/>
+              <rect x="36" y="81" width="10" height="7" rx="3.5" fill="#1E3A8A"/>
+              <rect x="52" y="81" width="10" height="7" rx="3.5" fill="#1E3A8A"/>
+            </svg>
           </div>
         </div>
       </div>
@@ -853,17 +848,28 @@
     if(ph) ph.hidden = true;
   })();
 
-  /* -- 0e. Bob photo above the offer form -------------------------------- */
+  /* -- 0e. Bob in the middle of the offer (image OR video) --------------- */
   (function(){
     var img = root.querySelector('[data-bob-card]');
+    var vid = root.querySelector('[data-bob-card-video]');
     var ph  = root.querySelector('[data-bob-card-ph]');
-    if(!img) return;
-    if(CONFIG.BOB_CARD_URL){
-      img.src = CONFIG.BOB_CARD_URL;
+    if(!img && !vid) return;
+    var url = CONFIG.BOB_CARD_URL;
+    if(!url) return;                 /* blank → keep the placeholder robot */
+
+    var isVideo = /\.(mp4|webm|ogg|ogv|mov|m4v)(\?|#|$)/i.test(url);
+    if(isVideo && vid){
+      vid.src = url;
+      vid.hidden = false;
+      if(img) img.hidden = true;
+      var play = vid.play && vid.play();
+      if(play && play.catch) play.catch(function(){});
+    } else if(img){
+      img.src = url;
       img.hidden = false;
-      if(ph) ph.style.display = 'none';
+      if(vid) vid.hidden = true;
     }
-    /* blank → keep the built-in placeholder avatar */
+    if(ph) ph.style.display = 'none';
   })();
 
   /* -- 1. scroll reveal + stagger ----------------------------------------- */
