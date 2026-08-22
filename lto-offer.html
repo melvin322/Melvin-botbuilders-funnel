@@ -423,6 +423,22 @@
 
         <!-- pricing card -->
         <div class="bb-price bb-rv bb-rv--right">
+          <div class="bb-lead-bob">
+            <img class="bb-lead-bob-img" data-bob-card src="" alt="Bob the BotBuilder" hidden>
+            <div class="bb-lead-bob-ph" data-bob-card-ph aria-hidden="true">
+              <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="60" cy="60" r="60" fill="#EAF2FE"/>
+                <rect x="34" y="40" width="52" height="42" rx="14" fill="#3B82F6"/>
+                <rect x="42" y="48" width="36" height="26" rx="9" fill="#0B1B36"/>
+                <circle cx="53" cy="60" r="4.5" fill="#38BDF8"/>
+                <circle cx="67" cy="60" r="4.5" fill="#38BDF8"/>
+                <path d="M52 68q8 6 16 0" stroke="#38BDF8" stroke-width="3" stroke-linecap="round" fill="none"/>
+                <line x1="60" y1="40" x2="60" y2="32" stroke="#38BDF8" stroke-width="3" stroke-linecap="round"/>
+                <circle cx="60" cy="30" r="3.5" fill="#38BDF8"/>
+                <rect x="46" y="84" width="28" height="12" rx="6" fill="#2563FF"/>
+              </svg>
+            </div>
+          </div>
           <div class="bb-price-pop">Launch offer</div>
           <div class="bb-price-name">Growth Plan</div>
           <div class="bb-price-fig">
@@ -444,22 +460,6 @@
 
           <div class="bb-price-annual">$1,164 billed once a year</div>
 
-          <div class="bb-lead-bob">
-            <img class="bb-lead-bob-img" data-bob-card src="" alt="Bob the BotBuilder" hidden>
-            <div class="bb-lead-bob-ph" data-bob-card-ph aria-hidden="true">
-              <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="60" cy="60" r="60" fill="#EAF2FE"/>
-                <rect x="34" y="40" width="52" height="42" rx="14" fill="#3B82F6"/>
-                <rect x="42" y="48" width="36" height="26" rx="9" fill="#0B1B36"/>
-                <circle cx="53" cy="60" r="4.5" fill="#38BDF8"/>
-                <circle cx="67" cy="60" r="4.5" fill="#38BDF8"/>
-                <path d="M52 68q8 6 16 0" stroke="#38BDF8" stroke-width="3" stroke-linecap="round" fill="none"/>
-                <line x1="60" y1="40" x2="60" y2="32" stroke="#38BDF8" stroke-width="3" stroke-linecap="round"/>
-                <circle cx="60" cy="30" r="3.5" fill="#38BDF8"/>
-                <rect x="46" y="84" width="28" height="12" rx="6" fill="#2563FF"/>
-              </svg>
-            </div>
-          </div>
           <form class="bb-lead" id="bb-lead" novalidate>
             <div class="bb-lead-head">Enter your details to claim your offer</div>
             <div class="bb-lead-row">
@@ -1081,16 +1081,22 @@
     });
   })();
 
-  /* -- 7. sticky bar: show after the hero, hide once the final CTA / footer
-     comes into view ------------------------------------------------------- */
+  /* -- 7. sticky bar: show after the hero, hide over the offer section and
+     once the final CTA / footer comes into view --------------------------- */
   (function(){
     var bar=document.getElementById('bb-sticky'), hero=root.querySelector('.bb-hero');
     var bottomEl=root.querySelector('.bb-final') || root.querySelector('.bb-footer');
+    var offer=document.getElementById('bb-pricing');
     if(!bar || !hero) return;
     function onScroll(){
+      var vh = window.innerHeight;
       var pastHero = hero.getBoundingClientRect().bottom < 0;
-      var atBottom = bottomEl ? bottomEl.getBoundingClientRect().top < (window.innerHeight - 40) : false;
-      bar.classList.toggle('is-in', pastHero && !atBottom);
+      var atBottom = bottomEl ? bottomEl.getBoundingClientRect().top < (vh - 40) : false;
+      /* hide the sticky bar while the offer/pricing section is on screen, so
+         the fields and every detail are fully visible (no duplicate CTA) */
+      var overOffer = false;
+      if(offer){ var r = offer.getBoundingClientRect(); overOffer = (r.top < vh - 80 && r.bottom > 80); }
+      bar.classList.toggle('is-in', pastHero && !atBottom && !overOffer);
     }
     window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
   })();
