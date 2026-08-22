@@ -294,16 +294,17 @@
   filter:blur(6px);
 }
 .bb-hero-bob{ --bb-card-h:694px; }   /* exact rendered height of the offer card */
+/* Bob fills the same footprint as the offer card: full column width x card height */
 .bb-bob-img, .bb-bob-video, .bb-bob-ph{
   position:relative; z-index:1;
-  height:var(--bb-card-h); width:auto; max-width:100%;
+  width:100%; height:var(--bb-card-h);
   filter:drop-shadow(0 26px 42px rgba(15,32,66,.28));
   animation:bb-bob-float 4.5s ease-in-out infinite;
 }
 .bb-bob-img, .bb-bob-video{ object-fit:contain; }
 .bb-bob-video{ background:transparent; }
 .bb-bob-ph{ display:flex; align-items:center; justify-content:center; }
-.bb-bob-ph svg{ height:100%; width:auto; max-width:100%; display:block; }
+.bb-bob-ph svg{ max-width:100%; max-height:100%; width:auto; height:auto; display:block; }
 .bb-bob-img[hidden], .bb-bob-video[hidden]{ display:none; }
 @keyframes bb-bob-float{ 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(-14px) } }
 .bb-bob-cap{
@@ -900,7 +901,7 @@
 @media (max-width:1040px){
   .bb-hero-in{ grid-template-columns:1fr; gap:44px; }
   .bb-offercard{ max-width:520px; }
-  .bb-bob-img, .bb-bob-video, .bb-bob-ph{ height:auto; width:min(100%,420px); }
+  .bb-bob-img, .bb-bob-video, .bb-bob-ph{ height:auto; width:100%; max-width:520px; margin:0 auto; }
   .bb-bob-ph svg{ height:auto; width:100%; }
   .bb-offer{ grid-template-columns:1fr; gap:28px; }
   .bb-stack,.bb-price{ max-width:560px; margin:0 auto; width:100%; }

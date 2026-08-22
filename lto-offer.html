@@ -730,9 +730,8 @@
        video (VP9-alpha .webm — see assets/bob-transparent.webm). Upload it
        to GHL Media Library and paste its URL here.
        Leave blank to show the built-in placeholder robot instead.
-       BOB_HEIGHT is optional (px); blank = matches the offer-card height.     */
-    BOB_URL       : '',
-    BOB_HEIGHT    : ''
+       Bob is sized to the same footprint as the offer card automatically. */
+    BOB_URL       : ''
   };
   /* ======================================================================= */
 
@@ -805,19 +804,16 @@
     var url = CONFIG.BOB_URL;
     if(!url) return;                 /* blank → keep the placeholder robot */
 
-    function sizeEl(el){ if(CONFIG.BOB_HEIGHT){ el.style.width = 'auto'; el.style.height = CONFIG.BOB_HEIGHT + 'px'; } }
     var isVideo = /\.(mp4|webm|ogg|ogv|mov|m4v)(\?|#|$)/i.test(url);
 
     if(isVideo && vid){
       vid.src = url;
       vid.hidden = false;
-      sizeEl(vid);
       var play = vid.play && vid.play();
       if(play && play.catch) play.catch(function(){});   /* ignore autoplay block */
     } else if(img){
       img.src = url;
       img.hidden = false;
-      sizeEl(img);
     }
     if(ph) ph.style.display = 'none';
   })();
