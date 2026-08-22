@@ -733,7 +733,7 @@
 /* Get Instant Access → dropdown lead form (name + email) */
 /* -- Bob floating in the middle of the offer, outside the cards -------- */
 .bb-lead-bob{
-  position:absolute; left:50%; bottom:18px; transform:translateX(-50%);
+  position:absolute; left:49%; bottom:150px; transform:translateX(-50%);
   z-index:5; margin:0; display:flex; justify-content:center;
   pointer-events:none;   /* never block clicks on the cards behind it */
 }
