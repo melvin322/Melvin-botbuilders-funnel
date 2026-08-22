@@ -280,6 +280,25 @@
 }
 .bb-hero-sub strong{ color:var(--bb-heading); font-weight:700; }
 
+/* -- hero "what you get" checklist ------------------------------------- */
+.bb-hero-get{ margin-top:22px; }
+.bb-hero-get-lbl{
+  font-size:15px; font-weight:700; color:var(--bb-heading); margin-bottom:13px;
+}
+.bb-hero-get-lbl strong{ color:var(--bb-blue); }
+.bb-hero-get-lbl s{ color:var(--bb-muted); font-weight:600; margin-left:4px; }
+.bb-hero-get ul{ list-style:none; margin:0; padding:0; display:grid; gap:11px; }
+.bb-hero-get li{
+  display:flex; align-items:center; gap:11px;
+  font-size:15.5px; font-weight:500; color:var(--bb-body); line-height:1.35;
+}
+.bb-hg-ck{
+  flex:0 0 auto; width:22px; height:22px; border-radius:50%;
+  background:var(--bb-blue); color:#fff;
+  display:inline-flex; align-items:center; justify-content:center;
+}
+.bb-hg-ck svg{ width:13px; height:13px; }
+
 /* -- Bob mascot (hero right) ------------------------------------------- */
 .bb-hero-bob{
   position:relative; margin:0;
