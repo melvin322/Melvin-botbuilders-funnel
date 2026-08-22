@@ -612,6 +612,7 @@
   position:relative;
   display:grid; grid-template-columns:1.05fr .95fr; gap:40px; align-items:stretch;
 }
+#bb-pricing{ overflow-x:clip; }   /* keep the side Bob from causing horizontal scroll */
 /* left — the value stack */
 .bb-stack{
   background:var(--bb-ink); color:#B9C7DB;
@@ -733,7 +734,7 @@
 /* Get Instant Access → dropdown lead form (name + email) */
 /* -- Bob floating in the middle of the offer, outside the cards -------- */
 .bb-lead-bob{
-  position:absolute; left:49%; bottom:150px; transform:translateX(-50%);
+  position:absolute; left:100%; bottom:150px; transform:translateX(-52%);
   z-index:5; margin:0; display:flex; justify-content:center;
   pointer-events:none;   /* never block clicks on the cards behind it */
 }
