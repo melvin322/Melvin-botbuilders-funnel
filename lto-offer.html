@@ -368,7 +368,7 @@
         <p>Claim the complete BotBuilders system at the launch price, locked in for as long as you stay.</p>
       </div>
 
-      <div class="bb-offer">
+      <div class="bb-offer" id="bb-claim">
         <!-- value stack -->
         <div class="bb-stack bb-rv bb-rv--left">
           <div class="bb-stack-in">
@@ -1018,10 +1018,9 @@
     if(!form) return;
     var err  = document.getElementById('bb-lead-err');
 
-    /* "Claim my offer" CTAs scroll down to the offer / pricing section
-       (where the lead fields now live) */
+    /* "Claim my offer" CTAs scroll straight to the offer cards / fields */
     root.querySelectorAll('[data-cta]').forEach(function(el){
-      el.setAttribute('href', '#bb-pricing');
+      el.setAttribute('href', '#bb-claim');
     });
 
     /* POST the lead to the GHL inbound webhook (creates the contact).
