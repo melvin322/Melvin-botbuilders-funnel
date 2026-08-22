@@ -617,15 +617,16 @@
 .bb-stack{
   background:var(--bb-ink); color:#B9C7DB;
   border-radius:var(--bb-radius-lg); padding:40px 38px; position:relative; overflow:hidden;
+  display:flex; flex-direction:column;
 }
 .bb-stack::after{
   content:''; position:absolute; top:-160px; right:-120px; width:520px; height:520px;
   background:radial-gradient(circle,rgba(37,99,255,.32),transparent 68%); pointer-events:none;
 }
-.bb-stack-in{ position:relative; z-index:2; }
+.bb-stack-in{ position:relative; z-index:2; display:flex; flex-direction:column; flex:1; }
 .bb-stack h3{ color:#fff; font-family:var(--bb-display); font-size:30px; letter-spacing:.02em; margin-bottom:6px; }
 .bb-stack-sub{ color:#9FB6CC; font-size:15px; margin-bottom:24px; }
-.bb-stack-list{ display:flex; flex-direction:column; gap:14px; }
+.bb-stack-list{ display:flex; flex-direction:column; gap:14px; flex:1; justify-content:space-between; }
 .bb-stack-row{
   display:flex; align-items:center; justify-content:space-between; gap:16px;
   padding-bottom:14px; border-bottom:1px solid rgba(255,255,255,.08);
