@@ -380,6 +380,10 @@
                 <div class="bb-stack-val">$1,164/yr</div>
               </div>
               <div class="bb-stack-row">
+                <div class="bb-stack-item"><span class="bb-ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12.5l4 4L19 7"/></svg></span>Unlimited bots</div>
+                <div class="bb-stack-val">Included</div>
+              </div>
+              <div class="bb-stack-row">
                 <div class="bb-stack-item"><span class="bb-ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12.5l4 4L19 7"/></svg></span>Guided Setup Walkthrough</div>
                 <div class="bb-stack-val">$500</div>
               </div>
@@ -390,6 +394,10 @@
               <div class="bb-stack-row">
                 <div class="bb-stack-item"><span class="bb-ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12.5l4 4L19 7"/></svg></span>Priority support</div>
                 <div class="bb-stack-val">$480/yr</div>
+              </div>
+              <div class="bb-stack-row">
+                <div class="bb-stack-item"><span class="bb-ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12.5l4 4L19 7"/></svg></span>Monthly strategy call</div>
+                <div class="bb-stack-val">Included</div>
               </div>
               <div class="bb-stack-row">
                 <div class="bb-stack-item"><span class="bb-ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12.5l4 4L19 7"/></svg></span>Bonus: custom training</div>
@@ -424,14 +432,6 @@
           </div>
           <div class="bb-price-bill">Billed annually · <s>$147/mo</s> <b>Save 34%</b></div>
 
-          <ul class="bb-price-list">
-            <li><span class="bb-ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12.5l4 4L19 7"/></svg></span>Full platform access</li>
-            <li><span class="bb-ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12.5l4 4L19 7"/></svg></span>Unlimited bots</li>
-            <li><span class="bb-ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12.5l4 4L19 7"/></svg></span>Premium Integrations</li>
-            <li><span class="bb-ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12.5l4 4L19 7"/></svg></span>Priority support</li>
-            <li><span class="bb-ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12.5l4 4L19 7"/></svg></span>Monthly strategy call</li>
-          </ul>
-
           <label class="bb-bump" id="bb-bump">
             <input type="checkbox" class="bb-bump-input">
             <span class="bb-bump-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12.5l4 4L19 7"/></svg></span>
@@ -444,6 +444,22 @@
 
           <div class="bb-price-annual">$1,164 billed once a year</div>
 
+          <div class="bb-lead-bob">
+            <img class="bb-lead-bob-img" data-bob-card src="" alt="Bob the BotBuilder" hidden>
+            <div class="bb-lead-bob-ph" data-bob-card-ph aria-hidden="true">
+              <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="60" cy="60" r="60" fill="#EAF2FE"/>
+                <rect x="34" y="40" width="52" height="42" rx="14" fill="#3B82F6"/>
+                <rect x="42" y="48" width="36" height="26" rx="9" fill="#0B1B36"/>
+                <circle cx="53" cy="60" r="4.5" fill="#38BDF8"/>
+                <circle cx="67" cy="60" r="4.5" fill="#38BDF8"/>
+                <path d="M52 68q8 6 16 0" stroke="#38BDF8" stroke-width="3" stroke-linecap="round" fill="none"/>
+                <line x1="60" y1="40" x2="60" y2="32" stroke="#38BDF8" stroke-width="3" stroke-linecap="round"/>
+                <circle cx="60" cy="30" r="3.5" fill="#38BDF8"/>
+                <rect x="46" y="84" width="28" height="12" rx="6" fill="#2563FF"/>
+              </svg>
+            </div>
+          </div>
           <form class="bb-lead" id="bb-lead" novalidate>
             <div class="bb-lead-head">Enter your details to claim your offer</div>
             <div class="bb-lead-row">
@@ -731,7 +747,11 @@
          • Image → any other URL → shown as a still image
        Leave blank to show the built-in placeholder robot until you add one.
        Bob is sized to the same footprint as the offer card automatically. */
-    BOB_URL       : ''
+    BOB_URL       : '',
+
+    /* Bob photo shown above the offer form (a headshot works best).
+       Paste a hosted image URL; blank = built-in placeholder avatar. */
+    BOB_CARD_URL  : ''
   };
   /* ======================================================================= */
 
@@ -819,6 +839,19 @@
       if(vid) vid.hidden = true;
     }
     if(ph) ph.hidden = true;
+  })();
+
+  /* -- 0e. Bob photo above the offer form -------------------------------- */
+  (function(){
+    var img = root.querySelector('[data-bob-card]');
+    var ph  = root.querySelector('[data-bob-card-ph]');
+    if(!img) return;
+    if(CONFIG.BOB_CARD_URL){
+      img.src = CONFIG.BOB_CARD_URL;
+      img.hidden = false;
+      if(ph) ph.style.display = 'none';
+    }
+    /* blank → keep the built-in placeholder avatar */
   })();
 
   /* -- 1. scroll reveal + stagger ----------------------------------------- */
