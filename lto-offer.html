@@ -1006,11 +1006,17 @@
       if(lastFocus && lastFocus.focus){ try{ lastFocus.focus(); }catch(e){} }
     }
 
-    /* every CTA + "Get Instant Access" opens the popup (no scrolling) */
-    root.querySelectorAll('[data-cta], #bb-getaccess').forEach(function(el){
-      el.setAttribute('href', '#');
-      el.addEventListener('click', function(e){ e.preventDefault(); openModal(); });
+    /* "Claim my offer" CTAs scroll down to the offer / pricing section
+       (smooth-scroll handler below does the rest) */
+    root.querySelectorAll('[data-cta]').forEach(function(el){
+      el.setAttribute('href', '#bb-pricing');
     });
+    /* "Get Instant Access" opens the popup with the fields ready */
+    var getBtn = document.getElementById('bb-getaccess');
+    if(getBtn){
+      getBtn.setAttribute('href', '#');
+      getBtn.addEventListener('click', function(e){ e.preventDefault(); openModal(); });
+    }
 
     /* close: overlay click, X button, or Esc */
     modal.querySelectorAll('[data-modal-close]').forEach(function(el){
