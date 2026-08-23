@@ -191,7 +191,7 @@
         <ul class="bb-pay-list">
           <li class="bb-pay-in" style="--d:470ms">
             <span class="bb-pay-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
-            <span>Full platform access &mdash; every channel, no seat limits</span>
+            <span>Full BotBuilders platform access</span>
           </li>
           <li class="bb-pay-in" style="--d:500ms">
             <span class="bb-pay-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
@@ -199,15 +199,27 @@
           </li>
           <li class="bb-pay-in" style="--d:530ms">
             <span class="bb-pay-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
-            <span>Premium integrations &mdash; CRM, calendar, payments</span>
+            <span>Guided setup walkthrough</span>
           </li>
           <li class="bb-pay-in" style="--d:560ms">
             <span class="bb-pay-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
-            <span>Priority support with a two-hour first reply</span>
+            <span>Premium integrations &mdash; CRM, calendar, payments</span>
           </li>
           <li class="bb-pay-in" style="--d:590ms">
             <span class="bb-pay-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+            <span>Priority support</span>
+          </li>
+          <li class="bb-pay-in" style="--d:620ms">
+            <span class="bb-pay-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
             <span>A monthly strategy call with your builder</span>
+          </li>
+          <li class="bb-pay-in" style="--d:650ms">
+            <span class="bb-pay-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+            <span>Bonus: custom training</span>
+          </li>
+          <li class="bb-pay-in" style="--d:680ms">
+            <span class="bb-pay-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+            <span>Bonus: proven templates</span>
           </li>
           <!-- variants replace this list from CONFIG.COPY[…].items -->
         </ul>
@@ -239,42 +251,44 @@
 
           <p class="bb-pay-box-kicker">Payment details</p>
           <h2 class="bb-pay-box-title">Complete your order</h2>
+          <p class="bb-pay-box-sub">Enter your details to claim your offer.</p>
 
           <form class="bb-pay-form" id="bb-pay-form" novalidate>
 
-            <!-- the same fields the offer page collects, in the same order -->
+            <!-- the offer page's own fields, in its order and its style:
+                 the placeholder is the label, so labels here are for
+                 screen readers only.                                        -->
             <div class="bb-pay-row is-2">
               <div class="bb-pay-field">
-                <label class="bb-pay-label" for="bb-pay-first">First name</label>
+                <label class="bb-pay-sr" for="bb-pay-first">First name</label>
                 <input class="bb-pay-input" id="bb-pay-first" name="first_name" type="text"
-                       placeholder="Dana" autocomplete="given-name"
+                       placeholder="First name" autocomplete="given-name"
                        aria-describedby="bb-pay-first-err">
                 <p class="bb-pay-err" id="bb-pay-first-err">Enter your first name.</p>
               </div>
               <div class="bb-pay-field">
-                <label class="bb-pay-label" for="bb-pay-last">Last name</label>
+                <label class="bb-pay-sr" for="bb-pay-last">Last name</label>
                 <input class="bb-pay-input" id="bb-pay-last" name="last_name" type="text"
-                       placeholder="Whitfield" autocomplete="family-name"
+                       placeholder="Last name" autocomplete="family-name"
                        aria-describedby="bb-pay-last-err">
                 <p class="bb-pay-err" id="bb-pay-last-err">Enter your last name.</p>
               </div>
             </div>
 
-            <div class="bb-pay-row is-2">
-              <div class="bb-pay-field">
-                <label class="bb-pay-label" for="bb-pay-email">Email</label>
-                <input class="bb-pay-input" id="bb-pay-email" name="email" type="email"
-                       placeholder="dana@company.com" autocomplete="email"
-                       inputmode="email" aria-describedby="bb-pay-email-err">
-                <p class="bb-pay-err" id="bb-pay-email-err">Enter a valid email address.</p>
-              </div>
-              <div class="bb-pay-field">
-                <label class="bb-pay-label" for="bb-pay-phone">Phone</label>
-                <input class="bb-pay-input" id="bb-pay-phone" name="phone" type="tel"
-                       placeholder="(602) 922-9700" autocomplete="tel"
-                       inputmode="tel" maxlength="18" aria-describedby="bb-pay-phone-err">
-                <p class="bb-pay-err" id="bb-pay-phone-err">Enter a phone number we can reach you on.</p>
-              </div>
+            <div class="bb-pay-field">
+              <label class="bb-pay-sr" for="bb-pay-email">Email address</label>
+              <input class="bb-pay-input" id="bb-pay-email" name="email" type="email"
+                     placeholder="Email address" autocomplete="email"
+                     inputmode="email" aria-describedby="bb-pay-email-err">
+              <p class="bb-pay-err" id="bb-pay-email-err">Enter a valid email address.</p>
+            </div>
+
+            <div class="bb-pay-field">
+              <label class="bb-pay-sr" for="bb-pay-phone">Phone number</label>
+              <input class="bb-pay-input" id="bb-pay-phone" name="phone" type="tel"
+                     placeholder="Phone number" autocomplete="tel"
+                     inputmode="tel" maxlength="18" aria-describedby="bb-pay-phone-err">
+              <p class="bb-pay-err" id="bb-pay-phone-err">Enter a phone number we can reach you on.</p>
             </div>
 
             <div class="bb-pay-field" id="bb-pay-card-slot">
@@ -314,28 +328,35 @@
                  variant with ! to hide it for that variant instead.          -->
             <p class="bb-pay-applied" data-bb-when="oto">
               <i class="bb-pay-dot" aria-hidden="true"></i>
-              <span>Your Done-For-You Bot Setup is added to this order.</span>
+              <span>Your Done-For-You AI Script Pack is added to this order.</span>
             </p>
             <p class="bb-pay-applied" data-bb-when="vip">
               <i class="bb-pay-dot" aria-hidden="true"></i>
-              <span>VIP is applied &mdash; you go to the front of the build queue.</span>
+              <span>Your VIP Launch Intensive is booked with this order.</span>
             </p>
             <p class="bb-pay-applied" data-bb-when="vip_oto">
               <i class="bb-pay-dot" aria-hidden="true"></i>
-              <span>VIP and your Done-For-You Bot Setup are both on this order.</span>
+              <span>Your VIP Launch Intensive and AI Script Pack are both on this order.</span>
             </p>
 
             <button class="bb-pay-cta" id="bb-pay-cta" type="submit">
               <span class="bb-pay-spin" aria-hidden="true"></span>
-              <span id="bb-pay-cta-txt">Get instant access</span>
+              <svg class="bb-pay-cta-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 2L4.5 13.5H10l-1.5 8.5L18 10h-5.5z"/></svg>
+              <span id="bb-pay-cta-txt">Get Instant Access</span>
+              <svg class="bb-pay-cta-arw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M12.5 6l6 6-6 6"/></svg>
             </button>
 
             <p class="bb-pay-formerr" id="bb-pay-formerr" role="alert"></p>
           </form>
 
           <p class="bb-pay-guarantee">
-            <i class="bb-pay-dot" aria-hidden="true"></i>
+            <svg class="bb-pay-guarantee-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 2.5v6c0 4.2-2.9 8-7 9.5-4.1-1.5-7-5.3-7-9.5v-6z"/><path d="M9 12l2.2 2.2L15.5 10"/></svg>
             <span>30-day money-back guarantee &middot; cancel anytime</span>
+          </p>
+
+          <p class="bb-pay-urgent" id="bb-pay-urgent" hidden>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9.5V13l2.5 1.5M9 2.5h6"/></svg>
+            <span id="bb-pay-urgent-txt"></span>
           </p>
 
           <p class="bb-pay-trust">
@@ -391,6 +412,10 @@
     /* Product / plan label sent along with the order.                       */
     PRODUCT          : 'Growth Plan',
 
+    /* Small urgency line under the guarantee, matching the offer page's
+       timer note. Blank = hidden.                                          */
+    URGENCY          : 'Your launch price is held while you complete this order.',
+
     /* ------------------------------------------------------------- PRICING
        Drives the order summary on the left. PLACEHOLDER AMOUNTS — put your
        real prices here. Amounts are plain numbers in whole currency units.
@@ -401,17 +426,17 @@
     PRICING : {
       currency : '$',                  /* symbol shown in the summary */
       code     : 'USD',                /* ISO code sent to GHL / analytics */
-      renews   : 'then $97/mo &middot; cancel anytime',
-      save     : 'Limited-time saving',/* label on the savings line        */
+      renews   : '$1,164 billed once a year &middot; cancel anytime',
+      save     : 'You save',           /* label on the savings line        */
 
       /* `was` draws the regular price struck through next to the offer
-         price, and feeds the savings line. `period` is appended after the
-         amount ('/mo'). Set a price to 0 or 'free' for an "Included" row. */
-      plan : { name:'Your own Bob',           note:'Growth Plan &middot; limited-time price', price:97, was:147, period:'/mo' },
-
-      /* PLACEHOLDERS — still waiting on the real numbers for these two   */
-      vip  : { name:'VIP priority build',     note:'one-time &middot; front of the queue', price:97  },
-      oto  : { name:'Done-For-You Bot Setup', note:'one-time &middot; built, connected, launched', price:497 }
+         price and feeds the savings line. `period` is appended after the
+         amount. Set a price to 0 or 'free' for an "Included" row.
+         Plan: $97/mo billed annually = $1,164/yr, against $147/mo =
+         $1,764/yr, the 34% saving the offer page quotes.                  */
+      plan : { name:'Growth Plan',                  note:'$97/mo &middot; billed annually',            price:1164, was:1764, period:'/yr' },
+      vip  : { name:'VIP Launch Intensive',         note:'one-time &middot; live build session',        price:197 },
+      oto  : { name:'Done-For-You AI Script Pack',  note:'one-time &middot; scripts + AI prompts',      price:97,   was:297 }
     },
 
     /* ---------------------------------------------------------------- COPY
@@ -457,54 +482,60 @@
       },
 
       vip : {
-        label   : 'VIP',
-        badge   : 'VIP upgrade applied',
-        eta     : '24 hours',
-        title   : 'Your first bot,<br><span class="hl">built VIP-fast.</span>',
-        lead    : 'VIP puts you at the front of the build queue. Your funnel gets scoped, built and shipped while the standard queue is still waiting &mdash; same platform, same templates, far less waiting.',
+        label   : 'VIP Launch Intensive',
+        badge   : 'VIP Launch Intensive added',
+        eta     : 'Live, with you',
+        title   : 'Your own Bob,<br><span class="hl">built with you, live.</span>',
+        lead    : 'You added the VIP Launch Intensive: a live working session where we build, connect and launch your first funnel with you, so you are live in 48 hours. A hands-on build session &mdash; not the advisory monthly strategy call that comes with your plan.',
         items   : [
-          'Full platform access &mdash; every channel, no seat limits',
+          'Full BotBuilders platform access',
           'Unlimited bots and conversation volume',
+          'Guided setup walkthrough',
           'Premium integrations &mdash; CRM, calendar, payments',
-          '+VIP &mdash; front of the build queue, live in 24 hours',
-          '+A direct line to your builder, not a support inbox',
-          'A monthly strategy call with your builder'
+          'Priority support',
+          '+VIP Launch Intensive &mdash; we build, connect and launch your first funnel with you, live',
+          'A monthly strategy call with your builder',
+          'Bonus: custom training',
+          'Bonus: proven templates'
         ]
       },
 
       oto : {
-        label   : 'Done-For-You Bot Setup',
-        badge   : 'Done-For-You setup added',
-        eta     : '48 hours, hands-off',
-        title   : 'Your first bot,<br><span class="hl">done for you in 48 hours.</span>',
-        lead    : 'You added Done-For-You Bot Setup, so our team builds, connects and launches the whole system &mdash; no DIY, no guesswork. You approve it, it goes live.',
+        label   : 'Done-For-You AI Script Pack',
+        badge   : 'AI Script Pack added',
+        title   : 'Your own Bob,<br><span class="hl">talking like your best closer.</span>',
+        lead    : 'You added the Done-For-You AI Script Pack, so Bob does not start from a blank page: proven conversation scripts and ready-made AI prompts, written to sound human and close, ready to paste straight in.',
         items   : [
-          'Full platform access &mdash; every channel, no seat limits',
+          'Full BotBuilders platform access',
           'Unlimited bots and conversation volume',
+          'Guided setup walkthrough',
           'Premium integrations &mdash; CRM, calendar, payments',
-          '+Built and configured for you &mdash; chatbots, funnels, automations, end to end',
-          '+Connected to your CRM, calendar and channels',
-          '+Every flow QA&rsquo;d and launch-ready before go-live',
-          '+Priority onboarding and hands-on support',
-          'A monthly strategy call with your builder'
+          'Priority support',
+          'A monthly strategy call with your builder',
+          '+Proven conversation scripts &mdash; lead-gen, booking, objections, follow-up',
+          '+Ready-made AI prompts, on-brand and copy-paste ready',
+          'Bonus: custom training',
+          'Bonus: proven templates'
         ]
       },
 
       vip_oto : {
-        label   : 'VIP + Done-For-You Bot Setup',
-        badge   : 'VIP + Done-For-You added',
-        eta     : '24 hours, hands-off',
-        title   : 'Your first bot,<br><span class="hl">built for you, VIP-fast.</span>',
-        lead    : 'Both of them: Done-For-You Bot Setup puts our team on the build, and VIP puts you at the front of the queue. Nothing left to decide but the card.',
+        label   : 'VIP + AI Script Pack',
+        badge   : 'VIP + AI Script Pack added',
+        eta     : 'Live, with you',
+        title   : 'Your own Bob,<br><span class="hl">built with you and ready to close.</span>',
+        lead    : 'Both of them: the VIP Launch Intensive puts us on the build with you, live, and the AI Script Pack gives Bob the scripts and prompts to sound human and close. Nothing left to decide but the card.',
         items   : [
-          'Full platform access &mdash; every channel, no seat limits',
+          'Full BotBuilders platform access',
           'Unlimited bots and conversation volume',
+          'Guided setup walkthrough',
           'Premium integrations &mdash; CRM, calendar, payments',
-          '+VIP &mdash; front of the build queue',
-          '+Built, connected and launched for you by our team',
-          '+Every flow QA&rsquo;d and launch-ready before go-live',
-          '+Priority onboarding and a direct line to your builder',
-          'A monthly strategy call with your builder'
+          'Priority support',
+          '+VIP Launch Intensive &mdash; we build, connect and launch your first funnel with you, live',
+          '+Proven conversation scripts and ready-made AI prompts, copy-paste ready',
+          'A monthly strategy call with your builder',
+          'Bonus: custom training',
+          'Bonus: proven templates'
         ]
       }
     },
@@ -618,7 +649,7 @@
     return v || 'base';
   })();
 
-  var CTA_LABEL   = 'Get instant access';
+  var CTA_LABEL   = 'Get Instant Access';
   var OFFER_LABEL = '';
 
   if(DEBUG && window.console){
@@ -687,6 +718,13 @@
       }
       blocks[i].hidden = hide || show === false;
     }
+  })();
+
+  /* urgency note under the CTA ------------------------------------------- */
+  (function(){
+    var wrap = document.getElementById('bb-pay-urgent');
+    var txt  = document.getElementById('bb-pay-urgent-txt');
+    if(wrap && txt && CONFIG.URGENCY){ txt.innerHTML = CONFIG.URGENCY; wrap.hidden = false; }
   })();
 
   /* ========================================================= order summary */
