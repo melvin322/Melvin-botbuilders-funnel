@@ -318,18 +318,32 @@
     close.focus();
   }
 
+  /* -- carry the fields the LTO passed to this page (name, email, phone,
+     contact id, etc. in the URL query string) through to the destination so
+     the payment page receives them too. Destination's own params win.       */
+  function forwardParams(base){
+    if(!base) return base;
+    try{
+      var url = new URL(base, window.location.href);
+      new URLSearchParams(window.location.search).forEach(function(v,k){
+        if(!url.searchParams.has(k)) url.searchParams.set(k, v);
+      });
+      return url.toString();
+    }catch(e){ return base; }
+  }
+
   /* -- accept / decline links (+ conversion tracking) --------------------- */
   (function(){
     var accept=document.getElementById('bb-oto-accept');
     var decline=document.getElementById('bb-oto-decline');
     if(accept){
-      if(CONFIG.ACCEPT_URL) accept.setAttribute('href', CONFIG.ACCEPT_URL);
+      if(CONFIG.ACCEPT_URL) accept.setAttribute('href', forwardParams(CONFIG.ACCEPT_URL));
       accept.addEventListener('click', function(){
         track('Purchase', {content_name:'AI Script Pack (OTO)', value:CONFIG.OFFER_VALUE, currency:'USD'});
       });
     }
     if(decline){
-      if(CONFIG.DECLINE_URL) decline.setAttribute('href', CONFIG.DECLINE_URL);
+      if(CONFIG.DECLINE_URL) decline.setAttribute('href', forwardParams(CONFIG.DECLINE_URL));
       decline.addEventListener('click', function(){
         track('upsell_declined', {content_name:'AI Script Pack (OTO)'});
       });
