@@ -944,7 +944,11 @@
       var win = Math.max(1, parseInt(CONFIG.EVERGREEN_MIN,10) || 2880) * 60 * 1000;
       var saved;
       try{ saved = parseInt(window.localStorage.getItem(KEY),10); }catch(e){}
-      if(!saved || isNaN(saved) || saved < Date.now()){
+      /* start a fresh window if none saved, if it already expired, OR if the
+         saved one is longer than the current window (e.g. an old 48h deadline
+         left over after shortening to 2h) — so nobody ever sees more than the
+         configured window. */
+      if(!saved || isNaN(saved) || saved < Date.now() || saved > Date.now() + win){
         deadline = Date.now() + win;
         try{ window.localStorage.setItem(KEY, String(deadline)); }catch(e){}
       } else {
