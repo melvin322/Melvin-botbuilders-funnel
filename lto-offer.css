@@ -427,7 +427,7 @@
     background: linear-gradient(180deg,#D3E7FC 0%,#CFE6FB 52%,#D7ECE6 100%);
     color: var(--bb-body);
     overflow: hidden;
-    padding: 30px 0 34px;
+    padding: 22px 0 28px;
 }
 
 .bb-hero-bg {
@@ -504,8 +504,8 @@
     color: var(--bb-heading);
     font-family: var(--bb-head);
     font-weight: 800;
-    font-size: clamp(38px,4.7vw,60px);
-    line-height: 1.05;
+    font-size: clamp(34px,4.1vw,52px);
+    line-height: 1.02;
     letter-spacing: -.02em;
 }
 
@@ -518,10 +518,10 @@
 }
 
 .bb-hero-sub {
-    margin-top: 16px;
+    margin-top: 12px;
     color: var(--bb-body);
-    font-size: clamp(16px,1.55vw,19px);
-    line-height: 1.5;
+    font-size: clamp(15px,1.45vw,17px);
+    line-height: 1.45;
     max-width: 34em;
 }
 
@@ -532,14 +532,14 @@
 
 /* -- hero "what you get" checklist ------------------------------------- */
 .bb-hero-get {
-    margin-top: 18px;
+    margin-top: 12px;
 }
 
 .bb-hero-get-lbl {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 700;
     color: var(--bb-heading);
-    margin-bottom: 11px;
+    margin-bottom: 8px;
 }
 
 .bb-hero-get-lbl strong {
@@ -557,14 +557,14 @@
     margin: 0;
     padding: 0;
     display: grid;
-    gap: 10px;
+    gap: 8px;
 }
 
 .bb-hero-get li {
     display: flex;
     align-items: center;
     gap: 11px;
-    font-size: 16.5px;
+    font-size: 15.5px;
     font-weight: 500;
     color: var(--bb-body);
     line-height: 1.3;
@@ -590,27 +590,27 @@
 
 /* -- hero price card (clear + catchy pricing) ------------------------- */
 .bb-hero-price{
-    margin-top:18px;
-    display:inline-flex; align-items:center; gap:14px; flex-wrap:wrap;
-    background:#fff; border:1.5px solid #D5E3F7; border-radius:14px;
-    padding:10px 16px; box-shadow:0 14px 34px -20px rgba(8,18,32,.30);
+    margin-top:14px;
+    display:inline-flex; align-items:center; gap:12px; flex-wrap:wrap;
+    background:#fff; border:1.5px solid #D5E3F7; border-radius:12px;
+    padding:8px 13px; box-shadow:0 12px 30px -20px rgba(8,18,32,.28);
 }
 .bb-hp-fig{ display:flex; align-items:flex-start; gap:2px; color:var(--bb-heading); line-height:.9; }
-.bb-hp-cur{ font-family:var(--bb-display); font-size:17px; margin-top:5px; color:var(--bb-blue); }
-.bb-hp-amt{ font-family:var(--bb-display); font-size:40px; letter-spacing:.01em;
+.bb-hp-cur{ font-family:var(--bb-display); font-size:14px; margin-top:4px; color:var(--bb-blue); }
+.bb-hp-amt{ font-family:var(--bb-display); font-size:30px; letter-spacing:.01em;
     background:var(--bb-grad); -webkit-background-clip:text; background-clip:text;
     -webkit-text-fill-color:transparent; color:transparent; }
-.bb-hp-per{ align-self:flex-end; margin-bottom:6px; font-size:13px; font-weight:600; color:var(--bb-muted); }
-.bb-hp-save{ display:flex; flex-direction:column; align-items:flex-start; gap:5px; }
-.bb-hp-save s{ color:#98A6BA; font-size:14px; font-weight:600; }
-.bb-hp-badge{ font-size:12px; font-weight:800; letter-spacing:.04em; color:#0F7A3D;
-    background:#DDF3E6; padding:4px 9px; border-radius:6px; }
+.bb-hp-per{ align-self:flex-end; margin-bottom:4px; font-size:12px; font-weight:600; color:var(--bb-muted); }
+.bb-hp-save{ display:flex; flex-direction:column; align-items:flex-start; gap:3px; }
+.bb-hp-save s{ color:#98A6BA; font-size:12.5px; font-weight:600; }
+.bb-hp-badge{ font-size:11px; font-weight:800; letter-spacing:.04em; color:#0F7A3D;
+    background:#DDF3E6; padding:3px 8px; border-radius:6px; }
 .bb-hp-div{ width:1px; align-self:stretch; background:var(--bb-border); margin:2px 0; }
-.bb-hp-terms{ display:flex; flex-direction:column; gap:2px; }
-.bb-hp-lbl{ font-size:11px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--bb-muted); }
-.bb-hp-note{ font-size:13.5px; font-weight:600; color:var(--bb-heading); }
-.bb-hp-timer{ display:flex; align-items:center; gap:6px; font-size:13px; font-weight:700; color:var(--bb-warn); }
-.bb-hp-timer svg{ width:15px; height:15px; }
+.bb-hp-terms{ display:flex; flex-direction:column; gap:1px; }
+.bb-hp-lbl{ font-size:10px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--bb-muted); }
+.bb-hp-note{ font-size:12.5px; font-weight:600; color:var(--bb-heading); }
+.bb-hp-timer{ display:flex; align-items:center; gap:5px; font-size:12px; font-weight:700; color:var(--bb-warn); }
+.bb-hp-timer svg{ width:14px; height:14px; }
 .bb-hp-cd{ font-variant-numeric:tabular-nums; }
 .bb-hp-cd b{ font-weight:800; }
 
@@ -772,7 +772,7 @@
 }
 
 .bb-hero-cta {
-    margin-top: 18px;
+    margin-top: 12px;
     display: flex;
     align-items: center;
     gap: 14px;
