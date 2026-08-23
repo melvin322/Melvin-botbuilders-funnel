@@ -221,11 +221,6 @@
           <p>Your bot starts greeting leads and booking calls — then we line up your strategy call.</p>
         </li>
       </ol>
-
-      <p class="bb-ty-next-foot">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.6h.01"/></svg>
-        <span id="bb-ty-next-foot-txt">Nothing to do but watch your inbox — we'll take it from here.</span>
-      </p>
     </section>
 
     <!-- ========================================================== help bar -->
@@ -414,8 +409,6 @@
       var h = li.querySelector('h3'); if (h && s.t) h.textContent = s.t;
       var p = li.querySelector('p');  if (p && s.d) p.textContent = s.d;
     });
-    var foot = document.getElementById('bb-ty-next-foot-txt');
-    if (foot && data.foot) foot.textContent = data.foot;
   })();
 
   /* -- conversion tracking · once per order, never on a cold landing ------

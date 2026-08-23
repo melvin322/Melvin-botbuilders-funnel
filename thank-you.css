@@ -346,12 +346,6 @@
 .bb-ty-step h3{ font-family:var(--ty-font); font-weight:800; font-size:17px; color:var(--ty-heading); line-height:1.22; margin-bottom:8px; }
 .bb-ty-step p{ font-size:13.5px; color:var(--ty-muted); line-height:1.5; }
 
-.bb-ty-next-foot{
-  display:flex; align-items:center; justify-content:center; gap:9px;
-  margin-top:22px; font-size:14.5px; color:var(--ty-muted);
-}
-.bb-ty-next-foot svg{ width:18px; height:18px; flex:none; color:var(--ty-blue); }
-
 /* ==========================================================================
    HELP BAR (dark navy panel — matches OTO guarantee panel)
    ========================================================================== */
