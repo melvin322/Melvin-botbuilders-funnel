@@ -424,18 +424,13 @@
 
        2. Session storage, which is the tidier route when the offer pages sit
           on the same domain: each page saves what it knows and the next one
-          reads it, so no personal data goes in a URL. Drop this on the LTO
-          and OTO pages:
-
-            <script>
-            document.querySelector('form').addEventListener('submit',function(){
-              var g=function(n){var el=this.querySelector('[name="'+n+'"]');
-                                return el?el.value.trim():'';}.bind(this);
-              try{ sessionStorage.setItem('bb_lead', JSON.stringify({
-                first:g('first_name'), last:g('last_name'),
-                email:g('email'),      phone:g('phone') })); }catch(e){}
-            });
-            <\/script>
+          reads it, so no personal data goes in a URL. Paste
+          offer-page-prefill.js (in this repo) into the LTO and the OTO page
+          and it handles that end — it finds the fields by name, then
+          autocomplete, then placeholder, so it works with the offer pages'
+          placeholder-only inputs. If the checkout sits on a different
+          domain, set APPEND_TO_LINK true in that file instead: storage
+          cannot cross domains, so it puts the fields on the checkout link.
 
        This page also saves as they type, so a trip out to the processor and
        back does not empty the form. CLEAN_URL strips the personal fields
