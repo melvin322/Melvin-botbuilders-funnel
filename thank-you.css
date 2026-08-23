@@ -283,8 +283,10 @@
   font-family:var(--ty-head); font-weight:700; color:#fff;
   font-size:clamp(26px,3.4vw,38px); line-height:1.08; letter-spacing:-.01em; margin-bottom:14px;
 }
-.bb-ty-wel-msg{
-  max-width:600px; margin:0 auto; text-align:left;
+/* .bb-ty prefix so the auto side-margins beat ".bb-ty p{margin:0}" and the
+   message block actually centres under the greeting */
+.bb-ty .bb-ty-wel-msg{
+  max-width:600px; margin:0 auto; text-align:center;
   font-size:clamp(15px,1.7vw,17px); line-height:1.65; color:#C7D5E6;
 }
 .bb-ty-wel-email{
