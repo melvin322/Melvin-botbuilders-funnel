@@ -8,9 +8,9 @@
 <meta name="robots" content="noindex">
 
 <!-- ==========================================================================
-     BotBuilders — Payment / checkout landing page
-     Design board: ink #16244C · accent #3C5A9A · body #5B6580 · green #2E9E6B
-                   Poppins (UI) + Caveat (handwritten accents)
+     BotBuilders — Payment / checkout page
+     Brand board (shared with the LTO / OTO pages):
+       navy #0B1320 · blue #2563EB · sky #38BDF8 · body #5B6B84 · Inter
      ------------------------------------------------------------------------
      TWO WAYS TO USE THIS
      A) Standalone: open this file in a browser. It links payment.css.
@@ -18,10 +18,20 @@
         <script> below it into a full-width Custom Code / HTML element.
         Paste the contents of payment.css into that page's Custom CSS.
      ------------------------------------------------------------------------
+     WHAT IS ON THE PAGE
+       left  — headline, order summary (built from CONFIG.PRICING for the
+               offer they took), a "what happens next" tracker in the same
+               numbered-step form as the thank-you page, what's included,
+               and a testimonial
+       right — the payment card (sticky on desktop)
+     ------------------------------------------------------------------------
      EDIT THESE FIRST (see the CONFIG block in the <script> at the bottom):
-       SUBMIT_URL   — endpoint / webhook that receives the order (POST JSON).
-                      Leave blank to preview the page in demo mode.
+       PRICING      — PLACEHOLDER PRICES. Put your real ones here; the
+                      summary rows and the total are calculated from them.
+       SUBMIT_URL   — endpoint / webhook that receives the order.
+       CHECKOUT_URL — the GHL order form / payment link that charges it.
        SUCCESS_URL  — where the buyer lands once the order goes through.
+       COPY         — per-variant wording (base / vip / oto / vip_oto).
        LOGO_URL     — your hosted logo. This page is light, so use the DARK
                       version of the mark (the reverse/light logo used on the
                       dark pages will disappear here). Blank = built-in mark.
@@ -71,7 +81,7 @@
     <div class="bb-pay-wrap bb-pay-top-in">
       <a class="bb-pay-logo bb-pay-in" style="--d:40ms" href="#" aria-label="BotBuilders">
         <svg class="bb-pay-logo-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <defs><linearGradient id="paybg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2B3E6E"/><stop offset="1" stop-color="#16244C"/></linearGradient></defs>
+          <defs><linearGradient id="paybg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2563EB"/><stop offset="1" stop-color="#38BDF8"/></linearGradient></defs>
           <rect x="3" y="3" width="34" height="34" rx="10" fill="url(#paybg)"/>
           <path d="M22 9l-9 12h6l-1.5 9 9-12h-6z" fill="#fff"/>
         </svg>
@@ -80,7 +90,7 @@
 
       <p class="bb-pay-secure bb-pay-in" style="--d:120ms">
         <i class="bb-pay-dot" aria-hidden="true"></i>
-<span>Secure checkout</span><span class="bb-pay-secure-long">&middot; 256-bit encryption</span>
+        <span>Secure checkout</span><span class="bb-pay-secure-long">&middot; 256-bit encryption</span>
       </p>
     </div>
   </header>
@@ -88,48 +98,127 @@
   <div class="bb-pay-wrap">
     <div class="bb-pay-grid">
 
-      <!-- ============================================================ copy -->
+      <!-- ======================================================== headline -->
       <section class="bb-pay-copy">
-        <p class="bb-pay-eyebrow bb-pay-in" style="--d:160ms">you&rsquo;re one step away</p>
-        <h1 class="bb-pay-title bb-pay-in" style="--d:220ms">Your first bot,<br>live in 48 hours.</h1>
-        <p class="bb-pay-lead bb-pay-in" style="--d:300ms">
+        <!-- the pill only appears for the VIP / OTO variants -->
+        <span class="bb-pay-pill bb-pay-in" style="--d:140ms" id="bb-pay-pill" data-bb-when="vip oto vip_oto">One-time offer applied</span>
+        <h1 class="bb-pay-title bb-pay-in" style="--d:200ms">Your first bot,<br><span class="hl">live in 48 hours.</span></h1>
+        <p class="bb-pay-lead bb-pay-in" style="--d:280ms">
           The Growth Plan gives you the platform, the templates, and a builder
           in your corner. You don&rsquo;t learn a tool &mdash; you ship a working funnel.
         </p>
       </section>
 
-      <!-- ================================================= what's included -->
-      <section class="bb-pay-incl">
-        <h2 class="bb-pay-kicker bb-pay-in" style="--d:360ms">What&rsquo;s included</h2>
-        <ul class="bb-pay-list">
-          <li class="bb-pay-in" style="--d:400ms">
-            <svg class="bb-pay-check" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.8 9.6c2.1 1.3 3.6 3 4.6 4.9C8.7 9.2 12.3 4.4 18 1.4"/></svg>
-            <span>Full platform access &mdash; every channel, no seat limits</span>
-          </li>
-          <li class="bb-pay-in" style="--d:440ms">
-            <svg class="bb-pay-check" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.8 9.6c2.1 1.3 3.6 3 4.6 4.9C8.7 9.2 12.3 4.4 18 1.4"/></svg>
-            <span>Unlimited bots and conversation volume</span>
-          </li>
-          <li class="bb-pay-in" style="--d:480ms">
-            <svg class="bb-pay-check" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.8 9.6c2.1 1.3 3.6 3 4.6 4.9C8.7 9.2 12.3 4.4 18 1.4"/></svg>
-            <span>Premium integrations &mdash; CRM, calendar, payments</span>
-          </li>
-          <li class="bb-pay-in" style="--d:520ms">
-            <svg class="bb-pay-check" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.8 9.6c2.1 1.3 3.6 3 4.6 4.9C8.7 9.2 12.3 4.4 18 1.4"/></svg>
-            <span>Priority support with a two-hour first reply</span>
-          </li>
-          <li class="bb-pay-in" style="--d:560ms">
-            <svg class="bb-pay-check" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.8 9.6c2.1 1.3 3.6 3 4.6 4.9C8.7 9.2 12.3 4.4 18 1.4"/></svg>
-            <span>A monthly strategy call with your builder</span>
+      <!-- =================================================== order summary -->
+      <section class="bb-pay-summary bb-pay-card-sh bb-pay-in" style="--d:340ms" aria-labelledby="bb-pay-sum-t">
+        <div class="bb-pay-sum-head">
+          <h2 class="bb-pay-sum-title" id="bb-pay-sum-t">Order summary</h2>
+          <span class="bb-pay-sum-edit" id="bb-pay-sum-plan">Growth Plan</span>
+        </div>
+
+        <!-- rows are rendered from CONFIG.PRICING for the current variant -->
+        <ul class="bb-pay-sum-rows" id="bb-pay-sum-rows"></ul>
+
+        <div class="bb-pay-sum-total">
+          <span class="bb-pay-sum-total-l">
+            Due today
+            <span class="bb-pay-sum-total-sub" id="bb-pay-sum-sub">then renews monthly &middot; cancel anytime</span>
+          </span>
+          <span class="bb-pay-sum-total-v" id="bb-pay-sum-total">&mdash;</span>
+        </div>
+      </section>
+
+      <!-- ============================================== what happens next -->
+      <section class="bb-pay-next bb-pay-card-sh bb-pay-in" style="--d:400ms">
+        <h2 class="bb-pay-kicker">What happens next</h2>
+
+        <ol class="bb-pay-steps">
+          <li class="bb-pay-step">
+            <div class="bb-pay-step-num">1</div>
+            <div class="bb-pay-step-b">
+              <h3>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M4 7l8 6 8-6"/></svg>
+                Your receipt and login
+                <span class="bb-pay-step-when">Instant</span>
+              </h3>
+              <p>Both land in your inbox the moment this clears &mdash; no waiting on a human.</p>
+            </div>
           </li>
 
-          <!-- this list is the 'base' wording and the no-JS fallback; the VIP /
-               LTO variants replace it from CONFIG.COPY[…].items below.       -->
+          <li class="bb-pay-step">
+            <div class="bb-pay-step-num">2</div>
+            <div class="bb-pay-step-b">
+              <h3>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v14H4z"/><path d="M8 10h8M8 14h5"/></svg>
+                A two-minute onboarding form
+                <span class="bb-pay-step-when">Today</span>
+              </h3>
+              <p>Your business, your offer, your calendar &mdash; so your builder starts with context.</p>
+            </div>
+          </li>
+
+          <li class="bb-pay-step">
+            <div class="bb-pay-step-num">3</div>
+            <div class="bb-pay-step-b">
+              <h3>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.4 5.1 5.6.8-4 4 1 5.6-5-2.7-5 2.7 1-5.6-4-4 5.6-.8z"/></svg>
+                We build and QA your funnel
+                <span class="bb-pay-step-when" id="bb-pay-step-eta">48 hours</span>
+              </h3>
+              <p>Bots, flows and integrations wired up, then tested end to end before you see it.</p>
+            </div>
+          </li>
+
+          <li class="bb-pay-step">
+            <div class="bb-pay-step-num">4</div>
+            <div class="bb-pay-step-b">
+              <h3>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+                You go live
+              </h3>
+              <p>Your funnel starts answering leads and booking calls. Your monthly strategy call gets booked from there.</p>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <!-- ================================================= what's included -->
+      <section class="bb-pay-incl">
+        <h2 class="bb-pay-kicker bb-pay-in" style="--d:440ms">What&rsquo;s included</h2>
+        <ul class="bb-pay-list">
+          <li class="bb-pay-in" style="--d:470ms">
+            <span class="bb-pay-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+            <span>Full platform access &mdash; every channel, no seat limits</span>
+          </li>
+          <li class="bb-pay-in" style="--d:500ms">
+            <span class="bb-pay-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+            <span>Unlimited bots and conversation volume</span>
+          </li>
+          <li class="bb-pay-in" style="--d:530ms">
+            <span class="bb-pay-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+            <span>Premium integrations &mdash; CRM, calendar, payments</span>
+          </li>
+          <li class="bb-pay-in" style="--d:560ms">
+            <span class="bb-pay-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+            <span>Priority support with a two-hour first reply</span>
+          </li>
+          <li class="bb-pay-in" style="--d:590ms">
+            <span class="bb-pay-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+            <span>A monthly strategy call with your builder</span>
+          </li>
+          <!-- variants replace this list from CONFIG.COPY[…].items -->
         </ul>
       </section>
 
-      <!-- ===================================================== testimonial -->
-      <figure class="bb-pay-quote bb-pay-in" style="--d:620ms">
+      <!-- ====================================================== testimonial -->
+      <figure class="bb-pay-quote bb-pay-card-sh bb-pay-in" style="--d:620ms">
+        <div class="bb-pay-quote-stars" aria-label="5 out of 5">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3 6.3 6.9.9-5 4.8 1.2 6.9L12 17.6 5.9 20.9 7.1 14l-5-4.8 6.9-.9z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3 6.3 6.9.9-5 4.8 1.2 6.9L12 17.6 5.9 20.9 7.1 14l-5-4.8 6.9-.9z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3 6.3 6.9.9-5 4.8 1.2 6.9L12 17.6 5.9 20.9 7.1 14l-5-4.8 6.9-.9z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3 6.3 6.9.9-5 4.8 1.2 6.9L12 17.6 5.9 20.9 7.1 14l-5-4.8 6.9-.9z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3 6.3 6.9.9-5 4.8 1.2 6.9L12 17.6 5.9 20.9 7.1 14l-5-4.8 6.9-.9z"/></svg>
+        </div>
         <blockquote class="bb-pay-quote-txt">
           &ldquo;We had a booking bot answering leads by Thursday. It paid for
           the year inside a month.&rdquo;
@@ -140,11 +229,6 @@
           <span class="bb-pay-quote-co">Northline Property Group</span>
         </figcaption>
       </figure>
-
-      <!-- ============================================== handwritten closer -->
-      <p class="bb-pay-note bb-pay-in" style="--d:680ms">
-        try it for 30 days &mdash; if it&rsquo;s not for you,<br>we refund it, no forms
-      </p>
 
       <!-- ==================================================== payment card -->
       <aside class="bb-pay-panel">
@@ -232,6 +316,11 @@
             <i class="bb-pay-dot" aria-hidden="true"></i>
             <span>30-day money-back guarantee &middot; cancel anytime</span>
           </p>
+
+          <p class="bb-pay-trust">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+            Encrypted and processed securely
+          </p>
         </div>
       </aside>
 
@@ -281,6 +370,22 @@
     /* Product / plan label sent along with the order.                       */
     PRODUCT          : 'Growth Plan',
 
+    /* ------------------------------------------------------------- PRICING
+       Drives the order summary on the left. PLACEHOLDER AMOUNTS — put your
+       real prices here. Amounts are plain numbers in whole currency units.
+         name  — the row label
+         note  — the small grey line under it ('' for none)
+         price — number, or the string 'free'
+       vip / oto rows are added to the summary only for those variants.     */
+    PRICING : {
+      currency : '$',                  /* symbol shown in the summary */
+      code     : 'USD',                /* ISO code sent to GHL / analytics */
+      renews   : 'then renews monthly &middot; cancel anytime',
+      plan : { name:'Growth Plan',              note:'monthly subscription',     price:297 },
+      vip  : { name:'VIP priority build',       note:'one-time &middot; front of the queue', price:97  },
+      oto  : { name:'Done-For-You Bot Setup',   note:'one-time &middot; built, connected, launched', price:497 }
+    },
+
     /* ---------------------------------------------------------------- COPY
        Which copy this page shows depends on what the buyer clicked upstream.
        The variant arrives on the link:
@@ -310,22 +415,24 @@
          <\/script>      (the \/ is only needed here, inside this comment)
 
        Per variant: label (the offer's readable name, sent to GHL as
-       offer_name), eyebrow, title, lead, note, cardKicker, cardTitle, cta
-       and items (the whole What's-included list). Every field is optional —
+       offer_name), badge (the pill above the headline), title, lead,
+       cardKicker, cardTitle, cta, eta (the build time on step 3 of the
+       tracker) and items (the whole What's-included list). Every field is optional —
        leave one out and the markup's own wording stands. In items, a leading
        + marks the line as newly added, which sets it in medium weight.      */
     COPY : {
       base : {
-        eyebrow : 'you&rsquo;re one step away',
-        title   : 'Your first bot,<br>live in 48 hours.',
+        badge   : '',                        /* no pill for the base visit */
+        title   : 'Your first bot,<br><span class="hl">live in 48 hours.</span>',
         lead    : 'The Growth Plan gives you the platform, the templates, and a builder in your corner. You don&rsquo;t learn a tool &mdash; you ship a working funnel.'
         /* no items → the checklist in the markup above stands as written */
       },
 
       vip : {
         label   : 'VIP',
-        eyebrow : 'you went VIP',
-        title   : 'Your first bot,<br>built VIP-fast.',
+        badge   : 'VIP upgrade applied',
+        eta     : '24 hours',
+        title   : 'Your first bot,<br><span class="hl">built VIP-fast.</span>',
         lead    : 'VIP puts you at the front of the build queue. Your funnel gets scoped, built and shipped while the standard queue is still waiting &mdash; same platform, same templates, far less waiting.',
         items   : [
           'Full platform access &mdash; every channel, no seat limits',
@@ -339,8 +446,9 @@
 
       oto : {
         label   : 'Done-For-You Bot Setup',
-        eyebrow : 'your build is on us',
-        title   : 'Your first bot,<br>done for you in 48 hours.',
+        badge   : 'Done-For-You setup added',
+        eta     : '48 hours, hands-off',
+        title   : 'Your first bot,<br><span class="hl">done for you in 48 hours.</span>',
         lead    : 'You added Done-For-You Bot Setup, so our team builds, connects and launches the whole system &mdash; no DIY, no guesswork. You approve it, it goes live.',
         items   : [
           'Full platform access &mdash; every channel, no seat limits',
@@ -356,8 +464,9 @@
 
       vip_oto : {
         label   : 'VIP + Done-For-You Bot Setup',
-        eyebrow : 'VIP, and we build it for you',
-        title   : 'Your first bot,<br>built for you, VIP-fast.',
+        badge   : 'VIP + Done-For-You added',
+        eta     : '24 hours, hands-off',
+        title   : 'Your first bot,<br><span class="hl">built for you, VIP-fast.</span>',
         lead    : 'Both of them: Done-For-You Bot Setup puts our team on the build, and VIP puts you at the front of the queue. Nothing left to decide but the card.',
         items   : [
           'Full platform access &mdash; every channel, no seat limits',
@@ -505,12 +614,15 @@
       var el = root.querySelector(sel);
       if(el && html) el.innerHTML = html;
     };
-    put('.bb-pay-eyebrow',   copy.eyebrow);
     put('.bb-pay-title',     copy.title);
     put('.bb-pay-lead',      copy.lead);
-    put('.bb-pay-note',      copy.note);
     put('.bb-pay-box-kicker',copy.cardKicker);
     put('.bb-pay-box-title', copy.cardTitle);
+    put('#bb-pay-step-eta',  copy.eta);
+
+    /* the pill only makes sense when an offer was taken */
+    var pill = root.querySelector('#bb-pay-pill');
+    if(pill && copy.badge) pill.innerHTML = copy.badge;
     if(copy.cta){ CTA_LABEL = copy.cta; put('#bb-pay-cta-txt', copy.cta); }
     OFFER_LABEL = copy.label || '';
 
@@ -519,9 +631,10 @@
     if(copy.items && copy.items.length){
       var list = root.querySelector('.bb-pay-list');
       if(list){
-        var check = '<svg class="bb-pay-check" viewBox="0 0 20 20" fill="none" stroke="currentColor"'
-                  + ' stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
-                  + '<path d="M1.8 9.6c2.1 1.3 3.6 3 4.6 4.9C8.7 9.2 12.3 4.4 18 1.4"/></svg>';
+        var check = '<span class="bb-pay-check" aria-hidden="true">'
+                  + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4"'
+                  + ' stroke-linecap="round" stroke-linejoin="round">'
+                  + '<path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>';
         list.innerHTML = copy.items.map(function(item, i){
           var added = item.charAt(0) === '+';
           return '<li class="bb-pay-in' + (added ? ' bb-pay-added' : '') + '"'
@@ -546,14 +659,70 @@
     }
   })();
 
+  /* ========================================================= order summary */
+  /* One row per thing they are buying: the plan, plus whichever offers the
+     variant says they took. Total is the sum, so the number on the left can
+     never drift from the variant shown everywhere else.                    */
+  var ORDER = (function(){
+    var P    = CONFIG.PRICING || {};
+    var cur  = P.currency || '$';
+    var rows = [];
+
+    if(P.plan) rows.push({ item:P.plan, add:false });
+    if(VARIANT === 'vip' || VARIANT === 'vip_oto'){ if(P.vip) rows.push({ item:P.vip, add:true }); }
+    if(VARIANT === 'oto' || VARIANT === 'vip_oto'){ if(P.oto) rows.push({ item:P.oto, add:true }); }
+
+    var money = function(n){
+      return cur + Number(n).toLocaleString(undefined, {
+        minimumFractionDigits: n % 1 ? 2 : 0,
+        maximumFractionDigits: 2
+      });
+    };
+
+    var total = 0;
+    rows.forEach(function(r){
+      if(typeof r.item.price === 'number') total += r.item.price;
+    });
+
+    var list = document.getElementById('bb-pay-sum-rows');
+    if(list){
+      var tick = '<span class="bb-pay-sum-tick" aria-hidden="true">'
+               + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.6"'
+               + ' stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>';
+      list.innerHTML = rows.map(function(r){
+        var free = r.item.price === 'free' || r.item.price === 0;
+        return '<li class="bb-pay-sum-row' + (r.add ? ' is-add' : '') + '">'
+             +   tick
+             +   '<span><span class="bb-pay-sum-name">' + r.item.name + '</span>'
+             +     (r.item.note ? '<span class="bb-pay-sum-note">' + r.item.note + '</span>' : '')
+             +   '</span>'
+             +   '<span class="bb-pay-sum-price' + (free ? ' is-free' : '') + '">'
+             +     (free ? 'Included' : money(r.item.price)) + '</span>'
+             + '</li>';
+      }).join('');
+    }
+
+    var totalEl = document.getElementById('bb-pay-sum-total');
+    if(totalEl) totalEl.innerHTML = money(total);
+    var subEl = document.getElementById('bb-pay-sum-sub');
+    if(subEl && P.renews) subEl.innerHTML = P.renews;
+    var planEl = document.getElementById('bb-pay-sum-plan');
+    if(planEl){
+      if(OFFER_LABEL) planEl.innerHTML = OFFER_LABEL;
+      else planEl.hidden = true;              /* no offer → nothing to caption */
+    }
+
+    return { rows:rows, total:total, currency:cur, code:P.code || 'USD' };
+  })();
+
   /* -- checkout tracking (page view = checkout started) -------------------- */
   (function(){
     try{
       if(window.dataLayer && window.dataLayer.push){
-        window.dataLayer.push({event:'begin_checkout', item_name:CONFIG.PRODUCT, offer:VARIANT});
+        window.dataLayer.push({event:'begin_checkout', item_name:CONFIG.PRODUCT, offer:VARIANT, value:ORDER.total, currency:ORDER.code});
         window.dataLayer.push({event:'offer_variant_view', offer:VARIANT});
       }
-      if(typeof window.fbq === 'function') window.fbq('track','InitiateCheckout',{content_name:CONFIG.PRODUCT, offer:VARIANT});
+      if(typeof window.fbq === 'function') window.fbq('track','InitiateCheckout',{content_name:CONFIG.PRODUCT, offer:VARIANT, value:ORDER.total, currency:ORDER.code});
     }catch(e){}
   })();
 
@@ -724,6 +893,8 @@
       email     : F.email.value.trim().toLowerCase(),
       offer     : VARIANT,                          /* base|vip|oto|vip_oto */
       offer_name: OFFER_LABEL,                      /* readable, for GHL     */
+      amount    : ORDER.total,                      /* what the summary shows */
+      currency  : ORDER.code,
       page      : location.href,
       referrer  : document.referrer || ''
     };
@@ -777,8 +948,9 @@
 
   function success(){
     try{
-      if(window.dataLayer && window.dataLayer.push) window.dataLayer.push({event:'purchase', item_name:CONFIG.PRODUCT, offer:VARIANT});
-      if(typeof window.fbq === 'function') window.fbq('track','Purchase',{content_name:CONFIG.PRODUCT, offer:VARIANT});
+      if(window.dataLayer && window.dataLayer.push) window.dataLayer.push({event:'purchase', item_name:CONFIG.PRODUCT, offer:VARIANT, value:ORDER.total, currency:ORDER.code});
+      if(typeof window.gtag === 'function') window.gtag('event','conversion',{send_to:'purchase', value:ORDER.total, currency:ORDER.code});
+      if(typeof window.fbq === 'function') window.fbq('track','Purchase',{content_name:CONFIG.PRODUCT, offer:VARIANT, value:ORDER.total, currency:ORDER.code});
     }catch(e){}
 
     var next = CONFIG.CHECKOUT_URL

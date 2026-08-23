@@ -1,29 +1,30 @@
 /* ==========================================================================
-   BotBuilders — Payment / checkout landing page
+   BotBuilders — Payment / checkout page
    Companion stylesheet for payment.html
    GHL: paste this whole file into the payment page's Custom CSS.
-   Design board: ink #16244C · accent #3C5A9A · body #5B6580 · green #2E9E6B
-                 Poppins (UI) + Caveat (handwritten accents)
+   Brand board (shared with the LTO / OTO pages):
+     navy #0B1320 · blue #2563EB · sky #38BDF8 · body #5B6B84 · Inter
    Namespaced under .bb-pay so nothing leaks into GHL.
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
 .bb-pay{
-  --pay-ink:#16244C;          /* headlines, list copy            */
-  --pay-body:#5B6580;         /* paragraphs, muted labels        */
-  --pay-accent:#3C5A9A;       /* eyebrow, checks, CTA            */
-  --pay-accent-d:#334E88;     /* CTA hover                       */
-  --pay-green:#2E9E6B;        /* secure / guarantee dot          */
+  --pay-ink:#0B1320;          /* headlines                        */
+  --pay-ink-2:#16233C;        /* sub-headlines, item titles       */
+  --pay-body:#5B6B84;         /* paragraphs                       */
+  --pay-muted:#7B8AA3;        /* small print                      */
+  --pay-blue:#2563EB;         /* primary accent, CTA, checks      */
+  --pay-blue-d:#1D4FD7;       /* CTA hover                        */
+  --pay-sky:#38BDF8;          /* gradient partner                 */
+  --pay-line:#E3EAF5;         /* borders                          */
+  --pay-line-2:#EEF2F9;       /* inner rules                      */
   --pay-white:#FFFFFF;
-  --pay-line:#E4EAF4;         /* input borders                   */
-  --pay-line-2:rgba(22,36,76,.10);
-  --pay-ph:#9BA5BA;           /* placeholders                    */
-  --pay-err:#C74A4A;
+  --pay-green:#16A34A;
+  --pay-err:#DC2626;
 
-  --pay-font:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
-  --pay-hand:'Caveat','Poppins',cursive;
-  --pay-shell:1160px;
+  --pay-font:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  --pay-shell:1180px;
   --pay-card:428px;
 
   font-family:var(--pay-font);
@@ -34,31 +35,29 @@
 
   position:relative;
   min-height:100vh;
-  padding:0 0 72px;
+  padding:0 0 76px;
   overflow:hidden;
-
-  /* soft blue → pale mint wash, exactly as the mockup */
-  background:linear-gradient(180deg,#BED5F5 0%,#C9DDF6 26%,#D3E5F3 54%,#DBECEA 100%);
+  background:linear-gradient(180deg,#F5F9FF 0%,#EDF3FD 42%,#E3EDFA 100%);
 }
 
-/* dot grid over the wash */
+/* soft blue glow, top right — same wash as the offer pages */
 .bb-pay::before{
   content:'';
-  position:absolute; inset:0;
-  background-image:radial-gradient(rgba(22,36,76,.085) 1.4px, transparent 1.5px);
-  background-size:34px 34px;
+  position:absolute; top:-380px; right:-240px;
+  width:900px; height:900px; border-radius:50%;
+  background:radial-gradient(circle, rgba(37,99,235,.10) 0%, rgba(56,189,248,.06) 45%, transparent 70%);
   pointer-events:none;
-  z-index:0;
 }
 
 .bb-pay *,
 .bb-pay *::before,
 .bb-pay *::after{ box-sizing:border-box; }
 /* zero-specificity reset so the component rules below always win */
-.bb-pay :where(h1,h2,h3,h4,p,figure,figcaption,blockquote,ul,ol){ margin:0; padding:0; }
+.bb-pay :where(h1,h2,h3,h4,p,figure,figcaption,blockquote,ul,ol,li){ margin:0; padding:0; }
 .bb-pay img{ max-width:100%; display:block; }
 .bb-pay svg{ display:block; }
 .bb-pay a{ color:inherit; text-decoration:none; }
+.bb-pay [hidden]{ display:none !important; }
 
 .bb-pay-wrap{
   position:relative; z-index:2;
@@ -67,15 +66,22 @@
   padding:0 40px;
 }
 
+/* gradient text, as on the offer pages' highlighted words -------------------- */
+.bb-pay .hl{
+  background:linear-gradient(96deg,var(--pay-blue) 0%,var(--pay-sky) 100%);
+  -webkit-background-clip:text; background-clip:text;
+  -webkit-text-fill-color:transparent; color:var(--pay-blue);
+}
+
 /* ==========================================================================
-   TOPBAR — logo · secure badge
+   TOPBAR
    ========================================================================== */
 .bb-pay-top{
   position:relative; z-index:3;
   background:var(--pay-white);
   box-shadow:
-    0 1px 2px rgba(22,36,76,.07),
-    0 8px 20px -8px rgba(22,36,76,.22);
+    0 1px 2px rgba(11,19,32,.06),
+    0 8px 20px -8px rgba(11,19,32,.16);
 }
 .bb-pay-top-in{
   display:flex; align-items:center; justify-content:space-between; gap:20px;
@@ -85,8 +91,7 @@
 .bb-pay-logo img{ height:34px; width:auto; }
 .bb-pay-logo-mark{ width:34px; height:34px; flex:0 0 auto; }
 .bb-pay-logo-word{
-  font-family:var(--pay-font);
-  font-weight:800; font-size:21px; letter-spacing:-.2px;
+  font-weight:800; font-size:21px; letter-spacing:-.3px;
   color:var(--pay-ink); line-height:1;
 }
 .bb-pay-logo-word sup{ font-size:9px; font-weight:600; top:-.75em; }
@@ -99,168 +104,246 @@
 .bb-pay-dot{
   width:7px; height:7px; border-radius:50%;
   background:var(--pay-green); flex:0 0 auto;
-  box-shadow:0 0 0 3px rgba(46,158,107,.16);
+  box-shadow:0 0 0 3px rgba(22,163,74,.16);
 }
 
 /* ==========================================================================
-   LAYOUT — copy column + sticky payment card
+   LAYOUT
    ========================================================================== */
 .bb-pay-grid{
   display:grid;
   grid-template-columns:minmax(0,1fr) var(--pay-card);
   grid-template-areas:
-    "copy  card"
-    "incl  card"
-    "quote card"
-    "note  card";
-  grid-template-rows:auto auto auto 1fr;
-  column-gap:80px;
+    "copy    card"
+    "summary card"
+    "next    card"
+    "incl    card"
+    "quote   card";
+  grid-template-rows:auto auto auto auto 1fr;
+  column-gap:72px;
   align-items:start;
-  padding-top:64px;
+  padding-top:56px;
 }
-.bb-pay-copy { grid-area:copy;  max-width:560px; }
-.bb-pay-incl { grid-area:incl;  max-width:560px; margin-top:34px; }
-.bb-pay-quote{ grid-area:quote; max-width:500px; }
-.bb-pay-note { grid-area:note;  max-width:520px; }
-.bb-pay-panel{
-  grid-area:card;
-  position:sticky; top:32px;
-}
+.bb-pay-copy   { grid-area:copy;    max-width:620px; }
+.bb-pay-summary{ grid-area:summary; margin-top:34px; }
+.bb-pay-next   { grid-area:next;    margin-top:34px; }
+.bb-pay-incl   { grid-area:incl;    margin-top:36px; max-width:620px; }
+.bb-pay-quote  { grid-area:quote;   margin-top:32px; max-width:620px; }
+.bb-pay-panel  { grid-area:card; position:sticky; top:28px; }
 
 /* ==========================================================================
-   COPY COLUMN
+   HEADLINE BLOCK
    ========================================================================== */
-.bb-pay-eyebrow{
-  font-family:var(--pay-hand);
-  font-weight:600; font-size:31px; line-height:1;
-  color:var(--pay-accent);
-  transform:rotate(-1.6deg);
-  transform-origin:left center;
-  margin-bottom:16px;
+.bb-pay-pill{
+  display:inline-flex; align-items:center; gap:8px;
+  height:32px; padding:0 15px;
+  border-radius:999px;
+  background:linear-gradient(96deg,var(--pay-blue) 0%,#3B82F6 100%);
+  color:#fff; font-size:11.5px; font-weight:800;
+  letter-spacing:1.3px; text-transform:uppercase;
+  box-shadow:0 10px 20px -10px rgba(37,99,235,.85);
+  margin-bottom:18px;
 }
 .bb-pay-title{
-  font-weight:700;
-  font-size:clamp(38px,4.4vw,58px);
-  line-height:1.06;
-  letter-spacing:-1.4px;
+  font-weight:800;
+  font-size:clamp(36px,4.2vw,54px);
+  line-height:1.08;
+  letter-spacing:-1.6px;
   color:var(--pay-ink);
 }
 .bb-pay-lead{
-  margin-top:22px;
+  margin-top:20px;
   font-size:17px; line-height:1.7;
   color:var(--pay-body);
-  max-width:470px;
+  max-width:540px;
 }
 
-.bb-pay-kicker{
-  margin:0 0 22px;
-  font-size:11.5px; font-weight:600; letter-spacing:1.7px;
-  text-transform:uppercase;
-  color:var(--pay-accent);
+/* ==========================================================================
+   ORDER SUMMARY
+   ========================================================================== */
+.bb-pay-card-sh{
+  background:var(--pay-white);
+  border:1px solid var(--pay-line);
+  border-radius:18px;
+  box-shadow:0 18px 44px -28px rgba(11,19,32,.28);
 }
-.bb-pay-list{ list-style:none; margin:0; padding:0; display:grid; gap:20px; }
+.bb-pay-summary{ padding:24px 26px 22px; }
+.bb-pay-sum-head{
+  display:flex; align-items:baseline; justify-content:space-between; gap:14px;
+  padding-bottom:16px; border-bottom:1px solid var(--pay-line-2);
+}
+.bb-pay-sum-title{
+  font-size:12px; font-weight:800; letter-spacing:1.5px; text-transform:uppercase;
+  color:var(--pay-blue);
+}
+.bb-pay-sum-edit{ font-size:13px; font-weight:600; color:var(--pay-muted); }
+
+.bb-pay-sum-rows{ list-style:none; }
+.bb-pay-sum-row{
+  display:grid; grid-template-columns:26px 1fr auto; gap:0 12px;
+  align-items:start;
+  padding:15px 0;
+  border-bottom:1px solid var(--pay-line-2);
+}
+.bb-pay-sum-tick{
+  width:20px; height:20px; margin-top:2px; border-radius:50%;
+  background:var(--pay-blue); color:#fff;
+  display:flex; align-items:center; justify-content:center;
+}
+.bb-pay-sum-tick svg{ width:11px; height:11px; }
+.bb-pay-sum-row.is-add .bb-pay-sum-tick{
+  background:linear-gradient(140deg,var(--pay-blue),var(--pay-sky));
+}
+.bb-pay-sum-name{ display:block; font-size:15px; font-weight:700; color:var(--pay-ink-2); line-height:1.35; }
+.bb-pay-sum-note{ display:block; margin-top:3px; font-size:12.5px; color:var(--pay-muted); line-height:1.45; }
+.bb-pay-sum-price{ font-size:15px; font-weight:700; color:var(--pay-ink-2); white-space:nowrap; }
+.bb-pay-sum-price.is-free{ color:var(--pay-green); }
+
+.bb-pay-sum-total{
+  display:flex; align-items:baseline; justify-content:space-between; gap:14px;
+  padding-top:16px;
+}
+.bb-pay-sum-total-l{ font-size:14px; font-weight:700; color:var(--pay-ink); }
+.bb-pay-sum-total-sub{ display:block; margin-top:2px; font-size:12.5px; font-weight:500; color:var(--pay-muted); }
+.bb-pay-sum-total-v{ font-size:26px; font-weight:800; letter-spacing:-.8px; color:var(--pay-ink); }
+
+/* ==========================================================================
+   WHAT HAPPENS NEXT — the thank-you page's step tracker, run vertically
+   ========================================================================== */
+.bb-pay-next{ padding:24px 26px 8px; }
+.bb-pay-kicker{
+  font-size:12px; font-weight:800; letter-spacing:1.5px; text-transform:uppercase;
+  color:var(--pay-blue);
+  margin-bottom:20px;
+}
+.bb-pay-steps{ list-style:none; position:relative; }
+.bb-pay-step{
+  position:relative;
+  display:grid; grid-template-columns:34px 1fr; gap:0 16px;
+  padding:0 0 24px 0;
+}
+.bb-pay-step:last-child{ padding-bottom:20px; }
+/* the connecting line, like the connector dots on the thank-you page */
+.bb-pay-step:not(:last-child)::before{
+  content:'';
+  position:absolute; left:16.5px; top:36px; bottom:2px;
+  width:2px; background:linear-gradient(180deg,rgba(37,99,235,.35),rgba(37,99,235,.10));
+}
+.bb-pay-step-num{
+  position:relative; z-index:2;
+  width:34px; height:34px; border-radius:50%;
+  background:var(--pay-blue); color:#fff;
+  display:flex; align-items:center; justify-content:center;
+  font-weight:800; font-size:15px;
+  box-shadow:0 8px 16px -6px rgba(37,99,235,.65);
+}
+.bb-pay-step-b{ padding-top:5px; }
+.bb-pay-step h3{
+  font-size:15.5px; font-weight:800; color:var(--pay-ink); line-height:1.3;
+  display:flex; align-items:center; gap:9px; flex-wrap:wrap;
+}
+.bb-pay-step h3 svg{ width:17px; height:17px; color:var(--pay-blue); flex:none; }
+.bb-pay-step p{ margin-top:5px; font-size:13.5px; line-height:1.55; color:var(--pay-body); }
+.bb-pay-step-when{
+  font-size:11px; font-weight:800; letter-spacing:.6px; text-transform:uppercase;
+  color:var(--pay-blue);
+  background:rgba(37,99,235,.09);
+  border-radius:6px; padding:3px 7px;
+}
+
+/* ==========================================================================
+   WHAT'S INCLUDED — blue circle checks, as on the offer pages
+   ========================================================================== */
+.bb-pay-list{ list-style:none; display:grid; gap:16px; }
 .bb-pay-list li{
-  display:grid; grid-template-columns:34px 1fr; align-items:start;
-  font-size:16px; line-height:1.5; color:var(--pay-ink);
+  display:grid; grid-template-columns:24px 1fr; gap:0 14px; align-items:start;
+  font-size:15.5px; line-height:1.55; color:var(--pay-body);
 }
 .bb-pay-check{
-  width:20px; height:20px; margin-top:2px;
-  color:var(--pay-accent);
+  width:22px; height:22px; margin-top:1px; border-radius:50%;
+  background:var(--pay-blue); color:#fff;
+  display:flex; align-items:center; justify-content:center;
 }
+.bb-pay-check svg{ width:12px; height:12px; }
+.bb-pay-list li b{ display:block; font-weight:700; color:var(--pay-ink-2); }
+.bb-pay-added .bb-pay-check{ background:linear-gradient(140deg,var(--pay-blue),var(--pay-sky)); }
 
-/* testimonial ------------------------------------------------------------- */
-.bb-pay-quote{
-  margin-top:46px;
-  background:var(--pay-white);
-  border-radius:16px;
-  padding:26px 28px 24px;
-  box-shadow:0 18px 40px -30px rgba(22,36,76,.35);
-}
-.bb-pay-quote-txt{
-  font-size:17px; line-height:1.62; color:var(--pay-ink);
-}
+/* ==========================================================================
+   TESTIMONIAL
+   ========================================================================== */
+.bb-pay-quote{ padding:24px 26px 22px; }
+.bb-pay-quote-stars{ display:flex; gap:3px; color:#F59E0B; margin-bottom:12px; }
+.bb-pay-quote-stars svg{ width:15px; height:15px; }
+.bb-pay-quote-txt{ font-size:16px; line-height:1.6; color:var(--pay-ink-2); }
 .bb-pay-quote-by{
-  margin-top:20px;
-  display:flex; align-items:center; gap:14px;
-  font-size:14px;
+  margin-top:16px; display:flex; align-items:center; gap:12px;
+  font-size:13.5px;
 }
-.bb-pay-quote-name{ font-weight:600; color:var(--pay-ink); }
-.bb-pay-quote-sep{
-  width:4px; height:4px; border-radius:50%;
-  background:#C3CADB; flex:0 0 auto;
-}
-.bb-pay-quote-co{ color:var(--pay-body); }
-
-/* handwritten closing line ------------------------------------------------ */
-.bb-pay-note{
-  margin-top:40px;
-  font-family:var(--pay-hand);
-  font-weight:500; font-size:28px; line-height:1.42;
-  color:var(--pay-body);
-  transform:rotate(-1.2deg);
-  transform-origin:left center;
-}
+.bb-pay-quote-name{ font-weight:700; color:var(--pay-ink); }
+.bb-pay-quote-sep{ width:4px; height:4px; border-radius:50%; background:#C7D2E4; flex:none; }
+.bb-pay-quote-co{ color:var(--pay-muted); }
 
 /* ==========================================================================
    PAYMENT CARD
    ========================================================================== */
 .bb-pay-box{
   background:var(--pay-white);
-  border-radius:22px;
-  padding:36px 34px 34px;
+  border:1px solid var(--pay-line);
+  border-radius:20px;
+  padding:32px 30px 30px;
   box-shadow:
-    0 2px 4px rgba(22,36,76,.04),
-    0 34px 70px -34px rgba(22,36,76,.34);
+    0 2px 4px rgba(11,19,32,.04),
+    0 34px 70px -34px rgba(11,19,32,.32);
 }
 .bb-pay-box-kicker{
-  font-size:11.5px; font-weight:600; letter-spacing:1.7px;
-  text-transform:uppercase; color:var(--pay-accent);
+  font-size:12px; font-weight:800; letter-spacing:1.5px; text-transform:uppercase;
+  color:var(--pay-blue);
 }
 .bb-pay-box-title{
-  margin-top:10px;
-  font-weight:700; font-size:29px; line-height:1.18;
+  margin-top:9px;
+  font-weight:800; font-size:27px; line-height:1.2;
   letter-spacing:-.8px; color:var(--pay-ink);
 }
 
-.bb-pay-form{ margin-top:28px; display:grid; gap:18px; }
-.bb-pay-row{ display:grid; gap:14px; }
+.bb-pay-form{ margin-top:24px; display:grid; gap:16px; }
+.bb-pay-row{ display:grid; gap:13px; }
 .bb-pay-row.is-2{ grid-template-columns:1fr 1fr; }
 .bb-pay-row.is-3{ grid-template-columns:1fr 1fr 1fr; }
 
 .bb-pay-field{ min-width:0; }
 .bb-pay-label{
-  display:block; margin-bottom:9px;
-  font-size:13.5px; font-weight:600; color:var(--pay-ink);
+  display:block; margin-bottom:8px;
+  font-size:13px; font-weight:700; color:var(--pay-ink-2);
 }
 .bb-pay-input{
-  width:100%; height:52px;
-  padding:0 16px;
+  width:100%; height:50px;
+  padding:0 15px;
   font-family:var(--pay-font);
-  font-size:15.5px; font-weight:400; color:var(--pay-ink);
-  background:var(--pay-white);
+  font-size:15px; font-weight:500; color:var(--pay-ink);
+  background:#FBFCFE;
   border:1.5px solid var(--pay-line);
-  border-radius:12px;
+  border-radius:11px;
   outline:none;
   transition:border-color .16s ease, box-shadow .16s ease, background-color .16s ease;
   -webkit-appearance:none; appearance:none;
 }
-.bb-pay-input::placeholder{ color:var(--pay-ph); font-weight:400; }
-.bb-pay-input:hover{ border-color:#D3DCEB; }
+.bb-pay-input::placeholder{ color:#A3AFC4; font-weight:400; }
+.bb-pay-input:hover{ border-color:#CFDAEB; }
 .bb-pay-input:focus{
-  border-color:var(--pay-accent);
-  box-shadow:0 0 0 4px rgba(60,90,154,.13);
+  background:#fff;
+  border-color:var(--pay-blue);
+  box-shadow:0 0 0 4px rgba(37,99,235,.13);
 }
-.bb-pay-input.is-err{ border-color:var(--pay-err); }
-.bb-pay-input.is-err:focus{ box-shadow:0 0 0 4px rgba(199,74,74,.13); }
+.bb-pay-input.is-err{ border-color:var(--pay-err); background:#FEF7F7; }
+.bb-pay-input.is-err:focus{ box-shadow:0 0 0 4px rgba(220,38,38,.12); }
 
-/* card number field + detected brand chip */
 .bb-pay-cardnum{ position:relative; }
 .bb-pay-cardnum .bb-pay-input{ padding-right:66px; letter-spacing:.4px; }
 .bb-pay-brand{
-  position:absolute; right:14px; top:50%; transform:translateY(-50%);
-  font-size:10px; font-weight:700; letter-spacing:.4px;
-  color:var(--pay-accent);
-  background:rgba(60,90,154,.08);
+  position:absolute; right:13px; top:50%; transform:translateY(-50%);
+  font-size:10px; font-weight:800; letter-spacing:.4px;
+  color:var(--pay-blue);
+  background:rgba(37,99,235,.09);
   border-radius:6px; padding:4px 7px;
   opacity:0; transition:opacity .18s ease;
   pointer-events:none;
@@ -268,31 +351,43 @@
 .bb-pay-brand.is-on{ opacity:1; }
 
 .bb-pay-err{
-  display:none;
-  margin-top:8px;
+  display:none; margin-top:7px;
   font-size:12.5px; font-weight:500; color:var(--pay-err);
 }
 .bb-pay-err.is-on{ display:block; }
 
-/* CTA --------------------------------------------------------------------- */
+/* the "your add-on is on this order" note */
+.bb-pay-applied{
+  display:grid; grid-template-columns:15px 1fr; align-items:start;
+  margin-top:2px; padding:12px 14px;
+  font-size:13.5px; line-height:1.5; font-weight:600;
+  color:#14532D;
+  background:rgba(22,163,74,.07);
+  border:1px solid rgba(22,163,74,.20);
+  border-radius:10px;
+}
+.bb-pay-applied .bb-pay-dot{ margin-top:6px; }
+
+/* CTA */
 .bb-pay-cta{
-  margin-top:10px;
-  width:100%; height:60px;
+  margin-top:8px;
+  width:100%; height:58px;
   display:inline-flex; align-items:center; justify-content:center; gap:10px;
-  font-family:var(--pay-font); font-size:17px; font-weight:700; letter-spacing:-.1px;
-  color:#fff; background:var(--pay-accent);
-  border:0; border-radius:14px; cursor:pointer;
-  box-shadow:0 14px 26px -16px rgba(60,90,154,.75);
-  transition:background-color .16s ease, transform .16s ease, box-shadow .16s ease;
+  font-family:var(--pay-font); font-size:16.5px; font-weight:800; letter-spacing:-.2px;
+  color:#fff;
+  background:linear-gradient(96deg,var(--pay-blue) 0%,#3B82F6 100%);
+  border:0; border-radius:12px; cursor:pointer;
+  box-shadow:0 14px 26px -14px rgba(37,99,235,.85);
+  transition:filter .16s ease, transform .16s ease, box-shadow .16s ease;
 }
 .bb-pay-cta:hover{
-  background:var(--pay-accent-d);
+  filter:saturate(1.05) brightness(1.03);
   transform:translateY(-1px);
-  box-shadow:0 18px 30px -16px rgba(60,90,154,.8);
+  box-shadow:0 18px 30px -14px rgba(37,99,235,.9);
 }
 .bb-pay-cta:active{ transform:translateY(0); }
-.bb-pay-cta:focus-visible{ outline:3px solid rgba(60,90,154,.35); outline-offset:3px; }
-.bb-pay-cta[disabled]{ cursor:default; opacity:.85; transform:none; }
+.bb-pay-cta:focus-visible{ outline:3px solid rgba(37,99,235,.35); outline-offset:3px; }
+.bb-pay-cta[disabled]{ cursor:default; opacity:.9; transform:none; }
 .bb-pay-spin{
   width:18px; height:18px; display:none;
   border:2px solid rgba(255,255,255,.4);
@@ -303,78 +398,60 @@
 @keyframes bb-pay-spin{ to{ transform:rotate(360deg); } }
 
 .bb-pay-guarantee{
-  margin-top:24px;
+  margin-top:18px;
   display:grid; grid-template-columns:15px 1fr; align-items:start;
-  font-size:14px; line-height:1.5; color:var(--pay-body);
+  font-size:13.5px; line-height:1.5; color:var(--pay-body);
 }
 .bb-pay-guarantee .bb-pay-dot{ margin-top:7px; }
 
+.bb-pay-trust{
+  margin-top:14px; padding-top:14px;
+  border-top:1px solid var(--pay-line-2);
+  display:flex; align-items:center; justify-content:center; gap:8px;
+  font-size:12px; font-weight:600; color:var(--pay-muted);
+}
+.bb-pay-trust svg{ width:14px; height:14px; }
+
 .bb-pay-formerr{
-  display:none;
-  margin-top:16px;
-  padding:12px 14px;
-  font-size:13.5px; font-weight:500; color:var(--pay-err);
-  background:rgba(199,74,74,.07);
-  border:1px solid rgba(199,74,74,.22);
+  display:none; margin-top:14px; padding:12px 14px;
+  font-size:13.5px; font-weight:600; color:var(--pay-err);
+  background:rgba(220,38,38,.06);
+  border:1px solid rgba(220,38,38,.20);
   border-radius:10px;
 }
 .bb-pay-formerr.is-on{ display:block; }
 
-/* variant-only blocks (data-bb-when) — [hidden] must beat the display rules */
-.bb-pay [hidden]{ display:none !important; }
-
-/* the extra "you added this" line in the checklist */
-.bb-pay-added span{ font-weight:500; }
-
-/* "your add-on is included" note above the CTA */
-.bb-pay-applied{
-  display:grid; grid-template-columns:15px 1fr; align-items:start;
-  gap:0 0;
-  margin-top:2px; padding:12px 14px;
-  font-size:13.5px; line-height:1.5; font-weight:500;
-  color:#1F6B4C;
-  background:rgba(46,158,107,.08);
-  border:1px solid rgba(46,158,107,.18);
-  border-radius:10px;
-}
-.bb-pay-applied .bb-pay-dot{ margin-top:6px; }
-
-/* CONFIG.CARD_FIELDS = false — the card is taken on the GHL order form /
-   payment link instead, so these rows come out of the page entirely.        */
-.bb-pay-box.is-nocard #bb-pay-card-slot,
-.bb-pay-box.is-nocard .bb-pay-row.is-3{ display:none; }
-
-/* honeypot (bots only) */
 .bb-pay-hp{
   position:absolute !important; left:-9999px; top:auto;
   width:1px; height:1px; overflow:hidden;
 }
 
-/* success state ----------------------------------------------------------- */
+/* CONFIG.CARD_FIELDS = false — the card is taken on the processor's own form */
+.bb-pay-box.is-nocard #bb-pay-card-slot,
+.bb-pay-box.is-nocard .bb-pay-row.is-3{ display:none; }
+
+/* success state */
 .bb-pay-done{ text-align:center; padding:14px 4px 6px; }
 .bb-pay-done-ico{
   width:62px; height:62px; margin:0 auto 20px;
   display:grid; place-items:center;
   color:#fff; background:var(--pay-green);
   border-radius:50%;
-  box-shadow:0 0 0 8px rgba(46,158,107,.13);
+  box-shadow:0 0 0 8px rgba(22,163,74,.12);
 }
 .bb-pay-done-ico svg{ width:28px; height:28px; }
-.bb-pay-done-title{
-  font-weight:700; font-size:25px; line-height:1.2;
-  letter-spacing:-.5px; color:var(--pay-ink);
-}
+.bb-pay-done-title{ font-weight:800; font-size:24px; letter-spacing:-.6px; color:var(--pay-ink); }
 .bb-pay-done-txt{ margin-top:12px; font-size:15px; line-height:1.6; color:var(--pay-body); }
 
 /* ==========================================================================
-   ENTRANCE ANIMATION
+   REVEAL
    ========================================================================== */
 .bb-pay-in{
-  opacity:0; transform:translateY(14px);
-  animation:bb-pay-rise .66s cubic-bezier(.22,.68,.32,1) forwards;
+  opacity:0; transform:translateY(16px);
+  animation:bb-pay-up .68s cubic-bezier(.2,.7,.25,1) forwards;
   animation-delay:var(--d,0ms);
 }
-@keyframes bb-pay-rise{ to{ opacity:1; transform:none; } }
+@keyframes bb-pay-up{ to{ opacity:1; transform:none; } }
 @media (prefers-reduced-motion:reduce){
   .bb-pay-in{ animation:none; opacity:1; transform:none; }
   .bb-pay-cta:hover{ transform:none; }
@@ -384,37 +461,32 @@
    RESPONSIVE
    ========================================================================== */
 @media (max-width:1120px){
-  .bb-pay-grid{ column-gap:52px; }
-  .bb-pay{ --pay-card:390px; }
+  .bb-pay-grid{ column-gap:48px; }
+  .bb-pay{ --pay-card:392px; }
 }
 @media (max-width:980px){
   .bb-pay{ --pay-card:auto; padding-bottom:56px; }
-  .bb-pay-wrap{ padding:0 28px; }
+  .bb-pay-wrap{ padding:0 26px; }
   .bb-pay-grid{
     grid-template-columns:minmax(0,1fr);
-    grid-template-areas:"copy" "card" "incl" "quote" "note";
+    grid-template-areas:"copy" "card" "summary" "next" "incl" "quote";
     grid-template-rows:auto;
-    row-gap:0;
-    padding-top:44px;
+    padding-top:40px;
   }
-  .bb-pay-copy,.bb-pay-incl,.bb-pay-quote,.bb-pay-note{ max-width:640px; }
-  .bb-pay-panel{ position:static; margin-top:34px; max-width:520px; }
-  .bb-pay-incl{ margin-top:46px; }
-  .bb-pay-quote{ margin-top:40px; }
-  .bb-pay-note{ margin-top:34px; }
+  .bb-pay-copy,.bb-pay-summary,.bb-pay-next,.bb-pay-incl,.bb-pay-quote{ max-width:640px; }
+  .bb-pay-panel{ position:static; margin-top:30px; max-width:560px; }
 }
 @media (max-width:560px){
-  .bb-pay-wrap{ padding:0 20px; }
+  .bb-pay-wrap{ padding:0 18px; }
   .bb-pay-top-in{ min-height:64px; }
   .bb-pay-secure{ font-size:12px; }
   .bb-pay-secure .bb-pay-secure-long{ display:none; }
-  .bb-pay-eyebrow{ font-size:27px; }
-  .bb-pay-title{ letter-spacing:-1px; }
+  .bb-pay-title{ letter-spacing:-1.1px; }
   .bb-pay-lead{ font-size:16px; }
-  .bb-pay-box{ padding:28px 22px 26px; border-radius:18px; }
-  .bb-pay-box-title{ font-size:25px; }
+  .bb-pay-box{ padding:26px 20px 24px; border-radius:16px; }
+  .bb-pay-box-title{ font-size:24px; }
   .bb-pay-row.is-2{ grid-template-columns:1fr; }
-  .bb-pay-quote{ padding:22px 22px 20px; }
-  .bb-pay-quote-txt{ font-size:16px; }
-  .bb-pay-note{ font-size:25px; }
+  .bb-pay-summary,.bb-pay-next,.bb-pay-quote{ padding-left:20px; padding-right:20px; }
+  .bb-pay-sum-total-v{ font-size:23px; }
+  .bb-pay-list li{ font-size:15px; }
 }
