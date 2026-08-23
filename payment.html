@@ -438,6 +438,11 @@
     PREFILL          : true,
     CLEAN_URL        : true,
 
+    /* Leave false while a thank-you page fires the purchase event — this
+       page then reports add_payment_info, which is what actually happened
+       here, and the order is only counted once. See success() below.      */
+    PURCHASE_EVENT   : false,
+
     /* Small urgency line under the guarantee, matching the offer page's
        timer note. Blank = hidden.                                          */
     URGENCY          : 'Your launch price is held while you complete this order.',
@@ -462,6 +467,10 @@
          $1,764/yr, the 34% saving the offer page quotes.                  */
       plan : { name:'Growth Plan',                  note:'$97/mo &middot; billed annually',            price:1164, was:1764, period:'/yr' },
       vip  : { name:'VIP Launch Intensive',         note:'one-time &middot; live build session',        price:197 },
+      /* NOTE — the OTO price is contested: the OTO page reads $97 (was $297)
+         for the AI Script Pack, while the thank-you page's CONFIG carries
+         1297 for a Done-For-You Bot Setup. Whichever is live, the two files
+         must agree or the summaries will disagree with each other.        */
       oto  : { name:'Done-For-You AI Script Pack',  note:'one-time &middot; scripts + AI prompts',      price:97,   was:297 }
     },
 
@@ -634,45 +643,111 @@
   var DEBUG = CONFIG.DEBUG === true || /^(1|true|yes|on)$/i.test(QUERY.bbdebug || '');
   var VARIANT_FROM = 'nothing — showing base copy';
 
-  var VARIANT = (function(){
-    var on = function(v){ return /^(1|true|yes|on)$/i.test(v||''); };
+  /* The thank-you page's detector keys, so one signal drives both pages.   */
+  var WG = { bump:'wg_bump', oto:'wg_oto', pixel:'wg_pixel_fired' };
 
+  /* true once anything has told us about this order — the thank-you page
+     calls the opposite of this "cold".                                     */
+  var KNOWN = false;
+
+  var VARIANT = (function(){
+    var on  = function(v){ return /^(1|true|yes|on)$/i.test(v||''); };
+    var off = function(v){ return /^(0|false|no|off)$/i.test(v||''); };
+    var ss  = function(k){ try{ return window.sessionStorage.getItem(k); }catch(e){ return null; } };
+
+    var bump = null, oto = null;          /* null = nothing has said either way */
+
+    /* 1. ?offer=vip | oto | vip_oto */
     var v = (QUERY.offer || QUERY.variant || QUERY.v || '').toLowerCase().replace(/[^a-z0-9_]/g,'');
     if(v === 'oto_vip') v = 'vip_oto';                 /* order does not matter */
-    if(v) VARIANT_FROM = 'the link (?offer=' + v + ')';
-
-    if(!v){
-      var vip = on(QUERY.vip), oto = on(QUERY.oto);
-      v = vip && oto ? 'vip_oto' : vip ? 'vip' : oto ? 'oto' : '';
-      if(v) VARIANT_FROM = 'the link (?vip / ?oto flags)';
+    if(v === 'vip' || v === 'oto' || v === 'vip_oto'){
+      bump = (v === 'vip' || v === 'vip_oto');
+      oto  = (v === 'oto' || v === 'vip_oto');
+      VARIANT_FROM = 'the link (?offer=' + v + ')';
+    }else if(v){
+      VARIANT_FROM = 'the link (?offer=' + v + ', which no COPY entry matches)';
     }
 
-    /* the page they came from, when the link carried nothing */
-    if(!v && CONFIG.OFFER_REFERRERS){
+    /* 2. the thank-you page's own flags: ?bump=1 / ?vip=1 / ?oto=1, and the
+          explicit 0 that means "asked and declined" rather than unknown.   */
+    if(bump === null){
+      if(on(QUERY.bump)  || on(QUERY.vip))  bump = true;
+      else if(off(QUERY.bump) || off(QUERY.vip)) bump = false;
+      if(bump !== null) VARIANT_FROM = 'the link (?bump / ?vip flag)';
+    }
+    if(oto === null){
+      if(on(QUERY.oto))       oto = true;
+      else if(off(QUERY.oto)) oto = false;
+      if(oto !== null && bump === null) VARIANT_FROM = 'the link (?oto flag)';
+    }
+
+    /* 3. the page they came from, when the link carried nothing */
+    if(bump === null && oto === null && CONFIG.OFFER_REFERRERS){
       var ref = (document.referrer || '').toLowerCase();
       if(ref){
         var keys = Object.keys(CONFIG.OFFER_REFERRERS);
-        for(var i=0; i<keys.length && !v; i++){
+        for(var i=0; i<keys.length; i++){
           var needles = CONFIG.OFFER_REFERRERS[keys[i]] || [];
           for(var j=0; j<needles.length; j++){
             if(needles[j] && ref.indexOf(String(needles[j]).toLowerCase()) > -1){
-              v = keys[i];
+              var k = keys[i];
+              bump = (k === 'vip' || k === 'vip_oto');
+              oto  = (k === 'oto' || k === 'vip_oto');
               VARIANT_FROM = 'the referring page (' + needles[j] + ')';
               break;
             }
           }
+          if(bump !== null) break;
         }
       }
     }
 
-    if(!v){
+    /* 4. what the funnel already stored — the thank-you page's keys first */
+    if(bump === null){
+      var sb = ss(WG.bump);
+      if(sb !== null){ bump = sb === '1'; VARIANT_FROM = 'this session (' + WG.bump + ')'; }
+    }
+    if(oto === null){
+      var so = ss(WG.oto);
+      if(so !== null){ oto = so === '1'; VARIANT_FROM = 'this session (' + WG.oto + ')'; }
+    }
+    if(bump === null && oto === null){
+      var mine = ss('bb_offer');
+      if(mine){
+        bump = (mine === 'vip' || mine === 'vip_oto');
+        oto  = (mine === 'oto' || mine === 'vip_oto');
+        VARIANT_FROM = 'this session (bb_offer)';
+      }
+    }
+
+    KNOWN = (bump !== null || oto !== null);
+    bump  = bump === true;
+    oto   = oto  === true;
+
+    var out = bump && oto ? 'vip_oto' : bump ? 'vip' : oto ? 'oto' : 'base';
+
+    /* Write it forward in BOTH conventions, so the thank-you page reads the
+       same answer this page rendered. Only when something actually told us —
+       writing 0s into a cold visit would turn "unknown" into "declined" and
+       cost the thank-you page its wg-cold state.                           */
+    if(KNOWN){
       try{
-        v = window.sessionStorage.getItem('bb_offer') || '';
-        if(v) VARIANT_FROM = 'this session (seen on an earlier page view)';
+        window.sessionStorage.setItem(WG.bump, bump ? '1' : '0');
+        window.sessionStorage.setItem(WG.oto,  oto  ? '1' : '0');
+        window.sessionStorage.setItem('bb_offer', out);
       }catch(e){}
     }
-    try{ if(v) window.sessionStorage.setItem('bb_offer', v); }catch(e){}
-    return v || 'base';
+
+    /* the same classes the thank-you page's detector sets, so any CSS you
+       already wrote against wg-bump-yes / wg-oto-no works here too         */
+    try{
+      var r = document.documentElement.classList;
+      r.add(bump ? 'wg-bump-yes' : 'wg-bump-no');
+      r.add(oto  ? 'wg-oto-yes'  : 'wg-oto-no');
+      if(!KNOWN) r.add('wg-cold');
+    }catch(e){}
+
+    return out;
   })();
 
   var CTA_LABEL   = 'Get Instant Access';
@@ -684,6 +759,9 @@
       '[bb-pay] offer variant: ' + VARIANT + '\n' +
       '  read from   : ' + VARIANT_FROM + '\n' +
       '  copy defined: ' + (known ? 'yes' : 'NO — falling back to base copy') + '\n' +
+      '  passed on as : wg_bump=' + (VARIANT === 'vip' || VARIANT === 'vip_oto' ? '1' : '0') +
+                      ' wg_oto=' + (VARIANT === 'oto' || VARIANT === 'vip_oto' ? '1' : '0') +
+                      (KNOWN ? '' : ' (nothing stored — this visit is cold)') + '\n' +
       '  url         : ' + location.href + '\n' +
       '  referrer    : ' + (document.referrer || '(none — opened directly, or the referrer was stripped)')
     );
@@ -1163,10 +1241,28 @@
   }
 
   function success(){
+    /* The thank-you page owns the purchase event: it only renders once the
+       money is actually taken, and it dedupes on wg_pixel_fired. This page
+       fires add_payment_info instead — true at this point, and it cannot
+       double-count. Set PURCHASE_EVENT true only if no thank-you page fires
+       one; the same stamp is written either way, so the two can never both
+       report the same order.                                              */
     try{
-      if(window.dataLayer && window.dataLayer.push) window.dataLayer.push({event:'purchase', item_name:CONFIG.PRODUCT, offer:VARIANT, value:ORDER.total, currency:ORDER.code});
-      if(typeof window.gtag === 'function') window.gtag('event','conversion',{send_to:'purchase', value:ORDER.total, currency:ORDER.code});
-      if(typeof window.fbq === 'function') window.fbq('track','Purchase',{content_name:CONFIG.PRODUCT, offer:VARIANT, value:ORDER.total, currency:ORDER.code});
+      var fired = false;
+      try{ fired = window.sessionStorage.getItem(WG.pixel) === '1'; }catch(e){}
+
+      var money = { value:ORDER.total, currency:ORDER.code };
+
+      if(CONFIG.PURCHASE_EVENT === true && !fired){
+        try{ window.sessionStorage.setItem(WG.pixel, '1'); }catch(e){}
+        if(window.dataLayer && window.dataLayer.push) window.dataLayer.push({event:'purchase', item_name:CONFIG.PRODUCT, offer:VARIANT, value:money.value, currency:money.currency});
+        if(typeof window.gtag === 'function') window.gtag('event','purchase', money);
+        if(typeof window.fbq === 'function') window.fbq('track','Purchase',{content_name:CONFIG.PRODUCT, offer:VARIANT, value:money.value, currency:money.currency});
+      }else{
+        if(window.dataLayer && window.dataLayer.push) window.dataLayer.push({event:'add_payment_info', item_name:CONFIG.PRODUCT, offer:VARIANT, value:money.value, currency:money.currency});
+        if(typeof window.gtag === 'function') window.gtag('event','add_payment_info', money);
+        if(typeof window.fbq === 'function') window.fbq('track','AddPaymentInfo',{content_name:CONFIG.PRODUCT, offer:VARIANT, value:money.value, currency:money.currency});
+      }
     }catch(e){}
 
     var next = CONFIG.CHECKOUT_URL
