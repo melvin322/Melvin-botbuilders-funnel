@@ -590,17 +590,17 @@
 
 /* -- hero price card (clear + catchy pricing) ------------------------- */
 .bb-hero-price{
-    margin-top:20px;
-    display:inline-flex; align-items:center; gap:18px; flex-wrap:wrap;
-    background:#fff; border:1.5px solid #D5E3F7; border-radius:16px;
-    padding:14px 20px; box-shadow:0 16px 40px -20px rgba(8,18,32,.32);
+    margin-top:18px;
+    display:inline-flex; align-items:center; gap:14px; flex-wrap:wrap;
+    background:#fff; border:1.5px solid #D5E3F7; border-radius:14px;
+    padding:10px 16px; box-shadow:0 14px 34px -20px rgba(8,18,32,.30);
 }
 .bb-hp-fig{ display:flex; align-items:flex-start; gap:2px; color:var(--bb-heading); line-height:.9; }
-.bb-hp-cur{ font-family:var(--bb-display); font-size:24px; margin-top:6px; color:var(--bb-blue); }
-.bb-hp-amt{ font-family:var(--bb-display); font-size:58px; letter-spacing:.01em;
+.bb-hp-cur{ font-family:var(--bb-display); font-size:17px; margin-top:5px; color:var(--bb-blue); }
+.bb-hp-amt{ font-family:var(--bb-display); font-size:40px; letter-spacing:.01em;
     background:var(--bb-grad); -webkit-background-clip:text; background-clip:text;
     -webkit-text-fill-color:transparent; color:transparent; }
-.bb-hp-per{ align-self:flex-end; margin-bottom:9px; font-size:15px; font-weight:600; color:var(--bb-muted); }
+.bb-hp-per{ align-self:flex-end; margin-bottom:6px; font-size:13px; font-weight:600; color:var(--bb-muted); }
 .bb-hp-save{ display:flex; flex-direction:column; align-items:flex-start; gap:5px; }
 .bb-hp-save s{ color:#98A6BA; font-size:14px; font-weight:600; }
 .bb-hp-badge{ font-size:12px; font-weight:800; letter-spacing:.04em; color:#0F7A3D;
@@ -643,12 +643,9 @@
     --bb-card-h: 440px;
 }   /* keeps the whole hero within one screen */
 
-/* dashed frame around Bob + floating "today only" deal badge */
+/* Bob wrapper (no frame) + floating "today only" deal badge */
 .bb-bob-frame{
     position:relative; z-index:1; width:100%;
-    border:2px dashed rgba(37,99,255,.30); border-radius:24px;
-    padding:16px 18px;
-    background:linear-gradient(180deg, rgba(255,255,255,.34), rgba(255,255,255,.08));
 }
 .bb-bob-deal{
     position:absolute; top:-16px; right:-14px; z-index:4;
