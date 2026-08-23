@@ -7,24 +7,15 @@
 <meta name="robots" content="noindex">
 
 <!-- ==========================================================================
-     BotBuilders — OTO / One-Time-Offer upsell page
-     Shown AFTER the Limited-Time-Offer checkout ("Claim my offer"), BEFORE the
-     thank-you page. Tokens/colors matched to the LTO page (lto-offer.css).
-     LTO board: ink #081220 · blue #2563FF · sky #38BDF8 · warn #FF7A45
-                Poppins (headings) · Bebas Neue (numbers) · Inter (body)
+     BotBuilders — OTO / One-Time-Offer upsell page  (conversion layout)
+     Shown AFTER the Limited-Time-Offer checkout, BEFORE the thank-you page.
+     Fonts + text colors kept from the funnel brand:
+       ink #081220 · blue #2563FF · sky #38BDF8 · grey #6B7A90
+       Poppins (headings) · Bebas Neue (price) · Inter (body)
      ------------------------------------------------------------------------
-     TWO WAYS TO USE THIS
-     A) Standalone: open this file in a browser. It links oto-upsell.css.
-     B) GHL: paste everything between <div class="bb-oto"> … </div> AND the
-        <script> below it into a full-width Custom Code / HTML element.
-        Paste the contents of oto-upsell.css into Settings › Custom CSS.
-     ------------------------------------------------------------------------
-     EDIT THESE FIRST (see the CONFIG block in the <script> at the bottom):
-       ACCEPT_URL   — where "Yes! Add to my order" sends the buyer (1-click
-                      upsell / order-bump accept URL from your funnel)
-       DECLINE_URL  — where "No thanks" sends them (usually the thank-you page)
-       PRODUCT_IMAGE — real product shot. Blank = the built-in SVG mockup shows.
-       LOGO_URL / LOGO_HEIGHT — your hosted logo (dark/positive for light nav)
+     GHL: paste the <div class="bb-oto">…</div> + the two <script> blocks into
+     a full-width Custom Code element; paste oto-upsell.css into Custom CSS.
+     EDIT in the CONFIG block: ACCEPT_URL, DECLINE_URL, LOGO_URL.
      ========================================================================== -->
 <link rel="stylesheet" href="oto-upsell.css">
 </head>
@@ -32,366 +23,306 @@
 
 <div class="bb-oto" id="bb-oto">
 
-  <!-- perspective dot-grid texture behind the hero -->
-  <div class="bb-oto-bg" aria-hidden="true"></div>
-
-  <!-- =============================================================== topbar -->
-  <div class="bb-oto-secure">
-    <span class="bb-oto-secure-in">
+  <!-- ====================================================== confirmation bar -->
+  <div class="bb-oto-confirm">
+    <span class="bb-oto-confirm-in">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10.5" width="15" height="10" rx="2.2"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></svg>
-      Secure Offer — This is a One-Time Offer, Not a Subscription
+      Payment received — your order is confirmed
     </span>
   </div>
 
-  <div class="bb-oto-shell">
+  <!-- ================================================================== nav -->
+  <nav class="bb-oto-nav">
+    <div class="bb-oto-nav-in">
+      <a href="#" class="bb-oto-logo">
+        <svg class="bb-oto-logo-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true"><defs><linearGradient id="otobg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2563EB"/><stop offset="1" stop-color="#38BDF8"/></linearGradient></defs>
+          <rect x="4" y="4" width="24" height="24" rx="7" fill="url(#otobg)"/>
+          <path d="M17 8l-7 9h5l-1 7 7-9h-5z" fill="#fff"/>
+        </svg>
+        <span class="bb-oto-logo-word">BotBuilders</span>
+      </a>
+      <ol class="bb-oto-steps" aria-label="Checkout progress">
+        <li class="bb-oto-step is-done">
+          <span class="bb-oto-step-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></span>
+          <span class="bb-oto-step-txt">Step 1 · Order</span>
+        </li>
+        <li class="bb-oto-step-bar"></li>
+        <li class="bb-oto-step is-current">
+          <span class="bb-oto-step-dot">2</span>
+          <span class="bb-oto-step-txt">Step 2 · Add-on</span>
+        </li>
+        <li class="bb-oto-step-bar"></li>
+        <li class="bb-oto-step">
+          <span class="bb-oto-step-dot">3</span>
+          <span class="bb-oto-step-txt">Step 3 · Access</span>
+        </li>
+      </ol>
+    </div>
+  </nav>
+
+  <div class="bb-oto-wrap">
 
     <!-- =============================================================== hero -->
-    <header class="bb-oto-hero">
-      <div class="bb-oto-topline bb-oto-in" style="--d:20ms">
-        <div class="bb-oto-logo">
-          <svg class="bb-oto-logo-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true"><defs><linearGradient id="otobg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2563EB"/><stop offset="1" stop-color="#38BDF8"/></linearGradient></defs>
-            <rect x="4" y="4" width="24" height="24" rx="7" fill="url(#otobg)"/>
-            <path d="M17 8l-7 9h5l-1 7 7-9h-5z" fill="#fff"/>
-          </svg>
-          <span class="bb-oto-logo-word">BotBuilders</span>
+    <section class="bb-oto-hero">
+      <div class="bb-oto-hero-l bb-oto-in" style="--d:40ms">
+        <div class="bb-oto-eyebrow">
+          <span class="bb-oto-badge">One-Time Offer</span>
+          <span class="bb-oto-hand">you'll only see this page once</span>
         </div>
-        <span class="bb-oto-badge">One-Time Offer</span>
-      </div>
 
-      <h1 class="bb-oto-title bb-oto-in" style="--d:140ms">
-        Yes! Add the Done-For-You<br>
-        <span class="hl">AI Script Pack</span>
-      </h1>
+        <h1 class="bb-oto-h1">Your bots are live.<br>Now make them <span class="bb-oto-uline">sound human.</span></h1>
 
-      <p class="bb-oto-lead bb-oto-in" style="--d:220ms">
-        Make your bots sound human and close more — with proven scripts and AI prompts, ready to paste in.
-      </p>
-      <p class="bb-oto-note bb-oto-in" style="--d:280ms">
-        This is a <b>one-time offer</b> shown only after checkout.
-      </p>
-    </header>
+        <p class="bb-oto-sub">
+          Add the <b>Done-For-You AI Script Pack</b> — 120+ word-for-word chat scripts
+          and AI prompts that turn conversations into booked calls. Paste in, done.
+        </p>
 
-    <!-- ============================================================ product -->
-    <section class="bb-oto-body">
-      <div class="bb-oto-visual bb-oto-in" style="--d:200ms">
-        <!-- real product shot slots in here via CONFIG.PRODUCT_IMAGE ------- -->
-        <img id="bb-oto-shot" class="bb-oto-shot" src="" alt="Done-For-You AI Script Pack" hidden>
-
-        <!-- built-in SVG mockup (shown when no product image is set) ------- -->
-        <div class="bb-oto-mockup" id="bb-oto-mockup" aria-hidden="true">
-          <div class="bb-oto-screen">
-            <span class="bb-oto-screen-kicker">Done-For-You</span>
-            <span class="bb-oto-screen-title">AI SCRIPT PACK</span>
-            <span class="bb-oto-screen-ico">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5h16v10H10l-4 3.5v-3.5H4z"/><path d="M8 9.5h8M8 12.5h5"/></svg>
+        <!-- before / after -->
+        <div class="bb-oto-compare">
+          <div class="bb-oto-cmp bb-oto-cmp--bad">
+            <span class="bb-oto-cmp-lbl">Default bot reply</span>
+            <p class="bb-oto-cmp-msg">"I'm sorry, I did not understand your request. Please select an option from the menu below."</p>
+            <span class="bb-oto-cmp-tag bb-oto-cmp-tag--bad">Lead goes cold</span>
+          </div>
+          <div class="bb-oto-cmp bb-oto-cmp--good">
+            <span class="bb-oto-cmp-lbl">With the Script Pack</span>
+            <p class="bb-oto-cmp-msg">"Totally get it — pricing depends on your call volume. Want me to grab 15 min with Sarah Thursday and price it out?"</p>
+            <span class="bb-oto-cmp-tag bb-oto-cmp-tag--good">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
+              Call booked
             </span>
-            <span class="bb-oto-screen-sub">Paste-in scripts. Human replies.<br>More conversions.</span>
-          </div>
-          <div class="bb-oto-stand"></div>
-          <div class="bb-oto-book">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4.5 13H11l-1 9 8.5-11H12z"/></svg>
-            <span><b>INSTANT</b>ACCESS</span>
           </div>
         </div>
       </div>
 
-      <div class="bb-oto-benefits bb-oto-in" style="--d:260ms">
-        <h2 class="bb-oto-benefits-h">Here's What You'll Get:</h2>
-        <ul class="bb-oto-list">
-          <li class="bb-oto-item">
-            <span class="bb-oto-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></span>
-            <div><h3>Proven Conversation Scripts</h3><p>Word-for-word chat scripts for lead-gen, booking, objections, and follow-up.</p></div>
+      <!-- order card -->
+      <aside class="bb-oto-card bb-oto-in" style="--d:140ms">
+        <div class="bb-oto-card-top">
+          <span>Add to your order</span>
+          <span class="bb-oto-card-chip">1-Click</span>
+        </div>
+        <div class="bb-oto-card-body">
+          <h3 class="bb-oto-card-title">Done-For-You AI Script Pack</h3>
+          <p class="bb-oto-card-desc">Instant access — added to the account you just created.</p>
+
+          <div class="bb-oto-price">
+            <span class="bb-oto-price-new">$97</span>
+            <span class="bb-oto-price-old">$297</span>
+          </div>
+          <p class="bb-oto-card-terms">One-time payment · no subscription · <b>save $200 today</b></p>
+
+          <a href="#" class="bb-oto-cta" id="bb-oto-accept" data-accept>
+            Yes — add it to my order
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+
+          <p class="bb-oto-trust">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10.5" width="15" height="10" rx="2.2"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></svg>
+            Secure checkout · card already on file
+          </p>
+
+          <div class="bb-oto-guar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 3.5v6c0 5-3.4 9.4-8 10.5-4.6-1.1-8-5.5-8-10.5v-6z"/><path d="M9 12l2.2 2.2L15.5 10"/></svg>
+            <span><b>14-day money-back guarantee.</b> Not for you? Email us and we refund it. No questions.</span>
+          </div>
+
+          <a href="#" class="bb-oto-decline" id="bb-oto-decline" data-decline>No thanks — I'll skip this and go to my account</a>
+        </div>
+      </aside>
+    </section>
+
+    <!-- ======================================================= what's inside -->
+    <section class="bb-oto-inside">
+      <div class="bb-oto-inside-l">
+        <h2 class="bb-oto-h2">What's inside the pack</h2>
+        <span class="bb-oto-hand">everything already written — you just paste it in</span>
+
+        <ul class="bb-oto-stack">
+          <li class="bb-oto-row">
+            <span class="bb-oto-row-num">01</span>
+            <div class="bb-oto-row-body">
+              <h4>42 proven conversation scripts</h4>
+              <p>Lead capture, qualifying, booking, objections, and follow-up — word for word, ready to drop in.</p>
+            </div>
+            <span class="bb-oto-row-val">$97 value</span>
           </li>
-          <li class="bb-oto-item">
-            <span class="bb-oto-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></span>
-            <div><h3>Ready-Made AI Prompts</h3><p>Copy-paste prompts that make your AI answer accurately and on-brand.</p></div>
+          <li class="bb-oto-row">
+            <span class="bb-oto-row-num">02</span>
+            <div class="bb-oto-row-body">
+              <h4>80 ready-made AI prompts</h4>
+              <p>Tuned prompts that keep your AI accurate, on-brand, and out of the "I don't understand" loop.</p>
+            </div>
+            <span class="bb-oto-row-val">$97 value</span>
           </li>
-          <li class="bb-oto-item">
-            <span class="bb-oto-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></span>
-            <div><h3>Sound Human, Not Robotic</h3><p>Natural, on-brand replies that build trust and keep people chatting.</p></div>
+          <li class="bb-oto-row">
+            <span class="bb-oto-row-num">03</span>
+            <div class="bb-oto-row-body">
+              <h4>The tone-of-voice guide</h4>
+              <p>Rewrite any robotic reply into something a real person would send — one page, ten rules.</p>
+            </div>
+            <span class="bb-oto-row-val">$47 value</span>
           </li>
-          <li class="bb-oto-item">
-            <span class="bb-oto-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></span>
-            <div><h3>Built To Convert</h3><p>Modeled on messages that already turn conversations into booked calls and sales.</p></div>
-          </li>
-          <li class="bb-oto-item">
-            <span class="bb-oto-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></span>
-            <div><h3>Copy, Paste, Done</h3><p>Drop them straight into your bots — no copywriting, no guesswork.</p></div>
+          <li class="bb-oto-row bb-oto-row--bonus">
+            <span class="bb-oto-row-num">04</span>
+            <div class="bb-oto-row-body">
+              <h4>Bonus: the objection vault</h4>
+              <p>The 12 replies that recover "too expensive," "just looking," and "send me info" — only on this page.</p>
+            </div>
+            <span class="bb-oto-row-val">$56 value</span>
           </li>
         </ul>
+
+        <div class="bb-oto-total">
+          <span class="bb-oto-total-lbl">Total value <s>$297</s></span>
+          <span class="bb-oto-total-now">Yours today <b>$97</b></span>
+        </div>
+      </div>
+
+      <div class="bb-oto-inside-r">
+        <figure class="bb-oto-quote">
+          <blockquote>"I swapped in the booking scripts on a Tuesday. By Friday the bot had booked nine calls it would have lost. It paid for itself the first day."</blockquote>
+          <figcaption>
+            <span class="bb-oto-quote-av">MR</span>
+            <span class="bb-oto-quote-who"><b>Marcus R.</b><i>Agency owner, 11 client bots</i></span>
+          </figcaption>
+        </figure>
+
+        <div class="bb-oto-faq">
+          <h4 class="bb-oto-faq-h">Quick answers</h4>
+          <div class="bb-oto-faq-item"><b>Is this a subscription?</b><p>No. One payment of $97, yours forever.</p></div>
+          <div class="bb-oto-faq-item"><b>Do I have to re-enter my card?</b><p>No — one click adds it to the order you just placed.</p></div>
+          <div class="bb-oto-faq-item"><b>Can I buy it later?</b><p>Not at $97. This price and the bonus vault live on this page only.</p></div>
+        </div>
       </div>
     </section>
 
-    <!-- ============================================================== offer -->
-    <section class="bb-oto-offer bb-oto-in" style="--d:120ms">
-      <span class="bb-oto-offer-pop">Best Value</span>
-      <h2 class="bb-oto-offer-h">Add The AI Script Pack Now</h2>
-      <p class="bb-oto-offer-sub">Special One-Time Price — Only Available On This Page</p>
-
-      <div class="bb-oto-price">
-        <span class="bb-oto-price-old">$297</span>
-        <span class="bb-oto-price-new">$97</span>
-        <span class="bb-oto-price-note">one-time</span>
-      </div>
-
-      <a href="#" class="bb-oto-cta" id="bb-oto-accept" data-accept>
-        Yes! Add To My Order
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3h2.2l2.1 12.3a1.6 1.6 0 0 0 1.6 1.3h9.1a1.6 1.6 0 0 0 1.6-1.3L21 7H6"/></svg>
+    <!-- ========================================================== final cta -->
+    <section class="bb-oto-final">
+      <h2 class="bb-oto-h2">Add it to your order — $97 once</h2>
+      <p class="bb-oto-final-sub">Skip it and your bots keep sending the replies you already have. 14 days to change your mind either way.</p>
+      <a href="#" class="bb-oto-cta bb-oto-cta--lg" id="bb-oto-accept2" data-accept>
+        Yes — add it to my order
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
-
-      <p class="bb-oto-trust">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10.5" width="15" height="10" rx="2.2"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></svg>
-        Secure Checkout — 100% Safe &amp; Secure
-      </p>
-
-      <!-- No Thanks — below the CTA -->
-      <a href="#" class="bb-oto-decline" id="bb-oto-decline" data-decline>
-        <span>
-          <b>No Thanks, I'll Pass on This Offer</b>
-          <i>I understand I won't be able to get this offer again.</i>
-        </span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </a>
+      <a href="#" class="bb-oto-decline bb-oto-decline--plain" id="bb-oto-decline2" data-decline>No thanks, take me to my account</a>
     </section>
 
-    <!-- ============================================================ urgency -->
-    <section class="bb-oto-urgency bb-oto-in" style="--d:130ms">
-      <div class="bb-oto-urgency-ico" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 2.5h6M12 5V2.5"/></svg>
-      </div>
-      <div class="bb-oto-urgency-body">
-        <h3>This Offer Won't Be Available Again</h3>
-        <p>You'll not see this price again. Add the AI Script Pack now and start converting more conversations today.</p>
-      </div>
-    </section>
-
-    <!-- ========================================================== guarantee -->
-    <div class="bb-oto-guarantee bb-oto-in" style="--d:140ms">
-      <div class="bb-oto-shield" aria-hidden="true">
-        <svg viewBox="0 0 120 132" fill="none">
-          <path d="M60 4 108 22v42c0 34-24 52-48 64C36 116 12 98 12 64V22z" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.5)" stroke-width="2"/>
-          <path d="M60 4 108 22v42c0 34-24 52-48 64C36 116 12 98 12 64V22z" fill="none" stroke="#38BDF8" stroke-width="2" stroke-dasharray="3 6" opacity=".6"/>
-        </svg>
-        <div class="bb-oto-shield-txt"><b>14-DAY</b>MONEY BACK<span>GUARANTEE</span><i>★★★</i></div>
-      </div>
-      <div class="bb-oto-guarantee-body">
-        <h3>100% Risk-Free</h3>
-        <p>If you're not completely satisfied, simply contact us within 14 days of your purchase and we'll refund your money. No questions asked.</p>
-      </div>
-    </div>
-
-  </div><!-- /shell -->
+  </div><!-- /wrap -->
 
   <p class="bb-oto-foot">© 2026 BotBuilders · 8936 N Central Ave, Phoenix, AZ 85020 · 602-922-9700 · All Rights Reserved.</p>
 </div>
 
 <script>
-(function(){
+(function () {
   'use strict';
 
   /* ====================================================== CONFIG — EDIT ME */
   var CONFIG = {
-    /* Where "Yes! Add to my order" sends the buyer. In a 1-click-upsell
-       funnel this is your platform's accept / upsell URL. Blank = stay put. */
-    ACCEPT_URL   : 'https://lead.automatordemo.com/lto-thank-you-page-1-offer--bump--oto',
+    /* Both CTAs and both "no thanks" links point here (the funnel thank-you
+       page). File 2 (below) records which was clicked.                       */
+    ACCEPT_URL  : 'https://lead.automatordemo.com/lto-thank-you-page-1-offer--bump--oto',
+    DECLINE_URL : 'https://lead.automatordemo.com/lto-thank-you-page-1-offer--bump--oto',
 
-    /* Where "No thanks" sends them — usually straight to the thank-you page.
-       Blank = stay put.                                                      */
-    DECLINE_URL  : 'https://lead.automatordemo.com/lto-thank-you-page-1-offer--bump--oto',
+    /* Upsell price — used for conversion tracking only. */
+    OFFER_VALUE : 97,
 
-    /* The upsell price (used for conversion tracking only).                  */
-    OFFER_VALUE  : 97,
-
-    /* Real product shot (transparent PNG works best). Blank keeps the
-       built-in on-brand SVG mockup.                                          */
-    PRODUCT_IMAGE: '',
-
-    /* Your logo. This page has a LIGHT header, so use the dark / positive
-       logo (same file the LTO page uses in its light nav). Blank keeps the
-       built-in gradient mark + wordmark.                                     */
-    LOGO_URL     : 'https://assets.cdn.filesafe.space/sz4sVbBhLW7cX7keIHT6/media/6a76a1f003343f290f6158c9.png',
-    LOGO_HEIGHT  : 46
+    /* Logo (dark / positive — the nav is white). Blank keeps the gradient mark. */
+    LOGO_URL    : 'https://assets.cdn.filesafe.space/sz4sVbBhLW7cX7keIHT6/media/6a76a1f003343f290f6158c9.png',
+    LOGO_HEIGHT : 38
   };
   /* ======================================================================= */
 
   var root = document.getElementById('bb-oto');
-  if(!root) return;
+  if (!root) return;
 
-  /* -- conversion tracking helper (same shape as the LTO page) ------------ */
-  function track(event, params){
+  function track(event, params) {
     params = params || {};
-    try{
-      if(window.dataLayer && window.dataLayer.push) window.dataLayer.push(Object.assign({event:event}, params));
-      if(typeof window.gtag === 'function') window.gtag('event', event, params);
-      if(typeof window.fbq === 'function'){
-        if(event === 'Purchase')  window.fbq('track','Purchase', params);
-        if(event === 'AddToCart') window.fbq('track','AddToCart', params);
+    try {
+      if (window.dataLayer && window.dataLayer.push) window.dataLayer.push(Object.assign({ event: event }, params));
+      if (typeof window.gtag === 'function') window.gtag('event', event, params);
+      if (typeof window.fbq === 'function') {
+        if (event === 'Purchase')  window.fbq('track', 'Purchase', params);
+        if (event === 'AddToCart') window.fbq('track', 'AddToCart', params);
       }
-    }catch(e){}
+    } catch (e) {}
   }
 
-  /* -- kill GHL wrapper chrome (white strip) ------------------------------ */
-  (function(){
+  /* -- kill GHL wrapper chrome (white strips / hairlines) ----------------- */
+  (function () {
     var el = root.parentElement;
-    while(el && el !== document.body && el !== document.documentElement){
-      el.style.background='transparent'; el.style.backgroundColor='transparent';
-      el.style.paddingTop='0px'; el.style.paddingBottom='0px';
-      el.style.marginTop='0px'; el.style.marginBottom='0px'; el.style.maxWidth='none';
-      /* kill GHL's section/row hairlines that render as faint white lines */
-      el.style.border='0'; el.style.borderTop='0'; el.style.borderBottom='0';
-      el.style.boxShadow='none';
+    while (el && el !== document.body && el !== document.documentElement) {
+      el.style.background = 'transparent'; el.style.backgroundColor = 'transparent';
+      el.style.paddingTop = '0px'; el.style.paddingBottom = '0px';
+      el.style.marginTop = '0px'; el.style.marginBottom = '0px'; el.style.maxWidth = 'none';
+      el.style.border = '0'; el.style.borderTop = '0'; el.style.borderBottom = '0';
+      el.style.boxShadow = 'none';
       el = el.parentElement;
     }
-    document.documentElement.style.background='#EAF1F8';
-    document.body.style.background='#EAF1F8';
-    document.body.style.margin='0';
+    document.documentElement.style.background = '#EEF3FB';
+    document.body.style.background = '#EEF3FB';
+    document.body.style.margin = '0';
   })();
 
   /* -- logo --------------------------------------------------------------- */
-  if(CONFIG.LOGO_URL){
-    var logo = root.querySelector('.bb-oto-logo');
-    if(logo){
-      logo.innerHTML=''; logo.classList.add('bb-oto-logo--img');
-      var img=document.createElement('img');
-      img.src=CONFIG.LOGO_URL; img.alt='BotBuilders';
-      img.style.height=(CONFIG.LOGO_HEIGHT||46)+'px'; img.style.width='auto'; img.style.display='block';
+  if (CONFIG.LOGO_URL) {
+    root.querySelectorAll('.bb-oto-logo').forEach(function (logo) {
+      logo.innerHTML = ''; logo.classList.add('bb-oto-logo--img');
+      var img = document.createElement('img');
+      img.src = CONFIG.LOGO_URL; img.alt = 'BotBuilders';
+      img.style.height = (CONFIG.LOGO_HEIGHT || 38) + 'px'; img.style.width = 'auto'; img.style.display = 'block';
       logo.appendChild(img);
-    }
-  }
-
-  /* -- product image + click-to-enlarge lightbox -------------------------- */
-  (function(){
-    if(!CONFIG.PRODUCT_IMAGE) return;
-    var shot=document.getElementById('bb-oto-shot');
-    var mock=document.getElementById('bb-oto-mockup');
-    if(mock){ mock.style.display='none'; }
-    if(!shot) return;
-    shot.src=CONFIG.PRODUCT_IMAGE; shot.hidden=false;
-
-    var visual=shot.closest('.bb-oto-visual');
-    if(visual){
-      visual.classList.add('is-zoomable');
-      var hint=document.createElement('span');
-      hint.className='bb-oto-zoom-hint';
-      hint.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to enlarge';
-      visual.appendChild(hint);
-    }
-    shot.setAttribute('role','button');
-    shot.setAttribute('tabindex','0');
-    shot.setAttribute('aria-label','Enlarge product image');
-    shot.addEventListener('click', function(){ openLightbox(shot.currentSrc||shot.src, shot.alt); });
-    shot.addEventListener('keydown', function(e){
-      if(e.key==='Enter' || e.key===' '){ e.preventDefault(); openLightbox(shot.currentSrc||shot.src, shot.alt); }
     });
-  })();
-
-  /* creates a full-screen overlay for the product photo. Close via the X,
-     a click on the backdrop / image, or the Escape key.                     */
-  function openLightbox(src, alt){
-    if(document.querySelector('.bb-oto-lightbox')) return;
-    var lb=document.createElement('div');
-    lb.className='bb-oto-lightbox';
-    var img=document.createElement('img');
-    img.src=src; img.alt=alt||'';
-    var close=document.createElement('button');
-    close.className='bb-oto-lightbox-close';
-    close.setAttribute('aria-label','Close');
-    close.innerHTML='&times;';
-    lb.appendChild(img); lb.appendChild(close);
-    function shut(){ document.body.style.overflow=''; lb.remove(); document.removeEventListener('keydown', onEsc); }
-    function onEsc(e){ if(e.key==='Escape') shut(); }
-    lb.addEventListener('click', function(e){ if(e.target===lb || e.target===img || e.target===close) shut(); });
-    document.addEventListener('keydown', onEsc);
-    document.body.appendChild(lb);
-    document.body.style.overflow='hidden';
-    close.focus();
   }
 
   /* -- accept / decline links (+ conversion tracking) --------------------- */
-  (function(){
-    var accept=document.getElementById('bb-oto-accept');
-    var decline=document.getElementById('bb-oto-decline');
-    if(accept){
-      if(CONFIG.ACCEPT_URL) accept.setAttribute('href', CONFIG.ACCEPT_URL);
-      accept.addEventListener('click', function(){
-        track('Purchase', {content_name:'AI Script Pack (OTO)', value:CONFIG.OFFER_VALUE, currency:'USD'});
-      });
-    }
-    if(decline){
-      if(CONFIG.DECLINE_URL) decline.setAttribute('href', CONFIG.DECLINE_URL);
-      decline.addEventListener('click', function(){
-        track('upsell_declined', {content_name:'AI Script Pack (OTO)'});
-      });
-    }
-  })();
+  root.querySelectorAll('[data-accept]').forEach(function (el) {
+    if (CONFIG.ACCEPT_URL) el.setAttribute('href', CONFIG.ACCEPT_URL);
+    el.addEventListener('click', function () {
+      track('Purchase', { content_name: 'AI Script Pack (OTO)', value: CONFIG.OFFER_VALUE, currency: 'USD' });
+    });
+  });
+  root.querySelectorAll('[data-decline]').forEach(function (el) {
+    if (CONFIG.DECLINE_URL) el.setAttribute('href', CONFIG.DECLINE_URL);
+    el.addEventListener('click', function () {
+      track('upsell_declined', { content_name: 'AI Script Pack (OTO)' });
+    });
+  });
 
   /* -- page view ---------------------------------------------------------- */
-  track('ViewContent', {content_name:'OTO — AI Script Pack'});
+  track('ViewContent', { content_name: 'OTO — AI Script Pack' });
 
 })();
 </script>
 
 <!-- ============================================================
      FLOW VAULT FUNNEL  ·  FILE 2 of 5
-     PASTE INTO: Page 2 (OTO Page) → Custom Code element
-     POSITION:   Bottom of page. Renders nothing visible.
-     JOB:        Remember whether they accepted the higher ticket offer.
-
-     SKIP THIS FILE IF your Yes and No buttons each accept their own
-     redirect URL. In that case set them to the same thank you page with
-     different params and paste nothing here:
-
-         Yes button  →  /thank-you?oto=1
-         No button   →  /thank-you?oto=0
-
-     That path is more trustworthy, because the flag comes from the button
-     that actually fired rather than from a guess about what got clicked.
-     Use this file only when GHL locks both buttons to "next funnel step."
+     Records whether the buyer accepted the offer (sessionStorage) so the
+     thank-you page (File 3) can tell accept from decline. Labels below must
+     match the visible button text on THIS page.
      ============================================================ -->
-
 <script>
 (function () {
   "use strict";
 
-  /* ---------- CONFIG · edit these three values ---------- */
   var CONFIG = {
-    // NOTE: the ACCEPT_URL / DECLINE_URL for the offer buttons live in the
-    // main CONFIG block near the top of this file. Both point at the
-    // thank-you page; File 2 (below) records which button was clicked.
-
-    // Exact visible text on each button. Partial match, so "Add To My Order"
-    // still matches a button reading "Yes! Add To My Order".
-    acceptLabel: "Add To My Order",
-    declineLabel: "No Thanks",
-
-    // Storage key. Must match the thank you page detector (File 3).
+    acceptLabel: "add it to my order",   // partial match of "Yes — add it to my order"
+    declineLabel: "No thanks",           // matches both "No thanks" links
     storageKey: "wg_oto"
   };
-  /* ------------------- end CONFIG ---------------------- */
 
   function remember(accepted) {
-    try {
-      sessionStorage.setItem(CONFIG.storageKey, accepted ? "1" : "0");
-    } catch (e) { /* fail quiet */ }
+    try { sessionStorage.setItem(CONFIG.storageKey, accepted ? "1" : "0"); } catch (e) {}
   }
 
-  // Default to declined the moment they arrive. If they leave without
-  // clicking either button, declined is the honest answer.
+  // Default to declined on arrival; if they leave without clicking, declined is honest.
   remember(false);
 
-  // Capture phase so this runs BEFORE GHL's own handler navigates away.
-  // sessionStorage writes are synchronous, so the value lands before unload.
   document.addEventListener("click", function (e) {
     var el = e.target.closest('a, button, [role="button"], .celement');
     if (!el) return;
-
     var label = (el.textContent || "").trim();
-
-    if (label.indexOf(CONFIG.acceptLabel) > -1) {
-      remember(true);
-    } else if (label.indexOf(CONFIG.declineLabel) > -1) {
-      remember(false);
-    }
+    if (label.indexOf(CONFIG.acceptLabel) > -1) remember(true);
+    else if (label.indexOf(CONFIG.declineLabel) > -1) remember(false);
   }, true);
 })();
 </script>
