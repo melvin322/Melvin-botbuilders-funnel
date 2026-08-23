@@ -412,6 +412,37 @@
     /* Product / plan label sent along with the order.                       */
     PRODUCT          : 'Growth Plan',
 
+    /* -------------------------------------------------------------- PREFILL
+       Carries what they already typed on the offer pages into this form, so
+       nobody types their name three times. Two routes, both on by default:
+
+       1. The link. Any of these are understood, in GHL merge-field form or
+          plain:  ?first_name= &last_name= &email= &phone=  (also fname /
+          lname / firstname / lastname / full_name / name). On a GHL order
+          form's redirect that is
+            …/payment?first_name={{contact.first_name}}&email={{contact.email}}
+
+       2. Session storage, which is the tidier route when the offer pages sit
+          on the same domain: each page saves what it knows and the next one
+          reads it, so no personal data goes in a URL. Drop this on the LTO
+          and OTO pages:
+
+            <script>
+            document.querySelector('form').addEventListener('submit',function(){
+              var g=function(n){var el=this.querySelector('[name="'+n+'"]');
+                                return el?el.value.trim():'';}.bind(this);
+              try{ sessionStorage.setItem('bb_lead', JSON.stringify({
+                first:g('first_name'), last:g('last_name'),
+                email:g('email'),      phone:g('phone') })); }catch(e){}
+            });
+            <\/script>
+
+       This page also saves as they type, so a trip out to the processor and
+       back does not empty the form. CLEAN_URL strips the personal fields
+       back out of the address bar once read (the offer flag stays).        */
+    PREFILL          : true,
+    CLEAN_URL        : true,
+
     /* Small urgency line under the guarantee, matching the offer page's
        timer note. Blank = hidden.                                          */
     URGENCY          : 'Your launch price is held while you complete this order.',
@@ -839,6 +870,87 @@
     }
   }
 
+  /* ============================================================== prefill */
+  /* What the offer pages already collected: the link first, then anything
+     this session saved on an earlier page.                                */
+  var LEAD = (function(){
+    var out = { first:'', last:'', email:'', phone:'' };
+    if(CONFIG.PREFILL === false) return out;
+
+    var pick = function(){
+      for(var i=0; i<arguments.length; i++){
+        var v = QUERY[arguments[i]];
+        if(v && v.indexOf('{{') < 0) return v;   /* skip unresolved merge fields */
+      }
+      return '';
+    };
+
+    out.first = pick('first_name','firstname','fname','first');
+    out.last  = pick('last_name','lastname','lname','last');
+    out.email = pick('email','email_address');
+    out.phone = pick('phone','phone_number','tel','mobile');
+
+    var full = pick('full_name','name');
+    if(full && !out.first){
+      var cut = full.trim().indexOf(' ');
+      out.first = cut > 0 ? full.slice(0,cut) : full;
+      if(cut > 0 && !out.last) out.last = full.slice(cut+1).trim();
+    }
+
+    try{
+      var saved = JSON.parse(window.sessionStorage.getItem('bb_lead') || '{}');
+      ['first','last','email','phone'].forEach(function(k){
+        if(!out[k] && saved[k]) out[k] = saved[k];
+      });
+    }catch(e){}
+
+    return out;
+  })();
+
+  (function(){
+    if(CONFIG.PREFILL === false) return;
+
+    var map = { first:F.first, last:F.last, email:F.email, phone:F.phone };
+    var got = false;
+    Object.keys(map).forEach(function(k){
+      if(map[k] && LEAD[k] && !map[k].value){ map[k].value = LEAD[k]; got = true; }
+    });
+
+    /* a prefilled number goes through the same formatter as a typed one */
+    if(got && F.phone.value) fmtPhone(F.phone);
+
+    /* keep it, so a bounce out to the processor does not empty the form */
+    var save = function(){
+      try{
+        window.sessionStorage.setItem('bb_lead', JSON.stringify({
+          first: F.first.value.trim(), last : F.last.value.trim(),
+          email: F.email.value.trim(), phone: F.phone.value.trim()
+        }));
+      }catch(e){}
+    };
+    [F.first, F.last, F.email, F.phone].forEach(function(el){
+      el.addEventListener('change', save);
+      el.addEventListener('blur',   save);
+    });
+    if(got) save();
+
+    /* take the personal fields back out of the address bar */
+    if(CONFIG.CLEAN_URL !== false && location.search && window.history && history.replaceState){
+      var drop = ['first_name','firstname','fname','first','last_name','lastname','lname','last',
+                  'email','email_address','phone','phone_number','tel','mobile','full_name','name'];
+      var keep = [];
+      location.search.replace(/^\?/,'').split('&').forEach(function(pair){
+        if(!pair) return;
+        var k = decodeURIComponent(pair.split('=')[0]).toLowerCase();
+        if(drop.indexOf(k) < 0) keep.push(pair);
+      });
+      var q = keep.length ? '?' + keep.join('&') : '';
+      if(q !== location.search){
+        try{ history.replaceState(null, '', location.pathname + q + location.hash); }catch(e){}
+      }
+    }
+  })();
+
   /* ======================================================== input helpers */
   function digits(v){ return (v||'').replace(/\D+/g,''); }
 
@@ -909,16 +1021,19 @@
   });
 
   /* phone: light formatting for a 10-digit US number, otherwise left as
-     typed so international numbers survive.                               */
-  F.phone.addEventListener('input', function(){
-    var raw = this.value;
+     typed so international numbers survive. Declared as a function so the
+     prefill above can format what it drops in.                            */
+  function fmtPhone(el){
+    var raw  = el.value;
     var plus = raw.trim().charAt(0) === '+';
-    var d = digits(raw);
-    if(!plus && d.length === 10){
-      this.value = '(' + d.slice(0,3) + ') ' + d.slice(3,6) + '-' + d.slice(6);
-    }else{
-      this.value = raw.replace(/[^\d+()\s.-]/g,'').slice(0,18);
-    }
+    var d    = digits(raw);
+    el.value = (!plus && d.length === 10)
+      ? '(' + d.slice(0,3) + ') ' + d.slice(3,6) + '-' + d.slice(6)
+      : raw.replace(/[^\d+()\s.-]/g,'').slice(0,18);
+  }
+
+  F.phone.addEventListener('input', function(){
+    fmtPhone(this);
     clear(this);
   });
 
