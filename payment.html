@@ -408,8 +408,14 @@
     CARD_FIELDS      : true,
 
     /* Where the buyer lands when neither CHECKOUT_URL nor a { redirect }
-       response applies.                                                     */
-    SUCCESS_URL      : 'thank-you.html',
+       response applies. The offer flags are appended for the thank-you
+       page's detector (see PASS_OFFER_ON_SUCCESS).                          */
+    SUCCESS_URL      : 'https://lead.automatordemo.com/lto-thank-you-page-1-offer--bump--oto',
+
+    /* Append oto=1|0, bump=1|0 and offer= to SUCCESS_URL on the way out.
+       sessionStorage already carries this when both pages share a domain;
+       the params are what make it survive if they do not.                   */
+    PASS_OFFER_ON_SUCCESS : true,
 
     /* Product / plan label sent along with the order.                       */
     PRODUCT          : 'Growth Plan',
@@ -600,7 +606,7 @@
     /* Your hosted logo. This page is light, so use the DARK logo — the
        reverse/light version used on the dark pages vanishes here.
        Blank keeps the built-in navy mark.                                   */
-    LOGO_URL         : '',
+    LOGO_URL         : 'https://assets.cdn.filesafe.space/sz4sVbBhLW7cX7keIHT6/media/6a7f730adc6b0a15e5b2b229.png',
     LOGO_HEIGHT      : 34
   };
   /* ======================================================================= */
@@ -937,11 +943,15 @@
   if(CONFIG.LOGO_URL){
     var logo = root.querySelector('.bb-pay-logo');
     if(logo){
-      logo.innerHTML='';
-      var img=document.createElement('img');
-      img.src=CONFIG.LOGO_URL; img.alt='BotBuilders';
-      img.style.height=(CONFIG.LOGO_HEIGHT||34)+'px'; img.style.width='auto';
-      logo.appendChild(img);
+      var builtIn = logo.innerHTML;              /* keep the mark to fall back on */
+      var img = document.createElement('img');
+      img.alt = 'BotBuilders';
+      img.style.height = (CONFIG.LOGO_HEIGHT || 34) + 'px';
+      img.style.width  = 'auto';
+      /* a moved or blocked URL should not leave a broken image in the header */
+      img.onerror = function(){ logo.innerHTML = builtIn; };
+      img.onload  = function(){ logo.innerHTML = ''; logo.appendChild(img); };
+      img.src = CONFIG.LOGO_URL;
     }
   }
 
@@ -1267,9 +1277,21 @@
       }
     }catch(e){}
 
-    var next = CONFIG.CHECKOUT_URL
-      ? prefill(CONFIG.CHECKOUT_URL, payload())
-      : CONFIG.SUCCESS_URL;
+    var next;
+    if(CONFIG.CHECKOUT_URL){
+      next = prefill(CONFIG.CHECKOUT_URL, payload());
+    }else{
+      next = CONFIG.SUCCESS_URL;
+      /* the thank-you page reads ?oto=1; bump and offer ride along so the
+         signal survives even if that page is on another domain and cannot
+         see this session's storage                                        */
+      if(next && CONFIG.PASS_OFFER_ON_SUCCESS !== false){
+        var bumpOn = (VARIANT === 'vip' || VARIANT === 'vip_oto') ? '1' : '0';
+        var otoOn  = (VARIANT === 'oto' || VARIANT === 'vip_oto') ? '1' : '0';
+        var q = 'oto=' + otoOn + '&bump=' + bumpOn + '&offer=' + encodeURIComponent(VARIANT);
+        next += (next.indexOf('?') > -1 ? '&' : '?') + q;
+      }
+    }
     if(next){ window.location.href = next; return; }
 
     var box = document.getElementById('bb-pay-box');
