@@ -191,7 +191,7 @@
           <h1 class="bb-ty-title bb-ty-in" style="--d:120ms">Order<br><span class="hl">confirmed!</span></h1>
 
           <!-- CONDITIONAL LEAD · one of these two shows -->
-          <p class="bb-ty-lead bb-ty-in wg-if-oto" style="--d:220ms">Nice choice — your <span class="hl">Done-For-You Bot Setup</span> has been added to your order.</p>
+          <p class="bb-ty-lead bb-ty-in wg-if-oto" style="--d:220ms">Nice choice — your <span class="hl">Done-For-You AI Script Pack</span> has been added to your order.</p>
           <p class="bb-ty-lead bb-ty-in wg-if-nooto" style="--d:220ms">You're all set — your <span class="hl">Growth Plan</span> is confirmed and ready to go.</p>
 
           <a href="#" class="bb-ty-btn bb-ty-in" id="bb-ty-access" style="--d:360ms">
@@ -266,29 +266,29 @@
 
       <!-- OTO ACCEPTED -->
       <div class="wg-card wg-card--held wg-if-oto">
-        <p class="wg-card__eyebrow">What we need from you</p>
-        <h3 class="wg-card__title">Send us your bot details to start the build</h3>
+        <p class="wg-card__eyebrow">In your inbox</p>
+        <h3 class="wg-card__title">Your AI Script Pack is ready to drop in</h3>
         <p class="wg-card__body">
-          Our team builds and configures your bot for you. Fill in the intake
-          form with your offer, your audience and your existing assets, and we
-          start the same day.
+          Proven conversation scripts and ready-made AI prompts, copy-paste
+          straight into your bots so they open every chat like a closer.
+          Check your email for the pack.
         </p>
-        <a class="wg-card__cta" href="#REPLACE_WITH_INTAKE_FORM_URL">
-          Open the intake form
+        <a class="wg-card__cta" href="#REPLACE_WITH_SCRIPT_PACK_URL">
+          Open your Script Pack
         </a>
       </div>
 
       <!-- OTO DECLINED -->
       <div class="wg-card wg-card--open wg-if-nooto">
         <p class="wg-card__eyebrow">One last thing</p>
-        <h3 class="wg-card__title">Done-For-You Bot Setup stays open until midnight</h3>
+        <h3 class="wg-card__title">Add the Done-For-You AI Script Pack for $97</h3>
         <p class="wg-card__body">
-          You keep your Growth Plan either way. This hands the build to our
-          team instead, so your first bot ships configured and connected
-          without you writing a single flow.
+          You keep your Growth Plan either way. This gives your bots proven,
+          word-for-word scripts and ready-made AI prompts — copy-paste ready,
+          so they sound human and book more calls. This price holds for one hour.
         </p>
-        <a class="wg-card__cta" href="#REPLACE_WITH_DFY_ORDER_URL">
-          See what is included
+        <a class="wg-card__cta" href="#REPLACE_WITH_SCRIPT_PACK_ORDER_URL">
+          Add the AI Script Pack
         </a>
       </div>
 
@@ -315,7 +315,7 @@
           </div>
           <!-- Rewritten to hold true in all four outcomes -->
           <h3>Nothing left to pay</h3>
-          <p>Everything on your order summary is already active. No second checkout, no follow-up invoice.</p>
+          <p>Everything you ordered is already active. No second checkout, no follow-up invoice.</p>
         </li>
 
         <li class="bb-ty-step">
@@ -377,7 +377,7 @@
     /* --- PRICES · must match what your checkout actually charges --------- */
     PRICE_MAIN : 1164,      /* Growth Plan, billed annually                  */
     PRICE_BUMP : 197,       /* VIP Launch Intensive                          */
-    PRICE_OTO  : 1500,      /* Done-For-You Bot Setup                        */
+    PRICE_OTO  : 97,        /* Done-For-You AI Script Pack (was $297)        */
 
     /* "Access your order" button link. Blank = the button is hidden.       */
     ACCESS_URL   : '',
@@ -401,13 +401,13 @@
        bb_lead the payment page saved). Variant comes from wg-bump / wg-oto:
          base    → Growth Plan only
          vip     → + VIP Launch Intensive
-         oto     → + Done-For-You Bot Setup
+         oto     → + Done-For-You AI Script Pack
          vip_oto → both                                                      */
     MESSAGES : {
       base    : "Welcome to BotBuilders — and honestly, well done. Your Growth Plan is live and my team is already in your corner. We'll help you get your first bot greeting leads and booking calls faster than you'd think. You brought the ambition; we'll help you turn it into a calendar that fills itself.",
       vip     : "Love that you grabbed the VIP Launch Intensive — that's the fast lane, and exactly how I'd do it. We're going to build your bot together on a live call and have it launched before we say goodbye. Bring the one flow you want first; we'll bring the build. Let's get you live in 48 hours.",
-      oto     : "Smart move handing the Done-For-You Bot Setup to my team — the heavy lifting is on us now. We'll build, connect and configure everything for you, so your first bot ships ready to work from its very first conversation. Sit back and let us do what we do best.",
-      vip_oto : "You went all in — the Done-For-You Bot Setup and the VIP Launch Intensive — and that's exactly how you win with this. My team builds it for you, then we launch it together, live. You're getting the full BotBuilders treatment, and I couldn't be happier you're here. Let's make your calendar overflow."
+      oto     : "Great add grabbing the AI Script Pack — your bot's about to sound a lot more human. You're getting proven, word-for-word scripts and ready-made AI prompts that have already booked calls for other members. Drop them straight in and your bot opens every conversation like a closer — no copywriting, no guesswork.",
+      vip_oto : "You went all in — the VIP Launch Intensive and the AI Script Pack — and that's exactly how you win with this. We build and launch your bot with you, live, and it arrives already knowing exactly what to say. You're getting the full BotBuilders treatment, and I couldn't be happier you're here. Let's make your calendar overflow."
     },
 
     CURRENCY     : 'USD'
