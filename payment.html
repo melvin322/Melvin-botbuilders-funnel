@@ -103,12 +103,13 @@
       <section class="bb-pay-copy">
         <!-- the pill only appears for the VIP / OTO variants -->
         <span class="bb-pay-pill bb-pay-in" style="--d:140ms" id="bb-pay-pill" data-bb-when="vip oto vip_oto">One-time offer applied</span>
-        <h1 class="bb-pay-title bb-pay-in" style="--d:200ms">Last step, then<br><span class="hl">Bob gets to work.</span></h1>
+        <h1 class="bb-pay-title bb-pay-in" style="--d:200ms">One last step, then<br><span class="hl">your bot gets to work.</span></h1>
         <p class="bb-pay-lead bb-pay-in" style="--d:280ms">
-          Your launch price is held below. Add your card and the build starts
-          &mdash; a bot that picks up every enquiry the minute it lands, keeps your
-          calendar filling itself, and chases the quiet leads you would never
-          get round to.
+          Thank you &mdash; your launch price is held below. Whenever you are ready,
+          add your card and we will start building your bot: your own version of
+          Bob, the chatbot that looks after enquiries here at BotBuilders. Yours
+          will pick up every enquiry as it lands, help keep your calendar
+          filling, and follow up on the quiet leads for you.
         </p>
       </section>
 
@@ -144,7 +145,7 @@
                 Your receipt and login
                 <span class="bb-pay-step-when">Instant</span>
               </h3>
-              <p>Both land in your inbox the moment this clears &mdash; no waiting on a human.</p>
+              <p>Both will be in your inbox moments after this clears &mdash; there is nothing to wait on.</p>
             </div>
           </li>
 
@@ -153,10 +154,10 @@
             <div class="bb-pay-step-b">
               <h3>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v14H4z"/><path d="M8 10h8M8 14h5"/></svg>
-                A two-minute onboarding form
+                A couple of quick questions
                 <span class="bb-pay-step-when">Today</span>
               </h3>
-              <p>Your business, your offer, your calendar &mdash; so your builder starts with context.</p>
+              <p>We will ask about your business, your offer and your calendar, so your builder starts with the full picture.</p>
             </div>
           </li>
 
@@ -165,10 +166,10 @@
             <div class="bb-pay-step-b">
               <h3>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.4 5.1 5.6.8-4 4 1 5.6-5-2.7-5 2.7 1-5.6-4-4 5.6-.8z"/></svg>
-                We build and QA your funnel
+                We build and test your funnel
                 <span class="bb-pay-step-when" id="bb-pay-step-eta">48 hours</span>
               </h3>
-              <p>Bots, flows and integrations wired up, then tested end to end before you see it.</p>
+              <p>Your bots, flows and integrations are wired up and checked end to end before we hand anything over.</p>
             </div>
           </li>
 
@@ -179,7 +180,7 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
                 You go live
               </h3>
-              <p>Your funnel starts answering leads and booking calls. Your monthly strategy call gets booked from there.</p>
+              <p>Your funnel starts answering leads and booking calls, and we will arrange your monthly strategy call from there.</p>
             </div>
           </li>
         </ol>
@@ -251,7 +252,7 @@
 
           <p class="bb-pay-box-kicker">Payment details</p>
           <h2 class="bb-pay-box-title">Complete your order</h2>
-          <p class="bb-pay-box-sub">Enter your details to claim your offer.</p>
+          <p class="bb-pay-box-sub">Please enter your details to claim your offer.</p>
 
           <form class="bb-pay-form" id="bb-pay-form" novalidate>
 
@@ -264,14 +265,14 @@
                 <input class="bb-pay-input" id="bb-pay-first" name="first_name" type="text"
                        placeholder="First name" autocomplete="given-name"
                        aria-describedby="bb-pay-first-err">
-                <p class="bb-pay-err" id="bb-pay-first-err">Enter your first name.</p>
+                <p class="bb-pay-err" id="bb-pay-first-err">Please enter your first name.</p>
               </div>
               <div class="bb-pay-field">
                 <label class="bb-pay-sr" for="bb-pay-last">Last name</label>
                 <input class="bb-pay-input" id="bb-pay-last" name="last_name" type="text"
                        placeholder="Last name" autocomplete="family-name"
                        aria-describedby="bb-pay-last-err">
-                <p class="bb-pay-err" id="bb-pay-last-err">Enter your last name.</p>
+                <p class="bb-pay-err" id="bb-pay-last-err">Please enter your last name.</p>
               </div>
             </div>
 
@@ -280,7 +281,7 @@
               <input class="bb-pay-input" id="bb-pay-email" name="email" type="email"
                      placeholder="Email address" autocomplete="email"
                      inputmode="email" aria-describedby="bb-pay-email-err">
-              <p class="bb-pay-err" id="bb-pay-email-err">Enter a valid email address.</p>
+              <p class="bb-pay-err" id="bb-pay-email-err">Please enter a valid email address.</p>
             </div>
 
             <div class="bb-pay-field">
@@ -288,7 +289,7 @@
               <input class="bb-pay-input" id="bb-pay-phone" name="phone" type="tel"
                      placeholder="Phone number" autocomplete="tel"
                      inputmode="tel" maxlength="18" aria-describedby="bb-pay-phone-err">
-              <p class="bb-pay-err" id="bb-pay-phone-err">Enter a phone number we can reach you on.</p>
+              <p class="bb-pay-err" id="bb-pay-phone-err">Please enter a phone number we can reach you on.</p>
             </div>
 
             <div class="bb-pay-field" id="bb-pay-card-slot">
@@ -299,7 +300,7 @@
                        inputmode="numeric" maxlength="23" aria-describedby="bb-pay-card-err">
                 <span class="bb-pay-brand" id="bb-pay-brand" aria-hidden="true"></span>
               </div>
-              <p class="bb-pay-err" id="bb-pay-card-err">Check the card number.</p>
+              <p class="bb-pay-err" id="bb-pay-card-err">Please check the card number.</p>
             </div>
 
             <div class="bb-pay-row is-3">
@@ -318,7 +319,7 @@
                        placeholder="ZIP" autocomplete="postal-code" aria-label="Billing ZIP or postcode"
                        maxlength="10" aria-describedby="bb-pay-exp-err">
               </div>
-              <p class="bb-pay-err" id="bb-pay-exp-err" style="grid-column:1/-1">Check the expiry, CVC and ZIP.</p>
+              <p class="bb-pay-err" id="bb-pay-exp-err" style="grid-column:1/-1">Please check the expiry, CVC and ZIP.</p>
             </div>
 
             <!-- bots only -->
@@ -328,15 +329,15 @@
                  variant with ! to hide it for that variant instead.          -->
             <p class="bb-pay-applied" data-bb-when="oto">
               <i class="bb-pay-dot" aria-hidden="true"></i>
-              <span>Your Done-For-You AI Script Pack is added to this order.</span>
+              <span>Thank you &mdash; your AI Script Pack is on this order.</span>
             </p>
             <p class="bb-pay-applied" data-bb-when="vip">
               <i class="bb-pay-dot" aria-hidden="true"></i>
-              <span>Your VIP Launch Intensive is booked with this order.</span>
+              <span>Thank you &mdash; your VIP Launch Intensive is booked with this order.</span>
             </p>
             <p class="bb-pay-applied" data-bb-when="vip_oto">
               <i class="bb-pay-dot" aria-hidden="true"></i>
-              <span>Your VIP Launch Intensive and AI Script Pack are both on this order.</span>
+              <span>Thank you &mdash; your VIP Launch Intensive and AI Script Pack are both on this order.</span>
             </p>
 
             <button class="bb-pay-cta" id="bb-pay-cta" type="submit">
@@ -445,7 +446,7 @@
 
     /* Small urgency line under the guarantee, matching the offer page's
        timer note. Blank = hidden.                                          */
-    URGENCY          : 'Your launch price is held while you complete this order.',
+    URGENCY          : 'Your launch price is held while you finish this order &mdash; please take your time.',
 
     /* ------------------------------------------------------------- PRICING
        Drives the order summary on the left. PLACEHOLDER AMOUNTS — put your
@@ -511,8 +512,8 @@
     COPY : {
       base : {
         badge   : '',                        /* no pill for the base visit */
-        title   : 'Last step, then<br><span class="hl">Bob gets to work.</span>',
-        lead    : 'Your launch price is held below. Add your card and the build starts &mdash; a bot that picks up every enquiry the minute it lands, keeps your calendar filling itself, and chases the quiet leads you would never get round to.'
+        title   : 'One last step, then<br><span class="hl">your bot gets to work.</span>',
+        lead    : 'Thank you &mdash; your launch price is held below. Whenever you are ready, add your card and we will start building your bot: your own version of Bob, the chatbot that looks after enquiries here at BotBuilders. Yours will pick up every enquiry as it lands, help keep your calendar filling, and follow up on the quiet leads for you.'
         /* no items → the checklist in the markup above stands as written */
       },
 
@@ -520,8 +521,8 @@
         label   : 'VIP Launch Intensive',
         badge   : 'VIP Launch Intensive added',
         eta     : 'Live, with you',
-        title   : 'Last step, then<br><span class="hl">we build it together.</span>',
-        lead    : 'Your VIP seat is on this order. We share a screen, wire Bob into your calendar and CRM while you watch, and switch him on before the session ends &mdash; nothing left sitting on your to-do list afterwards.',
+        title   : 'One last step, then<br><span class="hl">we build it together.</span>',
+        lead    : 'Thank you for adding the VIP Launch Intensive. We will share a screen, connect your bot to your calendar and CRM while you watch, and have it switched on before the session ends &mdash; so nothing is left waiting on you afterwards.',
         items   : [
           'Full BotBuilders platform access',
           'Unlimited bots and conversation volume',
@@ -538,8 +539,8 @@
       oto : {
         label   : 'Done-For-You AI Script Pack',
         badge   : 'AI Script Pack added',
-        title   : 'Last step, then<br><span class="hl">Bob starts talking.</span>',
-        lead    : 'The script pack is on this order, so Bob never opens with a blank page &mdash; he opens with lines that have already booked calls for someone else. Add your card and the two go live together.',
+        title   : 'One last step, then<br><span class="hl">your bot starts talking.</span>',
+        lead    : 'Thank you for adding the AI Script Pack. Your bot will open conversations with lines that have already booked calls for other members, rather than anything you need to write yourself. Add your card below and the two go live together.',
         items   : [
           'Full BotBuilders platform access',
           'Unlimited bots and conversation volume',
@@ -558,8 +559,8 @@
         label   : 'VIP + AI Script Pack',
         badge   : 'VIP + AI Script Pack added',
         eta     : 'Live, with you',
-        title   : 'Last step, then<br><span class="hl">Bob is built and briefed.</span>',
-        lead    : 'Both extras are on this order: we build Bob with you on a live call, and he arrives already knowing what to say. One card, and the whole thing is in motion.',
+        title   : 'One last step, then<br><span class="hl">we build it and brief it.</span>',
+        lead    : 'Thank you for adding both. We will build your bot with you on a live call, and it will arrive already knowing what to say. Add your card below and we will take it from there.',
         items   : [
           'Full BotBuilders platform access',
           'Unlimited bots and conversation volume',
@@ -1274,8 +1275,8 @@
     box.innerHTML =
       '<div class="bb-pay-done">' +
         '<div class="bb-pay-done-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg></div>' +
-        '<h2 class="bb-pay-done-title">You&rsquo;re in.</h2>' +
-        '<p class="bb-pay-done-txt">Check your inbox &mdash; your login and your builder&rsquo;s intro email are on the way.</p>' +
+        '<h2 class="bb-pay-done-title">Thank you &mdash; you&rsquo;re in.</h2>' +
+        '<p class="bb-pay-done-txt">Please check your inbox &mdash; your login and an introduction from your builder are on the way.</p>' +
       '</div>';
   }
 
@@ -1310,7 +1311,7 @@
       return res.text().then(function(txt){
         var data = {};
         try{ data = txt ? JSON.parse(txt) : {}; }catch(e){}
-        if(!res.ok) throw new Error(data.message || 'Payment could not be completed.');
+        if(!res.ok) throw new Error(data.message || 'Sorry, we could not complete that payment.');
         return data;
       });
     })
@@ -1320,7 +1321,7 @@
     })
     .catch(function(e){
       busy(false);
-      fail(e && e.message ? e.message : 'Something went wrong. Please try again.');
+      fail(e && e.message ? e.message : 'Sorry, something went wrong on our end. Please try again.');
     });
   });
 
