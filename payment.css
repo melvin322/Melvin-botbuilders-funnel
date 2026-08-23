@@ -21,6 +21,11 @@
   --pay-line-2:#EEF2F9;       /* inner rules                      */
   --pay-white:#FFFFFF;
   --pay-green:#16A34A;
+
+  /* background wash */
+  --pay-wash-1:#D3EFE7;      /* the body of the mint             */
+  --pay-wash-2:#DFF4EE;      /* lighter, top                     */
+  --pay-wash-3:#E9F8F4;      /* lightest, bottom                 */
   --pay-err:#DC2626;
 
   --pay-font:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
@@ -37,16 +42,25 @@
   min-height:100vh;
   padding:0 0 76px;
   overflow:hidden;
-  background:linear-gradient(180deg,#F5F9FF 0%,#EDF3FD 42%,#E3EDFA 100%);
+  /* mint wash — the three stops are the whole colour story, change them and
+     the page follows                                                       */
+  background:
+    radial-gradient(1200px 700px at 15% -10%, rgba(255,255,255,.75) 0%, transparent 60%),
+    linear-gradient(158deg, var(--pay-wash-2) 0%, var(--pay-wash-1) 42%, var(--pay-wash-3) 100%);
 }
 
-/* soft blue glow, top right — same wash as the offer pages */
+/* bubbles, rings and dotted arcs over the wash. One drawing, tiled at two
+   different scales and offsets so the repeat never lines up with itself —
+   no hosted image, so this survives a paste into GHL's Custom CSS.        */
 .bb-pay::before{
   content:'';
-  position:absolute; top:-380px; right:-240px;
-  width:900px; height:900px; border-radius:50%;
-  background:radial-gradient(circle, rgba(37,99,235,.10) 0%, rgba(56,189,248,.06) 45%, transparent 70%);
+  position:absolute; inset:0;
   pointer-events:none;
+  background-image:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='1400' height='980' viewBox='0 0 1400 980'><g fill='%23ffffff'><circle cx='120' cy='140' r='26' opacity='0.55'/><circle cx='232' cy='96' r='12' opacity='0.5'/><circle cx='300' cy='300' r='9' opacity='0.45'/><circle cx='96' cy='470' r='18' opacity='0.4'/><circle cx='420' cy='180' r='7' opacity='0.55'/><circle cx='520' cy='420' r='22' opacity='0.5'/><circle cx='610' cy='150' r='10' opacity='0.45'/><circle cx='700' cy='330' r='14' opacity='0.4'/><circle cx='820' cy='110' r='20' opacity='0.5'/><circle cx='880' cy='470' r='8' opacity='0.5'/><circle cx='980' cy='250' r='26' opacity='0.45'/><circle cx='1080' cy='120' r='10' opacity='0.5'/><circle cx='1180' cy='400' r='16' opacity='0.42'/><circle cx='1290' cy='220' r='11' opacity='0.5'/><circle cx='160' cy='760' r='20' opacity='0.38'/><circle cx='360' cy='690' r='9' opacity='0.45'/><circle cx='560' cy='820' r='14' opacity='0.4'/><circle cx='760' cy='700' r='24' opacity='0.4'/><circle cx='960' cy='830' r='10' opacity='0.45'/><circle cx='1150' cy='720' r='18' opacity='0.36'/><circle cx='60' cy='240' r='7' opacity='0.5'/><circle cx='470' cy='560' r='11' opacity='0.42'/><circle cx='1330' cy='600' r='9' opacity='0.45'/><circle cx='250' cy='540' r='6' opacity='0.5'/><rect x='268' y='236' width='9' height='9' rx='2' opacity='0.5' transform='rotate(18 272.5 240.5)'/><rect x='742' y='196' width='8' height='8' rx='2' opacity='0.45' transform='rotate(-14 746.0 200.0)'/><rect x='1046' y='556' width='10' height='10' rx='2' opacity='0.4' transform='rotate(24 1051.0 561.0)'/><rect x='452' y='780' width='8' height='8' rx='2' opacity='0.45' transform='rotate(32 456.0 784.0)'/><rect x='1256' y='86' width='7' height='7' rx='2' opacity='0.5' transform='rotate(-20 1259.5 89.5)'/><rect x='640' y='596' width='9' height='9' rx='2' opacity='0.4' transform='rotate(12 644.5 600.5)'/></g><g fill='none' stroke='%23ffffff'><circle cx='196' cy='330' r='15' stroke-width='3' opacity='0.6'/><circle cx='646' cy='262' r='11' stroke-width='2.5' opacity='0.55'/><circle cx='1006' cy='392' r='17' stroke-width='3' opacity='0.5'/><circle cx='386' cy='876' r='13' stroke-width='2.5' opacity='0.5'/><circle cx='866' cy='616' r='10' stroke-width='2.5' opacity='0.5'/><circle cx='1246' cy='470' r='14' stroke-width='3' opacity='0.45'/></g><g fill='none' stroke='%23a3d6c9' stroke-width='2.4' stroke-linecap='round' stroke-dasharray='1 14' opacity='.55'><path d='M690 300 C 840 300 900 360 1050 360 S 1240 300 1390 320'/><path d='M470 470 C 590 520 640 600 780 620 S 990 570 1120 610'/><path d='M120 620 C 260 660 300 730 440 745 S 620 700 730 740'/><path d='M900 150 C 1010 120 1080 60 1200 70'/><path d='M240 400 C 330 430 360 470 470 480'/></g></svg>"), url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='1400' height='980' viewBox='0 0 1400 980'><g fill='%23ffffff'><circle cx='120' cy='140' r='26' opacity='0.55'/><circle cx='232' cy='96' r='12' opacity='0.5'/><circle cx='300' cy='300' r='9' opacity='0.45'/><circle cx='96' cy='470' r='18' opacity='0.4'/><circle cx='420' cy='180' r='7' opacity='0.55'/><circle cx='520' cy='420' r='22' opacity='0.5'/><circle cx='610' cy='150' r='10' opacity='0.45'/><circle cx='700' cy='330' r='14' opacity='0.4'/><circle cx='820' cy='110' r='20' opacity='0.5'/><circle cx='880' cy='470' r='8' opacity='0.5'/><circle cx='980' cy='250' r='26' opacity='0.45'/><circle cx='1080' cy='120' r='10' opacity='0.5'/><circle cx='1180' cy='400' r='16' opacity='0.42'/><circle cx='1290' cy='220' r='11' opacity='0.5'/><circle cx='160' cy='760' r='20' opacity='0.38'/><circle cx='360' cy='690' r='9' opacity='0.45'/><circle cx='560' cy='820' r='14' opacity='0.4'/><circle cx='760' cy='700' r='24' opacity='0.4'/><circle cx='960' cy='830' r='10' opacity='0.45'/><circle cx='1150' cy='720' r='18' opacity='0.36'/><circle cx='60' cy='240' r='7' opacity='0.5'/><circle cx='470' cy='560' r='11' opacity='0.42'/><circle cx='1330' cy='600' r='9' opacity='0.45'/><circle cx='250' cy='540' r='6' opacity='0.5'/><rect x='268' y='236' width='9' height='9' rx='2' opacity='0.5' transform='rotate(18 272.5 240.5)'/><rect x='742' y='196' width='8' height='8' rx='2' opacity='0.45' transform='rotate(-14 746.0 200.0)'/><rect x='1046' y='556' width='10' height='10' rx='2' opacity='0.4' transform='rotate(24 1051.0 561.0)'/><rect x='452' y='780' width='8' height='8' rx='2' opacity='0.45' transform='rotate(32 456.0 784.0)'/><rect x='1256' y='86' width='7' height='7' rx='2' opacity='0.5' transform='rotate(-20 1259.5 89.5)'/><rect x='640' y='596' width='9' height='9' rx='2' opacity='0.4' transform='rotate(12 644.5 600.5)'/></g><g fill='none' stroke='%23ffffff'><circle cx='196' cy='330' r='15' stroke-width='3' opacity='0.6'/><circle cx='646' cy='262' r='11' stroke-width='2.5' opacity='0.55'/><circle cx='1006' cy='392' r='17' stroke-width='3' opacity='0.5'/><circle cx='386' cy='876' r='13' stroke-width='2.5' opacity='0.5'/><circle cx='866' cy='616' r='10' stroke-width='2.5' opacity='0.5'/><circle cx='1246' cy='470' r='14' stroke-width='3' opacity='0.45'/></g><g fill='none' stroke='%23a3d6c9' stroke-width='2.4' stroke-linecap='round' stroke-dasharray='1 14' opacity='.55'><path d='M690 300 C 840 300 900 360 1050 360 S 1240 300 1390 320'/><path d='M470 470 C 590 520 640 600 780 620 S 990 570 1120 610'/><path d='M120 620 C 260 660 300 730 440 745 S 620 700 730 740'/><path d='M900 150 C 1010 120 1080 60 1200 70'/><path d='M240 400 C 330 430 360 470 470 480'/></g></svg>");
+  background-size:1400px 980px, 880px 640px;
+  background-position:top left, 58% 34%;
+  background-repeat:repeat, repeat;
+  opacity:.85;
 }
 
 .bb-pay *,
