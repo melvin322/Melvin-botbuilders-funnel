@@ -111,12 +111,6 @@
   .bb-ty-confetti i{ animation:none; }
 }
 
-/* party poppers firing confetti inward from each side -------------------- */
-.bb-ty-popper{ position:absolute; z-index:1; width:150px; pointer-events:none; }
-.bb-ty-popper svg{ width:100%; height:auto; overflow:visible; filter:drop-shadow(0 10px 16px rgba(11,30,60,.20)); }
-.bb-ty-popper--l{ left:-10px; top:470px; transform:rotate(42deg); }
-.bb-ty-popper--r{ right:-10px; top:470px; transform:rotate(-42deg); }
-
 .bb-ty-secure, .bb-ty-shell, .bb-ty-foot{ position:relative; z-index:1; }
 
 /* ==========================================================================
@@ -425,13 +419,6 @@
   .bb-ty-order{ max-width:560px; margin-top:8px; }
   .bb-ty-help{ grid-template-columns:1fr; gap:18px; }
   .bb-ty-help-div{ display:none; }
-  /* side poppers flank the top on tablet; hidden on phones below */
-  .bb-ty-popper{ width:96px; }
-  .bb-ty-popper--l{ left:-14px; top:118px; transform:rotate(30deg); }
-  .bb-ty-popper--r{ right:-14px; top:118px; transform:rotate(-30deg); }
-}
-@media (max-width:520px){
-  .bb-ty-popper{ display:none; }
 }
 @media (max-width:520px){
   .bb-ty-shell{ padding:26px 16px 0; }

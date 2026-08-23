@@ -114,57 +114,6 @@
     <i style="--x:18%;--y:560px;--c:#2563FF;--rot:-26deg;--d:.65s;--t:3.9s"></i>
   </div>
 
-  <!-- party poppers firing confetti inward, one on each side -->
-  <div class="bb-ty-popper bb-ty-popper--l" aria-hidden="true">
-    <svg viewBox="0 0 120 150" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <pattern id="ppStripeA" width="17" height="17" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-          <rect width="17" height="17" fill="#E5352B"/><rect width="8.5" height="17" fill="#FBFBFB"/>
-        </pattern>
-      </defs>
-      <g fill="none" stroke-linecap="round">
-        <path d="M46 40 C34 18 16 16 22 2" stroke="#F4C430" stroke-width="5"/>
-        <path d="M60 38 C62 12 80 8 76 -4" stroke="#38BDF8" stroke-width="4"/>
-        <path d="M72 42 C92 28 104 32 101 15" stroke="#F472B6" stroke-width="4"/>
-        <path d="M38 44 C22 38 12 47 4 40" stroke="#34D399" stroke-width="4"/>
-        <path d="M84 44 C104 44 112 56 106 64" stroke="#A78BFA" stroke-width="3.5"/>
-      </g>
-      <circle cx="28" cy="14" r="4" fill="#F4C430"/>
-      <rect x="82" y="16" width="7" height="7" rx="1.5" fill="#2563FF" transform="rotate(25 85 19)"/>
-      <circle cx="58" cy="4" r="3.5" fill="#FB7185"/>
-      <rect x="14" y="30" width="6" height="6" rx="1.5" fill="#A78BFA" transform="rotate(-20 17 33)"/>
-      <circle cx="102" cy="26" r="3" fill="#22D3EE"/>
-      <rect x="96" y="52" width="6" height="6" rx="1.5" fill="#FBBF24"/>
-      <ellipse cx="60" cy="41" rx="38" ry="9.5" fill="#7C1512"/>
-      <polygon points="60,150 22,42 98,42" fill="url(#ppStripeA)" stroke="#AE241C" stroke-width="2.5" stroke-linejoin="round"/>
-    </svg>
-  </div>
-
-  <div class="bb-ty-popper bb-ty-popper--r" aria-hidden="true">
-    <svg viewBox="0 0 120 150" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <pattern id="ppStripeB" width="17" height="17" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-          <rect width="17" height="17" fill="#E5352B"/><rect width="8.5" height="17" fill="#FBFBFB"/>
-        </pattern>
-      </defs>
-      <g fill="none" stroke-linecap="round">
-        <path d="M46 40 C34 18 16 16 22 2" stroke="#F4C430" stroke-width="5"/>
-        <path d="M60 38 C62 12 80 8 76 -4" stroke="#38BDF8" stroke-width="4"/>
-        <path d="M72 42 C92 28 104 32 101 15" stroke="#F472B6" stroke-width="4"/>
-        <path d="M38 44 C22 38 12 47 4 40" stroke="#34D399" stroke-width="4"/>
-        <path d="M84 44 C104 44 112 56 106 64" stroke="#A78BFA" stroke-width="3.5"/>
-      </g>
-      <circle cx="28" cy="14" r="4" fill="#F4C430"/>
-      <rect x="82" y="16" width="7" height="7" rx="1.5" fill="#2563FF" transform="rotate(25 85 19)"/>
-      <circle cx="58" cy="4" r="3.5" fill="#FB7185"/>
-      <rect x="14" y="30" width="6" height="6" rx="1.5" fill="#A78BFA" transform="rotate(-20 17 33)"/>
-      <circle cx="102" cy="26" r="3" fill="#22D3EE"/>
-      <rect x="96" y="52" width="6" height="6" rx="1.5" fill="#FBBF24"/>
-      <ellipse cx="60" cy="41" rx="38" ry="9.5" fill="#7C1512"/>
-      <polygon points="60,150 22,42 98,42" fill="url(#ppStripeB)" stroke="#AE241C" stroke-width="2.5" stroke-linejoin="round"/>
-    </svg>
-  </div>
-
   <!-- ========================================================== secure bar -->
   <div class="bb-ty-secure">
     <div class="bb-ty-secure-in">
@@ -228,6 +177,71 @@
         <span class="bb-ty-wel-sign-role">Founder, BotBuilders</span>
       </div>
     </aside>
+
+    <!-- ============================================================
+         CONDITIONAL MESSAGE CARDS
+         Two show at a time, never more. One speaks to the bump, one to
+         the OTO. Held cards carry next actions. Open cards carry offers.
+         Do NOT rename the four wg-if-* classes.
+         ============================================================ -->
+    <div class="wg-states">
+
+      <!-- BUMP TAKEN -->
+      <div class="wg-card wg-card--held wg-if-bump">
+        <p class="wg-card__eyebrow">Book this now</p>
+        <h3 class="wg-card__title">Your VIP Launch Intensive is waiting to be scheduled</h3>
+        <p class="wg-card__body">
+          Pick the earliest slot you can make. The 48 hour window to launch
+          starts when we sit down together, not when you bought.
+        </p>
+        <a class="wg-card__cta" href="#REPLACE_WITH_VIP_BOOKING_URL">
+          Schedule my intensive
+        </a>
+      </div>
+
+      <!-- BUMP SKIPPED -->
+      <div class="wg-card wg-card--open wg-if-nobump">
+        <p class="wg-card__eyebrow">Still open to you</p>
+        <h3 class="wg-card__title">Add the VIP Launch Intensive for $197</h3>
+        <p class="wg-card__body">
+          A live 1:1 session where we build, connect and launch your first
+          funnel with you, so you go live in 48 hours instead of finding the
+          time later. This price holds for one hour.
+        </p>
+        <a class="wg-card__cta" href="#REPLACE_WITH_VIP_ORDER_URL">
+          Add the VIP Launch Intensive
+        </a>
+      </div>
+
+      <!-- OTO ACCEPTED -->
+      <div class="wg-card wg-card--held wg-if-oto">
+        <p class="wg-card__eyebrow">In your inbox</p>
+        <h3 class="wg-card__title">Your AI Script Pack is ready to drop in</h3>
+        <p class="wg-card__body">
+          Proven conversation scripts and ready-made AI prompts, copy-paste
+          straight into your bots so they open every chat like a closer.
+          Check your email for the pack.
+        </p>
+        <a class="wg-card__cta" href="#REPLACE_WITH_SCRIPT_PACK_URL">
+          Open your Script Pack
+        </a>
+      </div>
+
+      <!-- OTO DECLINED -->
+      <div class="wg-card wg-card--open wg-if-nooto">
+        <p class="wg-card__eyebrow">One last thing</p>
+        <h3 class="wg-card__title">Add the Done-For-You AI Script Pack for $97</h3>
+        <p class="wg-card__body">
+          You keep your Growth Plan either way. This gives your bots proven,
+          word-for-word scripts and ready-made AI prompts — copy-paste ready,
+          so they sound human and book more calls. This price holds for one hour.
+        </p>
+        <a class="wg-card__cta" href="#REPLACE_WITH_SCRIPT_PACK_ORDER_URL">
+          Add the AI Script Pack
+        </a>
+      </div>
+
+    </div>
 
     <!-- ================================================== what happens next -->
     <section class="bb-ty-next bb-ty-in" style="--d:140ms">
