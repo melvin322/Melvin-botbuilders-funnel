@@ -166,8 +166,12 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.4 5.1 5.6.8-4 4 1 5.6-5-2.7-5 2.7 1-5.6-4-4 5.6-.8z"/></svg>
         A note from Matt
       </p>
-      <blockquote class="bb-ty-wel-quote" id="bb-ty-wel-msg">You're going to love what's next.</blockquote>
-      <p class="bb-ty-wel-email" id="bb-ty-wel-email-txt">Your receipt and login details are on their way to your inbox.</p>
+      <h2 class="bb-ty-wel-greeting" id="bb-ty-wel-greeting">You're all set!</h2>
+      <p class="bb-ty-wel-msg" id="bb-ty-wel-msg">Welcome to BotBuilders — you're going to love what's next.</p>
+      <p class="bb-ty-wel-email" id="bb-ty-wel-email">
+        <span class="bb-ty-wel-email-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M4 7l8 6 8-6"/></svg></span>
+        <span id="bb-ty-wel-email-txt">Your receipt and login details are on their way to your inbox.</span>
+      </p>
       <div class="bb-ty-wel-sign">
         <span class="bb-ty-wel-sign-name">Matt</span>
         <span class="bb-ty-wel-sign-sep" aria-hidden="true"></span>
@@ -293,10 +297,10 @@
          oto     → + Done-For-You AI Script Pack
          vip_oto → both                                                      */
     MESSAGES : {
-      base    : "You brought the ambition. We'll help you turn it into <span class=\"hl\">a calendar that fills itself</span> — starting with your first bot greeting leads this week.",
-      vip     : "Smart move on the VIP Launch Intensive. We build and launch your bot <span class=\"hl\">together, live</span> — and have you up and running inside 48 hours.",
-      oto     : "With your AI Script Pack in hand, your bot opens every conversation <span class=\"hl\">like a closer</span> — human, on-brand, and booking calls from day one.",
-      vip_oto : "You went all in. We build and launch your bot <span class=\"hl\">with you, live</span>, and it lands already knowing exactly what to say. This is going to be fun."
+      base    : "Welcome to BotBuilders — and honestly, well done. Your Growth Plan is live and my team is already in your corner. We'll help you get your first bot greeting leads and booking calls faster than you'd think. You brought the ambition; we'll help you turn it into a calendar that fills itself.",
+      vip     : "Love that you grabbed the VIP Launch Intensive — that's the fast lane, and exactly how I'd do it. We're going to build your bot together on a live call and have it launched before we say goodbye. Bring the one flow you want first; we'll bring the build. Let's get you live in 48 hours.",
+      oto     : "Great add grabbing the AI Script Pack — your bot's about to sound a lot more human. You're getting proven, word-for-word scripts and ready-made AI prompts that have already booked calls for other members. Drop them straight in and your bot opens every conversation like a closer — no copywriting, no guesswork.",
+      vip_oto : "You went all in — the VIP Launch Intensive and the AI Script Pack — and that's exactly how you win with this. We build and launch your bot with you, live, and it arrives already knowing exactly what to say. You're getting the full BotBuilders treatment, and I couldn't be happier you're here. Let's make your calendar overflow."
     },
 
     /* --------------------------------------------------- WHAT HAPPENS NEXT
@@ -393,13 +397,11 @@
 
     var M = CONFIG.MESSAGES || {};
 
+    set('bb-ty-wel-greeting', first ? "You're in, " + esc(first) + "!" : "You're in — welcome aboard!");
     set('bb-ty-wel-msg', M[variant] || M.base || '');
-
-    /* the name rides along on the email line (the quote stays the hero) */
-    var lead = first ? esc(first) + ', your' : 'Your';
     set('bb-ty-wel-email-txt', email
-      ? lead + ' receipt and login are on the way to <b>' + esc(email) + '</b> — keep an eye out.'
-      : lead + ' receipt and login are on the way to your inbox — keep an eye out.');
+      ? 'Your receipt and login details are on their way to <b>' + esc(email) + '</b> — keep an eye on your inbox.'
+      : 'Your receipt and login details are on their way to your inbox — keep an eye out.');
   })();
 
   /* -- "what happens next" steps · one set per thing they bought ----------- */

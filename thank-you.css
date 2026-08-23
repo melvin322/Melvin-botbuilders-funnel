@@ -271,29 +271,32 @@
 }
 .bb-ty-order-save svg{ width:16px; height:16px; flex:none; color:var(--ty-sky); }
 
-/* --- personal note from Matt · quote style (fills the same dark card) ----- */
+/* --- personal note from Matt · left-aligned style (fills the dark card) ---- */
 .bb-ty-order.bb-ty-welcome{ text-align:left; padding:34px 40px 32px; }
 .bb-ty-wel-eyebrow{
   display:inline-flex; align-items:center; gap:7px;
   font-family:var(--ty-font); font-weight:800; font-size:11.5px; letter-spacing:.12em; text-transform:uppercase;
-  color:var(--ty-sky); margin-bottom:22px;
+  color:var(--ty-sky); margin-bottom:18px;
   padding:6px 13px; border-radius:999px;
   background:rgba(56,189,248,.08); border:1px solid rgba(56,189,248,.32);
 }
 .bb-ty-wel-eyebrow svg{ width:14px; height:14px; }
-.bb-ty-wel-quote{
+.bb-ty-wel-greeting{
   font-family:var(--ty-head); font-weight:700; color:#fff;
-  font-size:clamp(22px,2.9vw,33px); line-height:1.3; letter-spacing:-.01em;
-  quotes:"\201C" "\201D";
+  font-size:clamp(26px,3.4vw,38px); line-height:1.08; letter-spacing:-.01em; margin-bottom:14px;
 }
-.bb-ty-wel-quote::before{ content:open-quote; }
-.bb-ty-wel-quote::after{ content:close-quote; }
-.bb-ty-wel-quote .hl{
-  background:linear-gradient(95deg,#38BDF8 0%,#22D3EE 55%,#7DD3FC 100%);
-  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent;
+.bb-ty-wel-msg{
+  max-width:640px; font-size:clamp(15px,1.7vw,17px); line-height:1.65; color:#C7D5E6;
 }
-.bb-ty-wel-email{ margin-top:22px; font-size:14px; color:#8FA3BC; line-height:1.5; }
-.bb-ty-wel-email b{ color:#C7D5E6; font-weight:700; }
+.bb-ty-wel-email{
+  display:inline-flex; align-items:center; gap:9px; margin-top:22px;
+  padding:9px 16px; border-radius:999px;
+  background:rgba(56,189,248,.1); border:1px solid rgba(56,189,248,.28);
+  font-size:14px; color:#DCEBFF; line-height:1.4;
+}
+.bb-ty-wel-email b{ color:#fff; font-weight:700; }
+.bb-ty-wel-email-ico{ flex:none; display:flex; color:var(--ty-sky); }
+.bb-ty-wel-email-ico svg{ width:17px; height:17px; }
 .bb-ty-wel-sign{ display:flex; align-items:center; gap:12px; margin-top:24px; }
 .bb-ty-wel-sign-name{ font-family:var(--ty-head); font-weight:700; font-size:17px; color:#fff; }
 .bb-ty-wel-sign-sep{ width:1px; height:18px; background:rgba(255,255,255,.28); }
