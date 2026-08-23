@@ -178,9 +178,9 @@
 .bb-oto-screen{
   position:relative;
   background:linear-gradient(160deg,#0E1F3A 0%,#0B1730 60%,#0A1428 100%);
-  border-radius:14px 14px 4px 4px;
-  border:6px solid #070F1C;
-  box-shadow:0 30px 60px -26px rgba(8,18,32,.55);
+  border-radius:16px;
+  border:7px solid #060C16;
+  box-shadow:0 30px 60px -26px rgba(8,18,32,.55), inset 0 1px 0 rgba(255,255,255,.06);
   padding:26px 22px 26px;
   text-align:center; color:#fff;
   display:flex; flex-direction:column; align-items:center; gap:6px;
@@ -208,14 +208,19 @@
 }
 .bb-oto-screen-ico svg{ width:30px; height:30px; }
 .bb-oto-screen-sub{ font-size:13.5px; color:#9FB6CC; line-height:1.4; }
-.bb-oto-stand{
-  width:64px; height:14px; margin:0 auto;
-  background:linear-gradient(180deg,#C7D2E0,#9FADC0);
-  border-radius:0 0 6px 6px;
+/* monitor stand — neck (trapezoid) + wide base */
+.bb-oto-stand{ position:relative; width:100%; height:40px; margin-top:2px; }
+.bb-oto-stand::before{
+  content:''; position:absolute; left:50%; top:0; transform:translateX(-50%);
+  width:104px; height:28px;
+  background:linear-gradient(180deg,#CAD5E3 0%,#A6B3C5 100%);
+  clip-path:polygon(34% 0%, 66% 0%, 78% 100%, 22% 100%);
 }
 .bb-oto-stand::after{
-  content:''; display:block; width:120px; height:8px; margin:6px auto 0;
-  background:#B8C4D6; border-radius:6px;
+  content:''; position:absolute; left:50%; top:26px; transform:translateX(-50%);
+  width:212px; height:13px; border-radius:10px;
+  background:linear-gradient(180deg,#D3DDEA 0%,#AEBBCD 100%);
+  box-shadow:0 12px 22px -10px rgba(8,18,32,.45);
 }
 
 /* spiral 90-day calendar card, overlapping bottom-left */
