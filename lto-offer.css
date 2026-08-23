@@ -586,6 +586,33 @@
     width: 13px;
     height: 13px;
 }
+.bb-hg-val{ color:var(--bb-ok); font-weight:800; font-size:14px; margin-left:2px; }
+
+/* -- hero price card (clear + catchy pricing) ------------------------- */
+.bb-hero-price{
+    margin-top:20px;
+    display:inline-flex; align-items:center; gap:18px; flex-wrap:wrap;
+    background:#fff; border:1.5px solid #D5E3F7; border-radius:16px;
+    padding:14px 20px; box-shadow:0 16px 40px -20px rgba(8,18,32,.32);
+}
+.bb-hp-fig{ display:flex; align-items:flex-start; gap:2px; color:var(--bb-heading); line-height:.9; }
+.bb-hp-cur{ font-family:var(--bb-display); font-size:24px; margin-top:6px; color:var(--bb-blue); }
+.bb-hp-amt{ font-family:var(--bb-display); font-size:58px; letter-spacing:.01em;
+    background:var(--bb-grad); -webkit-background-clip:text; background-clip:text;
+    -webkit-text-fill-color:transparent; color:transparent; }
+.bb-hp-per{ align-self:flex-end; margin-bottom:9px; font-size:15px; font-weight:600; color:var(--bb-muted); }
+.bb-hp-save{ display:flex; flex-direction:column; align-items:flex-start; gap:5px; }
+.bb-hp-save s{ color:#98A6BA; font-size:14px; font-weight:600; }
+.bb-hp-badge{ font-size:12px; font-weight:800; letter-spacing:.04em; color:#0F7A3D;
+    background:#DDF3E6; padding:4px 9px; border-radius:6px; }
+.bb-hp-div{ width:1px; align-self:stretch; background:var(--bb-border); margin:2px 0; }
+.bb-hp-terms{ display:flex; flex-direction:column; gap:2px; }
+.bb-hp-lbl{ font-size:11px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--bb-muted); }
+.bb-hp-note{ font-size:13.5px; font-weight:600; color:var(--bb-heading); }
+.bb-hp-timer{ display:flex; align-items:center; gap:6px; font-size:13px; font-weight:700; color:var(--bb-warn); }
+.bb-hp-timer svg{ width:15px; height:15px; }
+.bb-hp-cd{ font-variant-numeric:tabular-nums; }
+.bb-hp-cd b{ font-weight:800; }
 
 /* -- Bob mascot (hero right) ------------------------------------------- */
 .bb-hero-bob {
@@ -613,9 +640,31 @@
 }
 
 .bb-hero-bob {
-    --bb-card-h: 500px;
+    --bb-card-h: 440px;
 }   /* keeps the whole hero within one screen */
-/* Bob fills the same footprint as the offer card: full column width x card height */
+
+/* dashed frame around Bob + floating "today only" deal badge */
+.bb-bob-frame{
+    position:relative; z-index:1; width:100%;
+    border:2px dashed rgba(37,99,255,.30); border-radius:24px;
+    padding:16px 18px;
+    background:linear-gradient(180deg, rgba(255,255,255,.34), rgba(255,255,255,.08));
+}
+.bb-bob-deal{
+    position:absolute; top:-16px; right:-14px; z-index:4;
+    background:#0B1B36; color:#fff; border:1px solid rgba(56,189,248,.28);
+    border-radius:16px; padding:11px 15px; line-height:1;
+    box-shadow:0 18px 34px -14px rgba(8,18,32,.65);
+    display:flex; flex-direction:column; align-items:flex-start;
+}
+.bb-bob-deal-lbl{ font-size:10px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:#8FB4E6; margin-bottom:5px; }
+.bb-bob-deal-price{ font-family:var(--bb-display); color:#fff; display:flex; align-items:flex-start; }
+.bb-bob-deal-cur{ font-size:16px; margin-top:3px; color:var(--bb-sky); }
+.bb-bob-deal-price{ font-size:30px; }
+.bb-bob-deal-per{ align-self:flex-end; font-size:12px; font-weight:600; color:#8FB4E6; margin:0 0 3px 2px; }
+.bb-bob-deal-was{ font-size:11px; color:#7E93AC; text-decoration:line-through; margin-top:4px; }
+
+/* Bob fills the frame: full column width x card height */
 .bb-bob-img, .bb-bob-video, .bb-bob-ph {
     position: relative;
     z-index: 1;
@@ -732,6 +781,12 @@
     gap: 14px;
     flex-wrap: wrap;
 }
+
+/* two-line CTA (price + reassurance) */
+.bb-cta-stack{ align-items:center; }
+.bb-cta-txt{ display:flex; flex-direction:column; align-items:flex-start; line-height:1.15; gap:2px; text-align:left; }
+.bb-cta-main{ font-size:17px; font-weight:800; }
+.bb-cta-sub{ font-size:12px; font-weight:600; opacity:.9; letter-spacing:.01em; }
 
 .bb-hero-pills {
     margin-top: 12px;
