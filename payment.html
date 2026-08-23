@@ -42,7 +42,8 @@
        2. Submit the form once from the live page so GHL captures a sample
           payload, then add a "Create/Update Contact" action and map:
             first_name → First Name     last_name → Last Name
-            email      → Email          product   → a custom field / tag
+            email      → Email          phone     → Phone
+            product    → a custom field / tag
           (the fields sent are listed in payload() below.)
        3. Payments ▸ Products ▸ create the plan, then build the order form or
           payment link that charges it. Put that URL in CONFIG.CHECKOUT_URL
@@ -239,20 +240,38 @@
 
           <form class="bb-pay-form" id="bb-pay-form" novalidate>
 
+            <!-- the same fields the offer page collects, in the same order -->
             <div class="bb-pay-row is-2">
               <div class="bb-pay-field">
-                <label class="bb-pay-label" for="bb-pay-name">Full name</label>
-                <input class="bb-pay-input" id="bb-pay-name" name="name" type="text"
-                       placeholder="Dana Whitfield" autocomplete="name"
-                       aria-describedby="bb-pay-name-err">
-                <p class="bb-pay-err" id="bb-pay-name-err">Enter your full name.</p>
+                <label class="bb-pay-label" for="bb-pay-first">First name</label>
+                <input class="bb-pay-input" id="bb-pay-first" name="first_name" type="text"
+                       placeholder="Dana" autocomplete="given-name"
+                       aria-describedby="bb-pay-first-err">
+                <p class="bb-pay-err" id="bb-pay-first-err">Enter your first name.</p>
               </div>
+              <div class="bb-pay-field">
+                <label class="bb-pay-label" for="bb-pay-last">Last name</label>
+                <input class="bb-pay-input" id="bb-pay-last" name="last_name" type="text"
+                       placeholder="Whitfield" autocomplete="family-name"
+                       aria-describedby="bb-pay-last-err">
+                <p class="bb-pay-err" id="bb-pay-last-err">Enter your last name.</p>
+              </div>
+            </div>
+
+            <div class="bb-pay-row is-2">
               <div class="bb-pay-field">
                 <label class="bb-pay-label" for="bb-pay-email">Email</label>
                 <input class="bb-pay-input" id="bb-pay-email" name="email" type="email"
                        placeholder="dana@company.com" autocomplete="email"
                        inputmode="email" aria-describedby="bb-pay-email-err">
                 <p class="bb-pay-err" id="bb-pay-email-err">Enter a valid email address.</p>
+              </div>
+              <div class="bb-pay-field">
+                <label class="bb-pay-label" for="bb-pay-phone">Phone</label>
+                <input class="bb-pay-input" id="bb-pay-phone" name="phone" type="tel"
+                       placeholder="(602) 922-9700" autocomplete="tel"
+                       inputmode="tel" maxlength="18" aria-describedby="bb-pay-phone-err">
+                <p class="bb-pay-err" id="bb-pay-phone-err">Enter a phone number we can reach you on.</p>
               </div>
             </div>
 
@@ -519,7 +538,9 @@
   var brand  = document.getElementById('bb-pay-brand');
 
   var F = {
-    name : document.getElementById('bb-pay-name'),
+    first: document.getElementById('bb-pay-first'),
+    last : document.getElementById('bb-pay-last'),
+    phone: document.getElementById('bb-pay-phone'),
     email: document.getElementById('bb-pay-email'),
     card : document.getElementById('bb-pay-card'),
     exp  : document.getElementById('bb-pay-exp'),
@@ -817,8 +838,22 @@
     clear(this);
   });
 
-  [F.name, F.email].forEach(function(el){
+  [F.first, F.last, F.email].forEach(function(el){
     el.addEventListener('input', function(){ clear(el); });
+  });
+
+  /* phone: light formatting for a 10-digit US number, otherwise left as
+     typed so international numbers survive.                               */
+  F.phone.addEventListener('input', function(){
+    var raw = this.value;
+    var plus = raw.trim().charAt(0) === '+';
+    var d = digits(raw);
+    if(!plus && d.length === 10){
+      this.value = '(' + d.slice(0,3) + ') ' + d.slice(3,6) + '-' + d.slice(6);
+    }else{
+      this.value = raw.replace(/[^\d+()\s.-]/g,'').slice(0,18);
+    }
+    clear(this);
   });
 
   /* ============================================================ validation */
@@ -854,8 +889,11 @@
     var b   = brandOf(num);
     var bad = [];
 
-    if(F.name.value.trim().length < 2 || F.name.value.trim().indexOf(' ') < 0) bad.push(F.name);
+    var tel = digits(F.phone.value);
+    if(F.first.value.trim().length < 2)                                        bad.push(F.first);
+    if(F.last.value.trim().length  < 2)                                        bad.push(F.last);
     if(!/^[^\s@]+@[^\s@]+\.[A-Za-z]{2,}$/.test(F.email.value.trim()))          bad.push(F.email);
+    if(tel.length < 7 || tel.length > 15)                                      bad.push(F.phone);
     if(CARDS){
       if(!b || b.len.indexOf(num.length) < 0 || !luhn(num))                    bad.push(F.card);
       if(!validExp(F.exp.value))                                               bad.push(F.exp);
@@ -883,13 +921,14 @@
   }
 
   function payload(){
-    var name = F.name.value.trim();
-    var cut  = name.indexOf(' ');
-    var out  = {
+    var first = F.first.value.trim();
+    var last  = F.last.value.trim();
+    var out   = {
       product   : CONFIG.PRODUCT,
-      name      : name,
-      first_name: cut > 0 ? name.slice(0,cut) : name,   /* GHL maps these two */
-      last_name : cut > 0 ? name.slice(cut+1) : '',
+      name      : (first + ' ' + last).trim(),
+      first_name: first,                            /* GHL maps these three */
+      last_name : last,
+      phone     : F.phone.value.trim(),
       email     : F.email.value.trim().toLowerCase(),
       offer     : VARIANT,                          /* base|vip|oto|vip_oto */
       offer_name: OFFER_LABEL,                      /* readable, for GHL     */
@@ -919,6 +958,7 @@
             '&first_name=' + encodeURIComponent(data.first_name) +
             '&last_name=' + encodeURIComponent(data.last_name) +
             '&email=' + encodeURIComponent(data.email) +
+            '&phone=' + encodeURIComponent(data.phone || '') +
             '&offer=' + encodeURIComponent(data.offer || 'base');
     return url + (url.indexOf('?') > -1 ? '&' : '?') + q;
   }
