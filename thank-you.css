@@ -277,6 +277,35 @@
 }
 .bb-ty-order-save svg{ width:16px; height:16px; flex:none; color:var(--ty-sky); }
 
+/* --- personal note from Matt (fills the same dark card, replacing rows) --- */
+.bb-ty-order.bb-ty-welcome{ text-align:center; padding:34px 44px 34px; }
+.bb-ty-wel-eyebrow{
+  display:inline-flex; align-items:center; gap:8px;
+  font-family:var(--ty-font); font-weight:800; font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--ty-sky); margin-bottom:14px;
+}
+.bb-ty-wel-eyebrow svg{ width:16px; height:16px; }
+.bb-ty-wel-greeting{
+  font-family:var(--ty-head); font-weight:700; color:#fff;
+  font-size:clamp(26px,3.4vw,38px); line-height:1.08; letter-spacing:-.01em; margin-bottom:14px;
+}
+.bb-ty-wel-msg{
+  max-width:620px; margin:0 auto;
+  font-size:clamp(15px,1.7vw,17px); line-height:1.65; color:#C7D5E6;
+}
+.bb-ty-wel-email{
+  display:inline-flex; align-items:center; gap:9px; margin:22px auto 0;
+  padding:9px 16px; border-radius:999px;
+  background:rgba(56,189,248,.1); border:1px solid rgba(56,189,248,.28);
+  font-size:14px; color:#DCEBFF; line-height:1.4; text-align:left;
+}
+.bb-ty-wel-email b{ color:#fff; font-weight:700; }
+.bb-ty-wel-email-ico{ flex:none; display:flex; color:var(--ty-sky); }
+.bb-ty-wel-email-ico svg{ width:17px; height:17px; }
+.bb-ty-wel-sign{ margin-top:22px; display:flex; flex-direction:column; align-items:center; gap:2px; }
+.bb-ty-wel-sign-mark{ font-family:var(--ty-head); font-weight:700; font-size:18px; color:#fff; }
+.bb-ty-wel-sign-role{ font-size:12.5px; letter-spacing:.04em; color:#8FA3BC; }
+
 /* ==========================================================================
    WHAT HAPPENS NEXT (white card, 4 columns)
    ========================================================================== */
@@ -412,5 +441,6 @@
   .bb-ty-steps{ grid-template-columns:1fr; }
   .bb-ty-next-head::before,.bb-ty-next-head::after{ max-width:34px; }
   .bb-ty-order{ padding:22px 18px 20px; }
+  .bb-ty-order.bb-ty-welcome{ padding:26px 20px 28px; }
   .bb-ty-order-item.is-addon{ margin-left:-10px; margin-right:-10px; padding-left:10px; padding-right:10px; }
 }

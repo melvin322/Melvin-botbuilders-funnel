@@ -208,61 +208,26 @@
       </div><!-- /hero-grid -->
     </header>
 
-    <!-- ============================================= order summary (below hero) -->
-    <aside class="bb-ty-order bb-ty-in" style="--d:260ms" aria-label="Order summary">
-      <div class="bb-ty-order-head">
-        <span class="bb-ty-order-title">Order summary</span>
-        <span class="bb-ty-order-paid">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4 4L19 7"/></svg>
-          Paid
-        </span>
-      </div>
-
-      <ul class="bb-ty-order-list">
-        <!-- ALWAYS SHOWN · main offer -->
-        <li class="bb-ty-order-item">
-          <div class="bb-ty-order-item-main">
-            <span class="bb-ty-order-name">Growth Plan</span>
-            <span class="bb-ty-order-desc">Full BotBuilders platform access · billed annually</span>
-          </div>
-          <span class="bb-ty-order-price">$1,164/yr</span>
-        </li>
-
-        <!-- ONLY IF BUMP TICKED · wg-row-bump -->
-        <li class="bb-ty-order-item wg-row-bump">
-          <div class="bb-ty-order-item-main">
-            <span class="bb-ty-order-name">VIP Launch Intensive</span>
-            <span class="bb-ty-order-desc">Live 1:1 build &amp; launch session — live in 48 hours</span>
-          </div>
-          <span class="bb-ty-order-price">$197</span>
-        </li>
-
-        <!-- ONLY IF OTO ACCEPTED · wg-row-oto -->
-        <li class="bb-ty-order-item is-addon wg-row-oto">
-          <div class="bb-ty-order-item-main">
-            <span class="bb-ty-order-name">Done-For-You Bot Setup<span class="bb-ty-order-badge">Just added</span></span>
-            <span class="bb-ty-order-desc">We build &amp; configure your bot for you · one-time</span>
-          </div>
-          <span class="bb-ty-order-price">$1,500</span>
-        </li>
-      </ul>
-
-      <div class="bb-ty-order-total">
-        <span>Total charged today</span>
-        <!-- Computed by JS from what is actually shown. Do not hardcode. -->
-        <span class="bb-ty-order-total-num" id="bb-ty-total">—</span>
-      </div>
-
-      <div class="bb-ty-order-save">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 3.5v6c0 5-3.4 9.4-8 10.5-4.6-1.1-8-5.5-8-10.5v-6z"/><path d="M9 12l2.2 2.2L15.5 10"/></svg>
-        Secure checkout · 30-day money-back guarantee
+    <!-- ============================= personal note from Matt (below hero) ---
+         Replaces the order summary. The greeting (first name), the message
+         (based on what they bought) and the email line are filled in by the
+         script from the buyer's name/email + the wg-bump / wg-oto variant. -->
+    <aside class="bb-ty-order bb-ty-welcome bb-ty-in" style="--d:260ms" id="bb-ty-welcome" aria-label="A note from Matt">
+      <p class="bb-ty-wel-eyebrow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.4 5.1 5.6.8-4 4 1 5.6-5-2.7-5 2.7 1-5.6-4-4 5.6-.8z"/></svg>
+        A note from Matt
+      </p>
+      <h2 class="bb-ty-wel-greeting" id="bb-ty-wel-greeting">You're all set!</h2>
+      <p class="bb-ty-wel-msg" id="bb-ty-wel-msg">Welcome to BotBuilders — you're going to love what's next.</p>
+      <p class="bb-ty-wel-email" id="bb-ty-wel-email">
+        <span class="bb-ty-wel-email-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M4 7l8 6 8-6"/></svg></span>
+        <span id="bb-ty-wel-email-txt">Your receipt and login details are on their way to your inbox.</span>
+      </p>
+      <div class="bb-ty-wel-sign">
+        <span class="bb-ty-wel-sign-mark">— Matt</span>
+        <span class="bb-ty-wel-sign-role">Founder, BotBuilders</span>
       </div>
     </aside>
-
-    <p class="bb-ty-note bb-ty-in" style="--d:320ms">
-      <span class="bb-ty-note-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M4 7l8 6 8-6"/></svg></span>
-      <span>Your receipt and access details are on their way to your email — no further payment needed.</span>
-    </p>
 
     <!-- ============================================================
          CONDITIONAL MESSAGE CARDS
@@ -429,6 +394,22 @@
     /* Hero cut-out photo (transparent PNG works best). Blank hides it.      */
     HERO_IMAGE   : 'https://assets.cdn.filesafe.space/sz4sVbBhLW7cX7keIHT6/media/6a7a83889a9c7792ea6078ce.png',
 
+    /* ------------------------------------------------------- MATT'S NOTE
+       The message on the welcome card, in Matt's voice, one per thing they
+       bought. The buyer's first name goes in the greeting and their email
+       on the line below, both pulled from the checkout (URL params or the
+       bb_lead the payment page saved). Variant comes from wg-bump / wg-oto:
+         base    → Growth Plan only
+         vip     → + VIP Launch Intensive
+         oto     → + Done-For-You Bot Setup
+         vip_oto → both                                                      */
+    MESSAGES : {
+      base    : "Welcome to BotBuilders — and honestly, well done. Your Growth Plan is live and my team is already in your corner. We'll help you get your first bot greeting leads and booking calls faster than you'd think. You brought the ambition; we'll help you turn it into a calendar that fills itself.",
+      vip     : "Love that you grabbed the VIP Launch Intensive — that's the fast lane, and exactly how I'd do it. We're going to build your bot together on a live call and have it launched before we say goodbye. Bring the one flow you want first; we'll bring the build. Let's get you live in 48 hours.",
+      oto     : "Smart move handing the Done-For-You Bot Setup to my team — the heavy lifting is on us now. We'll build, connect and configure everything for you, so your first bot ships ready to work from its very first conversation. Sit back and let us do what we do best.",
+      vip_oto : "You went all in — the Done-For-You Bot Setup and the VIP Launch Intensive — and that's exactly how you win with this. My team builds it for you, then we launch it together, live. You're getting the full BotBuilders treatment, and I couldn't be happier you're here. Let's make your calendar overflow."
+    },
+
     CURRENCY     : 'USD'
   };
   /* ======================================================================= */
@@ -441,15 +422,46 @@
   var hasOto  = cls.contains('wg-oto-yes');
   var isCold  = cls.contains('wg-cold');
 
-  /* -- order total · derived from what is actually shown ------------------- */
+  /* -- order value · kept for the conversion pixel further down ------------ */
   var total = CONFIG.PRICE_MAIN
             + (hasBump ? CONFIG.PRICE_BUMP : 0)
             + (hasOto  ? CONFIG.PRICE_OTO  : 0);
 
+  /* -- personal note from Matt: greeting (first name), message (based on
+        what they bought) and the email line ------------------------------- */
   (function () {
-    var el = document.getElementById('bb-ty-total');
-    if (!el) return;
-    el.textContent = '$' + total.toLocaleString('en-US');
+    function esc(s){ return String(s == null ? '' : s).replace(/[&<>"]/g, function(c){
+      return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c]; }); }
+    function set(id, html){ var el = document.getElementById(id); if(el) el.innerHTML = html; }
+
+    /* what the checkout knew about the buyer: URL params first (works across
+       domains), then the bb_lead the payment page saved to sessionStorage  */
+    var q = {};
+    location.search.replace(/^\?/,'').split('&').forEach(function(p){
+      if(!p) return; var kv = p.split('=');
+      q[decodeURIComponent(kv[0]).toLowerCase()] = decodeURIComponent((kv[1] || '').replace(/\+/g,' '));
+    });
+    function pick(){ for(var i=0;i<arguments.length;i++){ var v=q[arguments[i]];
+      if(v && v.indexOf('{{')<0) return v.trim(); } return ''; }
+
+    var first = pick('first_name','firstname','fname','first');
+    var email = pick('email','email_address');
+    var full  = pick('full_name','name');
+    if(full && !first) first = full.trim().split(/\s+/)[0];
+    try {
+      var saved = JSON.parse(sessionStorage.getItem('bb_lead') || '{}');
+      if(!first && saved.first) first = saved.first;
+      if(!email && saved.email) email = saved.email;
+    } catch(e){}
+
+    var variant = hasBump && hasOto ? 'vip_oto' : hasBump ? 'vip' : hasOto ? 'oto' : 'base';
+    var M = CONFIG.MESSAGES || {};
+
+    set('bb-ty-wel-greeting', first ? "You're in, " + esc(first) + "!" : "You're in — welcome aboard!");
+    set('bb-ty-wel-msg', M[variant] || M.base || '');
+    set('bb-ty-wel-email-txt', email
+      ? 'Your receipt and login details are on their way to <b>' + esc(email) + '</b> — keep an eye on your inbox.'
+      : 'Your receipt and login details are on their way to your inbox — keep an eye out.');
   })();
 
   /* -- conversion tracking · once per order, never on a cold landing ------
