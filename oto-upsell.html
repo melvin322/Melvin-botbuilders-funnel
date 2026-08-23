@@ -69,6 +69,11 @@
       <p class="bb-oto-note bb-oto-in" style="--d:280ms">
         This is a <b>one-time offer</b> shown only after the Limited Time Offer.
       </p>
+
+      <a href="#bb-oto-order" class="bb-oto-cta bb-oto-cta--hero bb-oto-in" style="--d:360ms" data-scroll>
+        Yes! Add To My Order
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3h2.2l2.1 12.3a1.6 1.6 0 0 0 1.6 1.3h9.1a1.6 1.6 0 0 0 1.6-1.3L21 7H6"/></svg>
+      </a>
     </header>
 
     <!-- ============================================================ product -->
@@ -127,7 +132,7 @@
     </section>
 
     <!-- ============================================================== offer -->
-    <section class="bb-oto-offer bb-oto-in" style="--d:120ms">
+    <section class="bb-oto-offer bb-oto-in" id="bb-oto-order" style="--d:120ms">
       <span class="bb-oto-offer-pop">Best Value</span>
       <h2 class="bb-oto-offer-h">Add The AI Script Pack Now</h2>
       <p class="bb-oto-offer-sub">Special One-Time Price — Only Available On This Page</p>
@@ -329,6 +334,19 @@
     }
   })();
 
+  /* -- in-page "add to my order" buttons smooth-scroll to the offer ------- */
+  (function(){
+    var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    root.querySelectorAll('[data-scroll]').forEach(function(btn){
+      btn.addEventListener('click', function(ev){
+        var target = document.getElementById('bb-oto-order') || root.querySelector('.bb-oto-offer');
+        if(!target) return;
+        ev.preventDefault();
+        target.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
+      });
+    });
+  })();
+
   /* -- page view ---------------------------------------------------------- */
   track('ViewContent', {content_name:'OTO — AI Script Pack'});
 
@@ -388,6 +406,7 @@
   document.addEventListener("click", function (e) {
     var el = e.target.closest('a, button, [role="button"], .celement');
     if (!el) return;
+    if (el.hasAttribute && el.hasAttribute('data-scroll')) return;  // in-page scroll, not accept/decline
 
     var label = (el.textContent || "").trim();
 
