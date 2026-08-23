@@ -103,10 +103,12 @@
       <section class="bb-pay-copy">
         <!-- the pill only appears for the VIP / OTO variants -->
         <span class="bb-pay-pill bb-pay-in" style="--d:140ms" id="bb-pay-pill" data-bb-when="vip oto vip_oto">One-time offer applied</span>
-        <h1 class="bb-pay-title bb-pay-in" style="--d:200ms">Your first bot,<br><span class="hl">live in 48 hours.</span></h1>
+        <h1 class="bb-pay-title bb-pay-in" style="--d:200ms">Your own Bob,<br><span class="hl">live in 48 hours.</span></h1>
         <p class="bb-pay-lead bb-pay-in" style="--d:280ms">
-          The Growth Plan gives you the platform, the templates, and a builder
-          in your corner. You don&rsquo;t learn a tool &mdash; you ship a working funnel.
+          Meet Bob the BotBuilder, our chatbot here at BotBuilders. With this
+          offer you create your very own Bob &mdash; a chatbot that answers every
+          lead in seconds, books more calls, and follows up 24/7, so you never
+          lose a sale.
         </p>
       </section>
 
@@ -399,10 +401,17 @@
     PRICING : {
       currency : '$',                  /* symbol shown in the summary */
       code     : 'USD',                /* ISO code sent to GHL / analytics */
-      renews   : 'then renews monthly &middot; cancel anytime',
-      plan : { name:'Growth Plan',              note:'monthly subscription',     price:297 },
-      vip  : { name:'VIP priority build',       note:'one-time &middot; front of the queue', price:97  },
-      oto  : { name:'Done-For-You Bot Setup',   note:'one-time &middot; built, connected, launched', price:497 }
+      renews   : 'then $97/mo &middot; cancel anytime',
+      save     : 'Limited-time saving',/* label on the savings line        */
+
+      /* `was` draws the regular price struck through next to the offer
+         price, and feeds the savings line. `period` is appended after the
+         amount ('/mo'). Set a price to 0 or 'free' for an "Included" row. */
+      plan : { name:'Your own Bob',           note:'Growth Plan &middot; limited-time price', price:97, was:147, period:'/mo' },
+
+      /* PLACEHOLDERS — still waiting on the real numbers for these two   */
+      vip  : { name:'VIP priority build',     note:'one-time &middot; front of the queue', price:97  },
+      oto  : { name:'Done-For-You Bot Setup', note:'one-time &middot; built, connected, launched', price:497 }
     },
 
     /* ---------------------------------------------------------------- COPY
@@ -442,8 +451,8 @@
     COPY : {
       base : {
         badge   : '',                        /* no pill for the base visit */
-        title   : 'Your first bot,<br><span class="hl">live in 48 hours.</span>',
-        lead    : 'The Growth Plan gives you the platform, the templates, and a builder in your corner. You don&rsquo;t learn a tool &mdash; you ship a working funnel.'
+        title   : 'Your own Bob,<br><span class="hl">live in 48 hours.</span>',
+        lead    : 'Meet Bob the BotBuilder, our chatbot here at BotBuilders. With this offer you create your very own Bob &mdash; a chatbot that answers every lead in seconds, books more calls, and follows up 24/7, so you never lose a sale.'
         /* no items → the checklist in the markup above stands as written */
       },
 
@@ -711,16 +720,35 @@
                + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.6"'
                + ' stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>';
       list.innerHTML = rows.map(function(r){
-        var free = r.item.price === 'free' || r.item.price === 0;
+        var it   = r.item;
+        var free = it.price === 'free' || it.price === 0;
+        var amt  = free ? 'Included'
+                 : (it.was ? '<s class="bb-pay-sum-was">' + money(it.was) + '</s> ' : '')
+                   + money(it.price)
+                   + (it.period ? '<span class="bb-pay-sum-per">' + it.period + '</span>' : '');
         return '<li class="bb-pay-sum-row' + (r.add ? ' is-add' : '') + '">'
              +   tick
-             +   '<span><span class="bb-pay-sum-name">' + r.item.name + '</span>'
-             +     (r.item.note ? '<span class="bb-pay-sum-note">' + r.item.note + '</span>' : '')
+             +   '<span><span class="bb-pay-sum-name">' + it.name + '</span>'
+             +     (it.note ? '<span class="bb-pay-sum-note">' + it.note + '</span>' : '')
              +   '</span>'
-             +   '<span class="bb-pay-sum-price' + (free ? ' is-free' : '') + '">'
-             +     (free ? 'Included' : money(r.item.price)) + '</span>'
+             +   '<span class="bb-pay-sum-price' + (free ? ' is-free' : '') + '">' + amt + '</span>'
              + '</li>';
       }).join('');
+
+      /* what the struck-through prices add up to */
+      var saved = 0;
+      rows.forEach(function(r){
+        if(typeof r.item.was === 'number' && typeof r.item.price === 'number'){
+          saved += r.item.was - r.item.price;
+        }
+      });
+      if(saved > 0){
+        list.innerHTML += '<li class="bb-pay-sum-row is-save">'
+                        + '<span></span>'
+                        + '<span class="bb-pay-sum-name">' + (P.save || 'You save') + '</span>'
+                        + '<span class="bb-pay-sum-price is-free">&minus;' + money(saved) + '</span>'
+                        + '</li>';
+      }
     }
 
     var totalEl = document.getElementById('bb-pay-sum-total');
