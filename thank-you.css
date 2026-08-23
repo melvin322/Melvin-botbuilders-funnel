@@ -284,7 +284,7 @@
   font-size:clamp(26px,3.4vw,38px); line-height:1.08; letter-spacing:-.01em; margin-bottom:14px;
 }
 .bb-ty-wel-msg{
-  max-width:620px; margin:0 auto;
+  max-width:600px; margin:0 auto; text-align:left;
   font-size:clamp(15px,1.7vw,17px); line-height:1.65; color:#C7D5E6;
 }
 .bb-ty-wel-email{
