@@ -1139,10 +1139,17 @@
   })();
 
   /* -- 8. smooth in-page jumps -------------------------------------------- */
+  /* Scroll with a fixed offset so the section intro stays visible above the
+     target (e.g. every "Lock In $97/mo" CTA → the offer cards at #bb-claim).
+     Done in JS (not just CSS scroll-margin) so it works even where the host
+     page ignores scroll-margin-top. */
+  var JUMP_OFFSET = 130;
   root.querySelectorAll('a[href^="#bb-"]').forEach(function(a){
     a.addEventListener('click', function(ev){
       var t=document.querySelector(a.getAttribute('href')); if(!t) return;
-      ev.preventDefault(); t.scrollIntoView({behavior:REDUCED?'auto':'smooth', block:'start'});
+      ev.preventDefault();
+      var y = t.getBoundingClientRect().top + (window.pageYOffset || document.documentElement.scrollTop || 0) - JUMP_OFFSET;
+      window.scrollTo({ top: Math.max(0, y), behavior: REDUCED ? 'auto' : 'smooth' });
     });
   });
 
