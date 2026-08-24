@@ -614,6 +614,7 @@
 .bb-hp-timer svg{ width:14px; height:14px; }
 .bb-hp-cd{ font-variant-numeric:tabular-nums; }
 .bb-hp-cd b{ font-weight:800; }
+.bb-hp-cta{ flex-basis:100%; margin-top:2px; justify-content:center; }
 
 /* -- Bob mascot (hero right) ------------------------------------------- */
 .bb-hero-bob {
