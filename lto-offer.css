@@ -1424,6 +1424,8 @@
 .bb-offer{
   position:relative;
   display:grid; grid-template-columns:1.05fr .95fr; gap:40px; align-items:stretch;
+  /* CTAs jump here; leave room above so the section intro stays visible */
+  scroll-margin-top:130px;
 }
 #bb-pricing{ overflow-x:clip; }   /* keep the side Bob from causing horizontal scroll */
 /* left — the value stack */
