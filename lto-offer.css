@@ -665,8 +665,15 @@
     transition:transform .25s ease, box-shadow .25s ease;
 }
 .bb-bob-play-btn svg{ width:22px; height:22px; margin-left:3px; }
-/* "Watch Bob in action" button, sits below the Meet Bob caption */
-.bb-bob-watch{ margin-top:14px; }
+/* "Watch Bob in action" button, sits below the Meet Bob caption — compact */
+.bb-bob-watch{
+    margin-top:12px;
+    font-size:13px;
+    padding:9px 16px;
+    border-radius:9px;
+    gap:7px;
+}
+.bb-bob-watch .bb-btn-ico{ width:14px; height:14px; }
 .bb-bob-frame[data-bob-play]:hover .bb-bob-play-btn,
 .bb-bob-frame[data-bob-play]:focus-visible .bb-bob-play-btn{
     transform:scale(1.08);
