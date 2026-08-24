@@ -1473,29 +1473,13 @@
 .bb-price{
   position:relative;
   background:#fff; border:1.5px solid #D5E3F7; border-radius:var(--bb-radius-lg);
-  padding:44px 34px 34px; box-shadow:var(--bb-shadow);
+  padding:28px 34px 34px; box-shadow:var(--bb-shadow);
   display:flex; flex-direction:column;
 }
-/* ManyChat-style sparkle tab that sits at the top edge of the card */
-.bb-price-tab{
-  position:absolute; top:0; left:50%; transform:translate(-50%,-52%);
-  display:inline-flex; align-items:center; gap:7px;
-  background:linear-gradient(180deg,#EEF3FF,#E3ECFF);
-  border:1px solid #CFE0FA;
-  color:var(--bb-blue);
-  font-family:var(--bb-font); font-size:12px; font-weight:800;
-  letter-spacing:.1em; text-transform:uppercase;
-  padding:9px 20px; border-radius:14px 14px 0 0;
-  box-shadow:0 -6px 18px -12px rgba(37,99,255,.5);
-}
-.bb-price-tab svg{ width:14px; height:14px; color:var(--bb-blue); }
+/* plan name — reference style: large, bold, dark, centered */
 .bb-price-name{
-  font-family:var(--bb-head); font-weight:800; font-size:30px; line-height:1.05;
-  color:var(--bb-heading); text-align:center; margin-bottom:6px;
-}
-.bb-price-sub{
-  text-align:center; color:var(--bb-muted); font-size:15px; line-height:1.4;
-  max-width:300px; margin:0 auto 18px;
+  font-family:var(--bb-head); font-weight:800; font-size:28px; line-height:1.05;
+  color:var(--bb-heading); text-align:center; margin-bottom:12px;
 }
 .bb-price-fig{ text-align:center; display:flex; align-items:flex-start; justify-content:center; gap:4px; }
 .bb-price-cur{ font-family:var(--bb-display); font-size:34px; color:var(--bb-heading); margin-top:8px; }
@@ -1504,23 +1488,6 @@
 .bb-price-bill{ text-align:center; margin-top:10px; color:var(--bb-muted); font-size:14px; }
 .bb-price-bill s{ color:#A9B4C4; margin:0 2px; }
 .bb-price-bill b{ color:var(--bb-ok); font-weight:800; }
-/* metric block (mirrors the reference's "2500 / Active Contacts …") */
-.bb-price-metric{
-  margin-top:20px; padding-top:20px; border-top:1px solid var(--bb-border);
-  text-align:center;
-}
-.bb-price-metric-num{
-  font-family:var(--bb-head); font-weight:800; font-size:26px; letter-spacing:.01em;
-  color:var(--bb-heading); line-height:1;
-}
-.bb-price-metric-lbl{
-  margin-top:7px; color:var(--bb-muted); font-size:14px; line-height:1.4;
-  max-width:280px; margin-left:auto; margin-right:auto;
-}
-.bb-price-metric-hl{
-  color:var(--bb-heading); font-weight:600;
-  border-bottom:1px dashed #B7C6DC;
-}
 .bb-price-list{ margin:24px 0 4px; display:flex; flex-direction:column; gap:12px; }
 .bb-price-list li{ display:flex; align-items:center; gap:11px; color:var(--bb-heading); font-size:15px; font-weight:500; }
 .bb-price-list .bb-ck{
