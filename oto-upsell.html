@@ -66,15 +66,33 @@
       <p class="bb-oto-lead bb-oto-in" style="--d:220ms">
         Make your bots sound human and close more — with proven scripts and AI prompts, ready to paste in.
       </p>
-      <p class="bb-oto-note bb-oto-in" style="--d:280ms">
-        This is a <b>one-time offer</b> shown only after the Limited Time Offer.
-      </p>
 
-      <div class="bb-oto-in" style="--d:360ms">
-        <a href="#bb-oto-order" class="bb-oto-cta bb-oto-cta--hero" data-scroll>
-          Yes! Add To My Order
+      <!-- offer — price + CTA + decline + trust -->
+      <div class="bb-oto-offer2 bb-oto-in" style="--d:300ms">
+        <div class="bb-oto-pricebar">
+          <span class="bb-oto-price-old">$297</span>
+          <span class="bb-oto-price-new">$97</span>
+          <span class="bb-oto-price-note">one-time</span>
+          <span class="bb-oto-pb-div" aria-hidden="true"></span>
+          <span class="bb-oto-save">Save $200</span>
+        </div>
+
+        <a href="#" class="bb-oto-cta" id="bb-oto-accept" data-accept>
+          Add To My Order
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3h2.2l2.1 12.3a1.6 1.6 0 0 0 1.6 1.3h9.1a1.6 1.6 0 0 0 1.6-1.3L21 7H6"/></svg>
         </a>
+
+        <a href="#" class="bb-oto-decline-btn" id="bb-oto-decline" data-decline>
+          No thanks, I'll pass on this offer
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+
+        <div class="bb-oto-trustrow">
+          <span class="i-ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10.5" width="15" height="10" rx="2.2"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></svg>Secure checkout</span>
+          <span class="i-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 3.5v6c0 5-3.4 9.4-8 10.5-4.6-1.1-8-5.5-8-10.5v-6z"/></svg>14-day money-back guarantee</span>
+          <span class="i-ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Shown only on this page</span>
+        </div>
+        <p class="bb-oto-finenote">You won't be charged again for your main order — this only adds the Script Pack.</p>
       </div>
     </header>
 
@@ -133,63 +151,27 @@
       </div>
     </section>
 
-    <!-- ============================================================== offer -->
-    <section class="bb-oto-offer bb-oto-in" id="bb-oto-order" style="--d:120ms">
-      <span class="bb-oto-offer-pop">Best Value</span>
-      <h2 class="bb-oto-offer-h">Add The AI Script Pack Now</h2>
-      <p class="bb-oto-offer-sub">Special One-Time Price — Only Available On This Page</p>
-
-      <div class="bb-oto-price">
-        <span class="bb-oto-price-old">$297</span>
-        <span class="bb-oto-price-new">$97</span>
-        <span class="bb-oto-price-note">one-time</span>
+    <!-- =================================================== urgency + guarantee -->
+    <section class="bb-oto-boxes">
+      <div class="bb-oto-box bb-oto-box--urgency bb-oto-in" style="--d:120ms">
+        <div class="bb-oto-box-ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 2.5h6M12 5V2.5"/></svg>
+        </div>
+        <div class="bb-oto-box-body">
+          <h3>This Offer Won't Be Available Again</h3>
+          <p>You won't see this price again. Add it now and start converting more conversations today.</p>
+        </div>
       </div>
-
-      <a href="#" class="bb-oto-cta" id="bb-oto-accept" data-accept>
-        Yes! Add To My Order
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3h2.2l2.1 12.3a1.6 1.6 0 0 0 1.6 1.3h9.1a1.6 1.6 0 0 0 1.6-1.3L21 7H6"/></svg>
-      </a>
-
-      <p class="bb-oto-trust">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10.5" width="15" height="10" rx="2.2"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></svg>
-        Secure Checkout — 100% Safe &amp; Secure
-      </p>
-
-      <!-- No Thanks — below the CTA -->
-      <a href="#" class="bb-oto-decline" id="bb-oto-decline" data-decline>
-        <span>
-          <b>No Thanks, I'll Pass on This Offer</b>
-          <i>I understand I won't be able to get this offer again.</i>
-        </span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </a>
-    </section>
-
-    <!-- ============================================================ urgency -->
-    <section class="bb-oto-urgency bb-oto-in" style="--d:130ms">
-      <div class="bb-oto-urgency-ico" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 2.5h6M12 5V2.5"/></svg>
-      </div>
-      <div class="bb-oto-urgency-body">
-        <h3>This Offer Won't Be Available Again</h3>
-        <p>You'll not see this price again. Add the AI Script Pack now and start converting more conversations today.</p>
+      <div class="bb-oto-box bb-oto-box--guar bb-oto-in" style="--d:180ms">
+        <div class="bb-oto-box-ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 3.5v6c0 5-3.4 9.4-8 10.5-4.6-1.1-8-5.5-8-10.5v-6z"/><path d="M9 12l2.2 2.2L15.5 10"/></svg>
+        </div>
+        <div class="bb-oto-box-body">
+          <h3>100% Risk-Free for 14 Days</h3>
+          <p>Not completely satisfied? Contact us within 14 days and we'll refund your money. No questions asked.</p>
+        </div>
       </div>
     </section>
-
-    <!-- ========================================================== guarantee -->
-    <div class="bb-oto-guarantee bb-oto-in" style="--d:140ms">
-      <div class="bb-oto-shield" aria-hidden="true">
-        <svg viewBox="0 0 120 132" fill="none">
-          <path d="M60 4 108 22v42c0 34-24 52-48 64C36 116 12 98 12 64V22z" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.5)" stroke-width="2"/>
-          <path d="M60 4 108 22v42c0 34-24 52-48 64C36 116 12 98 12 64V22z" fill="none" stroke="#38BDF8" stroke-width="2" stroke-dasharray="3 6" opacity=".6"/>
-        </svg>
-        <div class="bb-oto-shield-txt"><b>14-DAY</b>MONEY BACK<span>GUARANTEE</span><i>★★★</i></div>
-      </div>
-      <div class="bb-oto-guarantee-body">
-        <h3>100% Risk-Free</h3>
-        <p>If you're not completely satisfied, simply contact us within 14 days of your purchase and we'll refund your money. No questions asked.</p>
-      </div>
-    </div>
 
   </div><!-- /shell -->
 
@@ -400,7 +382,7 @@
     // Exact visible text on each button. Partial match, so "Add To My Order"
     // still matches a button reading "Yes! Add To My Order".
     acceptLabel: "Add To My Order",
-    declineLabel: "No Thanks",
+    declineLabel: "No thanks",
 
     // Storage key. Must match the thank you page detector (File 3).
     storageKey: "wg_oto"
