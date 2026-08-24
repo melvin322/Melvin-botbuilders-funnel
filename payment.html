@@ -20,9 +20,7 @@
      ------------------------------------------------------------------------
      WHAT IS ON THE PAGE
        left  — headline, order summary (built from CONFIG.PRICING for the
-               offer they took), a "what happens next" tracker in the same
-               numbered-step form as the thank-you page, what's included,
-               and a testimonial
+               offer they took), what's included, and a testimonial
        right — the payment card (sticky on desktop)
      ------------------------------------------------------------------------
      EDIT THESE FIRST (see the CONFIG block in the <script> at the bottom):
@@ -131,60 +129,6 @@
           </span>
           <span class="bb-pay-sum-total-v" id="bb-pay-sum-total">&mdash;</span>
         </div>
-      </section>
-
-      <!-- ============================================== what happens next -->
-      <section class="bb-pay-next bb-pay-card-sh bb-pay-in" style="--d:400ms">
-        <h2 class="bb-pay-kicker">What happens next</h2>
-
-        <ol class="bb-pay-steps">
-          <li class="bb-pay-step">
-            <div class="bb-pay-step-num">1</div>
-            <div class="bb-pay-step-b">
-              <h3>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M4 7l8 6 8-6"/></svg>
-                Your receipt and login
-                <span class="bb-pay-step-when">Instant</span>
-              </h3>
-              <p>Both land in your inbox moments after this clears &mdash; nothing to wait around for.</p>
-            </div>
-          </li>
-
-          <li class="bb-pay-step">
-            <div class="bb-pay-step-num">2</div>
-            <div class="bb-pay-step-b">
-              <h3>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v14H4z"/><path d="M8 10h8M8 14h5"/></svg>
-                A couple of quick questions
-                <span class="bb-pay-step-when">Today</span>
-              </h3>
-              <p>We will ask about your business, your offer and your calendar, so your builder can hit the ground running.</p>
-            </div>
-          </li>
-
-          <li class="bb-pay-step">
-            <div class="bb-pay-step-num">3</div>
-            <div class="bb-pay-step-b">
-              <h3>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.4 5.1 5.6.8-4 4 1 5.6-5-2.7-5 2.7 1-5.6-4-4 5.6-.8z"/></svg>
-                We build and test your funnel
-                <span class="bb-pay-step-when" id="bb-pay-step-eta">48 hours</span>
-              </h3>
-              <p>Your bots, flows and integrations get wired up and checked end to end, so it works from the very first conversation.</p>
-            </div>
-          </li>
-
-          <li class="bb-pay-step">
-            <div class="bb-pay-step-num">4</div>
-            <div class="bb-pay-step-b">
-              <h3>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
-                You go live!
-              </h3>
-              <p>Your funnel starts answering leads and booking calls, and we will arrange your monthly strategy call from there. This is the fun part.</p>
-            </div>
-          </li>
-        </ol>
       </section>
 
       <!-- ================================================= what's included -->
@@ -512,8 +456,8 @@
 
        Per variant: label (the offer's readable name, sent to GHL as
        offer_name), badge (the pill above the headline), title, lead,
-       cardKicker, cardTitle, cta, eta (the build time on step 3 of the
-       tracker) and items (the whole What's-included list). Every field is optional —
+       cardKicker, cardTitle, cta and items (the whole What's-included
+       list). Every field is optional —
        leave one out and the markup's own wording stands. In items, a leading
        + marks the line as newly added, which sets it in medium weight.      */
     COPY : {
@@ -527,7 +471,6 @@
       vip : {
         label   : 'VIP Launch Intensive',
         badge   : 'VIP Launch Intensive added!',
-        eta     : 'Live, with you',
         title   : 'One step to go &mdash;<br><span class="hl">then we build it together!</span>',
         lead    : 'Brilliant choice, and thank you! With the VIP Launch Intensive on your order we share a screen, plug your bot into your calendar and CRM while you watch, and have it live before we say goodbye &mdash; nothing left waiting on you afterwards.',
         items   : [
@@ -565,7 +508,6 @@
       vip_oto : {
         label   : 'VIP + AI Script Pack',
         badge   : 'VIP + AI Script Pack added!',
-        eta     : 'Live, with you',
         title   : 'One step to go &mdash;<br><span class="hl">then it is built and briefed!</span>',
         lead    : 'Wonderful &mdash; thank you for taking both! We build your bot with you on a live call, and it arrives already knowing exactly what to say. Add your card below and we will take it from here.',
         items   : [
@@ -791,7 +733,6 @@
     put('.bb-pay-lead',      copy.lead);
     put('.bb-pay-box-kicker',copy.cardKicker);
     put('.bb-pay-box-title', copy.cardTitle);
-    put('#bb-pay-step-eta',  copy.eta);
 
     /* the pill only makes sense when an offer was taken */
     var pill = root.querySelector('#bb-pay-pill');
