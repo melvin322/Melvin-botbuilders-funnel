@@ -370,11 +370,18 @@
 
        1. The link. Any of these are understood, in GHL merge-field form or
           plain:  ?first_name= &last_name= &email= &phone=  (also fname /
-          lname / firstname / lastname / full_name / name). On a GHL order
+          lname / firstname / lastname / full_name / name) — which is exactly
+          what the offer page's form already appends. On a GHL order
           form's redirect that is
             …/payment?first_name={{contact.first_name}}&email={{contact.email}}
 
-       2. Session storage, which is the tidier route when the offer pages sit
+       2. Storage. The offer page saves wg_lead (session AND local) as
+          firstName / lastName / email / phone / order_bump — this page reads
+          that shape first, so on the same domain the form fills itself with
+          nothing added to the link, and order_bump tells it the VIP answer.
+          Failing that, it reads its own bb_lead.
+
+       3. Session storage, which is the tidier route when the offer pages sit
           on the same domain: each page saves what it knows and the next one
           reads it, so no personal data goes in a URL. Paste
           offer-page-prefill.js (in this repo) into the LTO and the OTO page
@@ -409,15 +416,15 @@
     PRICING : {
       currency : '$',                  /* symbol shown in the summary */
       code     : 'USD',                /* ISO code sent to GHL / analytics */
-      renews   : '$1,164 billed once a year &middot; cancel anytime',
+      renews   : 'then $97/mo &middot; price locked for life &middot; cancel anytime',
       save     : 'You save',           /* label on the savings line        */
 
       /* `was` draws the regular price struck through next to the offer
          price and feeds the savings line. `period` is appended after the
          amount. Set a price to 0 or 'free' for an "Included" row.
-         Plan: $97/mo billed annually = $1,164/yr, against $147/mo =
-         $1,764/yr, the 34% saving the offer page quotes.                  */
-      plan : { name:'Growth Plan',                  note:'$97/mo &middot; billed annually',            price:1164, was:1764, period:'/yr' },
+         Plan: $97/mo against $147/mo, the 34% the offer page quotes, and
+         billed monthly — so today's charge is $97, not a year of it.      */
+      plan : { name:'Growth Plan',                  note:'billed monthly &middot; price locked for life', price:97, was:147, period:'/mo' },
       vip  : { name:'VIP Launch Intensive',         note:'one-time &middot; live build session',        price:197 },
       /* NOTE — the OTO price is contested: the OTO page reads $97 (was $297)
          for the AI Script Pack, while the thank-you page's CONFIG carries
@@ -625,6 +632,12 @@
       else if(off(QUERY.bump) || off(QUERY.vip)) bump = false;
       if(bump !== null) VARIANT_FROM = 'the link (?bump / ?vip flag)';
     }
+    /* the offer page's own form appends addon=vip-launch when the box is
+       ticked, so honour that spelling too                                 */
+    if(bump === null && QUERY.addon && QUERY.addon.toLowerCase().indexOf('vip') > -1){
+      bump = true;
+      VARIANT_FROM = 'the link (?addon=' + QUERY.addon + ')';
+    }
     if(oto === null){
       if(on(QUERY.oto))       oto = true;
       else if(off(QUERY.oto)) oto = false;
@@ -655,11 +668,31 @@
     /* 4. what the funnel already stored — the thank-you page's keys first */
     if(bump === null){
       var sb = ss(WG.bump);
-      if(sb !== null){ bump = sb === '1'; VARIANT_FROM = 'this session (' + WG.bump + ')'; }
+      if(sb !== null){
+        bump = sb === '1';
+        if(VARIANT_FROM.charAt(0) === 'n') VARIANT_FROM = 'this session (' + WG.bump + ')';
+      }
+    }
+    /* the offer page's saved lead carries order_bump alongside the contact */
+    if(bump === null){
+      var raw = ss('wg_lead');
+      if(!raw){ try{ raw = window.localStorage.getItem('wg_lead'); }catch(e){} }
+      if(raw){
+        try{
+          var lead = JSON.parse(raw) || {};
+          if(typeof lead.order_bump !== 'undefined'){
+            bump = String(lead.order_bump) === 'true' || String(lead.order_bump) === '1';
+            VARIANT_FROM = 'the saved lead (wg_lead.order_bump)';
+          }
+        }catch(e){}
+      }
     }
     if(oto === null){
       var so = ss(WG.oto);
-      if(so !== null){ oto = so === '1'; VARIANT_FROM = 'this session (' + WG.oto + ')'; }
+      if(so !== null){
+        oto = so === '1';
+        if(VARIANT_FROM.charAt(0) === 'n') VARIANT_FROM = 'this session (' + WG.oto + ')';
+      }
     }
     if(bump === null && oto === null){
       var mine = ss('bb_offer');
@@ -923,12 +956,23 @@
       if(cut > 0 && !out.last) out.last = full.slice(cut+1).trim();
     }
 
-    try{
-      var saved = JSON.parse(window.sessionStorage.getItem('bb_lead') || '{}');
-      ['first','last','email','phone'].forEach(function(k){
-        if(!out[k] && saved[k]) out[k] = saved[k];
-      });
-    }catch(e){}
+    /* the offer page saves wg_lead in both session and local storage, in its
+       own shape: firstName / lastName / email / phone / order_bump.       */
+    var stores = [];
+    try{ stores.push(window.sessionStorage); }catch(e){}
+    try{ stores.push(window.localStorage);   }catch(e){}
+
+    for(var i=0; i<stores.length; i++){
+      var raw;
+      try{ raw = stores[i].getItem('wg_lead') || stores[i].getItem('bb_lead'); }catch(e){ raw = null; }
+      if(!raw) continue;
+      var saved = {};
+      try{ saved = JSON.parse(raw) || {}; }catch(e){ saved = {}; }
+      if(!out.first) out.first = saved.firstName || saved.first_name || saved.first || '';
+      if(!out.last)  out.last  = saved.lastName  || saved.last_name  || saved.last  || '';
+      if(!out.email) out.email = saved.email || '';
+      if(!out.phone) out.phone = saved.phone || '';
+    }
 
     return out;
   })();
@@ -947,12 +991,23 @@
 
     /* keep it, so a bounce out to the processor does not empty the form */
     var save = function(){
-      try{
-        window.sessionStorage.setItem('bb_lead', JSON.stringify({
-          first: F.first.value.trim(), last : F.last.value.trim(),
-          email: F.email.value.trim(), phone: F.phone.value.trim()
-        }));
-      }catch(e){}
+      var first = F.first.value.trim(), last = F.last.value.trim();
+      var mine  = JSON.stringify({ first:first, last:last,
+                                   email:F.email.value.trim(), phone:F.phone.value.trim() });
+      /* wg_lead in the offer page's shape, so anything downstream that
+         already reads it keeps working                                   */
+      var theirs = JSON.stringify({
+        firstName : first,
+        lastName  : last,
+        email     : F.email.value.trim(),
+        phone     : F.phone.value.trim(),
+        order_bump: (VARIANT === 'vip' || VARIANT === 'vip_oto') ? 'true' : 'false',
+        offer     : VARIANT,
+        source    : location.href
+      });
+      try{ window.sessionStorage.setItem('bb_lead', mine); }catch(e){}
+      try{ window.sessionStorage.setItem('wg_lead', theirs); }catch(e){}
+      try{ window.localStorage.setItem('wg_lead', theirs); }catch(e){}
     };
     [F.first, F.last, F.email, F.phone].forEach(function(el){
       el.addEventListener('change', save);
