@@ -394,8 +394,10 @@
   /* -- fire the LeadConnector webhook once, with the lead + what they bought */
   (function () {
     if (!CONFIG.WEBHOOK_URL) return;
-    if (isCold) return;                                 /* no funnel context */
-    if (!LEAD.email && !LEAD.first && !LEAD.phone) return;  /* no real lead */
+    /* This is the final page — landing here means they paid on the previous
+       page, so fire for any real lead. Only skip when there is no contact
+       info at all (a bot or a stray direct hit). */
+    if (!LEAD.email && !LEAD.first && !LEAD.phone) return;
 
     try {                                               /* once per session */
       if (sessionStorage.getItem('wg_webhook_fired') === '1') return;
