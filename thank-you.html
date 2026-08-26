@@ -409,7 +409,8 @@
       email       : LEAD.email,
       phone       : LEAD.phone,
       order_bump  : bumpOn ? 'true' : 'false',
-      quoted_total: bumpOn ? '294' : '97',
+      /* base 97 (+197 VIP bump, +97 OTO): plain 97 · VIP 294 · OTO 194 · both 391 */
+      quoted_total: String(97 + (bumpOn ? 197 : 0) + (otoOn ? 97 : 0)),
       choice      : otoOn ? 'accepted' : 'declined',
       oto_accepted: otoOn ? 'true' : 'false',
       offer       : variant,
