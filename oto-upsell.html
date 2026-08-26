@@ -195,6 +195,11 @@
     /* The upsell price (used for conversion tracking only).                  */
     OFFER_VALUE  : 97,
 
+    /* GHL inbound webhook — fired when the buyer clicks Add to my order or
+       No thanks. Payload: first_name, last_name, email, phone (read from the
+       URL params the LTO forwards) + their choice. Blank = webhook off.      */
+    WEBHOOK_URL  : 'https://services.leadconnectorhq.com/hooks/sz4sVbBhLW7cX7keIHT6/webhook-trigger/d631482d-0796-477f-9325-efa03ce8f38e',
+
     /* Real product shot (transparent PNG works best). Blank keeps the
        built-in on-brand SVG mockup.                                          */
     PRODUCT_IMAGE: '',
@@ -314,19 +319,50 @@
     }catch(e){ return base; }
   }
 
-  /* -- accept / decline links (+ conversion tracking) --------------------- */
+  /* -- fire the GHL webhook with the lead's fields + their choice. Uses
+     sendBeacon so it still sends while the page navigates to payment.        */
+  function leadField(keys){
+    try{
+      var q = new URLSearchParams(window.location.search);
+      for(var i=0;i<keys.length;i++){ var v=q.get(keys[i]); if(v) return v; }
+    }catch(e){}
+    return '';
+  }
+  function fireWebhook(choice){
+    if(!CONFIG.WEBHOOK_URL) return;
+    var payload = {
+      first_name   : leadField(['first_name','firstName','fname','first']),
+      last_name    : leadField(['last_name','lastName','lname','last']),
+      email        : leadField(['email','email_address']),
+      phone        : leadField(['phone','phone_number','phoneNumber']),
+      choice       : choice,                 /* "accepted" or "declined" */
+      oto_accepted : (choice === 'accepted'),
+      offer        : 'AI Script Pack (OTO)',
+      value        : CONFIG.OFFER_VALUE
+    };
+    var body = JSON.stringify(payload);
+    try{
+      if(navigator.sendBeacon &&
+         navigator.sendBeacon(CONFIG.WEBHOOK_URL, new Blob([body], {type:'text/plain;charset=UTF-8'}))) return;
+    }catch(e){}
+    try{ fetch(CONFIG.WEBHOOK_URL, {method:'POST', body:body, headers:{'Content-Type':'text/plain'}, keepalive:true, mode:'no-cors'}); }catch(e){}
+  }
+
+  /* -- accept / decline links (+ webhook + conversion tracking) ----------- */
   (function(){
     var accept=document.getElementById('bb-oto-accept');
     var decline=document.getElementById('bb-oto-decline');
     if(accept){
       if(CONFIG.ACCEPT_URL) accept.setAttribute('href', forwardParams(CONFIG.ACCEPT_URL));
       accept.addEventListener('click', function(){
+        fireWebhook('accepted');
         track('Purchase', {content_name:'AI Script Pack (OTO)', value:CONFIG.OFFER_VALUE, currency:'USD'});
       });
     }
     if(decline){
       if(CONFIG.DECLINE_URL) decline.setAttribute('href', forwardParams(CONFIG.DECLINE_URL));
       decline.addEventListener('click', function(){
+        fireWebhook('declined');
         track('upsell_declined', {content_name:'AI Script Pack (OTO)'});
       });
     }
