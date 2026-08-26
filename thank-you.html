@@ -279,6 +279,11 @@
     /* Hero cut-out photo (transparent PNG works best). Blank hides it.      */
     HERO_IMAGE   : 'https://assets.cdn.filesafe.space/sz4sVbBhLW7cX7keIHT6/media/6a7a83889a9c7792ea6078ce.png',
 
+    /* LeadConnector / GHL webhook. Fired once when a lead lands on this page,
+       with their first/last name, email and phone, plus what they bought
+       (order_bump, quoted_total, choice, oto_accepted). Blank = off.        */
+    WEBHOOK_URL  : 'https://services.leadconnectorhq.com/hooks/sz4sVbBhLW7cX7keIHT6/webhook-trigger/4cd62f1e-ea9c-48ab-8bf9-2052280cbed7',
+
     /* ------------------------------------------------------- MATT'S NOTE
        The message on the welcome card, in Matt's voice, one per thing they
        bought. The buyer's first name goes in the greeting and their email
@@ -355,10 +360,80 @@
      the "what happens next" steps */
   var variant = hasBump && hasOto ? 'vip_oto' : hasBump ? 'vip' : hasOto ? 'oto' : 'base';
 
-  /* -- order value · kept for the conversion pixel further down ------------ */
+  /* -- order value · used by the webhook and the conversion pixel ---------- */
   var total = CONFIG.PRICE_MAIN
             + (hasBump ? CONFIG.PRICE_BUMP : 0)
             + (hasOto  ? CONFIG.PRICE_OTO  : 0);
+
+  /* -- who the buyer is: URL params first (works cross-domain), then the
+        bb_lead the payment page saved to sessionStorage (same domain) ------ */
+  var LEAD = (function () {
+    var q = {};
+    location.search.replace(/^\?/,'').split('&').forEach(function (p) {
+      if (!p) return; var kv = p.split('=');
+      q[decodeURIComponent(kv[0]).toLowerCase()] = decodeURIComponent((kv[1] || '').replace(/\+/g,' '));
+    });
+    function pick(){ for (var i=0;i<arguments.length;i++){ var v=q[arguments[i]];
+      if (v && v.indexOf('{{') < 0) return v.trim(); } return ''; }
+
+    var out = {
+      first: pick('first_name','firstname','fname','first'),
+      last : pick('last_name','lastname','lname','last'),
+      email: pick('email','email_address'),
+      phone: pick('phone','phone_number','tel','mobile')
+    };
+    var full = pick('full_name','name');
+    if (full && !out.first) { var parts = full.trim().split(/\s+/); out.first = parts[0]; if (!out.last && parts.length > 1) out.last = parts.slice(1).join(' '); }
+    try {
+      var saved = JSON.parse(sessionStorage.getItem('bb_lead') || '{}');
+      ['first','last','email','phone'].forEach(function (k) { if (!out[k] && saved[k]) out[k] = saved[k]; });
+    } catch (e) {}
+    return out;
+  })();
+
+  /* -- fire the LeadConnector webhook once, with the lead + what they bought */
+  (function () {
+    if (!CONFIG.WEBHOOK_URL) return;
+    if (isCold) return;                                 /* no funnel context */
+    if (!LEAD.email && !LEAD.first && !LEAD.phone) return;  /* no real lead */
+
+    try {                                               /* once per session */
+      if (sessionStorage.getItem('wg_webhook_fired') === '1') return;
+      sessionStorage.setItem('wg_webhook_fired', '1');
+    } catch (e) {}
+
+    var bumpOn = hasBump, otoOn = hasOto;
+    var data = {
+      first_name  : LEAD.first,
+      last_name   : LEAD.last,
+      email       : LEAD.email,
+      phone       : LEAD.phone,
+      order_bump  : bumpOn ? 'true' : 'false',
+      quoted_total: bumpOn ? '294' : '97',
+      choice      : otoOn ? 'accepted' : 'declined',
+      oto_accepted: otoOn ? 'true' : 'false',
+      offer       : variant,
+      product     : CONFIG.PRODUCT || 'Growth Plan',
+      amount      : total,
+      currency    : CONFIG.CURRENCY,
+      page        : location.href
+    };
+
+    var body = JSON.stringify(data);
+    /* fire-and-forget: LeadConnector returns no CORS headers, so the page
+       can't read the response — sendBeacon survives the page, fetch backs it up */
+    try {
+      if (navigator.sendBeacon) {
+        if (navigator.sendBeacon(CONFIG.WEBHOOK_URL, new Blob([body], { type: 'application/json' }))) return;
+      }
+    } catch (e) {}
+    try {
+      fetch(CONFIG.WEBHOOK_URL, {
+        method: 'POST', mode: 'no-cors', keepalive: true,
+        headers: { 'Content-Type': 'application/json' }, body: body
+      }).catch(function () {});
+    } catch (e) {}
+  })();
 
   /* -- personal note from Matt: greeting (first name), message (based on
         what they bought) and the email line ------------------------------- */
@@ -367,26 +442,7 @@
       return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c]; }); }
     function set(id, html){ var el = document.getElementById(id); if(el) el.innerHTML = html; }
 
-    /* what the checkout knew about the buyer: URL params first (works across
-       domains), then the bb_lead the payment page saved to sessionStorage  */
-    var q = {};
-    location.search.replace(/^\?/,'').split('&').forEach(function(p){
-      if(!p) return; var kv = p.split('=');
-      q[decodeURIComponent(kv[0]).toLowerCase()] = decodeURIComponent((kv[1] || '').replace(/\+/g,' '));
-    });
-    function pick(){ for(var i=0;i<arguments.length;i++){ var v=q[arguments[i]];
-      if(v && v.indexOf('{{')<0) return v.trim(); } return ''; }
-
-    var first = pick('first_name','firstname','fname','first');
-    var email = pick('email','email_address');
-    var full  = pick('full_name','name');
-    if(full && !first) first = full.trim().split(/\s+/)[0];
-    try {
-      var saved = JSON.parse(sessionStorage.getItem('bb_lead') || '{}');
-      if(!first && saved.first) first = saved.first;
-      if(!email && saved.email) email = saved.email;
-    } catch(e){}
-
+    var first = LEAD.first, email = LEAD.email;
     var M = CONFIG.MESSAGES || {};
 
     set('bb-ty-wel-greeting', first ? "You're in, " + esc(first) + "!" : "You're in — welcome aboard!");
