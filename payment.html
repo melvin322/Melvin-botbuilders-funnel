@@ -326,7 +326,7 @@
        validates and shows the success state locally so you can preview.
          • GHL  → Workflow ▸ Inbound Webhook trigger URL
          • yours → any API / Zapier / Make hook                             */
-    SUBMIT_URL       : '',
+    SUBMIT_URL       : 'https://services.leadconnectorhq.com/hooks/sz4sVbBhLW7cX7keIHT6/webhook-trigger/8a86e9cd-b0c0-4937-98f5-72f5d2b06a98',
 
     /* How to talk to that endpoint:
          'ghl' — form-encoded, fire-and-forget. GHL's webhook does not send
@@ -1185,19 +1185,36 @@
   function payload(){
     var first = F.first.value.trim();
     var last  = F.last.value.trim();
-    var out   = {
-      product   : CONFIG.PRODUCT,
-      name      : (first + ' ' + last).trim(),
-      first_name: first,                            /* GHL maps these three */
-      last_name : last,
-      phone     : F.phone.value.trim(),
-      email     : F.email.value.trim().toLowerCase(),
-      offer     : VARIANT,                          /* base|vip|oto|vip_oto */
-      offer_name: OFFER_LABEL,                      /* readable, for GHL     */
-      amount    : ORDER.total,                      /* what the summary shows */
-      currency  : ORDER.code,
-      page      : location.href,
-      referrer  : document.referrer || ''
+    var vip   = (VARIANT === 'vip' || VARIANT === 'vip_oto');
+    var oto   = (VARIANT === 'oto' || VARIANT === 'vip_oto');
+
+    var out = {
+      /* the contact, in the same camelCase the offer page's webhook sends,
+         so one GHL mapping covers both pages                              */
+      firstName    : first,
+      lastName     : last,
+      email        : F.email.value.trim().toLowerCase(),
+      phone        : F.phone.value.trim(),
+
+      /* what they actually bought */
+      order_bump   : vip ? 'true' : 'false',        /* the VIP Launch Intensive */
+      quoted_total : String(ORDER.total),           /* 97 · 194 · 294 · 391     */
+      choice       : oto ? 'accepted' : 'declined', /* the OTO answer           */
+      oto_accepted : oto,
+      offer        : VARIANT,                       /* base|vip|oto|vip_oto     */
+      offer_name   : OFFER_LABEL,                   /* readable, for GHL        */
+      product      : CONFIG.PRODUCT,
+      amount       : ORDER.total,
+      currency     : ORDER.code,
+
+      /* same names the offer page also sends, for any mapping already built
+         on them                                                            */
+      name         : (first + ' ' + last).trim(),
+      first_name   : first,
+      last_name    : last,
+      source       : location.href,
+      page         : location.href,
+      referrer     : document.referrer || ''
     };
     if(!CARDS) return out;
 
