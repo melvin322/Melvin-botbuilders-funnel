@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Order confirmation — field preview</title>
+<style>
+  :root{
+    --ground:#EEF4F1; --surface:#fff; --ink:#0B1320; --body:#4A5A6B;
+    --muted:#7B8AA3; --line:#DCE7E4; --blue:#2563EB; --green:#16A34A;
+    --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  }
+  *{ box-sizing:border-box; }
+  body{
+    margin:0; background:var(--ground); color:var(--body);
+    font:15px/1.6 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  }
+  .bar{
+    position:sticky; top:0; z-index:5; background:var(--surface);
+    border-bottom:1px solid var(--line); padding:16px 22px;
+    box-shadow:0 6px 18px -12px rgba(11,19,32,.25);
+  }
+  .bar-in{ max-width:1080px; margin:0 auto; display:flex; flex-wrap:wrap; gap:18px 26px; align-items:center; }
+  h1{ margin:0; font-size:16px; color:var(--ink); font-weight:700; letter-spacing:-.2px; }
+  h1 span{ display:block; font-size:12.5px; font-weight:400; color:var(--muted); letter-spacing:0; }
+
+  .toggles{ display:flex; gap:10px; flex-wrap:wrap; }
+  .tg{
+    display:inline-flex; align-items:center; gap:9px; cursor:pointer;
+    border:1.5px solid var(--line); border-radius:10px; padding:9px 14px;
+    background:#FBFDFC; font-size:14px; font-weight:600; color:var(--ink);
+    user-select:none;
+  }
+  .tg input{ width:16px; height:16px; accent-color:var(--blue); margin:0; cursor:pointer; }
+  .tg.is-on{ border-color:var(--blue); background:rgba(37,99,235,.07); }
+  .tg:focus-within{ outline:2.5px solid rgba(37,99,235,.4); outline-offset:2px; }
+
+  .presets{ display:flex; gap:8px; flex-wrap:wrap; }
+  .presets button{
+    font:inherit; font-size:13px; font-weight:600; cursor:pointer;
+    border:1px solid var(--line); background:#fff; color:var(--body);
+    border-radius:8px; padding:8px 12px;
+  }
+  .presets button:hover{ border-color:var(--blue); color:var(--blue); }
+
+  .fields{
+    max-width:1080px; margin:0 auto; padding:18px 22px 0;
+    display:flex; flex-wrap:wrap; gap:10px; align-items:center;
+  }
+  .fld{
+    font-family:var(--mono); font-size:12.5px; color:var(--ink);
+    background:var(--surface); border:1px solid var(--line);
+    border-radius:8px; padding:7px 11px;
+  }
+  .fld b{ color:var(--blue); font-weight:500; }
+  .fld.is-false b{ color:var(--muted); }
+  .fld.is-empty b{ color:#B4520C; }
+  .hint{ font-size:13px; color:var(--muted); }
+
+  .stage{ max-width:1080px; margin:0 auto; padding:18px 22px 60px; }
+  iframe{
+    width:100%; height:1500px; border:1px solid var(--line);
+    border-radius:14px; background:#fff; display:block;
+  }
+  .verdict{
+    margin:0 0 14px; font-size:14px; color:var(--ink);
+    background:var(--surface); border:1px solid var(--line);
+    border-left:3px solid var(--green); border-radius:0 10px 10px 0;
+    padding:12px 16px;
+  }
+  .verdict b{ font-weight:700; }
+</style>
+</head>
+<body>
+
+<div class="bar"><div class="bar-in">
+  <h1>Order confirmation<span>Flip the fields, watch the email follow</span></h1>
+
+  <div class="toggles">
+    <label class="tg" id="tg-vip">
+      <input type="checkbox" id="vip"> VIP Launch Intensive
+    </label>
+    <label class="tg" id="tg-pack">
+      <input type="checkbox" id="pack"> AI Script Pack
+    </label>
+  </div>
+
+  <div class="presets">
+    <button data-p="97">Plan only</button>
+    <button data-p="294">+ VIP</button>
+    <button data-p="194">+ Pack</button>
+    <button data-p="391">Both</button>
+    <button data-p="empty">Empty fields</button>
+  </div>
+</div></div>
+
+<div class="fields" id="fields"></div>
+
+<div class="stage">
+  <p class="verdict" id="verdict"></p>
+  <iframe id="out" title="Email preview"></iframe>
+</div>
+
+<script>
+/* the live template, embedded at build time */
+var TEMPLATE = "<!-- ==========================================================================\n     BotBuilders — ORDER CONFIRMATION EMAIL (HTML)\n     Paste into: GHL ▸ Marketing ▸ Emails ▸ new template ▸ Code / HTML element\n     --------------------------------------------------------------------------\n     HOW THE CONDITIONAL ROWS WORK\n     Every optional block carries two classes:\n\n        class=\"bb-opt bb-vip-{{contact.addon_vip}}\"\n\n     The merge field renders true or false, so the class becomes bb-vip-true or\n     bb-vip-false. The stylesheet hides .bb-opt by default and un-hides only\n     .bb-vip-true / .bb-pack-true. Single class selectors, no descendant\n     combinators — the pattern Outlook's rendering engine actually honours.\n\n     FAIL-SAFE BY DESIGN: if a merge field is empty (a contact created some\n     other way), the class becomes bb-vip- and matches nothing, so the block\n     stays hidden. A receipt that omits a line is a support question; a receipt\n     that invents a line the buyer never bought is a refund.\n\n     WHAT TO SET UP FIRST — two contact custom fields, populated by the\n     payment page's webhook:\n        addon_vip   ← order_bump      (\"true\" / \"false\")\n        addon_pack  ← oto_accepted    (\"true\" / \"false\")\n        order_total ← quoted_total    (97 / 194 / 294 / 391)\n     The total is a plain merge field, not a branch — one number, no logic.\n\n     REPLACE: LOGIN_URL · WALKTHROUGH_URL · VIP_CALENDAR_URL · SCRIPT_PACK_URL\n     ========================================================================== -->\n<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<meta name=\"color-scheme\" content=\"light\">\n<meta name=\"supported-color-schemes\" content=\"light\">\n<title>Your order is confirmed</title>\n<style>\n  /* ---- conditional blocks: hidden unless the merge field says true ---- */\n  .bb-opt        { display:none !important; max-height:0 !important; overflow:hidden !important; }\n  .bb-vip-true   { display:table-row !important; max-height:none !important; overflow:visible !important; }\n  .bb-pack-true  { display:table-row !important; max-height:none !important; overflow:visible !important; }\n  .bb-block.bb-vip-true,\n  .bb-block.bb-pack-true { display:block !important; }\n\n  /* ---- mobile ---- */\n  @media only screen and (max-width:600px){\n    .bb-sh   { padding-left:20px !important; padding-right:20px !important; }\n    .bb-h1   { font-size:26px !important; }\n    .bb-tot  { font-size:26px !important; }\n    .bb-btn a{ display:block !important; }\n  }\n  a{ color:#2563EB; }\n</style>\n</head>\n<body style=\"margin:0;padding:0;background:#EEF4F1;\">\n\n<!-- preheader: shows in the inbox list, never on the page -->\n<div style=\"display:none;max-height:0;overflow:hidden;mso-hide:all;font-size:1px;line-height:1px;color:#EEF4F1;\">\n  Your Growth Plan is active and your launch price is locked in. Order details inside.\n</div>\n\n<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"background:#EEF4F1;\">\n<tr><td align=\"center\" style=\"padding:28px 12px 40px;\">\n\n  <table role=\"presentation\" width=\"600\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"width:600px;max-width:600px;background:#FFFFFF;border-radius:16px;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;\">\n\n    <!-- ============================================ logo -->\n    <tr><td class=\"bb-sh\" align=\"left\" style=\"padding:26px 36px 0;\">\n      <img src=\"https://assets.cdn.filesafe.space/sz4sVbBhLW7cX7keIHT6/media/6a7f730adc6b0a15e5b2b229.png\"\n           alt=\"BotBuilders\" width=\"150\" style=\"display:block;width:150px;height:auto;border:0;\">\n    </td></tr>\n\n    <!-- ============================================ heading -->\n    <tr><td class=\"bb-sh\" align=\"left\" style=\"padding:24px 36px 0;\">\n      <p style=\"margin:0 0 10px;font-size:12px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:#16A34A;\">\n        Payment received\n      </p>\n      <h1 class=\"bb-h1\" style=\"margin:0;font-size:31px;line-height:1.15;color:#0B1320;font-weight:800;letter-spacing:-.6px;\">\n        Your order is confirmed\n      </h1>\n      <p style=\"margin:16px 0 0;font-size:16px;line-height:1.65;color:#4A5A6B;\">\n        Hi {{contact.first_name}}, thank you — your Growth Plan is active and your launch\n        price is locked in for as long as you're a member. Here's exactly what's on your order.\n      </p>\n    </td></tr>\n\n    <!-- ============================================ order table -->\n    <tr><td class=\"bb-sh\" style=\"padding:26px 36px 0;\">\n      <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"\n             style=\"border:1px solid #E3EAF5;border-radius:12px;\">\n\n        <tr><td style=\"padding:16px 20px 12px;border-bottom:1px solid #EEF2F9;\">\n          <p style=\"margin:0;font-size:11.5px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:#2563EB;\">\n            Order summary\n          </p>\n        </td></tr>\n\n        <!-- ---- always: the plan ---- -->\n        <tr><td style=\"padding:14px 20px;border-bottom:1px solid #EEF2F9;\">\n          <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr>\n            <td align=\"left\" style=\"font-size:15.5px;color:#16233C;font-weight:700;\">\n              Growth Plan\n              <div style=\"font-size:13px;font-weight:400;color:#7B8AA3;padding-top:3px;\">\n                Full platform access &middot; billed monthly &middot; price locked for life\n              </div>\n            </td>\n            <td align=\"right\" valign=\"top\" style=\"font-size:15.5px;color:#16233C;font-weight:700;white-space:nowrap;\">\n              $97<span style=\"font-size:12.5px;color:#7B8AA3;\">/mo</span>\n            </td>\n          </tr></table>\n        </td></tr>\n\n        <!-- ---- only when order_bump was true ---- -->\n        <tr class=\"bb-opt bb-vip-{{contact.addon_vip}}\"><td style=\"padding:14px 20px;border-bottom:1px solid #EEF2F9;\">\n          <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr>\n            <td align=\"left\" style=\"font-size:15.5px;color:#16233C;font-weight:700;\">\n              VIP Launch Intensive\n              <div style=\"font-size:13px;font-weight:400;color:#7B8AA3;padding-top:3px;\">\n                Live build session &middot; one-time\n              </div>\n            </td>\n            <td align=\"right\" valign=\"top\" style=\"font-size:15.5px;color:#16233C;font-weight:700;white-space:nowrap;\">\n              $197\n            </td>\n          </tr></table>\n        </td></tr>\n\n        <!-- ---- only when oto_accepted was true ---- -->\n        <tr class=\"bb-opt bb-pack-{{contact.addon_pack}}\"><td style=\"padding:14px 20px;border-bottom:1px solid #EEF2F9;\">\n          <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr>\n            <td align=\"left\" style=\"font-size:15.5px;color:#16233C;font-weight:700;\">\n              Done-For-You AI Script Pack\n              <div style=\"font-size:13px;font-weight:400;color:#7B8AA3;padding-top:3px;\">\n                Scripts + AI prompts &middot; one-time\n              </div>\n            </td>\n            <td align=\"right\" valign=\"top\" style=\"font-size:15.5px;color:#16233C;font-weight:700;white-space:nowrap;\">\n              $97\n            </td>\n          </tr></table>\n        </td></tr>\n\n        <!-- ---- total: a merge field, so it can never disagree with the rows ---- -->\n        <tr><td style=\"padding:16px 20px 18px;\">\n          <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr>\n            <td align=\"left\" style=\"font-size:14px;color:#0B1320;font-weight:700;\">\n              Charged today\n              <div style=\"font-size:12.5px;font-weight:400;color:#7B8AA3;padding-top:3px;\">\n                then $97/mo &middot; cancel anytime\n              </div>\n            </td>\n            <td align=\"right\" valign=\"top\" class=\"bb-tot\" style=\"font-size:29px;color:#0B1320;font-weight:800;letter-spacing:-.8px;white-space:nowrap;\">\n              ${{contact.order_total}}\n            </td>\n          </tr></table>\n        </td></tr>\n      </table>\n    </td></tr>\n\n    <!-- ============================================ always: get started -->\n    <tr><td class=\"bb-sh\" align=\"left\" style=\"padding:28px 36px 0;\">\n      <h2 style=\"margin:0;font-size:19px;line-height:1.3;color:#0B1320;font-weight:800;\">\n        Start here\n      </h2>\n      <p style=\"margin:10px 0 0;font-size:15.5px;line-height:1.65;color:#4A5A6B;\">\n        Your login is ready. Open the dashboard, pick the “Lead capture + booking” template,\n        connect your calendar, and your first bot is answering — the Guided Setup Walkthrough\n        shows every click.\n      </p>\n    </td></tr>\n\n    <tr><td class=\"bb-sh bb-btn\" align=\"left\" style=\"padding:20px 36px 0;\">\n      <a href=\"LOGIN_URL\"\n         style=\"display:inline-block;background:#2563EB;color:#FFFFFF;text-decoration:none;font-size:16px;font-weight:700;padding:15px 28px;border-radius:12px;\">\n        Open your dashboard\n      </a>\n      <p style=\"margin:12px 0 0;font-size:14px;color:#7B8AA3;\">\n        Or go straight to the walkthrough: <a href=\"WALKTHROUGH_URL\" style=\"color:#2563EB;\">watch it here</a>\n      </p>\n    </td></tr>\n\n    <!-- ============================================ only when VIP was bought -->\n    <tr><td class=\"bb-sh\" style=\"padding:0 36px;\">\n      <div class=\"bb-opt bb-block bb-vip-{{contact.addon_vip}}\"\n           style=\"margin-top:26px;border:1px solid #DBE7FA;border-left:3px solid #2563EB;border-radius:0 12px 12px 0;background:#F5F9FF;padding:18px 20px;\">\n        <p style=\"margin:0;font-size:11.5px;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:#2563EB;\">\n          Your VIP session\n        </p>\n        <p style=\"margin:8px 0 0;font-size:15.5px;line-height:1.6;color:#16233C;\">\n          You added the VIP Launch Intensive, so you don't have to build this alone. Pick a\n          slot and we'll share a screen, connect your bot to your calendar and CRM, and switch\n          it on before the session ends. The 48-hour window starts when we sit down together.\n        </p>\n        <p style=\"margin:14px 0 0;\">\n          <a href=\"VIP_CALENDAR_URL\" style=\"color:#2563EB;font-weight:700;font-size:15.5px;\">\n            Book your VIP session &rarr;\n          </a>\n        </p>\n      </div>\n    </td></tr>\n\n    <!-- ============================================ only when the pack was bought -->\n    <tr><td class=\"bb-sh\" style=\"padding:0 36px;\">\n      <div class=\"bb-opt bb-block bb-pack-{{contact.addon_pack}}\"\n           style=\"margin-top:16px;border:1px solid #DBE7FA;border-left:3px solid #38BDF8;border-radius:0 12px 12px 0;background:#F5FBFF;padding:18px 20px;\">\n        <p style=\"margin:0;font-size:11.5px;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:#0E7490;\">\n          Your AI Script Pack\n        </p>\n        <p style=\"margin:8px 0 0;font-size:15.5px;line-height:1.6;color:#16233C;\">\n          The pack is in your account now — word-for-word conversation scripts and the AI\n          prompts that keep your bot sounding like you. Don't read all of it: open\n          “Lead capture — first reply”, paste it into your live bot, and watch the next few\n          conversations.\n        </p>\n        <p style=\"margin:14px 0 0;\">\n          <a href=\"SCRIPT_PACK_URL\" style=\"color:#0E7490;font-weight:700;font-size:15.5px;\">\n            Open the Script Pack &rarr;\n          </a>\n        </p>\n      </div>\n    </td></tr>\n\n    <!-- ============================================ guarantee -->\n    <tr><td class=\"bb-sh\" align=\"left\" style=\"padding:28px 36px 0;\">\n      <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"\n             style=\"border-top:1px solid #EEF2F9;\">\n        <tr><td style=\"padding:20px 0 0;font-size:14.5px;line-height:1.6;color:#4A5A6B;\">\n          <b style=\"color:#0B1320;\">You're covered for 30 days.</b> Follow the walkthrough, and\n          if it isn't right for you within 30 days we'll refund every cent — no contracts, cancel\n          any time. Questions? Reply to this email; priority support is part of your plan.\n        </td></tr>\n      </table>\n    </td></tr>\n\n    <!-- ============================================ footer -->\n    <tr><td class=\"bb-sh\" align=\"left\" style=\"padding:26px 36px 32px;\">\n      <p style=\"margin:0;font-size:12.5px;line-height:1.7;color:#94A3B8;\">\n        Sent to {{contact.email}} because you purchased the Growth Plan.<br>\n        BotBuilders &middot; 8936 N Central Ave, Phoenix, AZ 85020 &middot; 602-922-9700<br>\n        &copy; 2026 BotBuilders. All rights reserved.\n      </p>\n    </td></tr>\n\n  </table>\n\n</td></tr>\n</table>\n</body>\n</html>\n";
+var CONTACT  = {"first_name":"Dana","email":"dana@company.com"};
+
+var vip = document.getElementById('vip');
+var pack = document.getElementById('pack');
+var out = document.getElementById('out');
+var fieldsEl = document.getElementById('fields');
+var verdictEl = document.getElementById('verdict');
+var emptyMode = false;
+
+function values(){
+  if(emptyMode) return { addon_vip:'', addon_pack:'', order_total:'97' };
+  return {
+    addon_vip  : vip.checked  ? 'true' : 'false',
+    addon_pack : pack.checked ? 'true' : 'false',
+    order_total: String(97 + (vip.checked ? 197 : 0) + (pack.checked ? 97 : 0))
+  };
+}
+
+function render(){
+  var v = values();
+  var html = TEMPLATE
+    .replace(/\{\{contact\.first_name\}\}/g, CONTACT.first_name)
+    .replace(/\{\{contact\.email\}\}/g, CONTACT.email)
+    .replace(/\{\{contact\.addon_vip\}\}/g, v.addon_vip)
+    .replace(/\{\{contact\.addon_pack\}\}/g, v.addon_pack)
+    .replace(/\{\{contact\.order_total\}\}/g, v.order_total);
+
+  out.srcdoc = html;
+
+  /* what GHL must hold on the contact for this render */
+  function chip(name, val){
+    var cls = val === '' ? 'fld is-empty' : (val === 'false' ? 'fld is-false' : 'fld');
+    return '<span class="' + cls + '">' + name + ' = <b>' + (val === '' ? '(blank)' : val) + '</b></span>';
+  }
+  fieldsEl.innerHTML =
+    chip('addon_vip',  v.addon_vip) +
+    chip('addon_pack', v.addon_pack) +
+    chip('order_total', v.order_total) +
+    '<span class="hint">the class each row resolves to: <code>bb-vip-' +
+      (v.addon_vip || '') + '</code> · <code>bb-pack-' + (v.addon_pack || '') + '</code></span>';
+
+  document.getElementById('tg-vip').classList.toggle('is-on', vip.checked && !emptyMode);
+  document.getElementById('tg-pack').classList.toggle('is-on', pack.checked && !emptyMode);
+
+  /* say what should be on screen, so a wrong render is obvious */
+  var lines = ['Growth Plan'];
+  if(!emptyMode && vip.checked)  lines.push('VIP Launch Intensive');
+  if(!emptyMode && pack.checked) lines.push('AI Script Pack');
+  verdictEl.innerHTML = emptyMode
+    ? '<b>Fail-safe check.</b> Both fields are blank, so the classes match nothing and both '
+      + 'add-on rows must stay hidden — the email should show the plan alone.'
+    : '<b>Expect ' + lines.length + ' line' + (lines.length > 1 ? 's' : '') + ':</b> '
+      + lines.join(' · ') + ' — charged today $' + values().order_total + '.';
+}
+
+vip.addEventListener('change', function(){ emptyMode = false; render(); });
+pack.addEventListener('change', function(){ emptyMode = false; render(); });
+
+document.querySelectorAll('.presets button').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var p = btn.getAttribute('data-p');
+    emptyMode = (p === 'empty');
+    vip.checked  = (p === '294' || p === '391');
+    pack.checked = (p === '194' || p === '391');
+    render();
+  });
+});
+
+render();
+</script>
+
+</body>
+</html>
