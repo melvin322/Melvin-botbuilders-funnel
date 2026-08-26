@@ -1,0 +1,249 @@
+<!-- ==========================================================================
+     BotBuilders — ORDER CONFIRMATION EMAIL (HTML)
+     Paste into: GHL ▸ Marketing ▸ Emails ▸ new template ▸ Code / HTML element
+     --------------------------------------------------------------------------
+     HOW THE CONDITIONAL ROWS WORK
+     Every optional block carries two classes:
+
+        class="bb-opt bb-vip-{{contact.addon_vip}}"
+
+     The merge field renders true or false, so the class becomes bb-vip-true or
+     bb-vip-false. The stylesheet hides .bb-opt by default and un-hides only
+     .bb-vip-true / .bb-pack-true. Single class selectors, no descendant
+     combinators — the pattern Outlook's rendering engine actually honours.
+
+     FAIL-SAFE BY DESIGN: if a merge field is empty (a contact created some
+     other way), the class becomes bb-vip- and matches nothing, so the block
+     stays hidden. A receipt that omits a line is a support question; a receipt
+     that invents a line the buyer never bought is a refund.
+
+     WHAT TO SET UP FIRST — two contact custom fields, populated by the
+     payment page's webhook:
+        addon_vip   ← order_bump      ("true" / "false")
+        addon_pack  ← oto_accepted    ("true" / "false")
+        order_total ← quoted_total    (97 / 194 / 294 / 391)
+     The total is a plain merge field, not a branch — one number, no logic.
+
+     REPLACE: LOGIN_URL · WALKTHROUGH_URL · VIP_CALENDAR_URL · SCRIPT_PACK_URL
+     ========================================================================== -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="supported-color-schemes" content="light">
+<title>Your order is confirmed</title>
+<style>
+  /* ---- conditional blocks: hidden unless the merge field says true ---- */
+  .bb-opt        { display:none !important; max-height:0 !important; overflow:hidden !important; }
+  .bb-vip-true   { display:table-row !important; max-height:none !important; overflow:visible !important; }
+  .bb-pack-true  { display:table-row !important; max-height:none !important; overflow:visible !important; }
+  .bb-block.bb-vip-true,
+  .bb-block.bb-pack-true { display:block !important; }
+
+  /* ---- mobile ---- */
+  @media only screen and (max-width:600px){
+    .bb-sh   { padding-left:20px !important; padding-right:20px !important; }
+    .bb-h1   { font-size:26px !important; }
+    .bb-tot  { font-size:26px !important; }
+    .bb-btn a{ display:block !important; }
+  }
+  a{ color:#2563EB; }
+</style>
+</head>
+<body style="margin:0;padding:0;background:#EEF4F1;">
+
+<!-- preheader: shows in the inbox list, never on the page -->
+<div style="display:none;max-height:0;overflow:hidden;mso-hide:all;font-size:1px;line-height:1px;color:#EEF4F1;">
+  Your Growth Plan is active and your launch price is locked in. Order details inside.
+</div>
+
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#EEF4F1;">
+<tr><td align="center" style="padding:28px 12px 40px;">
+
+  <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px;max-width:600px;background:#FFFFFF;border-radius:16px;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
+
+    <!-- ============================================ logo -->
+    <tr><td class="bb-sh" align="left" style="padding:26px 36px 0;">
+      <img src="https://assets.cdn.filesafe.space/sz4sVbBhLW7cX7keIHT6/media/6a7f730adc6b0a15e5b2b229.png"
+           alt="BotBuilders" width="150" style="display:block;width:150px;height:auto;border:0;">
+    </td></tr>
+
+    <!-- ============================================ heading -->
+    <tr><td class="bb-sh" align="left" style="padding:24px 36px 0;">
+      <p style="margin:0 0 10px;font-size:12px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:#16A34A;">
+        Payment received
+      </p>
+      <h1 class="bb-h1" style="margin:0;font-size:31px;line-height:1.15;color:#0B1320;font-weight:800;letter-spacing:-.6px;">
+        Your order is confirmed
+      </h1>
+      <p style="margin:16px 0 0;font-size:16px;line-height:1.65;color:#4A5A6B;">
+        Hi {{contact.first_name}}, thank you — your Growth Plan is active and your launch
+        price is locked in for as long as you're a member. Here's exactly what's on your order.
+      </p>
+    </td></tr>
+
+    <!-- ============================================ order table -->
+    <tr><td class="bb-sh" style="padding:26px 36px 0;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
+             style="border:1px solid #E3EAF5;border-radius:12px;">
+
+        <tr><td style="padding:16px 20px 12px;border-bottom:1px solid #EEF2F9;">
+          <p style="margin:0;font-size:11.5px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:#2563EB;">
+            Order summary
+          </p>
+        </td></tr>
+
+        <!-- ---- always: the plan ---- -->
+        <tr><td style="padding:14px 20px;border-bottom:1px solid #EEF2F9;">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
+            <td align="left" style="font-size:15.5px;color:#16233C;font-weight:700;">
+              Growth Plan
+              <div style="font-size:13px;font-weight:400;color:#7B8AA3;padding-top:3px;">
+                Full platform access &middot; billed monthly &middot; price locked for life
+              </div>
+            </td>
+            <td align="right" valign="top" style="font-size:15.5px;color:#16233C;font-weight:700;white-space:nowrap;">
+              $97<span style="font-size:12.5px;color:#7B8AA3;">/mo</span>
+            </td>
+          </tr></table>
+        </td></tr>
+
+        <!-- ---- only when order_bump was true ---- -->
+        <tr class="bb-opt bb-vip-{{contact.addon_vip}}"><td style="padding:14px 20px;border-bottom:1px solid #EEF2F9;">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
+            <td align="left" style="font-size:15.5px;color:#16233C;font-weight:700;">
+              VIP Launch Intensive
+              <div style="font-size:13px;font-weight:400;color:#7B8AA3;padding-top:3px;">
+                Live build session &middot; one-time
+              </div>
+            </td>
+            <td align="right" valign="top" style="font-size:15.5px;color:#16233C;font-weight:700;white-space:nowrap;">
+              $197
+            </td>
+          </tr></table>
+        </td></tr>
+
+        <!-- ---- only when oto_accepted was true ---- -->
+        <tr class="bb-opt bb-pack-{{contact.addon_pack}}"><td style="padding:14px 20px;border-bottom:1px solid #EEF2F9;">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
+            <td align="left" style="font-size:15.5px;color:#16233C;font-weight:700;">
+              Done-For-You AI Script Pack
+              <div style="font-size:13px;font-weight:400;color:#7B8AA3;padding-top:3px;">
+                Scripts + AI prompts &middot; one-time
+              </div>
+            </td>
+            <td align="right" valign="top" style="font-size:15.5px;color:#16233C;font-weight:700;white-space:nowrap;">
+              $97
+            </td>
+          </tr></table>
+        </td></tr>
+
+        <!-- ---- total: a merge field, so it can never disagree with the rows ---- -->
+        <tr><td style="padding:16px 20px 18px;">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
+            <td align="left" style="font-size:14px;color:#0B1320;font-weight:700;">
+              Charged today
+              <div style="font-size:12.5px;font-weight:400;color:#7B8AA3;padding-top:3px;">
+                then $97/mo &middot; cancel anytime
+              </div>
+            </td>
+            <td align="right" valign="top" class="bb-tot" style="font-size:29px;color:#0B1320;font-weight:800;letter-spacing:-.8px;white-space:nowrap;">
+              ${{contact.order_total}}
+            </td>
+          </tr></table>
+        </td></tr>
+      </table>
+    </td></tr>
+
+    <!-- ============================================ always: get started -->
+    <tr><td class="bb-sh" align="left" style="padding:28px 36px 0;">
+      <h2 style="margin:0;font-size:19px;line-height:1.3;color:#0B1320;font-weight:800;">
+        Start here
+      </h2>
+      <p style="margin:10px 0 0;font-size:15.5px;line-height:1.65;color:#4A5A6B;">
+        Your login is ready. Open the dashboard, pick the “Lead capture + booking” template,
+        connect your calendar, and your first bot is answering — the Guided Setup Walkthrough
+        shows every click.
+      </p>
+    </td></tr>
+
+    <tr><td class="bb-sh bb-btn" align="left" style="padding:20px 36px 0;">
+      <a href="LOGIN_URL"
+         style="display:inline-block;background:#2563EB;color:#FFFFFF;text-decoration:none;font-size:16px;font-weight:700;padding:15px 28px;border-radius:12px;">
+        Open your dashboard
+      </a>
+      <p style="margin:12px 0 0;font-size:14px;color:#7B8AA3;">
+        Or go straight to the walkthrough: <a href="WALKTHROUGH_URL" style="color:#2563EB;">watch it here</a>
+      </p>
+    </td></tr>
+
+    <!-- ============================================ only when VIP was bought -->
+    <tr><td class="bb-sh" style="padding:0 36px;">
+      <div class="bb-opt bb-block bb-vip-{{contact.addon_vip}}"
+           style="margin-top:26px;border:1px solid #DBE7FA;border-left:3px solid #2563EB;border-radius:0 12px 12px 0;background:#F5F9FF;padding:18px 20px;">
+        <p style="margin:0;font-size:11.5px;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:#2563EB;">
+          Your VIP session
+        </p>
+        <p style="margin:8px 0 0;font-size:15.5px;line-height:1.6;color:#16233C;">
+          You added the VIP Launch Intensive, so you don't have to build this alone. Pick a
+          slot and we'll share a screen, connect your bot to your calendar and CRM, and switch
+          it on before the session ends. The 48-hour window starts when we sit down together.
+        </p>
+        <p style="margin:14px 0 0;">
+          <a href="VIP_CALENDAR_URL" style="color:#2563EB;font-weight:700;font-size:15.5px;">
+            Book your VIP session &rarr;
+          </a>
+        </p>
+      </div>
+    </td></tr>
+
+    <!-- ============================================ only when the pack was bought -->
+    <tr><td class="bb-sh" style="padding:0 36px;">
+      <div class="bb-opt bb-block bb-pack-{{contact.addon_pack}}"
+           style="margin-top:16px;border:1px solid #DBE7FA;border-left:3px solid #38BDF8;border-radius:0 12px 12px 0;background:#F5FBFF;padding:18px 20px;">
+        <p style="margin:0;font-size:11.5px;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:#0E7490;">
+          Your AI Script Pack
+        </p>
+        <p style="margin:8px 0 0;font-size:15.5px;line-height:1.6;color:#16233C;">
+          The pack is in your account now — word-for-word conversation scripts and the AI
+          prompts that keep your bot sounding like you. Don't read all of it: open
+          “Lead capture — first reply”, paste it into your live bot, and watch the next few
+          conversations.
+        </p>
+        <p style="margin:14px 0 0;">
+          <a href="SCRIPT_PACK_URL" style="color:#0E7490;font-weight:700;font-size:15.5px;">
+            Open the Script Pack &rarr;
+          </a>
+        </p>
+      </div>
+    </td></tr>
+
+    <!-- ============================================ guarantee -->
+    <tr><td class="bb-sh" align="left" style="padding:28px 36px 0;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
+             style="border-top:1px solid #EEF2F9;">
+        <tr><td style="padding:20px 0 0;font-size:14.5px;line-height:1.6;color:#4A5A6B;">
+          <b style="color:#0B1320;">You're covered for 30 days.</b> Follow the walkthrough, and
+          if it isn't right for you within 30 days we'll refund every cent — no contracts, cancel
+          any time. Questions? Reply to this email; priority support is part of your plan.
+        </td></tr>
+      </table>
+    </td></tr>
+
+    <!-- ============================================ footer -->
+    <tr><td class="bb-sh" align="left" style="padding:26px 36px 32px;">
+      <p style="margin:0;font-size:12.5px;line-height:1.7;color:#94A3B8;">
+        Sent to {{contact.email}} because you purchased the Growth Plan.<br>
+        BotBuilders &middot; 8936 N Central Ave, Phoenix, AZ 85020 &middot; 602-922-9700<br>
+        &copy; 2026 BotBuilders. All rights reserved.
+      </p>
+    </td></tr>
+
+  </table>
+
+</td></tr>
+</table>
+</body>
+</html>
