@@ -331,8 +331,8 @@
   function fireWebhook(choice){
     if(!CONFIG.WEBHOOK_URL) return;
     var payload = {
-      first_name   : leadField(['first_name','firstName','fname','first']),
-      last_name    : leadField(['last_name','lastName','lname','last']),
+      firstName    : leadField(['firstName','first_name','fname','first']),
+      lastName     : leadField(['lastName','last_name','lname','last']),
       email        : leadField(['email','email_address']),
       phone        : leadField(['phone','phone_number','phoneNumber']),
       choice       : choice,                 /* "accepted" or "declined" */
