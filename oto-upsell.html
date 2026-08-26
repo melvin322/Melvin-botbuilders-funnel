@@ -341,11 +341,14 @@
       value        : CONFIG.OFFER_VALUE
     };
     var body = JSON.stringify(payload);
+    /* send as application/json (the format GHL parsed in testing) with
+       keepalive so it still completes as the page navigates to payment.     */
     try{
-      if(navigator.sendBeacon &&
-         navigator.sendBeacon(CONFIG.WEBHOOK_URL, new Blob([body], {type:'text/plain;charset=UTF-8'}))) return;
+      fetch(CONFIG.WEBHOOK_URL, {method:'POST', headers:{'Content-Type':'application/json'}, body:body, keepalive:true});
+      return;
     }catch(e){}
-    try{ fetch(CONFIG.WEBHOOK_URL, {method:'POST', body:body, headers:{'Content-Type':'text/plain'}, keepalive:true, mode:'no-cors'}); }catch(e){}
+    /* fallback for browsers without keepalive fetch */
+    try{ if(navigator.sendBeacon) navigator.sendBeacon(CONFIG.WEBHOOK_URL, new Blob([body], {type:'application/json'})); }catch(e){}
   }
 
   /* -- accept / decline links (+ webhook + conversion tracking) ----------- */
