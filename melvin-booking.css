@@ -1,0 +1,231 @@
+/* ==========================================================================
+   BotBuilders — "Pick a time that suits you" · Melvin booking page
+   Companion stylesheet for melvin-booking.html  (funnel step 2 of 3)
+   Same design language as melvin-call.css.
+   GHL: paste this whole file into the page's Custom CSS.
+   Brand board: navy #16244C · blue #1B7BE8 · sky #35C6F4 · Poppins
+   Namespaced under .bb-mb so nothing leaks into GHL.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Caveat:wght@500;600;700&display=swap');
+
+.bb-mb{
+  --mb-ink:#16244C;
+  --mb-body:#5B6580;
+  --mb-line:#E3E7F0;
+  --mb-blue:#1B7BE8;
+  --mb-blue-d:#1560BF;
+  --mb-sky:#35C6F4;
+  --mb-tint:#E8F4FE;
+  --mb-tint-line:#BFE2FA;
+  --mb-panel:#F7F8FB;
+  --mb-green:#2E9E6B;
+  --mb-white:#FFFFFF;
+
+  --mb-grad:linear-gradient(90deg,#1B7BE8 0%,#35C6F4 100%);
+  --mb-shadow:0 6px 18px rgba(22,36,76,.05);
+  --mb-shadow-m:0 6px 18px rgba(22,36,76,.1);
+
+  --mb-font:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  --mb-hand:'Caveat','Poppins',cursive;
+  --mb-wrap:1240px;
+  --mb-pad:56px;
+
+  font-family:var(--mb-font);
+  color:var(--mb-ink);
+  background:var(--mb-white);
+  background-image:
+    radial-gradient(900px 420px at 78% -6%, rgba(53,198,244,.13), transparent 62%),
+    radial-gradient(760px 420px at 8% 4%, rgba(27,123,232,.08), transparent 60%);
+  background-repeat:no-repeat;
+  line-height:1.6; min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+.bb-mb *,
+.bb-mb *::before,
+.bb-mb *::after{ box-sizing:border-box; }
+.bb-mb h1,.bb-mb h2,.bb-mb h3{ margin:0; font-weight:700; letter-spacing:-.02em; color:var(--mb-ink); }
+.bb-mb p{ margin:0; }
+.bb-mb ul,.bb-mb ol{ margin:0; padding:0; }
+.bb-mb li{ list-style:none; }
+.bb-mb img{ max-width:100%; display:block; }
+.bb-mb img[hidden]{ display:none; }
+.bb-mb a{ color:var(--mb-blue); text-decoration:none; }
+.bb-mb a:hover{ color:var(--mb-blue-d); }
+.bb-mb svg{ display:block; }
+
+.bb-mb-wrap{ width:100%; max-width:var(--mb-wrap); margin:0 auto; padding-left:var(--mb-pad); padding-right:var(--mb-pad); }
+
+/* shared bits ------------------------------------------------------------ */
+.bb-mb-mark{ display:inline-flex; align-items:center; gap:10px; }
+.bb-mb-mark img{ height:28px; width:auto; }
+.bb-mb-mark-ico{ width:30px; height:30px; flex:none; }
+.bb-mb-mark-word{ font-size:19px; font-weight:700; letter-spacing:.01em; color:var(--mb-ink); line-height:1; }
+.bb-mb-mark-word sup{ font-size:9px; top:-.8em; }
+.bb-mb-mark--sm .bb-mb-mark-ico{ width:26px; height:26px; }
+.bb-mb-mark--sm .bb-mb-mark-word{ font-size:17px; }
+
+.bb-mb-grad{
+  background:var(--mb-grad);
+  -webkit-background-clip:text; background-clip:text;
+  color:transparent; -webkit-text-fill-color:transparent;
+}
+.bb-mb-pill{
+  display:inline-flex; align-items:center; gap:9px;
+  background:var(--mb-tint); border:1.5px solid var(--mb-tint-line); color:var(--mb-blue);
+  padding:7px 14px; border-radius:999px;
+  font-size:12.5px; font-weight:600; letter-spacing:.06em; text-transform:uppercase;
+}
+.bb-mb-pill i{ width:7px; height:7px; border-radius:99px; background:var(--mb-green); display:block; flex:none; }
+.bb-mb-hand{
+  font-family:var(--mb-hand); font-size:20px; font-weight:600; line-height:1.25;
+  color:#6A7490; display:inline-flex; align-items:center; gap:9px;
+}
+.bb-mb-hand::before{
+  content:""; width:26px; height:12px; flex:none;
+  background:no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 12' fill='none' stroke='%2335C6F4' stroke-width='1.6' stroke-linecap='round'%3E%3Cpath d='M1 9C8 10 16 7 24 3'/%3E%3Cpath d='M18 1l6 2-3 4'/%3E%3C/svg%3E");
+}
+.bb-mb-sticky{
+  display:block; max-width:300px;
+  font-family:var(--mb-hand); font-size:22px; font-weight:600; line-height:1.3; color:#4C5670;
+  background:#FFF8DC; border:1.5px solid #F0E2AC; border-radius:10px;
+  padding:18px 20px; box-shadow:var(--mb-shadow-m); transform:rotate(-1.6deg);
+}
+.bb-mb-eyebrow{
+  display:inline-block; font-size:12.5px; font-weight:600;
+  letter-spacing:.1em; text-transform:uppercase; color:var(--mb-blue);
+}
+
+/* ==========================================================================
+   HEADER
+   ========================================================================== */
+.bb-mb-header{
+  position:sticky; top:0; z-index:20;
+  background:rgba(255,255,255,.96);
+  -webkit-backdrop-filter:saturate(180%) blur(10px); backdrop-filter:saturate(180%) blur(10px);
+  border-bottom:1.5px solid var(--mb-line);
+}
+.bb-mb-header-in{
+  display:flex; align-items:center; justify-content:space-between; gap:24px;
+  padding-top:20px; padding-bottom:20px;
+}
+.bb-mb-back{ display:inline-flex; align-items:center; gap:8px; font-size:14px; color:var(--mb-body); }
+.bb-mb-back:hover{ color:var(--mb-ink); }
+.bb-mb-back svg{ width:16px; height:16px; }
+.bb-mb-back svg path{ stroke:currentColor; fill:none; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round; }
+
+/* ==========================================================================
+   PAGE HEAD
+   ========================================================================== */
+.bb-mb-head{ padding-top:56px; text-align:center; }
+.bb-mb-h1{ font-size:46px; line-height:1.1; letter-spacing:-.9px; margin-top:20px; text-wrap:pretty; }
+.bb-mb-lead{ font-size:18px; line-height:1.6; color:var(--mb-body); margin:16px auto 0; max-width:620px; text-wrap:pretty; }
+.bb-mb-trust{
+  display:flex; justify-content:center; gap:24px; flex-wrap:wrap;
+  margin-top:22px; color:var(--mb-body); font-size:14px;
+}
+.bb-mb-trust em{ color:var(--mb-line); font-style:normal; }
+
+/* ==========================================================================
+   BOOKING GRID
+   ========================================================================== */
+.bb-mb-main{ padding-top:40px; padding-bottom:76px; }
+.bb-mb-grid{ display:grid; grid-template-columns:360px 1fr; gap:32px; align-items:start; }
+
+.bb-mb-rail{ display:flex; flex-direction:column; gap:20px; position:sticky; top:104px; }
+.bb-mb-card{
+  background:var(--mb-white); border:1.5px solid var(--mb-line); border-radius:16px;
+  padding:26px; box-shadow:var(--mb-shadow);
+}
+.bb-mb-who{ display:flex; align-items:center; gap:14px; }
+.bb-mb-who-photo{
+  width:60px; height:60px; border-radius:14px; flex:none; overflow:hidden;
+  background:var(--mb-grad); color:var(--mb-white);
+  display:flex; align-items:center; justify-content:center; font-size:24px; font-weight:700;
+}
+.bb-mb-who-photo img{ width:100%; height:100%; object-fit:cover; }
+.bb-mb-who-name{ font-size:17px; font-weight:600; color:var(--mb-ink); line-height:1.25; }
+.bb-mb-who-role{ font-size:13.5px; color:var(--mb-body); }
+.bb-mb-rule{ height:1.5px; background:var(--mb-line); margin:20px 0 18px; }
+.bb-mb-steps{ display:flex; flex-direction:column; gap:16px; }
+.bb-mb-step{ display:grid; grid-template-columns:38px 1fr; gap:14px; align-items:start; }
+.bb-mb-step-num{
+  width:38px; height:38px; border-radius:12px; flex:none;
+  background:var(--mb-tint); border:1.5px solid var(--mb-tint-line);
+  display:flex; align-items:center; justify-content:center;
+  font-size:15px; font-weight:700; color:var(--mb-blue);
+}
+.bb-mb-step h3{ font-size:16px; font-weight:600; line-height:1.3; margin-bottom:4px; }
+.bb-mb-step p{ font-size:14px; line-height:1.55; color:var(--mb-body); }
+.bb-mb-card--note{ display:flex; justify-content:center; background:transparent; border:0; box-shadow:none; padding:0; }
+
+/* calendar --------------------------------------------------------------- */
+.bb-mb-cal{
+  background:var(--mb-white); border:1.5px solid var(--mb-line); border-radius:16px;
+  box-shadow:var(--mb-shadow); overflow:hidden; min-height:720px;
+}
+.bb-mb-cal iframe{ display:block; width:100%; min-height:720px; border:0; }
+.bb-mb-cal-ph{
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:14px; text-align:center; min-height:720px; padding:48px 32px;
+}
+.bb-mb-cal-ph-ico{
+  width:64px; height:64px; border-radius:18px;
+  background:var(--mb-tint); border:1.5px solid var(--mb-tint-line); color:var(--mb-blue);
+  display:flex; align-items:center; justify-content:center;
+}
+.bb-mb-cal-ph-ico svg{ width:30px; height:30px; }
+.bb-mb-cal-ph-ico svg path,.bb-mb-cal-ph-ico svg rect{
+  stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round;
+}
+.bb-mb-cal-ph h3{ font-size:20px; font-weight:600; }
+.bb-mb-cal-ph p{ font-size:15px; color:var(--mb-body); max-width:420px; }
+.bb-mb-cal-ph code{
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:13.5px;
+  background:var(--mb-panel); border:1.5px solid var(--mb-line); border-radius:8px; padding:2px 8px;
+}
+
+/* ==========================================================================
+   FAQ + FOOTER
+   ========================================================================== */
+.bb-mb-faq{
+  background:var(--mb-panel); border-top:1.5px solid var(--mb-line); border-bottom:1.5px solid var(--mb-line);
+  padding-top:64px; padding-bottom:64px;
+}
+.bb-mb-faq h2{ font-size:30px; line-height:1.18; letter-spacing:-.4px; }
+.bb-mb-faq-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:28px; }
+.bb-mb-faq-card h3{ font-size:17px; font-weight:600; margin-bottom:8px; line-height:1.3; }
+.bb-mb-faq-card p{ font-size:14.5px; line-height:1.6; color:var(--mb-body); }
+
+.bb-mb-footer{
+  display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;
+  padding-top:26px; padding-bottom:26px; color:var(--mb-body); font-size:13.5px;
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+@media (max-width:1080px){
+  .bb-mb{ --mb-pad:32px; }
+  .bb-mb-grid{ grid-template-columns:320px 1fr; gap:24px; }
+}
+@media (max-width:900px){
+  .bb-mb-grid{ grid-template-columns:1fr; }
+  .bb-mb-rail{ position:static; }
+  .bb-mb-h1{ font-size:36px; letter-spacing:-.5px; }
+  .bb-mb-faq-grid{ grid-template-columns:1fr; }
+  .bb-mb-cal,.bb-mb-cal iframe,.bb-mb-cal-ph{ min-height:760px; }
+}
+@media (max-width:600px){
+  .bb-mb{ --mb-pad:20px; }
+  .bb-mb-head{ padding-top:40px; }
+  .bb-mb-h1{ font-size:30px; }
+  .bb-mb-lead{ font-size:16px; }
+  .bb-mb-trust{ flex-direction:column; gap:8px; }
+  .bb-mb-trust em{ display:none; }
+  .bb-mb-main{ padding-bottom:56px; }
+  .bb-mb-card{ padding:22px; }
+  .bb-mb-footer{ justify-content:center; text-align:center; }
+  .bb-mb-back span{ display:none; }
+}
