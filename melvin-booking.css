@@ -19,6 +19,10 @@
   --mb-tint:#E8F4FE;
   --mb-tint-line:#BFE2FA;
   --mb-panel:#F7F8FB;
+  /* soft washes taken from the BotBuilders site */
+  --mb-wash-mint:#E9F6F0;
+  --mb-wash-blue:#E8F3FB;
+  --mb-wash-soft:#F3FAF7;
   --mb-green:#2E9E6B;
   --mb-white:#FFFFFF;
 
@@ -34,18 +38,19 @@
   font-family:var(--mb-font);
   color:var(--mb-ink);
   background:var(--mb-white);
-  background-image:
-    radial-gradient(900px 420px at 78% -6%, rgba(53,198,244,.13), transparent 62%),
-    radial-gradient(760px 420px at 8% 4%, rgba(27,123,232,.08), transparent 60%);
+  background-image:linear-gradient(158deg,var(--mb-wash-mint) 0%,var(--mb-wash-blue) 48%,var(--mb-white) 88%);
+  background-size:100% 760px;
   background-repeat:no-repeat;
-  line-height:1.6; min-height:100vh;
+  line-height:1.65; min-height:100vh;
   -webkit-font-smoothing:antialiased;
   text-rendering:optimizeLegibility;
 }
 .bb-mb *,
 .bb-mb *::before,
 .bb-mb *::after{ box-sizing:border-box; }
-.bb-mb h1,.bb-mb h2,.bb-mb h3{ margin:0; font-weight:700; letter-spacing:-.02em; color:var(--mb-ink); }
+.bb-mb h1,.bb-mb h2,.bb-mb h3{
+  margin:0; font-weight:700; letter-spacing:-.025em; line-height:1.16; color:var(--mb-ink);
+}
 .bb-mb p{ margin:0; }
 .bb-mb ul,.bb-mb ol{ margin:0; padding:0; }
 .bb-mb li{ list-style:none; }
@@ -92,7 +97,7 @@
 }
 .bb-mb-eyebrow{
   display:inline-block; font-size:12.5px; font-weight:600;
-  letter-spacing:.1em; text-transform:uppercase; color:var(--mb-blue);
+  letter-spacing:.13em; text-transform:uppercase; color:var(--mb-blue);
 }
 
 /* ==========================================================================
@@ -115,8 +120,8 @@
    PAGE HEAD
    ========================================================================== */
 .bb-mb-head{ padding-top:56px; text-align:center; }
-.bb-mb-h1{ font-size:46px; line-height:1.1; letter-spacing:-.9px; margin-top:20px; text-wrap:pretty; }
-.bb-mb-lead{ font-size:18px; line-height:1.6; color:var(--mb-body); margin:16px auto 0; max-width:620px; text-wrap:pretty; }
+.bb-mb-h1{ font-size:46px; line-height:1.14; letter-spacing:-1.2px; margin-top:22px; text-wrap:pretty; }
+.bb-mb-lead{ font-size:18px; line-height:1.7; color:var(--mb-body); margin:14px auto 0; max-width:620px; text-wrap:pretty; }
 .bb-mb-trust{
   display:flex; justify-content:center; gap:24px; flex-wrap:wrap;
   margin-top:22px; color:var(--mb-body); font-size:14px;
@@ -152,8 +157,8 @@
   display:flex; align-items:center; justify-content:center;
   font-size:15px; font-weight:700; color:var(--mb-blue);
 }
-.bb-mb-step h3{ font-size:16px; font-weight:600; line-height:1.3; margin-bottom:4px; }
-.bb-mb-step p{ font-size:14px; line-height:1.55; color:var(--mb-body); }
+.bb-mb-step h3{ font-size:16px; font-weight:600; line-height:1.35; letter-spacing:-.3px; margin-bottom:5px; }
+.bb-mb-step p{ font-size:14px; line-height:1.65; color:var(--mb-body); }
 .bb-mb-card--note{ display:flex; justify-content:center; background:transparent; border:0; box-shadow:none; padding:0; }
 
 /* calendar --------------------------------------------------------------- */
@@ -176,7 +181,7 @@
   stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round;
 }
 .bb-mb-cal-ph h3{ font-size:20px; font-weight:600; }
-.bb-mb-cal-ph p{ font-size:15px; color:var(--mb-body); max-width:420px; }
+.bb-mb-cal-ph p{ font-size:15px; line-height:1.7; color:var(--mb-body); max-width:420px; }
 .bb-mb-cal-ph code{
   font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:13.5px;
   background:var(--mb-panel); border:1.5px solid var(--mb-line); border-radius:8px; padding:2px 8px;
@@ -186,13 +191,18 @@
    FAQ + FOOTER
    ========================================================================== */
 .bb-mb-faq{
-  background:var(--mb-panel); border-top:1.5px solid var(--mb-line); border-bottom:1.5px solid var(--mb-line);
+  background:var(--mb-wash-soft);
+  background-image:
+    radial-gradient(rgba(27,123,232,.07) 1.1px, transparent 1.2px),
+    linear-gradient(180deg,var(--mb-wash-soft) 0%,var(--mb-wash-blue) 100%);
+  background-size:28px 28px, 100% 100%;
+  border-top:1.5px solid var(--mb-line); border-bottom:1.5px solid var(--mb-line);
   padding-top:64px; padding-bottom:64px;
 }
-.bb-mb-faq h2{ font-size:30px; line-height:1.18; letter-spacing:-.4px; }
+.bb-mb-faq h2{ font-size:30px; line-height:1.18; letter-spacing:-.8px; }
 .bb-mb-faq-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:28px; }
-.bb-mb-faq-card h3{ font-size:17px; font-weight:600; margin-bottom:8px; line-height:1.3; }
-.bb-mb-faq-card p{ font-size:14.5px; line-height:1.6; color:var(--mb-body); }
+.bb-mb-faq-card h3{ font-size:17px; font-weight:600; margin-bottom:9px; line-height:1.35; letter-spacing:-.35px; }
+.bb-mb-faq-card p{ font-size:14.5px; line-height:1.7; color:var(--mb-body); }
 
 .bb-mb-footer{
   display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;
