@@ -100,31 +100,13 @@
 .bb-mc-btn:focus-visible{ outline:3px solid rgba(27,123,232,.4); outline-offset:3px; }
 .bb-mc-btn--sm{ padding:11px 20px; font-size:14px; box-shadow:var(--mc-shadow-m); }
 .bb-mc-btn--lg{ padding:16px 30px; }
-/* the arrow inside a button nudges forward on hover */
-.bb-mc-btn-ar{ width:19px; height:15px; flex:none; transition:transform .18s ease; }
-.bb-mc-btn-ar path{
-  stroke:currentColor; fill:none; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round;
-}
-.bb-mc-btn:hover .bb-mc-btn-ar{ transform:translateX(3px); }
 
-/* handwritten note + the little drawn arrow that points at its subject.
-   Default: the arrow sweeps right, from the thing being annotated into the
-   note.  --up / --down swing it back at something above or below.          */
+/* handwritten aside next to a heading, button or card */
 .bb-mc-hand{
+  display:inline-block;
   font-family:var(--mc-hand); font-size:20px; font-weight:600; line-height:1.25;
-  color:#6A7490; display:inline-flex; align-items:center; gap:12px;
+  color:#6A7490;
 }
-.bb-mc-hand-ar{ width:38px; height:20px; flex:none; color:var(--mc-sky); }
-.bb-mc-hand-ar path{
-  stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round;
-}
-.bb-mc-hand--up .bb-mc-hand-ar,
-.bb-mc-hand--down .bb-mc-hand-ar{ width:30px; height:30px; }
-.bb-mc-hand--up{ align-items:flex-start; }
-.bb-mc-hand--up .bb-mc-hand-ar{ margin-top:-9px; }
-.bb-mc-hand--down{ align-items:flex-end; }
-.bb-mc-hand--down .bb-mc-hand-ar{ margin-bottom:-7px; transform:scaleY(-1); }
-.bb-mc-hand--plain .bb-mc-hand-ar{ display:none; }
 .bb-mc-sticky{
   display:block; max-width:300px;
   font-family:var(--mc-hand); font-size:22px; font-weight:600; line-height:1.3; color:#4C5670;
@@ -315,8 +297,7 @@
 @media (prefers-reduced-motion:reduce){
   .bb-mc.is-ready .bb-mc-in{ opacity:1; transform:none; }
   .bb-mc.is-ready .bb-mc-in.is-shown{ animation:none; }
-  .bb-mc-btn,.bb-mc-btn-ar{ transition:none; }
-  .bb-mc-btn:hover .bb-mc-btn-ar{ transform:none; }
+  .bb-mc-btn{ transition:none; }
 }
 
 /* ==========================================================================
