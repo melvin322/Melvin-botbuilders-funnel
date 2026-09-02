@@ -120,6 +120,8 @@
 .bb-mb-head{ padding-top:56px; text-align:center; }
 .bb-mb-h1{ font-size:46px; line-height:1.1; letter-spacing:-.9px; margin-top:20px; text-wrap:pretty; }
 .bb-mb-lead{ font-size:18px; line-height:1.6; color:var(--mb-body); margin:16px auto 0; max-width:620px; text-wrap:pretty; }
+/* .bb-mb p{margin:0} outranks the bare class, so centre it explicitly */
+.bb-mb .bb-mb-lead{ margin-left:auto; margin-right:auto; }
 
 /* ==========================================================================
    BOOKING GRID

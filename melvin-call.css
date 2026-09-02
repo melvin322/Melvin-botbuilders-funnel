@@ -227,6 +227,10 @@
 .bb-mc-channels{ padding-top:78px; padding-bottom:78px; text-align:center; }
 .bb-mc-h2--center{ font-size:42px; line-height:1.14; letter-spacing:-.7px; margin:0 auto; max-width:none; }
 .bb-mc-sub--center{ margin:18px auto 0; max-width:720px; line-height:1.65; text-wrap:pretty; }
+/* the .bb-mc h2 / .bb-mc p resets outrank a bare class, so the centred
+   heading and sub need the extra .bb-mc to take their auto margins       */
+.bb-mc .bb-mc-h2--center,
+.bb-mc .bb-mc-sub--center{ margin-left:auto; margin-right:auto; }
 .bb-mc-tiles{
   display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:14px; max-width:800px; margin:44px auto 0;
 }
