@@ -302,8 +302,8 @@
 
     /* Your hosted wordmark — DARK version, the header is white.
        Blank keeps the built-in gradient mark + wordmark.                    */
-    LOGO_URL      : '',
-    LOGO_HEIGHT   : 28,
+    LOGO_URL      : 'https://assets.cdn.filesafe.space/sz4sVbBhLW7cX7keIHT6/media/6a76a1f003343f290f6158c9.png',
+    LOGO_HEIGHT   : 50,
 
     /* Scarcity chip. SHOW_SCARCITY:false → "Booking now open".             */
     SHOW_SCARCITY : true,
@@ -311,12 +311,12 @@
 
     /* Channel tiles — hosted logo URLs. Blank keeps the drawn glyph.       */
     CHANNELS      : {
-      facebook  : '',
-      instagram : '',
-      tiktok    : '',
-      whatsapp  : '',
-      website   : '',
-      sms       : ''
+      facebook  : 'https://assets.cdn.filesafe.space/sz4sVbBhLW7cX7keIHT6/media/6a986bfa0ba3728cefdab107.png',
+      instagram : 'https://assets.cdn.filesafe.space/sz4sVbBhLW7cX7keIHT6/media/6a986bfaa1de6b8a22762258.png',
+      tiktok    : 'https://assets.cdn.filesafe.space/sz4sVbBhLW7cX7keIHT6/media/6a986bfa0ba3728cefdab0fe.png',
+      whatsapp  : 'https://assets.cdn.filesafe.space/sz4sVbBhLW7cX7keIHT6/media/6a986bfa4f0181579a237ff6.png',
+      website   : 'https://assets.cdn.filesafe.space/sz4sVbBhLW7cX7keIHT6/media/6a986bfa8a50b9d88a1c7674.png',
+      sms       : 'https://assets.cdn.filesafe.space/sz4sVbBhLW7cX7keIHT6/media/6a986bfa0ba3728cefdab0f5.png'
     }
   };
   /* ======================================================================= */
@@ -354,11 +354,14 @@
   /* -- wordmark ----------------------------------------------------------- */
   if(CONFIG.LOGO_URL){
     root.querySelectorAll('[data-logo]').forEach(function(box){
-      var small = box.classList.contains('bb-mc-mark--sm');
+      var h = CONFIG.LOGO_HEIGHT || 28;
+      /* the footer mark rides at 70% of the header's, so it stays light
+         whatever LOGO_HEIGHT is set to                                    */
+      if(box.classList.contains('bb-mc-mark--sm')) h = Math.max(20, Math.round(h * .7));
       box.innerHTML='';
       var img=document.createElement('img');
       img.src=CONFIG.LOGO_URL; img.alt='BotBuilders';
-      img.style.height=((CONFIG.LOGO_HEIGHT||28) - (small?4:0))+'px'; img.style.width='auto';
+      img.style.height=h+'px'; img.style.width='auto';
       box.appendChild(img);
     });
   }

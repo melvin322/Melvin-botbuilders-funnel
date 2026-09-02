@@ -219,11 +219,12 @@
   /* -- wordmark ----------------------------------------------------------- */
   if(CONFIG.LOGO_URL){
     root.querySelectorAll('[data-logo]').forEach(function(box){
-      var small = box.classList.contains('bb-mb-mark--sm');
+      var h = CONFIG.LOGO_HEIGHT || 28;
+      if(box.classList.contains('bb-mb-mark--sm')) h = Math.max(20, Math.round(h * .7));
       box.innerHTML='';
       var img=document.createElement('img');
       img.src=CONFIG.LOGO_URL; img.alt='BotBuilders';
-      img.style.height=((CONFIG.LOGO_HEIGHT||28) - (small?4:0))+'px'; img.style.width='auto';
+      img.style.height=h+'px'; img.style.width='auto';
       box.appendChild(img);
     });
   }
