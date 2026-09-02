@@ -78,11 +78,13 @@
 
     <div class="bb-mc-hero-r bb-mc-in" style="--d:200ms">
       <div class="bb-mc-video">
-        <div id="bb-mc-video-stage">
-          <div class="bb-mc-video-ph" id="bb-mc-video-ph">
-            <img id="bb-mc-video-poster" src="" alt="" hidden>
-            <span aria-hidden="true"></span>
-          </div>
+        <!-- thumbnail first; the clip is swapped in on click and swapped
+             back out again whenever it pauses -->
+        <div class="bb-mc-video-stage" id="bb-mc-video-stage">
+          <button class="bb-mc-video-ph" id="bb-mc-video-ph" type="button" aria-label="Play the intro from Melvin">
+            <img class="bb-mc-video-poster" id="bb-mc-video-poster" src="" alt="" hidden>
+            <span class="bb-mc-video-play" aria-hidden="true"></span>
+          </button>
         </div>
         <div class="bb-mc-video-meta">
           <div>
@@ -287,11 +289,16 @@
     /* Where every CTA goes — the booking page (step 2 of the funnel).      */
     BOOKING_URL   : 'melvin-booking.html',
 
-    /* Melvin's intro clip. An .mp4 URL plays inline; blank leaves the
-       poster + play button, which then links to VIDEO_LINK if set.         */
+    /* Melvin's intro clip. The thumbnail shows first; clicking it plays
+       the clip inline at the same size, and pausing brings the thumbnail
+       back. With VIDEO_URL blank the thumbnail just links to VIDEO_LINK
+       (or sits there, if that is blank too).
+       VIDEO_ASPECT only matters before the clip loads — once it does, the
+       frame takes the clip's own proportions.                             */
     VIDEO_URL     : '',
     VIDEO_POSTER  : '',
     VIDEO_LINK    : '',
+    VIDEO_ASPECT  : '16 / 9',
 
     /* Your hosted wordmark — DARK version, the header is white.
        Blank keeps the built-in gradient mark + wordmark.                    */
@@ -356,27 +363,59 @@
     });
   }
 
-  /* -- intro video -------------------------------------------------------- */
+  /* -- intro video: thumbnail -> clip -> thumbnail again on pause --------- */
   (function(){
     var stage=document.getElementById('bb-mc-video-stage');
-    var ph=document.getElementById('bb-mc-video-ph');
+    var facade=document.getElementById('bb-mc-video-ph');
     var poster=document.getElementById('bb-mc-video-poster');
-    if(!stage) return;
+    if(!stage || !facade) return;
 
-    if(CONFIG.VIDEO_URL){
-      stage.innerHTML='';
-      var v=document.createElement('video');
-      v.src=CONFIG.VIDEO_URL; v.controls=true; v.playsInline=true; v.preload='metadata';
-      if(CONFIG.VIDEO_POSTER) v.poster=CONFIG.VIDEO_POSTER;
-      stage.appendChild(v);
-      v.addEventListener('play', function(){ track('ViewContent', {content_name:'Melvin intro video'}); }, {once:true});
+    if(CONFIG.VIDEO_ASPECT) stage.style.setProperty('--mc-video-ar', CONFIG.VIDEO_ASPECT);
+    if(CONFIG.VIDEO_POSTER && poster){ poster.src=CONFIG.VIDEO_POSTER; poster.hidden=false; }
+
+    /* no clip: the thumbnail either opens VIDEO_LINK or just sits there */
+    if(!CONFIG.VIDEO_URL){
+      if(CONFIG.VIDEO_LINK){
+        facade.addEventListener('click', function(){ window.open(CONFIG.VIDEO_LINK, '_blank', 'noopener'); });
+      } else {
+        facade.disabled = true;
+      }
       return;
     }
-    if(CONFIG.VIDEO_POSTER && poster){ poster.src=CONFIG.VIDEO_POSTER; poster.hidden=false; }
-    if(CONFIG.VIDEO_LINK && ph){
-      ph.style.cursor='pointer';
-      ph.addEventListener('click', function(){ window.open(CONFIG.VIDEO_LINK, '_blank', 'noopener'); });
-    }
+
+    var video=document.createElement('video');
+    video.src=CONFIG.VIDEO_URL;
+    video.controls=true; video.playsInline=true; video.preload='metadata';
+    if(CONFIG.VIDEO_POSTER) video.poster=CONFIG.VIDEO_POSTER;
+    video.hidden=true;
+    stage.appendChild(video);
+
+    /* once the clip reports its size, the frame takes those proportions so
+       the thumbnail and the clip occupy exactly the same box              */
+    video.addEventListener('loadedmetadata', function(){
+      if(video.videoWidth && video.videoHeight){
+        stage.style.setProperty('--mc-video-ar', video.videoWidth + ' / ' + video.videoHeight);
+      }
+    });
+
+    function showClip(){ facade.hidden=true; video.hidden=false; }
+    function showThumb(){ video.hidden=true; facade.hidden=false; }
+
+    facade.addEventListener('click', function(){
+      showClip();
+      var played = video.play();
+      if(played && played.catch) played.catch(function(){ /* leave the controls up */ });
+    });
+
+    video.addEventListener('play', showClip);
+    video.addEventListener('pause', function(){
+      if(video.seeking) return;                      /* scrubbing, not a stop */
+      showThumb();
+    });
+    video.addEventListener('ended', function(){ video.currentTime = 0; showThumb(); });
+    video.addEventListener('play', function(){
+      track('ViewContent', {content_name:'Melvin intro video'});
+    }, {once:true});
   })();
 
   /* -- channel tiles ------------------------------------------------------ */
