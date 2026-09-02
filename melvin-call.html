@@ -370,9 +370,22 @@
     var poster=document.getElementById('bb-mc-video-poster');
     if(!stage || !facade) return;
 
+    /* The frame grows to fit whichever of the thumbnail and the clip is
+       taller, so neither one is ever cropped. Until they load it sits at
+       CONFIG.VIDEO_ASPECT.                                                */
+    var ratios = [];
+    function fitFrame(w, h){
+      if(!w || !h) return;
+      ratios.push(w / h);
+      stage.style.setProperty('--mc-video-ar', String(Math.min.apply(null, ratios)));
+    }
     if(CONFIG.VIDEO_ASPECT) stage.style.setProperty('--mc-video-ar', CONFIG.VIDEO_ASPECT);
+
     if(CONFIG.VIDEO_POSTER && poster){
-      poster.addEventListener('load', function(){ poster.hidden=false; });
+      poster.addEventListener('load', function(){
+        poster.hidden=false;
+        fitFrame(poster.naturalWidth, poster.naturalHeight);
+      });
       poster.src=CONFIG.VIDEO_POSTER;
     }
 
@@ -393,12 +406,8 @@
     video.hidden=true;
     stage.appendChild(video);
 
-    /* once the clip reports its size, the frame takes those proportions so
-       the thumbnail and the clip occupy exactly the same box              */
     video.addEventListener('loadedmetadata', function(){
-      if(video.videoWidth && video.videoHeight){
-        stage.style.setProperty('--mc-video-ar', video.videoWidth + ' / ' + video.videoHeight);
-      }
+      fitFrame(video.videoWidth, video.videoHeight);
     });
 
     function showClip(){ facade.hidden=true; video.hidden=false; }
