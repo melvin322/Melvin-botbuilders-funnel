@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pick a time that suits you — BotBuilders</title>
+<meta name="robots" content="noindex">
+
+<!-- ==========================================================================
+     BotBuilders — "Pick a time that suits you" · Melvin booking page
+     Funnel step 2 of 3:  bb-sales-page  →  THIS PAGE  →  thank-you
+     Brand board: navy #16244C · blue #1B7BE8 · sky #35C6F4 · Poppins + Caveat
+     ------------------------------------------------------------------------
+     GHL — one Custom HTML element per BLOCK marker below, all in the SAME
+     row, in the SAME top-to-bottom order. Paste melvin-booking.css into the
+     page's Custom CSS (or the funnel-wide custom code, since the call page
+     shares these tokens).
+
+     Each block carries its own class="bb-mb" on its outermost element on
+     purpose — GHL renders each Custom HTML element as an isolated fragment,
+     so one wrapper opened in block 1 does NOT contain blocks 2-5.
+     ------------------------------------------------------------------------
+     EDIT in the CONFIG block at the bottom:
+       CALENDAR_URL — the GHL calendar widget URL to embed
+       BACK_URL     — where the "Back" link goes (the sales page)
+       LOGO_URL     — hosted logo (dark version; the header is white)
+       HOST_PHOTO   — headshot for the rail card. Blank = initials fallback.
+     ========================================================================== -->
+<link rel="stylesheet" href="melvin-booking.css">
+</head>
+<body class="bb-mb-page">
+
+<!-- ===================================================== BLOCK 1 — header -->
+<div class="bb-mb">
+  <header class="bb-mb-header" id="bb-mb-header">
+    <div class="bb-mb-wrap bb-mb-header-in">
+      <a href="#" class="bb-mb-mark" id="bb-mb-logo">
+        <svg class="bb-mb-mark-ico" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs><linearGradient id="mbg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1B7BE8"/><stop offset="1" stop-color="#35C6F4"/></linearGradient></defs>
+          <rect x="4" y="4" width="24" height="24" rx="7" fill="url(#mbg)"/>
+          <path d="M17 8l-7 9h5l-1 7 7-9h-5z" fill="#fff"/>
+        </svg>
+        <span class="bb-mb-mark-word">BotBuilders<sup>&reg;</sup></span>
+      </a>
+
+      <a href="#" class="bb-mb-back" id="bb-mb-back">
+        &larr; <span>Back to the overview</span>
+      </a>
+    </div>
+  </header>
+</div>
+
+<!-- ================================================== BLOCK 2 — page head -->
+<div class="bb-mb">
+  <div class="bb-mb-wrap bb-mb-head">
+    <span class="bb-mb-pill"><i></i> Step 2 of 3 &middot; Choose your slot</span>
+
+    <h1 class="bb-mb-h1">Pick a time that <span class="bb-mb-grad">suits you</span></h1>
+
+    <p class="bb-mb-lead">
+      Grab the slot that works best and we'll do the rest. You'll get a confirmation
+      by email and text the moment it's booked — no back-and-forth needed.
+    </p>
+  </div>
+</div>
+
+<!-- ============================================ BLOCK 3 — the booking grid -->
+<!-- Keep the rail and the calendar together in ONE element: .bb-mb-rail is
+     sticky relative to .bb-mb-grid and stops following if they're split. -->
+<div class="bb-mb">
+  <main class="bb-mb-wrap bb-mb-main">
+    <div class="bb-mb-grid">
+
+      <!-- ------------------------------------------------------- left rail -->
+      <aside class="bb-mb-rail">
+
+        <div class="bb-mb-card">
+          <div class="bb-mb-who">
+            <div class="bb-mb-who-photo" id="bb-mb-who-photo">
+              <span id="bb-mb-who-initials">MG</span>
+              <img id="bb-mb-who-img" src="" alt="" hidden>
+            </div>
+            <div>
+              <div class="bb-mb-who-name" id="bb-mb-who-name">Melvin Guiritan</div>
+              <div class="bb-mb-who-role" id="bb-mb-who-role">Automation Strategist &middot; BotBuilders</div>
+            </div>
+          </div>
+
+          <div class="bb-mb-rule"></div>
+
+          <span class="bb-mb-eyebrow">What we'll cover</span>
+
+          <ol class="bb-mb-steps" style="margin-top:16px">
+            <li class="bb-mb-step">
+              <div class="bb-mb-step-num">1</div>
+              <div>
+                <h3>We review your business</h3>
+                <p>Where you are now, and what's actually slowing you down.</p>
+              </div>
+            </li>
+            <li class="bb-mb-step">
+              <div class="bb-mb-step-num">2</div>
+              <div>
+                <h3>We talk through your goals</h3>
+                <p>What you want to hit this year, and what's in the way.</p>
+              </div>
+            </li>
+            <li class="bb-mb-step">
+              <div class="bb-mb-step-num">3</div>
+              <div>
+                <h3>We spot the automation wins</h3>
+                <p>The places where automation saves you hours or wins back revenue.</p>
+              </div>
+            </li>
+            <li class="bb-mb-step">
+              <div class="bb-mb-step-num">4</div>
+              <div>
+                <h3>You leave with a plan</h3>
+                <p>Clear next steps you can act on — whether or not we work together.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+
+        <div class="bb-mb-card bb-mb-card--note">
+          <p class="bb-mb-sticky">
+            Bring your numbers if you have them — the call gets 10&times; more
+            useful when we can look at real figures together.
+          </p>
+        </div>
+
+      </aside>
+
+      <!-- --------------------------------------------------- the calendar -->
+      <div class="bb-mb-cal" id="bb-mb-cal">
+        <div class="bb-mb-cal-ph" id="bb-mb-cal-ph">
+          <div class="bb-mb-cal-ph-ico">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="3" y="4.5" width="18" height="17" rx="2.5"/>
+              <path d="M3 10h18M8 2.5v4M16 2.5v4"/>
+              <path d="M8 14.5h.01M12 14.5h.01M16 14.5h.01M8 18h.01M12 18h.01"/>
+            </svg>
+          </div>
+          <h3>Loading the calendar&hellip;</h3>
+          <p>
+            If nothing appears in a few seconds, the booking link hasn't been set yet —
+            drop your calendar URL into <code>CALENDAR_URL</code> in the script at the
+            bottom of this page.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<!-- ======================================================== BLOCK 4 — FAQ -->
+<div class="bb-mb">
+  <section class="bb-mb-faq">
+    <div class="bb-mb-wrap">
+      <span class="bb-mb-eyebrow">Before you book</span>
+      <h2 style="margin-top:10px">The questions we get asked most</h2>
+
+      <div class="bb-mb-faq-grid">
+        <div class="bb-mb-faq-card bb-mb-card">
+          <h3>How long is the call?</h3>
+          <p>Around 30 minutes. We keep it tight and useful — you'll know inside the first ten whether this is worth continuing.</p>
+        </div>
+
+        <div class="bb-mb-faq-card bb-mb-card">
+          <h3>Is this just a sales pitch?</h3>
+          <p>No. We map out what we'd actually do, and you keep that plan whether or not you ever hire us.</p>
+        </div>
+
+        <div class="bb-mb-faq-card bb-mb-card">
+          <h3>What should I prepare?</h3>
+          <p>Nothing formal. A rough idea of your monthly lead volume and where deals stall is plenty.</p>
+        </div>
+
+        <div class="bb-mb-faq-card bb-mb-card">
+          <h3>Can I reschedule?</h3>
+          <p>Any time. Your confirmation email has a reschedule link — one click, no need to message us.</p>
+        </div>
+
+        <div class="bb-mb-faq-card bb-mb-card">
+          <h3>Who will I be speaking to?</h3>
+          <p>Melvin, directly. Not a call centre and not a junior setter reading a script.</p>
+        </div>
+
+        <div class="bb-mb-faq-card bb-mb-card">
+          <h3>What if none of the times work?</h3>
+          <p>Scroll the calendar forward — more slots open further out. Still stuck? Reply to any of our emails and we'll find one.</p>
+        </div>
+      </div>
+
+      <p class="bb-mb-hand" style="margin-top:28px">See you on the call!</p>
+    </div>
+  </section>
+</div>
+
+<!-- ============================================ BLOCK 5 — footer + script -->
+<div class="bb-mb">
+  <div class="bb-mb-wrap">
+    <footer class="bb-mb-footer">
+      <a href="#" class="bb-mb-mark bb-mb-mark--sm" id="bb-mb-logo-foot">
+        <svg class="bb-mb-mark-ico" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs><linearGradient id="mbg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1B7BE8"/><stop offset="1" stop-color="#35C6F4"/></linearGradient></defs>
+          <rect x="4" y="4" width="24" height="24" rx="7" fill="url(#mbg2)"/>
+          <path d="M17 8l-7 9h5l-1 7 7-9h-5z" fill="#fff"/>
+        </svg>
+        <span class="bb-mb-mark-word">BotBuilders<sup>&reg;</sup></span>
+      </a>
+
+      <div>
+        <a href="https://www.botbuilders.com/privacy">Privacy Policy</a>
+        &nbsp;&middot;&nbsp;
+        <a href="https://www.botbuilders.com/terms">Terms of Service</a>
+        &nbsp;&middot;&nbsp;
+        <a href="https://www.botbuilders.com/disclaimer">Legal Disclaimer</a>
+      </div>
+
+      <div>&copy; 2026 BotBuilders &middot; 8936 N Central Ave, Phoenix, AZ 85020 &middot; 602-922-9700</div>
+    </footer>
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+
+  /* ====================================================== CONFIG — EDIT ME */
+  var CONFIG = {
+    /* The calendar to embed. GHL calendar widget, Calendly, TidyCal…
+       Blank leaves the "set your booking link" placeholder showing.        */
+    CALENDAR_URL : 'https://link.automator.ai/widget/bookings/melvin-guiritan-personal-calendar-ji0cmkuqe',
+
+    /* Height of the embed. The CSS floor is 720px (760px under 900px wide). */
+    CAL_HEIGHT   : 760,
+
+    /* Where the header "Back" link goes — normally the sales page.
+       Blank hides the link.                                                */
+    BACK_URL     : '',
+
+    /* Logo. The header sits on white, so use the DARK version.
+       Blank keeps the built-in gradient mark + wordmark.                   */
+    LOGO_URL     : '',
+    LOGO_HEIGHT  : 28,
+
+    /* Headshot for the rail card. Blank keeps the gradient initials tile.  */
+    HOST_PHOTO   : '',
+    HOST_NAME    : 'Melvin Guiritan',
+    HOST_ROLE    : 'Automation Strategist · BotBuilders'
+  };
+  /* ======================================================================= */
+
+  /* GHL renders each Custom HTML element as its own isolated fragment, so a
+     wrapper element from block 1 does NOT contain blocks 2-5. Query the whole
+     document instead of scoping to a wrapper. */
+  var root = document;
+
+  function track(event, params){
+    params = params || {};
+    try{
+      if(window.dataLayer && window.dataLayer.push) window.dataLayer.push(Object.assign({event:event}, params));
+      if(typeof window.gtag === 'function') window.gtag('event', event, params);
+    }catch(e){}
+  }
+
+  /* -- 1. kill GHL's wrapper chrome so blocks butt up against each other --- */
+  function stripChrome(){
+    var blocks = root.querySelectorAll('.bb-mb');
+    for(var i=0;i<blocks.length;i++){
+      var el = blocks[i].parentElement;
+      while(el && el !== document.body && el !== document.documentElement){
+        el.style.paddingTop='0px'; el.style.paddingBottom='0px';
+        el.style.marginTop='0px';  el.style.marginBottom='0px';
+        el.style.maxWidth='none';
+        el = el.parentElement;
+      }
+    }
+    /* the page-top wash lives on the page, not on a wrapper — see the CSS */
+    document.body.classList.add('bb-mb-page');
+    document.body.style.margin='0';
+  }
+
+  /* -- 2. logo ------------------------------------------------------------ */
+  function paintLogos(){
+    if(!CONFIG.LOGO_URL) return;
+    var marks = root.querySelectorAll('.bb-mb-mark');
+    for(var i=0;i<marks.length;i++){
+      var mark = marks[i];
+      if(mark.getAttribute('data-mb-logo')) continue;
+      mark.setAttribute('data-mb-logo','1');
+      var small = mark.classList.contains('bb-mb-mark--sm');
+      var img = document.createElement('img');
+      img.src = CONFIG.LOGO_URL;
+      img.alt = 'BotBuilders';
+      img.style.height = ((CONFIG.LOGO_HEIGHT||28) - (small?2:0)) + 'px';
+      img.style.width  = 'auto';
+      mark.innerHTML = '';
+      mark.appendChild(img);
+    }
+  }
+
+  /* -- 3. host card ------------------------------------------------------- */
+  function paintHost(){
+    var name = root.getElementById('bb-mb-who-name');
+    var role = root.getElementById('bb-mb-who-role');
+    if(name && CONFIG.HOST_NAME) name.textContent = CONFIG.HOST_NAME;
+    if(role && CONFIG.HOST_ROLE) role.textContent = CONFIG.HOST_ROLE;
+
+    var initials = root.getElementById('bb-mb-who-initials');
+    if(initials && CONFIG.HOST_NAME){
+      initials.textContent = CONFIG.HOST_NAME.split(/\s+/).slice(0,2)
+        .map(function(w){ return w.charAt(0); }).join('').toUpperCase();
+    }
+
+    var img = root.getElementById('bb-mb-who-img');
+    if(img && CONFIG.HOST_PHOTO){
+      img.src = CONFIG.HOST_PHOTO;
+      img.alt = CONFIG.HOST_NAME || '';
+      img.hidden = false;
+      if(initials) initials.hidden = true;
+    }
+  }
+
+  /* -- 4. back link ------------------------------------------------------- */
+  function paintBack(){
+    var back = root.getElementById('bb-mb-back');
+    if(!back) return;
+    if(CONFIG.BACK_URL){ back.href = CONFIG.BACK_URL; }
+    else { back.style.display = 'none'; }
+  }
+
+  /* -- 5. mount the calendar ---------------------------------------------- */
+  /* Idempotent: only writes when the iframe isn't already sitting there, so
+     re-running it after a hydration pass costs nothing and doesn't reload a
+     calendar the visitor is already using. */
+  function mountCalendar(){
+    var host = root.getElementById('bb-mb-cal');
+    if(!host || !CONFIG.CALENDAR_URL) return;
+    if(host.querySelector('iframe')) return;
+
+    var frame = document.createElement('iframe');
+    frame.src = CONFIG.CALENDAR_URL;
+    frame.id = 'bb-mb-cal-frame';
+    frame.title = 'Booking calendar';
+    frame.setAttribute('scrolling','no');
+    frame.style.minHeight = (CONFIG.CAL_HEIGHT||760) + 'px';
+
+    host.innerHTML = '';
+    host.appendChild(frame);
+
+    frame.addEventListener('load', function(){ track('booking_calendar_loaded'); });
+  }
+
+  /* GHL's own embed script auto-resizes their calendar iframes. Harmless if
+     the calendar is from someone else; loaded once, only when needed. */
+  function loadEmbedHelper(){
+    if(!CONFIG.CALENDAR_URL) return;
+    if(!/msgsndr|automator\.ai|leadconnector/.test(CONFIG.CALENDAR_URL)) return;
+    if(root.getElementById('bb-mb-embed-js')) return;
+    var s = document.createElement('script');
+    s.id = 'bb-mb-embed-js';
+    s.src = 'https://link.msgsndr.com/js/form_embed.js';
+    s.async = true;
+    document.body.appendChild(s);
+  }
+
+  /* -- run, then re-assert ------------------------------------------------ */
+  /* GHL can replace a block's DOM once, shortly after load, as part of its own
+     hydration — wiping anything written above. Every function here is guarded
+     or idempotent, so re-running them over the first few seconds just repairs
+     whatever got swapped out. */
+  function paint(){
+    stripChrome();
+    paintLogos();
+    paintHost();
+    paintBack();
+    mountCalendar();
+  }
+
+  paint();
+  loadEmbedHelper();
+  [250, 750, 1500, 3000, 6000].forEach(function(ms){ setTimeout(paint, ms); });
+
+  track('booking_page_view');
+
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!-- ============================================ BLOCK 5 — footer + script -->
+<div class="bb-mb">
+  <div class="bb-mb-wrap">
+    <footer class="bb-mb-footer">
+      <a href="#" class="bb-mb-mark bb-mb-mark--sm" id="bb-mb-logo-foot">
+        <svg class="bb-mb-mark-ico" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs><linearGradient id="mbg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1B7BE8"/><stop offset="1" stop-color="#35C6F4"/></linearGradient></defs>
+          <rect x="4" y="4" width="24" height="24" rx="7" fill="url(#mbg2)"/>
+          <path d="M17 8l-7 9h5l-1 7 7-9h-5z" fill="#fff"/>
+        </svg>
+        <span class="bb-mb-mark-word">BotBuilders<sup>&reg;</sup></span>
+      </a>
+
+      <div>
+        <a href="https://www.botbuilders.com/privacy">Privacy Policy</a>
+        &nbsp;&middot;&nbsp;
+        <a href="https://www.botbuilders.com/terms">Terms of Service</a>
+        &nbsp;&middot;&nbsp;
+        <a href="https://www.botbuilders.com/disclaimer">Legal Disclaimer</a>
+      </div>
+
+      <div>&copy; 2026 BotBuilders &middot; 8936 N Central Ave, Phoenix, AZ 85020 &middot; 602-922-9700</div>
+    </footer>
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+
+  /* ====================================================== CONFIG — EDIT ME */
+  var CONFIG = {
+    /* The calendar to embed. GHL calendar widget, Calendly, TidyCal…
+       Blank leaves the "set your booking link" placeholder showing.        */
+    CALENDAR_URL : 'https://link.automator.ai/widget/bookings/melvin-guiritan-personal-calendar-ji0cmkuqe',
+
+    /* Height of the embed. The CSS floor is 720px (760px under 900px wide). */
+    CAL_HEIGHT   : 760,
+
+    /* Where the header "Back" link goes — normally the sales page.
+       Blank hides the link.                                                */
+    BACK_URL     : '',
+
+    /* Logo. The header sits on white, so use the DARK version.
+       Blank keeps the built-in gradient mark + wordmark.                   */
+    LOGO_URL     : '',
+    LOGO_HEIGHT  : 28,
+
+    /* Headshot for the rail card. Blank keeps the gradient initials tile.  */
+    HOST_PHOTO   : '',
+    HOST_NAME    : 'Melvin Guiritan',
+    HOST_ROLE    : 'Automation Strategist · BotBuilders'
+  };
+  /* ======================================================================= */
+
+  /* GHL renders each Custom HTML element as its own isolated fragment, so a
+     wrapper element from block 1 does NOT contain blocks 2-5. Query the whole
+     document instead of scoping to a wrapper. */
+  var root = document;
+
+  function track(event, params){
+    params = params || {};
+    try{
+      if(window.dataLayer && window.dataLayer.push) window.dataLayer.push(Object.assign({event:event}, params));
+      if(typeof window.gtag === 'function') window.gtag('event', event, params);
+    }catch(e){}
+  }
+
+  /* -- 1. kill GHL's wrapper chrome so blocks butt up against each other --- */
+  function stripChrome(){
+    var blocks = root.querySelectorAll('.bb-mb');
+    for(var i=0;i<blocks.length;i++){
+      var el = blocks[i].parentElement;
+      while(el && el !== document.body && el !== document.documentElement){
+        el.style.paddingTop='0px'; el.style.paddingBottom='0px';
+        el.style.marginTop='0px';  el.style.marginBottom='0px';
+        el.style.maxWidth='none';
+        el = el.parentElement;
+      }
+    }
+    /* the page-top wash lives on the page, not on a wrapper — see the CSS */
+    document.body.classList.add('bb-mb-page');
+    document.body.style.margin='0';
+  }
+
+  /* -- 2. logo ------------------------------------------------------------ */
+  function paintLogos(){
+    if(!CONFIG.LOGO_URL) return;
+    var marks = root.querySelectorAll('.bb-mb-mark');
+    for(var i=0;i<marks.length;i++){
+      var mark = marks[i];
+      if(mark.getAttribute('data-mb-logo')) continue;
+      mark.setAttribute('data-mb-logo','1');
+      var small = mark.classList.contains('bb-mb-mark--sm');
+      var img = document.createElement('img');
+      img.src = CONFIG.LOGO_URL;
+      img.alt = 'BotBuilders';
+      img.style.height = ((CONFIG.LOGO_HEIGHT||28) - (small?2:0)) + 'px';
+      img.style.width  = 'auto';
+      mark.innerHTML = '';
+      mark.appendChild(img);
+    }
+  }
+
+  /* -- 3. host card ------------------------------------------------------- */
+  function paintHost(){
+    var name = root.getElementById('bb-mb-who-name');
+    var role = root.getElementById('bb-mb-who-role');
+    if(name && CONFIG.HOST_NAME) name.textContent = CONFIG.HOST_NAME;
+    if(role && CONFIG.HOST_ROLE) role.textContent = CONFIG.HOST_ROLE;
+
+    var initials = root.getElementById('bb-mb-who-initials');
+    if(initials && CONFIG.HOST_NAME){
+      initials.textContent = CONFIG.HOST_NAME.split(/\s+/).slice(0,2)
+        .map(function(w){ return w.charAt(0); }).join('').toUpperCase();
+    }
+
+    var img = root.getElementById('bb-mb-who-img');
+    if(img && CONFIG.HOST_PHOTO){
+      img.src = CONFIG.HOST_PHOTO;
+      img.alt = CONFIG.HOST_NAME || '';
+      img.hidden = false;
+      if(initials) initials.hidden = true;
+    }
+  }
+
+  /* -- 4. back link ------------------------------------------------------- */
+  function paintBack(){
+    var back = root.getElementById('bb-mb-back');
+    if(!back) return;
+    if(CONFIG.BACK_URL){ back.href = CONFIG.BACK_URL; }
+    else { back.style.display = 'none'; }
+  }
+
+  /* -- 5. mount the calendar ---------------------------------------------- */
+  /* Idempotent: only writes when the iframe isn't already sitting there, so
+     re-running it after a hydration pass costs nothing and doesn't reload a
+     calendar the visitor is already using. */
+  function mountCalendar(){
+    var host = root.getElementById('bb-mb-cal');
+    if(!host || !CONFIG.CALENDAR_URL) return;
+    if(host.querySelector('iframe')) return;
+
+    var frame = document.createElement('iframe');
+    frame.src = CONFIG.CALENDAR_URL;
+    frame.id = 'bb-mb-cal-frame';
+    frame.title = 'Booking calendar';
+    frame.setAttribute('scrolling','no');
+    frame.style.minHeight = (CONFIG.CAL_HEIGHT||760) + 'px';
+
+    host.innerHTML = '';
+    host.appendChild(frame);
+
+    frame.addEventListener('load', function(){ track('booking_calendar_loaded'); });
+  }
+
+  /* GHL's own embed script auto-resizes their calendar iframes. Harmless if
+     the calendar is from someone else; loaded once, only when needed. */
+  function loadEmbedHelper(){
+    if(!CONFIG.CALENDAR_URL) return;
+    if(!/msgsndr|automator\.ai|leadconnector/.test(CONFIG.CALENDAR_URL)) return;
+    if(root.getElementById('bb-mb-embed-js')) return;
+    var s = document.createElement('script');
+    s.id = 'bb-mb-embed-js';
+    s.src = 'https://link.msgsndr.com/js/form_embed.js';
+    s.async = true;
+    document.body.appendChild(s);
+  }
+
+  /* -- run, then re-assert ------------------------------------------------ */
+  /* GHL can replace a block's DOM once, shortly after load, as part of its own
+     hydration — wiping anything written above. Every function here is guarded
+     or idempotent, so re-running them over the first few seconds just repairs
+     whatever got swapped out. */
+  function paint(){
+    stripChrome();
+    paintLogos();
+    paintHost();
+    paintBack();
+    mountCalendar();
+  }
+
+  paint();
+  loadEmbedHelper();
+  [250, 750, 1500, 3000, 6000].forEach(function(ms){ setTimeout(paint, ms); });
+
+  track('booking_page_view');
+
+})();
+</script>

@@ -57,9 +57,17 @@
 .bb-mb-page,
 body{
   background-color:var(--mb-white);
-  background-image:linear-gradient(158deg,var(--mb-wash-mint) 0%,var(--mb-wash-blue) 48%,var(--mb-white) 88%);
-  background-size:100% 760px;
-  background-repeat:no-repeat;
+  /* Two layers: the brand wash, plus a vertical fade to white over the bottom
+     of the band. The wash alone is a 158deg diagonal, so where its bottom edge
+     lands on the gradient axis depends on viewport width — at 1280px the
+     bottom-left corner only reaches ~60% of the way along it, leaving a
+     visible horizontal seam against the white page below. The fade layer
+     guarantees the band ends white at every width. */
+  background-image:
+    linear-gradient(180deg,rgba(255,255,255,0) 52%,var(--mb-white) 100%),
+    linear-gradient(158deg,var(--mb-wash-mint) 0%,var(--mb-wash-blue) 48%,var(--mb-white) 88%);
+  background-size:100% 760px, 100% 760px;
+  background-repeat:no-repeat, no-repeat;
   min-height:100vh;
 }
 
